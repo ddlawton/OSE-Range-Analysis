@@ -4,6 +4,8 @@
 
 library(dplyr)
 library(tidyr)
+library(readxl)
+library(janitor)
 library(testthat)
 
 # ---- Load raw_data here ----
@@ -46,13 +48,25 @@ raw_data_long <- raw_data_long |>
     percent_ground_cover = as.numeric(percent_ground_cover)
   )
 
+# Step 4: cleaning up typos in columns
+
+raw_data_long <- raw_data_long |>
+    mutate(fertilizer_treatment = case_when(
+        fertilizer_treatement == "Id C NF" ~ "control",
+        fertilizer_treatement == "IdC NF" ~ "control",
+        fertilizer_treatement == "Id C F" ~ "fertilized",
+        TRUE ~ fertilizer_treatement
+    )) |> 
+    select(!fertilizer_treatement)
+
+
 # Step 4: Select the columns of interest to keep in your final dataset
 raw_data_long <- raw_data_long |>
   select(
     year,
     region,
     farmer,
-    fertilizer_treatement,
+    fertilizer_treatment,
     code,
     mission_number,
     date_surveyed,
@@ -69,7 +83,7 @@ raw_data_long <- raw_data_long |>
     # Set categorical variables to factors
     across(c(
       'farmer',
-      'fertilizer_treatement',
+      'fertilizer_treatment',
       'code',
       'year',
       'mission_number',
@@ -99,7 +113,7 @@ test_that("Row count is exactly nrow(raw_data) * 3", {
 test_that("All static columns are preserved for each mission", {
   # By grouping by all static columns and yield columns, there should be 3 rows per group (for the 3 missions)
   groups <- raw_data_long |>
-    group_by(year, region, farmer, fertilizer_treatement, code,
+    group_by(year, region, farmer, fertilizer_treatment, code,
              yield_date_havested, rendement_en_kg_ha) |>
     tally()
   expect_true(all(groups$n == 3))
