@@ -16,7 +16,7 @@ website:
       - text: "Home"
         href: R/index.qmd
       - text: "Locust Density Analysis"
-        href: R/analysis/main_analysis.qmd
+        href: R/analysis/locust_denisty_analysis.qmd
       # - text: "Supplementary"
       #   href: analysis/supplementary.qmd
       # - text: "Figures"

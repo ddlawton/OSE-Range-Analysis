@@ -29,26 +29,20 @@ In total, the survey covered **500 ha across 1,500 observations**. The Saint-Lou
 
 We are exploring several complementary objectives:
 
-1.  **Fertilization and Pest Pressure**\
-    Quantify how fertilizer affects OSE density and yield using mixed-effects models, assessing whether improved plant vigor corresponds to lower infestation rates.
+1.  [**Fertilization and Pest Pressure**](analysis/locust_denisty_analysis.qmd)**:**\
+    Quantify how fertilizer affects OSE density using mixed-effects models, assessing whether improved plant vigor corresponds to lower infestation rates and look how OSE density is influenced by ground cover
 
-2.  **Regional Dynamics and Rainfall Gradients**\
+2.  **Regional Dynamics and Rainfall Gradients** (page TBA)\
     Evaluate OSE abundance in relation to mean annual rainfall and latitude, to infer how climatic gradients structure its range across Senegal.
 
-3.  **Generational and Temporal Patterns**\
+3.  **Generational and Temporal Patterns** (page TBA)\
     Visualize the timing of OSE developmental stages across regions to assess whether northern populations are locally derived or the result of seasonal migrations.
 
 ------------------------------------------------------------------------
 
 ## Visual and Analytical Outputs
 
--   [**Main Analysis**](analysis/main_analysis.qmd)**:** Statistical models of fertilizer effects on OSE density and yield\
-<!-- -   [**Supplementary Analyses**](analysis/supplementary.qmd)**:** Extended model results and sensitivity checks\
--   [**Figures Gallery**](analysis/figures_gallery.qmd)**:** Key maps, rainfall gradients, and generation timing visuals -->
-
 All figures are reproducible from R scripts stored in the `R/` folder and rendered through this Quarto project.
-
-------------------------------------------------------------------------
 
 ## Citation and Acknowledgments
 
