@@ -1,0 +1,316 @@
+---
+title: "2021 Locust Density Analysis"
+subtitle: "figures and tables"
+format: html
+toc: true
+---
+
+## Summary
+
+This page presents the visualizations and statistical analyses conducted on the 2021 field survey dataset, supporting ongoing manuscript development for publication. 
+
+The analyses focus on Senegalese locust (OSE) density and ground cover data collected across multiple regions and fertilizer treatments in Senegalese agricultural fields. The goal of this page is to replicate the current figures in the manuscript. This is to ensure visuals are made in the same way but also to ensure that my data management aligns well with expectations and that there are no errors. If you see errors, please let me know!
+
+
+```{r package loading}
+#| echo: false
+#| results: "hide"
+#| message: false
+#| warning: false
+
+
+library(tidyverse)
+library(rnaturalearth)
+library(janitor)
+library(here)
+library(patchwork)
+library(ggpubr)
+library(gt)
+
+library(glmmTMB)
+library(mgcv)
+library(gratia)
+library(emmeans)
+
+here::i_am('README.md')
+
+# setting project root
+# sourcing functions
+source(('R/functions/data_preprocessing.R'), local = knitr::knit_global())
+source(('R/functions/table_variable_summary.R'), local = knitr::knit_global())
+source(('R/functions/senegal_map.R'), local = knitr::knit_global())
+source(('R/functions/locust_density_modeling.R'), local = knitr::knit_global())
+
+```
+
+
+```{r data loading and processing}
+#| echo: false
+#| message: false
+#| warning: false
+
+data = process_senegal_data('data/raw/Toure_OSE2021data_v03.xlsx')
+
+```
+
+# Basic statistics around dataset
+
+```{r basic_statistics}
+#| echo: false
+#| message: false
+#| warning: false
+
+
+table_variable_summary(data)
+
+```
+
+
+# Map of senegal and regions
+
+```{r senegal_map}
+#| echo: false
+#| message: false
+#| warning: false
+
+
+plot_senegal_map(
+  regions_of_interest = c('Saint-Louis', 'Thiès', 'Fatick', 'Kaffrine'),
+  show_legend = FALSE,
+  roi_color = "tomato",
+  other_color = "grey80",
+  label_size = 4)
+
+```
+
+
+# Locust density and region by treatment
+
+
+To assess how locust count changes between treatment (fertilized and control) and region (five regions), I built a generalized linear mixed model (family: Poisson) per mission as follows:
+
+$$
+$$
+\begin{align*}
+\text{ose count}_{ij} =\ 
+  &\beta_0 \\
+  &+ \beta_1 \cdot \text{fertilizer treatment}_i \\
+  &+ \beta_2 \cdot \text{region}_i \\
+  &+ \beta_3 \cdot (\text{fertilizer treatment}_i \times \text{region}_i) \\
+  &+ u_j \\
+  &+ \varepsilon_{ij}
+\end{align*}
+$$
+$$
+
+
+Where:  
+- $\text{ose count}_{ij}$: observed ose count for observation $i$ from farmer $j$  
+- $\text{fertilizer treatment}_i$: fertilizer treatment group of observation $i$  
+- $\text{region}_i$: region of observation $i$  
+- $(\text{fertilizer treatment}_i \times \text{region}_i)$: interaction between fertilizer treatment and region  
+- $u_j$: random effect for farmer $j$, $u_j \sim N(0, \sigma^2_{farmer})$  
+- $\varepsilon_{ij}$: residual error  
+
+Below are the diagnostic plots for these models:
+
+```{r computing ose density models}
+#| echo: false
+#| message: false
+#| warning: false
+
+# Split data into a list of data based on mission date
+model_data <- data |>
+    group_split(mission_number)
+
+#create lists to store objects
+mission_mods <- list()
+mission_diagnostic_plots <- list()
+mission_emmeans <- list()
+
+#seek through lists. create model, diagnostic plot, and emmeans
+for (i in seq_along(model_data)){
+    diagnostic_plot_title = paste0('mission',i)
+    mission_mods[[i]] <- create_glmm_model(model_data[[i]])
+    mission_diagnostic_plots[[i]] <- plot_model_diagnostics(mission_mods[[i]],plot_title = diagnostic_plot_title)
+    mission_emmeans[[i]] <- get_emmeans_and_pairs(mission_mods[[i]], mission_num = i)
+}
+
+names(mission_mods) <- c('m1','m2','m3')
+names(mission_diagnostic_plots) <- c('m1','m2','m3')
+names(mission_emmeans) <- c('m1','m2','m3')
+```
+
+
+```{r plot diagnostic plots}
+
+diagnostic_plots <- (mission_diagnostic_plots$m1 +
+    mission_diagnostic_plots$m2) /
+    (mission_diagnostic_plots$m3 +
+    plot_spacer())
+
+diagnostic_plots
+```
+
+
+These models are not perfect, but I think they are fine to use for this analysis. Happy to invetigate further if you would like me too.
+
+## OSE density by treatment and region (option 1)
+
+
+```{r densiy option 1 plot}
+#| out-width: 100%
+#| out-height: 100%
+#| 
+# A list of model results with emmeans
+mission_emms <- bind_rows(
+  lapply(names(mission_emmeans), function(nm) {
+    # Add the list element name as a column:
+    df <- mission_emmeans[[nm]]$emmeans
+    df$source <- nm
+    df
+  }),
+  .id = 'mission_numer' 
+)
+
+count_plot_option_1 <- plot_mission_density(
+    data |> drop_na(ose_count,fertilizer_treatment),
+    mission_emms,
+    regions = c('Saint Louis','Thies','Fatick','Kaffrine'),
+    legend_position = 'bottom'
+) 
+
+count_plot_option_1
+
+```
+
+## OSE density by treatment and region (option 2)
+
+Instead of a plot per mission, lets plot the missions together (x-axis) and see how region counts shifted through time
+
+```{r count plot option 2}
+
+count_plot_option_2 <- plot_emmeans(mission_emms,
+    color_palette = "Degas",
+    ylab = "OSE count",
+    xlab = "Mission")
+
+count_plot_option_2
+
+```
+
+
+# OSE density x plant cover
+
+We would like to see how density is influenced by plant cover. To do this I am building a generalized additive model (family: tweedie). Following this form:
+
+
+The generalized additive model (GAM) fitted is:
+
+$$
+$$
+\begin{align*}
+\text{ose\_count}_i = \\
+  &\alpha + \\ 
+  &+ f(\text{percent\_ground\_cover}_i,\, \text{region\_treat}_i) +  \\
+  &+ b_{\text{farmer}_i} + \\
+  &+ \varepsilon_i
+\end{align*}
+$$
+$$
+
+
+
+where:
+- $\alpha$ is the intercept,
+- $f(\text{percent\_ground\_cover},\, \text{region\_treat})$ is a smooth function (tensor product, using factor-smooth interaction) over percent ground cover and region treatment,
+- $b_{\text{farmer}_i}$ is a random effect for each farmer,
+- $\varepsilon_i$ is the residual error.
+
+
+```{r constructing gam model}
+#| echo: false
+#| message: false
+#| warning: false
+
+
+plant_cover_dat <- data |>
+    dplyr::select(region,farmer,fertilizer_treatment,mission_number,ose_count,percent_ground_cover) |>
+    mutate(
+        region_treat = factor(paste0(region,'_',fertilizer_treatment))
+    ) |>
+    drop_na(ose_count,fertilizer_treatment)
+
+plant_cover_mod <- build_gam(plant_cover_dat,
+    formula = ose_count ~ te(percent_ground_cover, region_treat, bs='fs', k=10) + s(farmer, bs='re'),
+    nthreads = 9,
+    family = mgcv::tw(),
+    k = 10) 
+
+```
+
+
+The model diagnostics look pretty good! I tried to build a poisson model, but the data was overdispersed. Instead I went with a tweedie model which does a pretty good job at handling this type of data:
+
+```{r gam model diagnostics}
+
+appraise(plant_cover_mod)
+
+```
+
+
+However, I am not able to reproduce the smooths seen in the manuscript sent to me. This is likely due to data differences as I am not sure what was included in the initial modeling approach. **Roughly** we can see similiar trends in Kaffrine, Fatick, and Saint Louis. But Thies definitely has a different trend. Additionally, there seems to be different trends between control and fertilized treatments as comapred to the current plots in the manuscript. Not sure what to think here.
+
+```{r plotting gam model results}
+#| echo: false
+#| message: false
+#| warning: false
+
+gam_plot <- plot_gam_smooths_gratia(plant_cover_mod)
+
+gam_plot
+```
+
+
+# Table: annual OSE density by region and field type
+
+The data discrepancies seen the the OSE count x ground cover are really shown in this table as well. We can see that the trends are the same (e.g. fertilized plots have less than control), but the actual averages are totally different. 
+
+```{r}
+
+ose_dat <- data |>
+  select(region, fertilizer_treatment, ose_count) |>
+  mutate(region = factor(region, levels = c('Saint Louis', 'Thies', 'Fatick', 'Kaffrine')),
+         fertilizer_treatment = factor(fertilizer_treatment, levels = c('fertilized', 'control'))) |>
+  drop_na(ose_count, fertilizer_treatment) |>
+  group_by(region, fertilizer_treatment) |>
+  summarize(ose_mean = mean(ose_count, na.rm = TRUE), .groups = "drop") |>
+  pivot_wider(names_from = region, values_from = ose_mean)
+
+# Create the gt table
+ose_dat %>%
+  gt(rowname_col = "fertilizer_treatment") %>%
+  tab_header(
+    title = "Mean OSE Count by Region and Fertilizer Treatment"
+  ) %>%
+  fmt_number(
+    columns = everything(),
+    decimals = 2
+  ) %>%
+  cols_label(
+    fertilizer_treatment = "Treatment",
+    `Saint Louis` = "Saint Louis",
+    Thies = "Thies",
+    Fatick = "Fatick",
+    Kaffrine = "Kaffrine"
+  ) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels(everything())
+  )
+
+
+```
+
+
+

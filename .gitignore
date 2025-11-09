@@ -1,2 +1,5 @@
 /renv/*
 .DS_Store
+/.quarto/
+_site/*
+output/*

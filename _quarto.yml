@@ -1,0 +1,49 @@
+project:
+  type: website
+  output-dir: _site
+  execute-dir: project
+website:
+  title: "OSE range analysis"
+  description: "Reproducible statistical analysis and visualizations for the manuscript"
+  site-url: "https://ddlawton.github.io/OSE-Range-Analysis"
+  repo-url: "https://github.com/ddlawton/OSE-Range-Analysis"
+  favicon: "outputs/figures/favicon.png"
+
+  navbar:
+    logo: outputs/figures/logo.png
+    background: primary
+    right:
+      - text: "Home"
+        href: R/index.qmd
+      - text: "Locust Density Analysis"
+        href: R/analysis/main_analysis.qmd
+      # - text: "Supplementary"
+      #   href: analysis/supplementary.qmd
+      # - text: "Figures"
+      #   href: analysis/figures_gallery.qmd
+      # - text: "About"
+      #   href: about.qmd
+      # - icon: github
+      #   href: https://github.com/ddlawton/OSE-Range-Analysis
+
+  page-footer:
+    # left: |
+    #   © 2025 Your Name & Colleagues — Shared under CC-BY 4.0  
+    right: |
+      [View on GitHub]("https://github.com/ddlawton/OSE-Range-Analysis") • [Zenodo DOI](https://doi.org/10.5281/zenodo.xxxxxx)
+
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    code-tools: true
+    smooth-scroll: true
+    number-sections: false
+    anchor-sections: true
+    page-layout: full
+
+editor: visual
