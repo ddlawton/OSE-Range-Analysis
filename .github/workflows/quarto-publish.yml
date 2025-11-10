@@ -43,6 +43,7 @@ jobs:
         run: |
           Rscript -e 'install.packages("renv", repos="https://cran.r-project.org")'
           Rscript -e 'renv::restore(prompt = FALSE)'
+          Rscript -e 'renv::install("ropensci/rnaturalearthhires")'
 
       - uses: quarto-dev/quarto-actions/setup@v2
 
