@@ -11,6 +11,14 @@ This page presents the visualizations and statistical analyses conducted on the 
 
 The analyses focus on Senegalese locust (OSE) density and ground cover data collected across multiple regions and fertilizer treatments in Senegalese agricultural fields. The goal of this page is to replicate the current figures in the manuscript. This is to ensure visuals are made in the same way but also to ensure that my data management aligns well with expectations and that there are no errors. If you see errors, please let me know!
 
+## Major questions:
+
+1.  OSE densiy plots: do you prefer option 1 or 2 (assuming that we could workshop either one to be better)?
+2.  OSE densiy x ground cover: I am unable to replicate the curves seen in the mansucript (figure 5), can you confirm how the data was handled in this analysis?
+3.  annual OSE density: my averages do not add up to the numbers reported in table 1 in the manuscript, can you confirm how the data was handled for this table?
+4.  For model summaries (e.g. p values) how would we like to handle them? Would you prefer in-line references or supplementary tables?
+
+
 ```{r package loading}
 #| echo: false
 #| results: "hide"
