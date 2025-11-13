@@ -1,0 +1,114 @@
+---
+title: "2021 Locust x Temperature"
+format: html
+toc: true
+---
+
+```{r package loading}
+#| echo: false
+#| results: "hide"
+#| message: false
+#| warning: false
+
+
+library(tidyverse)
+library(rnaturalearth)
+library(rnaturalearthhires)
+library(janitor)
+library(MetBrewer)
+library(here)
+library(patchwork)
+library(ggpubr)
+library(gt)
+library(glmmTMB)
+library(mgcv)
+library(gratia)
+library(emmeans)
+
+here::i_am('README.md')
+
+# setting project root
+# sourcing functions
+source(('R/functions/data_preprocessing.R'), local = knitr::knit_global())
+source(('R/functions/table_variable_summary.R'), local = knitr::knit_global())
+source(('R/functions/locust_density_temperature.R'), local = knitr::knit_global())
+source(('R/functions/locust_density_modeling.R'), local = knitr::knit_global())
+
+```
+
+```{r data loading and processing}
+#| echo: false
+#| message: false
+#| warning: false
+
+data = process_senegal_data('data/raw/Toure_OSE2021data_v03.xlsx') |>
+    filter(fertilizer_treatment == 'control') |>
+    select(year,region,farmer,mission_number,ose_count,temperature)
+
+```
+
+# How is locust density related to temperature through the missions
+
+We would like to model the influence of temperature on locust density. Lets plot the raw data by region to see how it falls. I also removed the fertilizer plots since this variable influences OSE counts.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+
+data |>
+    ggplot(aes(x=temperature,y=ose_count,color=region)) +
+        geom_point() +
+        geom_smooth(se=FALSE) +
+        theme_pubr() +
+        scale_color_met_d(name='Degas') +
+        facet_wrap(~region,scales='free')
+
+```
+
+The raw plots do not look very compelling, but lets construct a quick generalized additive model and see if there is a statistically significant trend.
+
+```{r building gam}
+
+mod <- gam(
+    ose_count ~
+        s(temperature,region,bs='fs',k=10) +
+        s(farmer,bs=c('re'))  +
+        s(mission_number,bs=c('re')),
+    data=data,
+    family=tw(),
+    select=TRUE
+)
+
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+plot_temperature_smooth(mod,
+    smooth = "s(temperature,region)",
+    xvar = "temperature",
+    group = "region",
+    xlab = NULL,
+    ylab = NULL,
+    title = "locust density x temperature",
+    palette = "Degas",
+    ribbon_fill = "grey70",
+    ribbon_alpha = 0.3) 
+
+```
+
+There seems to be some positive realationship between temperature and locust denisty for Fatick, Saint Louis, and Thies. Kaffrine is a different relationship, however I wonder if this is partially still driven by the high densities in the first mission.
+
+Here is the model summary for what it's worth:
+
+```{r locust_temperature_model_summary}
+#| echo: false
+#| message: false
+#| warning: false
+
+model_summary_gt(mod, title = 'Locust x Temperature model summary', digits = 3) 
+```

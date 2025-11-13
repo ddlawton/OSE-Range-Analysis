@@ -2,8 +2,9 @@ project:
   type: website
   output-dir: _site
   execute-dir: project
+
 website:
-  title: "OSE range analysis"
+  title: "OSE Range Analysis"
   description: "Reproducible statistical analysis and visualizations for the manuscript"
   site-url: "https://ddlawton.github.io/OSE-Range-Analysis"
   repo-url: "https://github.com/ddlawton/OSE-Range-Analysis"
@@ -15,22 +16,35 @@ website:
     right:
       - text: "Home"
         href: R/index.qmd
-      - text: "Locust Density Analysis"
-        href: R/analysis/locust_denisty_analysis.qmd
-      # - text: "Supplementary"
-      #   href: analysis/supplementary.qmd
-      # - text: "Figures"
-      #   href: analysis/figures_gallery.qmd
-      # - text: "About"
-      #   href: about.qmd
-      # - icon: github
-      #   href: https://github.com/ddlawton/OSE-Range-Analysis
+      - text: "Map and Basic Stats"
+        href: R/analysis/basic_stats.qmd
+      - text: "Locust Dynamics"
+        menu:
+          - text: "Density × Treatment / Region"
+            href: R/analysis/locust_density_treatment_region.qmd
+          - text: "Locust × Plant Cover"
+            href: R/analysis/locust_density_plant_cover.qmd
+          - text: "Locust × Temperature"
+            href: R/analysis/locust_density_temperature.qmd
+
+      - text: "Yield Outcomes"
+        menu:
+          - text: "Yield × Locust Density"
+            href: R/analysis/yield_locust.qmd
+          - text: "Yield × Fertilizer / Region"
+            href: R/analysis/yield_treatment_region.qmd
+          - text: "Yield × Temperature"
+            href: R/analysis/yield_environment.qmd
+    left:
+        menu:
+          - text: "Download Figures"
+            href: outputs/figures/all_figures.zip
+      - icon: github
+        href: https://github.com/ddlawton/OSE-Range-Analysis
 
   page-footer:
-    # left: |
-    #   © 2025 Your Name & Colleagues — Shared under CC-BY 4.0  
     right: |
-      [View on GitHub]("https://github.com/ddlawton/OSE-Range-Analysis") • [Zenodo DOI](https://doi.org/10.5281/zenodo.xxxxxx)
+      [View on GitHub](https://github.com/ddlawton/OSE-Range-Analysis) • [Zenodo DOI](https://doi.org/10.5281/zenodo.xxxxxx)
 
 format:
   html:

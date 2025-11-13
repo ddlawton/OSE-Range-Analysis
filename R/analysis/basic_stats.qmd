@@ -1,0 +1,77 @@
+---
+title: "basic stats and maps"
+format: html
+toc: true
+---
+
+## Summary
+
+The goal of this page is to provide the map and a basic understanding of the data I have. This is to ensure visuals for publication have the same themeing but also to ensure that my data management aligns well with expectations and that there are no errors. If you see errors, please let me know!
+
+```{r package loading}
+#| echo: false
+#| results: "hide"
+#| message: false
+#| warning: false
+
+
+library(tidyverse)
+library(rnaturalearth)
+library(rnaturalearthhires)
+library(janitor)
+library(here)
+library(patchwork)
+library(ggpubr)
+library(gt)
+library(glmmTMB)
+library(mgcv)
+library(gratia)
+library(emmeans)
+
+here::i_am('README.md')
+
+# setting project root
+# sourcing functions
+source(('R/functions/data_preprocessing.R'), local = knitr::knit_global())
+source(('R/functions/table_variable_summary.R'), local = knitr::knit_global())
+source(('R/functions/senegal_map.R'), local = knitr::knit_global())
+source(('R/functions/locust_density_modeling.R'), local = knitr::knit_global())
+
+```
+
+```{r data loading and processing}
+#| echo: false
+#| message: false
+#| warning: false
+
+data = process_senegal_data('data/raw/Toure_OSE2021data_v03.xlsx')
+
+```
+
+# Basic statistics around dataset
+
+```{r basic_statistics}
+#| echo: false
+#| message: false
+#| warning: false
+
+table_variable_summary(data)
+
+```
+
+# Map of senegal and regions
+
+```{r senegal_map}
+#| echo: false
+#| message: false
+#| warning: false
+
+
+plot_senegal_map(
+  regions_of_interest = c('Saint-Louis', 'Thiès', 'Fatick', 'Kaffrine'),
+  show_legend = FALSE,
+  roi_color = "tomato",
+  other_color = "grey80",
+  label_size = 4)
+
+```

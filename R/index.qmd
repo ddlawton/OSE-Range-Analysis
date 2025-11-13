@@ -7,7 +7,7 @@ toc: false
 
 ## Overview
 
-This site presents a reproducible analysis of the 2021 *Oedaleus senegalensis* (OSE) dataset, collected by Mamour and collaborators across four regions of Senegal: Fatick, Kaffrine, Thiès, and Saint-Louis. The study examined how fertilizer application influences grasshopper densities and millet yield, while also providing insights into OSE’s regional dynamics and distribution along a rainfall gradient.
+This site presents a reproducible analysis of the 2021 *Oedaleus senegalensis* (OSE) dataset, collected across four regions of Senegal: Fatick, Kaffrine, Thiès, and Saint-Louis. The study examined how fertilizer application influences grasshopper densities and millet yield, while also providing insights into OSE’s regional dynamics and distribution along a rainfall gradient.
 
 The analyses and figures here build on previous work from our *Scientific Reports* paper, applying similar statistical frameworks to an expanded dataset that includes additional regions and survey rounds. All scripts, data processing, and visualizations are documented in this Quarto project for transparency and reproducibility.
 
@@ -15,33 +15,43 @@ The analyses and figures here build on previous work from our *Scientific Report
 
 ## Study Background
 
-During the 2021 growing season (July–October), 250 farmers participated in a paired-field experiment where each managed: 
-- One fertilized field receiving 150 kg each of NPK and urea. 
-- One non-fertilized control field.
+During the 2021 growing season (July–October), 250 farmers participated in a paired-field experiment where each managed:
 
-Each field was surveyed three times to record: - Grasshopper density and developmental stage\
-- Vegetation cover and temperature\
-- Millet yield at harvest
+-   One fertilized field receiving 150 kg each of NPK and urea.
+
+-   One non-fertilized control field.
+
+Each field was surveyed three times to record:
+
+-   Grasshopper density and developmental stage
+
+-   Vegetation cover and temperature
+
+-   Millet yield at harvest
 
 In total, the survey covered 500 ha across 1,500 sampling points. The Saint-Louis region, which experienced extreme dryness that year, was only sampled twice due to field abandonment.
 
 ------------------------------------------------------------------------
 
-## Analytical Goals
+# Analytical Goals
 
-We are exploring several complementary objectives:
+Our analyses address several complementary objectives:
 
-1.  [**Fertilization and Pest Pressure**](analysis/locust_denisty_analysis.qmd)**:**\
-    Quantify how fertilizer affects OSE density using mixed-effects models, assessing whether improved plant vigor corresponds to lower infestation rates and look how OSE density is influenced by ground cover
+**Locust Dynamics**
 
-2. **OSE density impacts on millet yield** (page TBA) \
-    understand how millet yield is influence by OSE presence (and presumabley millet damage)
+This section presents results on locust density across treatments and regions, as well as relationships between locust abundance, plant cover, and temperature.
 
-3.  **Regional Dynamics and Rainfall Gradients** (page TBA)\
-    Evaluate OSE abundance in relation to mean annual rainfall and latitude, to infer how climatic gradients structure its range across Senegal.
+**Yield Impact**
 
-4.  **Generational and Temporal Patterns** (page TBA)\
-    Visualize the timing of OSE developmental stages across regions to assess whether northern populations are locally derived or the result of seasonal migrations.
+Here, we examine how locust density influences yield, explore yield patterns across treatments and regions, and assess how temperature affects yield outcomes.
+
+**Regional Dynamics and Rainfall Gradients (page TBA)**
+
+This section will evaluate OSE abundance along gradients of mean annual rainfall and latitude to infer how climatic variation structures its range across Senegal.
+
+**Generational and Temporal Patterns (page TBA)**
+
+This section will visualize the timing of OSE developmental stages across regions to assess whether northern populations are locally derived or result from seasonal migration
 
 ------------------------------------------------------------------------
 

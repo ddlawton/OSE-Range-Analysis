@@ -1,0 +1,293 @@
+---
+title: "2021 Yield x treatment X region results"
+subtitle: "figures and tables"
+format: html
+toc: true
+---
+
+# Goal
+
+This should be a straight forward investigation as we are simply looking at how fertilization inlfluences millet yield. We should look at it by region to see any regional differences.
+
+```{r package loading}
+#| echo: false
+#| results: "hide"
+#| message: false
+#| warning: false
+
+
+library(tidyverse)
+library(rnaturalearth)
+library(rnaturalearthhires)
+library(janitor)
+library(MetBrewer)
+library(here)
+library(patchwork)
+library(ggpubr)
+library(gt)
+library(glmmTMB)
+library(mgcv)
+library(gratia)
+library(emmeans)
+
+here::i_am('README.md')
+
+# setting project root
+# sourcing functions
+source(('R/functions/data_preprocessing.R'), local = knitr::knit_global())
+source(('R/functions/table_variable_summary.R'), local = knitr::knit_global())
+source(('R/functions/locust_density_temperature.R'), local = knitr::knit_global())
+source(('R/functions/locust_density_modeling.R'), local = knitr::knit_global())
+
+```
+
+```{r data loading and processing}
+#| echo: false
+#| message: false
+#| warning: false
+
+data = process_senegal_data('data/raw/Toure_OSE2021data_v03.xlsx') |>
+    select(year,region,farmer,fertilizer_treatment,rendement_en_kg_ha) |>
+    drop_na(rendement_en_kg_ha) |>
+    distinct()
+
+```
+
+# Raw data visualization
+
+It is fairly obvious that fertilization influences millet yield. It is interesting to see the regional differences. It appears that Thies has a much strong response to fertilization than farms at Fatick or Kaffrine. Or at least the variation is dramatically less.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| 
+avg_yield <- data |>
+    group_by(region,fertilizer_treatment) |>
+    summarize(mean_yield = mean(rendement_en_kg_ha)) |>
+    drop_na() 
+
+data |>
+    drop_na() |>
+    ggplot(aes(x=region,y=rendement_en_kg_ha,color=fertilizer_treatment)) +
+        geom_jitter(position=position_jitterdodge()) +
+        geom_jitter(data = avg_yield,aes(y=mean_yield),size=8,position=position_jitterdodge(jitter.width=0,jitter.height=0)) +
+        scale_color_manual(values = c('black','dark green')) +
+        theme_pubr() +
+        xlab('') +
+        ylab('yield')         
+
+```
+
+# Modeling
+
+This model formula will be similar to locust density by treatment x region. I will hold farmer as a random effect. So the model formula looks like this:
+
+```{r model formula}
+
+formula <- yield ~
+    fertilizer_treatment * region + # interactive fixed effect
+    (1|farmer) # random effect
+
+```
+
+```{r model building}
+#| echo: false
+#| message: false
+#| warning: false
+
+yield_mod <- glmmTMB(
+    rendement_en_kg_ha ~
+        fertilizer_treatment * region +
+        (1|farmer),
+    data = data,
+    family=tweedie()
+)
+
+get_emmeans_and_pairs <- function(glmm_mod) {
+  emmeans_obj <- emmeans(glmm_mod, ~ fertilizer_treatment * region, type = "response")
+  
+  emmeans_tbl <- as_tibble(emmeans_obj) 
+  
+  pairs_tbl <- as_tibble(pairs(emmeans_obj, adjust = "tukey"))
+  
+  list(
+    emmeans = emmeans_tbl,
+    pairwise = pairs_tbl
+  )
+}
+
+
+```
+
+As can be seen in the modeled results below, fertilization significantly improved yield across the board. For whatever reason, Thies had lower yield unfertilized but also saw the biggest incase in yield when fertilized.
+
+```{r mod emmeans}
+#| echo: false
+#| message: false
+#| warning: false
+
+emms <- get_emmeans_and_pairs(yield_mod)
+
+emms$emmeans |>
+    ggplot(aes(x=region,y=response,color=fertilizer_treatment)) +
+        geom_point(position = position_dodge(width=0.2),size=10) +
+        geom_errorbar(aes(ymin=asymp.LCL, ymax=asymp.UCL),width=0,position = position_dodge(width=0.2)) +
+        scale_color_manual(values=c('black','dark green')) +
+        theme_pubr() +
+        xlab('') +
+        ylab('yield (estimated marginal means)')
+
+
+```
+
+Here are the tabulated summaries for the model:
+
+```{r model summary}
+#| echo: false
+#| message: false
+#| warning: false
+
+tidy_prepped <- broom.mixed::tidy(yield_mod) %>%
+  # Make term names human-readable; handle interactions by replacing ":" with " × "
+  mutate(
+    term = term %>%
+      # common renames from your output
+      str_replace_all("^\\(Intercept\\)$", "Intercept") %>%
+      str_replace_all("fertilizer_treatmentfertilized", "Fertilized") %>%
+      str_replace_all("regionKaffrine", "Kaffrine") %>%
+      str_replace_all("regionThies", "Thies"),
+    # keep original p.value column but create a formatted label with significance stars
+    p_value = p.value,
+    p_label = case_when(
+      is.na(p_value) ~ NA_character_,
+      p_value < 0.001 ~ "<0.001",
+      TRUE ~ formatC(p_value, digits = 3, format = "f")
+    ),
+    sig = case_when(
+      is.na(p_value) ~ "",
+      p_value < 0.001 ~ "***",
+      p_value < 0.01  ~ "**",
+      p_value < 0.05  ~ "*",
+      TRUE ~ ""
+    ),
+    p_label = if_else(is.na(p_label), NA_character_, paste0(p_label, sig))
+  ) %>%
+  # Keep ordering as-is; you can reorder rows here if desired
+  select(effect, component, term, estimate, std.error, statistic, p_value, p_label)
+
+# ---- Build the gt table ----
+gt_table <- tidy_prepped %>%
+  # start GT table
+  gt(rowname_col = "term") %>%
+  # Add row groups for fixed vs random parts
+  tab_row_group(
+    group = "Fixed effects",
+    rows = tidy_prepped$effect == "fixed"
+  ) %>%
+  tab_row_group(
+    group = "Random parameters",
+    rows = tidy_prepped$effect == "ran_pars"
+  ) %>%
+  # Column labels for presentation
+  cols_label(
+    term = "Term",
+    estimate = "Estimate",
+    std.error = "Std. error",
+    statistic = "z",
+    p_label = "p-value",
+    component = "Component"
+  ) %>%
+  # Format numeric columns
+  fmt_number(
+    columns = vars(estimate, std.error, statistic,p_value),
+    decimals = 3
+  ) %>%
+  # Replace NA with a dash
+  fmt_missing(
+    columns = everything(),
+    missing_text = "-"
+  ) %>%
+  # Move the p-value column to the rightmost position
+  cols_move_to_end(columns = vars(p_label)) %>%
+  # Styling: bold the row group labels
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_row_groups()
+  ) %>%
+  # Header and source note suitable for a Quarto site
+  tab_header(
+    title = md("Model estimates for yield ~ fertilizer x region model"),
+    subtitle = md("Fixed effects and random parameter SDs")
+  ) %>%
+  tab_source_note(
+    source_note = md("Significance: *** p < 0.001, ** p < 0.01, * p < 0.05")
+  ) %>%
+  # Accessibility / alignment tweaks
+  cols_align(
+    align = "center",
+    columns = vars(estimate, std.error, statistic, p_label)
+  )
+
+# Print or return the table
+gt_table
+
+```
+
+And of course the pairwise comparisons for `fertilizer x region`
+
+```{r}
+
+# Prepare and format p-value with significance stars
+emms_pw_prepped <- emms$pairwise %>%
+  mutate(
+    p_label = case_when(
+      is.na(p.value)   ~ "-",
+      p.value == 0     ~ "<0.001***",
+      p.value < 0.001  ~ "<0.001***",
+      p.value < 0.01   ~ paste0(formatC(p.value, digits = 3, format = "e"), "**"),
+      p.value < 0.05   ~ paste0(formatC(p.value, digits = 3, format = "e"), "*"),
+      TRUE             ~ formatC(p.value, digits = 3, format = "e")
+    )
+  )
+
+# Make column names readable
+col_labels <- c(
+  contrast   = "Contrast",
+  ratio      = "Ratio",
+  SE         = "Std. Error",
+  df         = "DF",
+  null       = "Null",
+  z.ratio    = "z Ratio",
+  p_label    = "p-value"
+)
+
+
+
+emms_pairwise_gt <- emms_pw_prepped %>%
+  select(contrast, ratio, SE, df, null, z.ratio, p_label) %>%
+  gt(rowname_col = "contrast") %>%
+  cols_label(!!!col_labels) %>%
+  fmt_number(
+    columns = c("ratio", "SE", "z.ratio"),
+    decimals = 3
+  ) %>%
+  fmt_missing(columns = everything(), missing_text = "-") %>%
+  tab_header(
+    title = md("Estimated Marginal Means Pairwise Contrasts"),
+    subtitle = md("Table of pairwise ratios, z statistics, and p-values")
+  ) %>%
+  tab_source_note(
+    source_note = md("Significance: *** p < 0.001, ** p < 0.01, * p < 0.05")
+  ) %>%
+  cols_align(
+    align = "center",
+    columns = c("ratio", "SE", "z.ratio", "null", "df", "p_label")
+  ) %>%
+  opt_row_striping()
+
+# Print or return the table (Quarto HTML will render this table)
+emms_pairwise_gt
+
+
+```

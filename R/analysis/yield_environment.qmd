@@ -1,0 +1,75 @@
+---
+title: "2021 Yield x Temperature"
+subtitle: "figures and tables"
+format: html
+toc: true
+---
+
+# Goal
+
+How is yield millet influenced by temperature during the growing season? This may be overkill, but I thought I would show this as well since the data has already been collected.
+
+```{r package loading}
+#| echo: false
+#| results: "hide"
+#| message: false
+#| warning: false
+
+
+library(tidyverse)
+library(rnaturalearth)
+library(rnaturalearthhires)
+library(janitor)
+library(MetBrewer)
+library(here)
+library(patchwork)
+library(ggpubr)
+library(gt)
+library(glmmTMB)
+library(mgcv)
+library(gratia)
+library(emmeans)
+
+here::i_am('README.md')
+
+# setting project root
+# sourcing functions
+source(('R/functions/data_preprocessing.R'), local = knitr::knit_global())
+
+```
+
+```{r data loading and processing}
+#| echo: false
+#| message: false
+#| warning: false
+
+data = process_senegal_data('data/raw/Toure_OSE2021data_v03.xlsx') |>
+    select(year,region,farmer,temperature,fertilizer_treatment,rendement_en_kg_ha) |>
+    drop_na(rendement_en_kg_ha,fertilizer_treatment) |>
+    distinct()
+
+```
+
+# Raw data visualization
+
+So I will calculate the mean and sd temperature and plot against yield to see if there are any interesting trends.
+
+```{r}
+
+data |>
+    group_by(region,farmer) |>
+    summarize(mean_temp = mean(temperature),
+        sd_temp = sd(temperature),
+        rendement_en_kg_ha = first(rendement_en_kg_ha)) |>
+    pivot_longer(!c(farmer,region,rendement_en_kg_ha)) |>
+    ggplot(aes(x=value,y=rendement_en_kg_ha)) +
+        geom_point() +
+        geom_smooth(method='gam',se=FALSE) +
+        facet_grid(region~name,scales='free') +
+        theme_pubr()
+
+
+```
+
+Not sure what to think about the potential non-linear relationship with yield x temperature. It might not be significant anyway. Happy to go further here if y'all are interested but for now I will leave it.
+

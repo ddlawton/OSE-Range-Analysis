@@ -1,0 +1,193 @@
+---
+title: "2021 Yield x Locust results"
+subtitle: "figures and tables"
+format: html
+toc: true
+---
+
+# Goal
+
+We would like to see if locust density influences end-of-season millet yield. Locust denisty was collected three times through the season and of course yield is collected at the end of season.
+
+Like the first paper, we are running into confounding variable issues specifically fertilization. To overcome this, I will just focus on the control plots.
+
+
+```{r package loading}
+#| echo: false
+#| results: "hide"
+#| message: false
+#| warning: false
+
+
+library(tidyverse)
+library(rnaturalearth)
+library(rnaturalearthhires)
+library(janitor)
+library(MetBrewer)
+library(here)
+library(patchwork)
+library(ggpubr)
+library(gt)
+library(glmmTMB)
+library(mgcv)
+library(gratia)
+library(emmeans)
+
+here::i_am('README.md')
+
+# setting project root
+# sourcing functions
+source(('R/functions/data_preprocessing.R'), local = knitr::knit_global())
+source(('R/functions/table_variable_summary.R'), local = knitr::knit_global())
+source(('R/functions/locust_density_temperature.R'), local = knitr::knit_global())
+source(('R/functions/locust_density_modeling.R'), local = knitr::knit_global())
+
+```
+
+```{r data loading and processing}
+#| echo: false
+#| message: false
+#| warning: false
+
+data = process_senegal_data('data/raw/Toure_OSE2021data_v03.xlsx') |>
+    filter(fertilizer_treatment == 'control') |>
+    select(year,region,farmer,mission_number,fertilizer_treatment,ose_count,rendement_en_kg_ha) |>
+    drop_na(rendement_en_kg_ha)
+
+```
+
+## Raw data visualization
+
+
+```{r raw data viz}
+#| echo: false
+#| message: false
+#| warning: false
+
+
+lm_plot <- data |>
+    group_by(region,farmer) |>
+    mutate(mean_ose = mean(ose_count)) |>
+    ggplot(aes(x=ose_count,y=rendement_en_kg_ha,color=region)) +
+        geom_point(pch=21) +
+        geom_smooth(method='lm',se=FALSE,size=1.25) +
+        theme_pubr() +
+        xlab('OSE count') +
+        ylab('yield') +
+        MetBrewer::scale_color_met_d(name = 'Degas') +
+        facet_wrap(~region,ncol=2,scale='free')
+
+lm_plot
+```
+
+Doesnt look too strong, but lets model. I will hold the following variables as random effects: *farmer number*, *region*, and *mission_number*. Holding mission_number as a random effect can help with puesodreplication. 
+
+
+```{r model building}
+#| echo: false
+#| results: "hide"
+#| message: false
+#| warning: false
+
+mod <- glmmTMB(
+    rendement_en_kg_ha ~ 
+        ose_count +
+        (1|region)  +
+        (1|farmer) +
+        (1|mission_number),
+    data = data,
+    family = poisson()
+)
+
+```
+
+There isnt a strong relationship between locust density and yield. I am happy to dive further into this if you'd like!
+
+
+```{r model viz}
+#| echo: false
+#| message: false
+#| warning: false
+#| 
+
+
+tidy_prepped <- broom.mixed::tidy(mod) %>%
+  # Make labels friendlier
+  mutate(
+    Effect = case_when(
+      effect == "fixed" ~ "Fixed effects",
+      effect == "ran_pars" ~ "Random parameters",
+      TRUE ~ effect
+    ),
+    Component = if_else(is.na(component) | component == "NA", "Overall", as.character(component)),
+    Group = if_else(is.na(group) | group == "NA", "-", as.character(group)),
+    # Clean up term names, turn sd__(...) into "SD — <what>" for readability
+    Term = case_when(
+      term == "(Intercept)" ~ "Intercept",
+      str_detect(term, "^sd__") ~ str_replace(term, "^sd__\\(?([^\\)]*)\\)?", "SD — \\1"),
+      TRUE ~ as.character(term)
+    ),
+    # Prepare a pretty p-value column for display
+    p_display = case_when(
+      is.na(p.value) ~ NA_character_,
+      p.value == 0 ~ "<0.001",
+      p.value < 0.001 ~ paste0("<", formatC(0.001, format = "f", digits = 3)),
+      TRUE ~ formatC(p.value, format = "f", digits = 3)
+    )
+  ) %>%
+  # Choose ordering for the table: fixed effects first, then random parameters
+  mutate(effect_order = case_when(Effect == "Fixed effects" ~ 1L, Effect == "Random parameters" ~ 2L, TRUE ~ 3L)) %>%
+  arrange(effect_order, Effect, Component, Group)
+
+# Build gt table
+gt_tbl <- tidy_prepped %>%
+  select(Effect, Component, Group, Term, Estimate = estimate, `Std. Error` = std.error, Statistic = statistic, `p value` = p_display) %>%
+  gt(rowname_col = "Term") %>%
+  # Create row groups by Effect (Fixed / Random)
+  tab_row_group(
+    group = "Fixed effects",
+    rows = Effect == "Fixed effects"
+  ) %>%
+  tab_row_group(
+    group = "Random parameters",
+    rows = Effect == "Random parameters"
+  ) %>%
+  # Column labels and title
+  cols_label(
+    Component = "Component",
+    Group = "Group",
+    `Std. Error` = "Std. Error",
+    Statistic = "Statistic",
+    `p value` = "p value"
+  ) %>%
+  tab_header(
+    title = md("Model coefficients"),
+    subtitle = md("Fixed effects and estimated random-parameter standard deviations")
+  ) %>%
+  # Format numeric columns:
+  # - For Estimate: show normal decimals for medium/large values, scientific for very small
+  fmt_number(
+    columns = vars(Estimate),
+    decimals = 3,
+    rows = !is.na(Estimate) & abs(Estimate) >= 0.001
+  ) %>%
+  fmt_scientific(
+    columns = vars(Estimate),
+    rows = !is.na(Estimate) & abs(Estimate) < 0.001,
+    decimals = 2
+  ) %>%
+  fmt_number(
+    columns = vars(`Std. Error`, Statistic),
+    decimals = 3
+  ) %>%
+  # Replace missing numeric entries with a dash for clarity
+  fmt_missing(
+    columns = everything(),
+    missing_text = "-"
+  ) %>%
+  # A little visual polish
+  opt_align_table_header("left")
+
+
+gt_tbl
+```
