@@ -1,5 +1,5 @@
 ---
-title: "2021 Locust x Plant Cover"
+title: "2021 Locust x ground Cover"
 format: html
 toc: true
 ---
@@ -44,7 +44,7 @@ data = process_senegal_data('data/raw/Toure_OSE2021data_v03.xlsx')
 
 ```
 
-We would like to see how density is influenced by plant cover. To do this I am building a generalized additive model (family: tweedie). Following this form:
+We would like to see how density is influenced by ground cover. To do this I am building a generalized additive model (family: tweedie). Following this form:
 
 The generalized additive model (GAM) fitted is:
 
@@ -71,14 +71,14 @@ where:
 #| warning: false
 
 
-plant_cover_dat <- data |>
+ground_cover_dat <- data |>
     dplyr::select(region,farmer,fertilizer_treatment,mission_number,ose_count,percent_ground_cover) |>
     mutate(
         region_treat = factor(paste0(region,'_',fertilizer_treatment))
     ) |>
     drop_na(ose_count,fertilizer_treatment)
 
-plant_cover_mod <- build_gam(plant_cover_dat,
+ground_cover_mod <- build_gam(ground_cover_dat,
     formula = ose_count ~ te(percent_ground_cover, region_treat, bs='fs', k=10) + s(farmer, bs='re'),
     nthreads = 9,
     family = mgcv::tw(),
@@ -94,7 +94,7 @@ The model diagnostics look pretty good! I tried to build a poisson model, but th
 #| warning: false
 
 
-appraise(plant_cover_mod)
+appraise(ground_cover_mod)
 ```
 
 However, I am not able to reproduce the smooths seen in the manuscript sent to me. This is likely due to data differences as I am not sure what was included in the initial modeling approach. **Roughly** we can see similiar trends in Kaffrine, Fatick, and Saint Louis. But Thies definitely has a different trend. Additionally, there seems to be different trends between control and fertilized treatments as comapred to the current plots in the manuscript. Not sure what to think here.
@@ -104,7 +104,7 @@ However, I am not able to reproduce the smooths seen in the manuscript sent to m
 #| message: false
 #| warning: false
 
-gam_plot <- plot_gam_smooths_gratia(plant_cover_mod)
+gam_plot <- plot_gam_smooths_gratia(ground_cover_mod)
 
 gam_plot
 ```
@@ -117,7 +117,7 @@ gam_plot
 #| warning: false
 
 
-broom.mixed::tidy(plant_cover_mod) |>
+broom.mixed::tidy(ground_cover_mod) |>
   gt() |>
   fmt_number(
     columns = c(edf, ref.df, statistic, p.value),
@@ -131,7 +131,7 @@ broom.mixed::tidy(plant_cover_mod) |>
     p.value = "P-value"
   ) |>
   tab_header(
-    title = "GAM model Summary: OSE Density x Plant Cover"
+    title = "GAM model Summary: OSE Density x ground Cover"
   ) |>
   tab_options(
     table.font.size = "small",

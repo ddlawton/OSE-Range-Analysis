@@ -23,8 +23,8 @@ website:
         menu:
           - text: "Density × Treatment / Region"
             href: R/analysis/locust_density_treatment_region.qmd
-          - text: "Locust × Plant Cover"
-            href: R/analysis/locust_density_plant_cover.qmd
+          - text: "Locust × Ground Cover"
+            href: R/analysis/locust_density_ground_cover.qmd
           - text: "Locust × Temperature"
             href: R/analysis/locust_density_temperature.qmd
       - text: "Yield Outcomes"
