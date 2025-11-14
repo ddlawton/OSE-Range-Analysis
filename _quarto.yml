@@ -9,7 +9,6 @@ website:
   site-url: "https://ddlawton.github.io/OSE-Range-Analysis"
   repo-url: "https://github.com/ddlawton/OSE-Range-Analysis"
   favicon: "outputs/figures/favicon.png"
-
   navbar:
     logo: outputs/figures/logo.png
     background: primary
@@ -26,7 +25,6 @@ website:
             href: R/analysis/locust_density_plant_cover.qmd
           - text: "Locust × Temperature"
             href: R/analysis/locust_density_temperature.qmd
-
       - text: "Yield Outcomes"
         menu:
           - text: "Yield × Locust Density"
@@ -35,13 +33,11 @@ website:
             href: R/analysis/yield_treatment_region.qmd
           - text: "Yield × Temperature"
             href: R/analysis/yield_environment.qmd
-    left:
-        menu:
-          - text: "Download Figures"
-            href: outputs/figures/all_figures.zip
       - icon: github
         href: https://github.com/ddlawton/OSE-Range-Analysis
-
+    left:
+      - text: "Download Figures"
+        href: outputs/figures/all_figures.zip
   page-footer:
     right: |
       [View on GitHub](https://github.com/ddlawton/OSE-Range-Analysis) • [Zenodo DOI](https://doi.org/10.5281/zenodo.xxxxxx)
