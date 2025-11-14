@@ -2,6 +2,8 @@ project:
   type: website
   output-dir: _site
   execute-dir: project
+  resources:
+    - outputs/figures/all_figures.zip
 
 website:
   title: "OSE Range Analysis"
