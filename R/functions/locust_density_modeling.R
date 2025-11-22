@@ -158,8 +158,6 @@ plot_mission_density <- function(
             legend.title = element_blank(),
             plot.title = element_text(hjust = 0.5),  # Centers the title
             axis.title.x = element_blank(),         # Removes x-axis label
-            axis.text.x = element_blank(),          # Removes x-axis tick labels
-            axis.ticks.x = element_blank()          # Removes x-axis tick marks
         )
     }
 
