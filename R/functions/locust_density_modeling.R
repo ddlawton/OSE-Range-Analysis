@@ -108,13 +108,14 @@ get_emmeans_and_pairs <- function(glmm_mod, mission_num = 1) {
 plot_mission_density <- function(
     data,
     emmeans,
+    ncol=1,
     emmean_point_size = 5,
     regions = c('Saint Louis','Thies','Fatick','Kaffrine'),
     legend_position = 'bottom'
 ) {
     # Data prep
     density_dat <- data |>
-        dplyr::select(year,region,farmer,fertilizer_treatment,mission_number,ose_count) |>
+        dplyr::select(year, region, farmer, fertilizer_treatment, mission_number, ose_count) |>
         dplyr::mutate(region = factor(region, levels = regions)) |>
         dplyr::mutate(mission_date = dplyr::case_when(
             mission_number == 1 ~ 'Mission 1 (July)',
@@ -136,29 +137,35 @@ plot_mission_density <- function(
     plot_mission <- function(md) {
         ggplot(
             dplyr::filter(density_dat, mission_date == md),
-            aes(x=region, y=ose_count, color=fertilizer_treatment)
+            aes(x = region, y = ose_count, color = fertilizer_treatment)
         ) +
-        geom_jitter(position = position_jitterdodge(jitter.width=0.2, jitter.height=0),
-            pch=21, alpha=0.3) +
+        geom_jitter(position = position_jitterdodge(jitter.width = 0.2, jitter.height = 0),
+            pch = 21, alpha = 0.3) +
         geom_jitter(
             data = dplyr::filter(emmeans, mission_date == md),
             aes(y = rate, x = region, fill = fertilizer_treatment), # Keep mappings explicit!
-            position = position_jitterdodge(jitter.width=0.00001, jitter.height=0),
-            pch=21,
+            position = position_jitterdodge(jitter.width = 0.00001, jitter.height = 0),
+            pch = 21,
             color = 'black',
             size = emmean_point_size
         ) +
-        scale_color_manual(values = c('black','dark green')) +
-        scale_fill_manual(values = c('black','dark green')) +
-        ylab('OSE/100m') +
+        scale_color_manual(values = c('black', 'dark green')) +
+        scale_fill_manual(values = c('black', 'dark green')) +
+        ylab(bquote('individuals'~bold('•')~100~m^-2)) + # Adds superscript -2
         labs(title = md) +
         theme_pubr(legend = 'bottom') +
-        theme(legend.title = element_blank())
+        theme(
+            legend.title = element_blank(),
+            plot.title = element_text(hjust = 0.5),  # Centers the title
+            axis.title.x = element_blank(),         # Removes x-axis label
+            axis.text.x = element_blank(),          # Removes x-axis tick labels
+            axis.ticks.x = element_blank()          # Removes x-axis tick marks
+        )
     }
 
     plots <- lapply(mission_levels, plot_mission)
 
-    combined_plot <- patchwork::wrap_plots(plots, ncol=2) +
+    combined_plot <- patchwork::wrap_plots(plots, ncol = ncol) +
         patchwork::plot_annotation(tag_levels = 'a') +
         patchwork::plot_layout(guides = "collect") &
         theme(legend.position = legend_position)

@@ -121,6 +121,9 @@ These models are not perfect, but I think they are fine to use for this analysis
 #| echo: false
 #| message: false
 #| warning: false
+#| fig-width: 5       # device width in inches
+#| fig-height: 10      # device height in inches
+#| fig-retina: 2      # scale up for high-DPI (keeps the output sharp)
 
 
 # A list of model results with emmeans
@@ -137,6 +140,7 @@ mission_emms <- bind_rows(
 count_plot_option_1 <- plot_mission_density(
     data |> drop_na(ose_count,fertilizer_treatment),
     mission_emms,
+    ncol=1,
     regions = c('Saint Louis','Thies','Fatick','Kaffrine'),
     legend_position = 'bottom'
 ) 
