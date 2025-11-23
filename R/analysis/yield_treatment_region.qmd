@@ -1,56 +1,37 @@
 ---
-title: "2021 Yield x treatment X region results"
-subtitle: "figures and tables"
+title: "2021 Yield × Treatment × Region Results"
+subtitle: "Effects of fertilization on millet yield by region"
 format: html
 toc: true
 ---
 
 # Goal
 
-This should be a straight forward investigation as we are simply looking at how fertilization inlfluences millet yield. We should look at it by region to see any regional differences.
+This analysis examines how fertilization influences millet yield across different regions. We expect to see regional differences in fertilizer response.
 
-```{r package loading}
+```{r setup}
 #| echo: false
 #| results: "hide"
 #| message: false
 #| warning: false
 
+# Load common setup (packages, functions, configuration)
+source(here::here("R", "_common.R"))
 
-library(tidyverse)
-library(rnaturalearth)
-library(rnaturalearthhires)
-library(janitor)
-library(MetBrewer)
-library(here)
-library(patchwork)
-library(ggpubr)
-library(gt)
-library(glmmTMB)
-library(mgcv)
-library(gratia)
-library(emmeans)
-
-here::i_am('README.md')
-
-# setting project root
-# sourcing functions
-source(('R/functions/data_preprocessing.R'), local = knitr::knit_global())
-source(('R/functions/table_variable_summary.R'), local = knitr::knit_global())
-source(('R/functions/locust_density_temperature.R'), local = knitr::knit_global())
-source(('R/functions/locust_density_modeling.R'), local = knitr::knit_global())
-
+# Set the current analysis for organized output
+set_current_analysis("yield_treatment_region")
 ```
 
-```{r data loading and processing}
+```{r data-loading}
 #| echo: false
 #| message: false
 #| warning: false
 
-data = process_senegal_data('data/raw/Toure_OSE2021data_v03.xlsx') |>
-    select(year,region,farmer,fertilizer_treatment,rendement_en_kg_ha) |>
+# Load processed data and filter for yield analysis
+data <- load_ose_data(cache_processed = TRUE) |>
+    select(year, region, farmer, fertilizer_treatment, rendement_en_kg_ha) |>
     drop_na(rendement_en_kg_ha) |>
     distinct()
-
 ```
 
 # Raw data visualization
@@ -91,19 +72,27 @@ formula <- yield ~
 
 ```
 
-```{r model building}
+```{r model-building}
 #| echo: false
 #| message: false
 #| warning: false
 
-yield_mod <- glmmTMB(
-    rendement_en_kg_ha ~
-        fertilizer_treatment * region +
-        (1|farmer),
+# Use model caching for the yield model
+yield_mod <- cache_model(
+    model_name = "yield_treatment_region",
     data = data,
-    family=tweedie()
+    fit_function = function(data) {
+        glmmTMB(
+            rendement_en_kg_ha ~
+                fertilizer_treatment * region +
+                (1|farmer),
+            data = data,
+            family = tweedie()
+        )
+    }
 )
 
+# Define emmeans function locally (could be moved to statistical_models.R)
 get_emmeans_and_pairs <- function(glmm_mod) {
   emmeans_obj <- emmeans(glmm_mod, ~ fertilizer_treatment * region, type = "response")
   
@@ -116,8 +105,6 @@ get_emmeans_and_pairs <- function(glmm_mod) {
     pairwise = pairs_tbl
   )
 }
-
-
 ```
 
 As can be seen in the modeled results below, fertilization significantly improved yield across the board. For whatever reason, Thies had lower yield unfertilized but also saw the biggest incase in yield when fertilized.

@@ -4,15 +4,16 @@ project:
   execute-dir: project
   resources:
     - outputs/figures/all_figures.zip
+  post-render: scripts/create-figures-zip.sh
 
 website:
   title: "OSE Range Analysis"
   description: "Reproducible statistical analysis and visualizations for the manuscript"
   site-url: "https://ddlawton.github.io/OSE-Range-Analysis"
   repo-url: "https://github.com/ddlawton/OSE-Range-Analysis"
-  favicon: "outputs/figures/favicon.png"
+  # favicon: "outputs/figures/favicon.png"  # TODO: Add project favicon
   navbar:
-    logo: outputs/figures/logo.png
+    logo: outputs/figures/gli_logo.jpg
     background: primary
     right:
       - text: "Home"

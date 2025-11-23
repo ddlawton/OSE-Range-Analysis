@@ -13,6 +13,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Cache model objects to avoid rebuilding expensive models
+      - name: Cache model objects
+        uses: actions/cache@v3
+        with:
+          path: data/model_objects
+          key: model-cache-${{ hashFiles('data/raw/**', 'R/functions/**', 'R/_common.R') }}
+          restore-keys: |
+            model-cache-
+
       - name: Install system dependencies
         run: |
           sudo apt-get update
@@ -49,11 +58,173 @@ jobs:
 
       - run: quarto render
 
-      # === Added Step: Zip all figures ===
-      - name: Zip all PNG figures
+      # === Enhanced Step: Collect all website figures ===
+      - name: Collect all website figures for download
         run: |
+          echo "Collecting all figures from website output..."
           mkdir -p _site/outputs/figures
-          zip -j _site/outputs/figures/all_figures.zip outputs/figures/*.png || echo "No PNG files found."
+          
+          # Create temporary directory for organized zip structure
+          temp_dir="_site/temp_download"
+          mkdir -p "$temp_dir"
+          
+          # Function to copy and rename figures with meaningful names
+          copy_website_figures() {
+              local analysis_name="$1"
+              local dest_dir="$temp_dir/figures/$analysis_name"
+              mkdir -p "$dest_dir"
+              
+              # Path to analysis figures in _site
+              local site_figures_dir="_site/R/analysis/${analysis_name}_files/figure-html"
+              
+              if [ -d "$site_figures_dir" ]; then
+                  local count=0
+                  
+                  # Process each PNG file with meaningful renaming
+                  for fig_path in "$site_figures_dir"/*.png; do
+                      if [ -f "$fig_path" ]; then
+                          local orig_name=$(basename "$fig_path")
+                          local new_name
+                          
+                          # Create meaningful names based on original chunk names
+                          case "$orig_name" in
+                              *"senegal-map"*) new_name="senegal_regions_map.png" ;;
+                              *"basic-statistics"*) new_name="dataset_summary_stats.png" ;;
+                              *"diagnostic"*) new_name="model_diagnostic_plots.png" ;;
+                              *"density-option-1"*) new_name="locust_density_by_treatment_region.png" ;;
+                              *"count-plot"*) new_name="locust_count_summary.png" ;;
+                              *"emmeans"*) new_name="estimated_marginal_means.png" ;;
+                              *"temperature"*) new_name="temperature_analysis.png" ;;
+                              *"ground-cover"*) new_name="ground_cover_analysis.png" ;;
+                              *"yield"*) new_name="yield_analysis.png" ;;
+                              *"raw-data"*) new_name="raw_data_visualization.png" ;;
+                              *"gam"*) new_name="gam_smooth_plots.png" ;;
+                              *) 
+                                  # For unnamed chunks, create descriptive names
+                                  local chunk_num=$(echo "$orig_name" | grep -o '[0-9]\+' | head -1)
+                                  new_name="${analysis_name}_figure_${chunk_num:-1}.png"
+                                  ;;
+                          esac
+                          
+                          # Copy with new name
+                          cp "$fig_path" "$dest_dir/$new_name"
+                          count=$((count + 1))
+                      fi
+                  done
+                  
+                  if [ $count -gt 0 ]; then
+                      echo "  ✓ Copied $count figures from $analysis_name"
+                  fi
+              fi
+          }
+          
+          # List of all analysis pages
+          analysis_pages=(
+              "basic_stats"
+              "locust_density_treatment_region"
+              "locust_density_ground_cover"
+              "locust_density_temperature"
+              "yield_environment"
+              "yield_locust"
+              "yield_treatment_region"
+          )
+          
+          # Collect figures from each analysis
+          total_figures=0
+          for analysis in "${analysis_pages[@]}"; do
+              copy_website_figures "$analysis"
+          done
+          
+          # Copy tables if they exist
+          total_tables=0
+          if [ -d "outputs/tables" ]; then
+              echo "Copying analysis tables..."
+              for analysis_dir in outputs/tables/*/; do
+                  if [ -d "$analysis_dir" ]; then
+                      analysis_name=$(basename "$analysis_dir")
+                      dest_dir="$temp_dir/tables/$analysis_name"
+                      
+                      if [ $(find "$analysis_dir" -name "*.csv" | wc -l) -gt 0 ]; then
+                          mkdir -p "$dest_dir"
+                          cp "$analysis_dir"*.csv "$dest_dir/" 2>/dev/null || true
+                          local_count=$(find "$dest_dir" -name "*.csv" | wc -l)
+                          total_tables=$((total_tables + local_count))
+                          echo "  ✓ Copied $local_count tables from $analysis_name"
+                      fi
+                  fi
+              done
+          fi
+          
+          # Count final figures
+          total_figures=$(find "$temp_dir/figures" -name "*.png" | wc -l)
+          
+          # Create comprehensive README
+          cat > "$temp_dir/README.txt" << EOF
+          OSE Range Analysis - Complete Figure and Table Package
+          ====================================================
+          
+          Generated on: $(date)
+          Website: https://ddlawton.github.io/OSE-Range-Analysis
+          Repository: https://github.com/ddlawton/OSE-Range-Analysis
+          
+          This package contains ALL figures and tables from the complete analysis,
+          matching exactly what appears on the published website.
+          
+          CONTENTS:
+          
+          FIGURES/ (organized by analysis section)
+            ├── basic_stats/                    Study area maps and dataset summaries
+            ├── locust_density_treatment_region/   Treatment effects across regions
+            ├── locust_density_ground_cover/       Vegetation-locust relationships
+            ├── locust_density_temperature/        Temperature-locust dynamics
+            ├── yield_environment/             Environmental yield factors
+            ├── yield_locust/                  Locust impact on yield
+            └── yield_treatment_region/        Regional fertilizer effects
+          
+          TABLES/ (CSV format for analysis reuse)
+            └── [same structure as figures]/    Model summaries, statistics, comparisons
+          
+          FIGURE DETAILS:
+          - All figures match website display dimensions and quality
+          - PNG format at publication resolution
+          - Meaningful filenames based on analysis content
+          - Total figures: $total_figures
+          - Total tables: $total_tables
+          
+          REPRODUCIBILITY:
+          All outputs generated from code at:
+          https://github.com/ddlawton/OSE-Range-Analysis
+          
+          CITATION:
+          Lawton, D. et al. (submitted) Journal of Economic Entomology
+          Zenodo DOI: https://doi.org/10.5281/zenodo.xxxxxx
+          EOF
+          
+          # Create the comprehensive zip file
+          if [ -d "$temp_dir" ] && [ "$(find "$temp_dir" -type f | wc -l)" -gt 0 ]; then
+              cd _site
+              zip -r outputs/figures/all_figures.zip temp_download/
+              
+              # Get final stats
+              zip_size=$(du -h outputs/figures/all_figures.zip | cut -f1)
+              file_count=$(find temp_download -type f | wc -l)
+              
+              echo "✓ Created comprehensive download package:"
+              echo "  📁 Total files: $file_count"
+              echo "  📏 File size: $zip_size" 
+              echo "  📊 Figures: $total_figures"
+              echo "  📋 Tables: $total_tables"
+              
+              # Cleanup
+              rm -rf temp_download
+              cd ..
+          else
+              echo "No files found, creating minimal zip..."
+              mkdir -p _site/outputs/figures
+              echo "No analysis outputs found. Please check the build process." > _site/temp_readme.txt
+              zip -j _site/outputs/figures/all_figures.zip _site/temp_readme.txt
+              rm -f _site/temp_readme.txt
+          fi
 
       - uses: peaceiris/actions-gh-pages@v4
         with:

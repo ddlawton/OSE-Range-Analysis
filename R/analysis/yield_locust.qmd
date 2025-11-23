@@ -1,59 +1,39 @@
 ---
-title: "2021 Yield x Locust results"
-subtitle: "figures and tables"
+title: "2021 Yield × Locust Results"
+subtitle: "Impact of locust density on millet yield"
 format: html
 toc: true
 ---
 
 # Goal
 
-We would like to see if locust density influences end-of-season millet yield. Locust denisty was collected three times through the season and of course yield is collected at the end of season.
+We would like to see if locust density influences end-of-season millet yield. Locust density was collected three times through the season and yield is collected at the end of season.
 
-Like the first paper, we are running into confounding variable issues specifically fertilization. To overcome this, I will just focus on the control plots.
+Like the first paper, we are running into confounding variable issues specifically with fertilization. To overcome this, I will focus on the control plots only.
 
-
-```{r package loading}
+```{r setup}
 #| echo: false
 #| results: "hide"
 #| message: false
 #| warning: false
 
+# Load common setup (packages, functions, configuration)
+source(here::here("R", "_common.R"))
 
-library(tidyverse)
-library(rnaturalearth)
-library(rnaturalearthhires)
-library(janitor)
-library(MetBrewer)
-library(here)
-library(patchwork)
-library(ggpubr)
-library(gt)
-library(glmmTMB)
-library(mgcv)
-library(gratia)
-library(emmeans)
-
-here::i_am('README.md')
-
-# setting project root
-# sourcing functions
-source(('R/functions/data_preprocessing.R'), local = knitr::knit_global())
-source(('R/functions/table_variable_summary.R'), local = knitr::knit_global())
-source(('R/functions/locust_density_temperature.R'), local = knitr::knit_global())
-source(('R/functions/locust_density_modeling.R'), local = knitr::knit_global())
-
+# Set the current analysis for organized output
+set_current_analysis("yield_locust")
 ```
 
-```{r data loading and processing}
+```{r data-loading}
 #| echo: false
 #| message: false
 #| warning: false
 
-data = process_senegal_data('data/raw/Toure_OSE2021data_v03.xlsx') |>
+# Load processed data and filter for yield analysis
+data <- load_ose_data(cache_processed = TRUE) |>
     filter(fertilizer_treatment == 'control') |>
-    select(year,region,farmer,mission_number,fertilizer_treatment,ose_count,rendement_en_kg_ha) |>
+    select(year, region, farmer, mission_number, fertilizer_treatment, ose_count, rendement_en_kg_ha) |>
     drop_na(rendement_en_kg_ha)
-
 ```
 
 ## Raw data visualization
@@ -83,22 +63,28 @@ lm_plot
 Doesnt look too strong, but lets model. I will hold the following variables as random effects: *farmer number*, *region*, and *mission_number*. Holding mission_number as a random effect can help with puesodreplication. 
 
 
-```{r model building}
+```{r model-building}
 #| echo: false
 #| results: "hide"
 #| message: false
 #| warning: false
 
-mod <- glmmTMB(
-    rendement_en_kg_ha ~ 
-        ose_count +
-        (1|region)  +
-        (1|farmer) +
-        (1|mission_number),
+# Use model caching for the yield-locust model
+mod <- cache_model(
+    model_name = "yield_locust_density",
     data = data,
-    family = poisson()
+    fit_function = function(data) {
+        glmmTMB(
+            rendement_en_kg_ha ~ 
+                ose_count +
+                (1|region) +
+                (1|farmer) +
+                (1|mission_number),
+            data = data,
+            family = poisson()
+        )
+    }
 )
-
 ```
 
 There isnt a strong relationship between locust density and yield. I am happy to dive further into this if you'd like!

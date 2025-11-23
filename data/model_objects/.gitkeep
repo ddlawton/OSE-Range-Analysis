@@ -1,0 +1,2 @@
+# This file ensures the data/model_objects directory is tracked by git
+# Model objects are cached here but ignored by .gitignore

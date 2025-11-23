@@ -1,47 +1,29 @@
 ---
-title: "2021 Locust x ground Cover"
+title: "2021 Locust × Ground Cover"
 format: html
 toc: true
 ---
 
-```{r package loading}
+```{r setup}
 #| echo: false
 #| results: "hide"
 #| message: false
 #| warning: false
 
+# Load common setup (packages, functions, configuration)
+source(here::here("R", "_common.R"))
 
-library(tidyverse)
-library(rnaturalearth)
-library(rnaturalearthhires)
-library(janitor)
-library(here)
-library(patchwork)
-library(ggpubr)
-library(gt)
-library(glmmTMB)
-library(mgcv)
-library(gratia)
-library(emmeans)
-
-here::i_am('README.md')
-
-# setting project root
-# sourcing functions
-source(('R/functions/data_preprocessing.R'), local = knitr::knit_global())
-source(('R/functions/table_variable_summary.R'), local = knitr::knit_global())
-source(('R/functions/senegal_map.R'), local = knitr::knit_global())
-source(('R/functions/locust_density_modeling.R'), local = knitr::knit_global())
-
+# Set the current analysis for organized output
+set_current_analysis("locust_density_ground_cover")
 ```
 
-```{r data loading and processing}
+```{r data-loading}
 #| echo: false
 #| message: false
 #| warning: false
 
-data = process_senegal_data('data/raw/Toure_OSE2021data_v03.xlsx')
-
+# Load processed data
+data <- load_ose_data(cache_processed = TRUE)
 ```
 
 We would like to see how density is influenced by ground cover. To do this I am building a generalized additive model (family: tweedie). Following this form:
@@ -65,25 +47,40 @@ where:
 -   $b_{\text{farmer}_i}$ is a random effect for each farmer,
 -   $\varepsilon_i$ is the residual error.
 
-```{r constructing gam model}
+```{r constructing-gam-model}
 #| echo: false
 #| message: false
 #| warning: false
 
-
 ground_cover_dat <- data |>
-    dplyr::select(region,farmer,fertilizer_treatment,mission_number,ose_count,percent_ground_cover) |>
+    dplyr::select(region, farmer, fertilizer_treatment, mission_number, ose_count, percent_ground_cover) |>
     mutate(
-        region_treat = factor(paste0(region,'_',fertilizer_treatment))
+        region_treat = factor(paste0(region, '_', fertilizer_treatment))
     ) |>
-    drop_na(ose_count,fertilizer_treatment)
+    drop_na(ose_count, fertilizer_treatment)
 
-ground_cover_mod <- build_gam(ground_cover_dat,
-    formula = ose_count ~ te(percent_ground_cover, region_treat, bs='fs', k=10) + s(farmer, bs='re'),
-    nthreads = 9,
-    family = mgcv::tw(),
-    k = 10) 
-
+# Use model caching for the GAM (can take several minutes to fit)
+ground_cover_mod <- cache_model(
+    model_name = "locust_ground_cover_gam",
+    data = ground_cover_dat,
+    fit_function = function(data, formula, nthreads, family) {
+        build_gam(data, 
+                 formula = formula, 
+                 nthreads = nthreads, 
+                 family = family)
+    },
+    # Simpler model for CI environments (faster fitting)
+    fit_function_simple = function(data, formula, nthreads, family) {
+        # Use simpler GAM with reduced complexity for CI
+        build_gam(data,
+                 formula = ose_count ~ te(percent_ground_cover, region_treat, bs = 'fs', k = 5) + s(farmer, bs = 're'),
+                 nthreads = 2,
+                 family = family)
+    },
+    formula = ose_count ~ te(percent_ground_cover, region_treat, bs = 'fs', k = 10) + s(farmer, bs = 're'),
+    nthreads = 4,  # Reduced from 9 for better compatibility
+    family = mgcv::tw()
+)
 ```
 
 The model diagnostics look pretty good! I tried to build a poisson model, but the data was overdispersed. Instead I went with a tweedie model which does a pretty good job at handling this type of data:

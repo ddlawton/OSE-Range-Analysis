@@ -2,4 +2,9 @@
 .DS_Store
 /.quarto/
 _site/*
-output/*
+outputs/*
+data/processed/*
+!data/processed/.gitkeep
+# Model objects cached locally but preserved in CI
+# data/model_objects/*
+# !data/model_objects/.gitkeep

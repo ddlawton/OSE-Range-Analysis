@@ -1,86 +1,88 @@
 ---
-title: "2021 Locust x Temperature"
+title: "2021 Locust × Temperature"
 format: html
 toc: true
 ---
 
-```{r package loading}
+```{r setup}
 #| echo: false
 #| results: "hide"
 #| message: false
 #| warning: false
 
+# Load common setup (packages, functions, configuration)
+source(here::here("R", "_common.R"))
 
-library(tidyverse)
-library(rnaturalearth)
-library(rnaturalearthhires)
-library(janitor)
-library(MetBrewer)
-library(here)
-library(patchwork)
-library(ggpubr)
-library(gt)
-library(glmmTMB)
-library(mgcv)
-library(gratia)
-library(emmeans)
-
-here::i_am('README.md')
-
-# setting project root
-# sourcing functions
-source(('R/functions/data_preprocessing.R'), local = knitr::knit_global())
-source(('R/functions/table_variable_summary.R'), local = knitr::knit_global())
-source(('R/functions/locust_density_temperature.R'), local = knitr::knit_global())
-source(('R/functions/locust_density_modeling.R'), local = knitr::knit_global())
-
+# Set the current analysis for organized output
+set_current_analysis("locust_density_temperature")
 ```
 
-```{r data loading and processing}
+```{r data-loading}
 #| echo: false
 #| message: false
 #| warning: false
 
-data = process_senegal_data('data/raw/Toure_OSE2021data_v03.xlsx') |>
+# Load processed data and filter for control plots only
+data <- load_ose_data(cache_processed = TRUE) |>
     filter(fertilizer_treatment == 'control') |>
-    select(year,region,farmer,mission_number,ose_count,temperature)
-
+    select(year, region, farmer, mission_number, ose_count, temperature)
 ```
 
 # How is locust density related to temperature through the missions
 
-We would like to model the influence of temperature on locust density. Lets plot the raw data by region to see how it falls. I also removed the fertilizer plots since this variable influences OSE counts.
+We would like to model the influence of temperature on locust density. Let's plot the raw data by region to see how it falls. I also removed the fertilizer plots since this variable influences OSE counts.
 
-```{r}
+```{r raw-data-viz}
 #| echo: false
 #| message: false
 #| warning: false
 
-
-data |>
-    ggplot(aes(x=temperature,y=ose_count,color=region)) +
+raw_temp_plot <- data |>
+    ggplot(aes(x = temperature, y = ose_count, color = region)) +
         geom_point() +
-        geom_smooth(se=FALSE) +
+        geom_smooth(se = FALSE) +
         theme_pubr() +
-        scale_color_met_d(name='Degas') +
-        facet_wrap(~region,scales='free')
+        scale_color_met_d(name = 'Degas') +
+        facet_wrap(~region, scales = 'free')
 
+# Display the raw data plot
+raw_temp_plot
 ```
 
-The raw plots do not look very compelling, but lets construct a quick generalized additive model and see if there is a statistically significant trend.
+The raw plots do not look very compelling, but let's construct a generalized additive model and see if there is a statistically significant trend.
 
-```{r building gam}
+```{r building-gam}
+#| echo: false
+#| message: false
+#| warning: false
 
-mod <- gam(
-    ose_count ~
-        s(temperature,region,bs='fs',k=10) +
-        s(farmer,bs=c('re'))  +
-        s(mission_number,bs=c('re')),
-    data=data,
-    family=tw(),
-    select=TRUE
+# Use model caching for the temperature GAM
+mod <- cache_model(
+    model_name = "locust_temperature_gam",
+    data = data,
+    fit_function = function(data) {
+        mgcv::gam(
+            ose_count ~
+                s(temperature, region, bs = 'fs', k = 10) +
+                s(farmer, bs = 're') +
+                s(mission_number, bs = 're'),
+            data = data,
+            family = mgcv::tw(),
+            select = TRUE
+        )
+    },
+    # Simpler model for CI (reduced complexity)
+    fit_function_simple = function(data) {
+        mgcv::gam(
+            ose_count ~
+                s(temperature, region, bs = 'fs', k = 5) +
+                s(farmer, bs = 're'),
+            data = data,
+            family = mgcv::tw(),
+            select = TRUE
+        )
+    }
 )
-
 ```
 
 ```{r}
@@ -88,7 +90,7 @@ mod <- gam(
 #| message: false
 #| warning: false
 
-plot_temperature_smooth(mod,
+temp_smooth_plot <- plot_temperature_smooth(mod,
     smooth = "s(temperature,region)",
     xvar = "temperature",
     group = "region",
@@ -99,6 +101,22 @@ plot_temperature_smooth(mod,
     ribbon_fill = "grey70",
     ribbon_alpha = 0.3) 
 
+# Display and save the temperature smooth plot
+temp_smooth_plot
+save_temperature_smooth(mod,
+    smooth = "s(temperature,region)",
+    xvar = "temperature",
+    group = "region",
+    xlab = NULL,
+    ylab = NULL,
+    title = "locust density x temperature",
+    palette = "Degas",
+    ribbon_fill = "grey70",
+    ribbon_alpha = 0.3,
+    filename = "temperature_gam_smooths")
+
+# Save model summary
+save_model_summary(mod, "temperature_gam_summary")
 ```
 
 There seems to be some positive realationship between temperature and locust denisty for Fatick, Saint Louis, and Thies. Kaffrine is a different relationship, however I wonder if this is partially still driven by the high densities in the first mission.

@@ -1,57 +1,39 @@
 ---
 title: "2021 Locust Density Analysis"
-subtitle: "figures and tables"
+subtitle: "Density patterns by treatment and region"
 format: html
 toc: true
 ---
 
 ## Summary
 
-The goal of this page is to replicate the current figures in the manuscript. This is to ensure visuals for publication have the same themeing but also to ensure that my data management aligns well with expectations and that there are no errors. If you see errors, please let me know!
+The goal of this page is to analyze locust density patterns across fertilizer treatments and regions. This analysis replicates key figures from the manuscript to ensure consistent theming and validates our data management approach. If you see errors, please let me know!
 
-```{r package loading}
+```{r setup}
 #| echo: false
 #| results: "hide"
 #| message: false
 #| warning: false
 
+# Load common setup (packages, functions, configuration)
+source(here::here("R", "_common.R"))
 
-library(tidyverse)
-library(rnaturalearth)
-library(rnaturalearthhires)
-library(janitor)
-library(here)
-library(patchwork)
-library(ggpubr)
-library(gt)
-library(glmmTMB)
-library(mgcv)
-library(gratia)
-library(emmeans)
-
-here::i_am('README.md')
-
-# setting project root
-# sourcing functions
-source(('R/functions/data_preprocessing.R'), local = knitr::knit_global())
-source(('R/functions/table_variable_summary.R'), local = knitr::knit_global())
-source(('R/functions/senegal_map.R'), local = knitr::knit_global())
-source(('R/functions/locust_density_modeling.R'), local = knitr::knit_global())
-
+# Set the current analysis for organized output
+set_current_analysis("locust_density_treatment_region")
 ```
 
-```{r data loading and processing}
+```{r data-loading}
 #| echo: false
 #| message: false
 #| warning: false
 
-data = process_senegal_data('data/raw/Toure_OSE2021data_v03.xlsx')
-
+# Load processed data
+data <- load_ose_data(cache_processed = TRUE)
 ```
 
 # Locust density and region by treatment
 
-To assess how locust count changes between treatment (fertilized and control) and region (five regions), I built a generalized linear mixed model (family: Poisson) per mission as follows:
+To assess how locust count changes between treatment (fertilized and control) and region (four regions), I built a generalized linear mixed model (family: Poisson) per mission as follows:
 
 $$
 \begin{align*}
@@ -62,21 +44,14 @@ $$
   &+ \beta_3 \cdot (\text{fertilizer treatment}_i \times \text{region}_i) \\
   &+ u_j \\
   &+ \varepsilon_{ij}
-\end{align*}ilon\_{ij} \\end{align\*}ilon\_{ij} \\end{align\*} 
+\end{align*}
 $$
 
-Where:\
-$\text{ose count}_{ij}$: observed ose count for observation $i$ from farmer \$j \$\$
-
--   $\text{fertilizer treatment}_i$: fertilizer treatment group of observation $i$\
-    $\text{region}_i$: region of observation $i$\
-    $(\text{fertilizer treatment}_i \times \text{region}_i)$: interaction between fertilizer treatment and region\
-    $u_j$: random effect for farmer $j$, $u_j \sim N(0, \sigma^2_{farmer})$\
-    $\varepsilon_{ij}$: residual error
+Where: - $\text{ose count}_{ij}$: observed ose count for observation $i$ from farmer $j$ - $\text{fertilizer treatment}_i$: fertilizer treatment group of observation $i$ - $\text{region}_i$: region of observation $i$ - $(\text{fertilizer treatment}_i \times \text{region}_i)$: interaction between fertilizer treatment and region - $u_j$: random effect for farmer $j$, $u_j \sim N(0, \sigma^2_{farmer})$ - $\varepsilon_{ij}$: residual error
 
 Below are the diagnostic plots for these models:
 
-```{r computing ose density models}
+```{r computing-ose-density-models}
 #| echo: false
 #| message: false
 #| warning: false
@@ -85,51 +60,67 @@ Below are the diagnostic plots for these models:
 model_data <- data |>
     group_split(mission_number)
 
-#create lists to store objects
+# Create lists to store objects
 mission_mods <- list()
 mission_diagnostic_plots <- list()
 mission_emmeans <- list()
 
-#seek through lists. create model, diagnostic plot, and emmeans
+# Loop through missions: create model, diagnostic plot, and emmeans with caching
 for (i in seq_along(model_data)){
-    diagnostic_plot_title = paste0('mission',i)
-    mission_mods[[i]] <- create_glmm_model(model_data[[i]])
-    mission_diagnostic_plots[[i]] <- plot_model_diagnostics(mission_mods[[i]],plot_title = diagnostic_plot_title)
+    diagnostic_plot_title <- paste0('Mission ', i)
+    
+    # Cache each mission model separately
+    mission_mods[[i]] <- cache_model(
+        model_name = paste0("locust_density_mission_", i),
+        data = model_data[[i]],
+        fit_function = create_glmm_model
+    )
+    
+    mission_diagnostic_plots[[i]] <- plot_model_diagnostics(mission_mods[[i]], plot_title = diagnostic_plot_title)
     mission_emmeans[[i]] <- get_emmeans_and_pairs(mission_mods[[i]], mission_num = i)
 }
 
-names(mission_mods) <- c('m1','m2','m3')
-names(mission_diagnostic_plots) <- c('m1','m2','m3')
-names(mission_emmeans) <- c('m1','m2','m3')
+names(mission_mods) <- c('m1', 'm2', 'm3')
+names(mission_diagnostic_plots) <- c('m1', 'm2', 'm3')
+names(mission_emmeans) <- c('m1', 'm2', 'm3')
 ```
 
-```{r plot diagnostic plots}
+```{r plot-diagnostic-plots}
+#| echo: false
+#| message: false
+#| warning: false
 
 diagnostic_plots <- (mission_diagnostic_plots$m1 +
     mission_diagnostic_plots$m2) /
     (mission_diagnostic_plots$m3 +
-    plot_spacer())
+    patchwork::plot_spacer())
 
+# Display diagnostic plots
 diagnostic_plots
+
+# Save model summaries for each mission (tables only)
+for (i in 1:3) {
+  save_model_summary(mission_mods[[i]], paste0("mission_", i, "_model_summary"))
+  save_emmeans_table(mission_emmeans[[i]]$emmeans, paste0("mission_", i, "_emmeans"))
+  save_data_table(mission_emmeans[[i]]$pairwise, paste0("mission_", i, "_pairwise_comparisons"))
+}
 ```
 
-These models are not perfect, but I think they are fine to use for this analysis. Happy to invetigate further if you would like me too.
+These models are not perfect, but I think they are adequate for this analysis. Happy to investigate further if you would like me to!
 
 ## OSE density by treatment and region (option 1)
 
-```{r densiy option 1 plot}
+```{r density-option-1-plot}
 #| echo: false
 #| message: false
 #| warning: false
-#| fig-width: 5       # device width in inches
-#| fig-height: 10      # device height in inches
-#| fig-retina: 2      # scale up for high-DPI (keeps the output sharp)
+#| fig-width: 5       
+#| fig-height: 10      
+#| fig-retina: 2      
 
-
-# A list of model results with emmeans
+# Combine model results with emmeans
 mission_emms <- bind_rows(
   lapply(names(mission_emmeans), function(nm) {
-    # Add the list element name as a column:
     df <- mission_emmeans[[nm]]$emmeans
     df$source <- nm
     df
@@ -138,33 +129,35 @@ mission_emms <- bind_rows(
 )
 
 count_plot_option_1 <- plot_mission_density(
-    data |> drop_na(ose_count,fertilizer_treatment),
+    data |> drop_na(ose_count, fertilizer_treatment),
     mission_emms,
-    ncol=1,
-    regions = c('Saint Louis','Thies','Fatick','Kaffrine'),
+    ncol = 1,
+    regions = ALT_STUDY_REGIONS,
     legend_position = 'bottom'
 ) 
 
+# Display the plot
 count_plot_option_1
 
+# Save the combined emmeans data (table only)
+save_data_table(mission_emms, "combined_mission_emmeans")
 ```
 
 ## OSE density by treatment and region (option 2)
 
-Instead of a plot per mission, lets plot the missions together (x-axis) and see how region counts shifted through time
+Instead of a plot per mission, let's plot the missions together (x-axis) and see how region counts shifted through time
 
-```{r count plot option 2}
+```{r count-plot-option-2}
 #| echo: false
 #| message: false
 #| warning: false
-#| 
+
 count_plot_option_2 <- plot_emmeans(mission_emms,
-    color_palette = "Degas",
+    color_palette = DEFAULT_PALETTE,
     ylab = "OSE count",
     xlab = "Mission")
 
 count_plot_option_2
-
 ```
 
 ## OSE density by teatment and region model summaries (tabulated)

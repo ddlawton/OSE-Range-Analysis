@@ -9,44 +9,30 @@ toc: true
 
 How is yield millet influenced by temperature during the growing season? This may be overkill, but I thought I would show this as well since the data has already been collected.
 
-```{r package loading}
+```{r setup}
 #| echo: false
 #| results: "hide"
 #| message: false
 #| warning: false
 
+# Load common setup (packages, functions, configuration)
+source(here::here("R", "_common.R"))
 
-library(tidyverse)
-library(rnaturalearth)
-library(rnaturalearthhires)
-library(janitor)
-library(MetBrewer)
-library(here)
-library(patchwork)
-library(ggpubr)
-library(gt)
-library(glmmTMB)
-library(mgcv)
-library(gratia)
-library(emmeans)
-
-here::i_am('README.md')
-
-# setting project root
-# sourcing functions
-source(('R/functions/data_preprocessing.R'), local = knitr::knit_global())
-
+# Set the current analysis for organized output
+set_current_analysis("yield_environment")
 ```
 
-```{r data loading and processing}
+```{r data-loading}
 #| echo: false
 #| message: false
 #| warning: false
 
-data = process_senegal_data('data/raw/Toure_OSE2021data_v03.xlsx') |>
-    select(year,region,farmer,temperature,fertilizer_treatment,rendement_en_kg_ha) |>
-    drop_na(rendement_en_kg_ha,fertilizer_treatment) |>
+# Load processed data
+data <- load_ose_data(cache_processed = TRUE) |>
+    select(year, region, farmer, temperature, fertilizer_treatment, rendement_en_kg_ha) |>
+    drop_na(rendement_en_kg_ha, fertilizer_treatment) |>
     distinct()
+```
 
 ```
 

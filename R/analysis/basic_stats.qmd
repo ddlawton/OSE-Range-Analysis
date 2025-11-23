@@ -1,5 +1,5 @@
 ---
-title: "basic stats and maps"
+title: "Basic Statistics and Maps"
 format: html
 toc: true
 ---
@@ -8,70 +8,97 @@ toc: true
 
 The goal of this page is to provide the map and a basic understanding of the data I have. This is to ensure visuals for publication have the same themeing but also to ensure that my data management aligns well with expectations and that there are no errors. If you see errors, please let me know!
 
-```{r package loading}
+```{r setup}
 #| echo: false
 #| results: "hide"
 #| message: false
 #| warning: false
 
+# Load common setup (packages, functions, configuration)
+source(here::here("R", "_common.R"))
 
-library(tidyverse)
-library(rnaturalearth)
-library(rnaturalearthhires)
-library(janitor)
-library(here)
-library(patchwork)
-library(ggpubr)
-library(gt)
-library(glmmTMB)
-library(mgcv)
-library(gratia)
-library(emmeans)
-
-here::i_am('README.md')
-
-# setting project root
-# sourcing functions
-source(('R/functions/data_preprocessing.R'), local = knitr::knit_global())
-source(('R/functions/table_variable_summary.R'), local = knitr::knit_global())
-source(('R/functions/senegal_map.R'), local = knitr::knit_global())
-source(('R/functions/locust_density_modeling.R'), local = knitr::knit_global())
-
+# Set the current analysis for organized output
+set_current_analysis("basic_stats")
 ```
 
-```{r data loading and processing}
+```{r data-loading}
 #| echo: false
 #| message: false
 #| warning: false
+#| results: hide
 
-data = process_senegal_data('data/raw/Toure_OSE2021data_v03.xlsx')
+# Load and process data using the common function
+data <- load_ose_data(cache_processed = TRUE)
 
-```
+# Save basic dataset summary
+save_data_table(
+  data |> 
+    summarise(
+      n_farmers = n_distinct(farmer),
+      n_regions = n_distinct(region),
+      n_missions = n_distinct(mission_number),
+      total_observations = n(),
+      mean_ose_count = mean(ose_count, na.rm = TRUE),
+      mean_temperature = mean(temperature, na.rm = TRUE),
+      mean_ground_cover = mean(percent_ground_cover, na.rm = TRUE),
+      mean_yield = mean(rendement_en_kg_ha, na.rm = TRUE)
+    ),
+  "dataset_summary"
+)
 
 # Basic statistics around dataset
 
-```{r basic_statistics}
+```{r basic-statistics}
 #| echo: false
 #| message: false
 #| warning: false
 
-table_variable_summary(data)
+summary_table <- table_variable_summary(data)
 
+# Also save the detailed variable summary
+if (exists("summary_table")) {
+  # Extract the underlying data if it's a gt table
+  tryCatch({
+    if ("gt_tbl" %in% class(summary_table)) {
+      # For gt tables, we need to recreate the summary data
+      summary_data <- data |>
+        select(where(is.numeric)) |>
+        summarise(across(everything(), list(
+          min = ~min(.x, na.rm = TRUE),
+          max = ~max(.x, na.rm = TRUE), 
+          mean = ~mean(.x, na.rm = TRUE),
+          median = ~median(.x, na.rm = TRUE),
+          sd = ~sd(.x, na.rm = TRUE)
+        ))) |>
+        pivot_longer(everything(), names_to = "variable_stat", values_to = "value") |>
+        separate(variable_stat, into = c("variable", "statistic"), sep = "_(?=[^_]*$)")
+      
+      save_data_table(summary_data, "variable_summary_statistics")
+    }
+  }, error = function(e) {
+    message("Could not save summary table data: ", e$message)
+  })
+}
+
+# Display the summary table
+summary_table
 ```
 
-# Map of senegal and regions
+# Map of Senegal and regions
 
-```{r senegal_map}
+```{r senegal-map}
 #| echo: false
 #| message: false
 #| warning: false
 
-
-plot_senegal_map(
-  regions_of_interest = c('Saint-Louis', 'Thiès', 'Fatick', 'Kaffrine'),
+senegal_map <- plot_senegal_map(
+  regions_of_interest = STUDY_REGIONS,
   show_legend = FALSE,
   roi_color = "tomato",
   other_color = "grey80",
-  label_size = 4)
+  label_size = 4
+)
 
+# Display the map
+senegal_map
 ```
