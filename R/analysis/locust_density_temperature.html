@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2021 Locust x Temperature – OSE Range Analysis</title>
+<title>2021 Locust × Temperature – OSE Range Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../outputs/figures/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -283,8 +282,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../outputs/figures/logo.png" alt="" class="navbar-logo light-content">
-    <img src="../../outputs/figures/logo.png" alt="" class="navbar-logo dark-content">
+    <img src="../../outputs/figures/gli_logo.jpg" alt="" class="navbar-logo light-content">
+    <img src="../../outputs/figures/gli_logo.jpg" alt="" class="navbar-logo dark-content">
     </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">OSE Range Analysis</span>
@@ -380,7 +379,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">2021 Locust x Temperature</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title">2021 Locust × Temperature</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -399,7 +398,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="how-is-locust-density-related-to-temperature-through-the-missions" class="level1">
 <h1>How is locust density related to temperature through the missions</h1>
-<p>We would like to model the influence of temperature on locust density. Lets plot the raw data by region to see how it falls. I also removed the fertilizer plots since this variable influences OSE counts.</p>
+<p>We would like to model the influence of temperature on locust density. Let’s plot the raw data by region to see how it falls. I also removed the fertilizer plots since this variable influences OSE counts.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="locust_density_temperature_files/figure-html/raw-data-viz-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The raw plots do not look very compelling, but let’s construct a generalized additive model and see if there is a statistically significant trend.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -408,52 +417,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-</div>
-<p>The raw plots do not look very compelling, but lets construct a quick generalized additive model and see if there is a statistically significant trend.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    ose_count <span class="sc">~</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">s</span>(temperature,region,<span class="at">bs=</span><span class="st">'fs'</span>,<span class="at">k=</span><span class="dv">10</span>) <span class="sc">+</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">s</span>(farmer,<span class="at">bs=</span><span class="fu">c</span>(<span class="st">'re'</span>))  <span class="sc">+</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">s</span>(mission_number,<span class="at">bs=</span><span class="fu">c</span>(<span class="st">'re'</span>)),</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>data,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">family=</span><span class="fu">tw</span>(),</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">select=</span><span class="cn">TRUE</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
-<div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="locust_density_temperature_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="locust_density_temperature_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term                      edf ref.df  statistic p.value
+  &lt;chr&gt;                   &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+1 s(temperature,region) 8.78        19 15.7         0    
+2 s(farmer)             0.00459    226  0.0000166   0.952</code></pre>
 </div>
 </div>
 <p>There seems to be some positive realationship between temperature and locust denisty for Fatick, Saint Louis, and Thies. Kaffrine is a different relationship, however I wonder if this is partially still driven by the high densities in the first mission.</p>
 <p>Here is the model summary for what it’s worth:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="lkktsngana" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lkktsngana table {
+<div id="apvdxhfyov" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#apvdxhfyov table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lkktsngana thead, #lkktsngana tbody, #lkktsngana tfoot, #lkktsngana tr, #lkktsngana td, #lkktsngana th {
+#apvdxhfyov thead, #apvdxhfyov tbody, #apvdxhfyov tfoot, #apvdxhfyov tr, #apvdxhfyov td, #apvdxhfyov th {
   border-style: none;
 }
 
-#lkktsngana p {
+#apvdxhfyov p {
   margin: 0;
   padding: 0;
 }
 
-#lkktsngana .gt_table {
+#apvdxhfyov .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -479,12 +478,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#lkktsngana .gt_caption {
+#apvdxhfyov .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lkktsngana .gt_title {
+#apvdxhfyov .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -496,7 +495,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#lkktsngana .gt_subtitle {
+#apvdxhfyov .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -508,7 +507,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#lkktsngana .gt_heading {
+#apvdxhfyov .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -520,13 +519,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#lkktsngana .gt_bottom_border {
+#apvdxhfyov .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lkktsngana .gt_col_headings {
+#apvdxhfyov .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -541,7 +540,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#lkktsngana .gt_col_heading {
+#apvdxhfyov .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -561,7 +560,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#lkktsngana .gt_column_spanner_outer {
+#apvdxhfyov .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -573,15 +572,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#lkktsngana .gt_column_spanner_outer:first-child {
+#apvdxhfyov .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lkktsngana .gt_column_spanner_outer:last-child {
+#apvdxhfyov .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lkktsngana .gt_column_spanner {
+#apvdxhfyov .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -593,11 +592,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#lkktsngana .gt_spanner_row {
+#apvdxhfyov .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lkktsngana .gt_group_heading {
+#apvdxhfyov .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -623,7 +622,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#lkktsngana .gt_empty_group_heading {
+#apvdxhfyov .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -638,15 +637,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#lkktsngana .gt_from_md > :first-child {
+#apvdxhfyov .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lkktsngana .gt_from_md > :last-child {
+#apvdxhfyov .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lkktsngana .gt_row {
+#apvdxhfyov .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -665,7 +664,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#lkktsngana .gt_stub {
+#apvdxhfyov .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -678,7 +677,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lkktsngana .gt_stub_row_group {
+#apvdxhfyov .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -692,15 +691,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#lkktsngana .gt_row_group_first td {
+#apvdxhfyov .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lkktsngana .gt_row_group_first th {
+#apvdxhfyov .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lkktsngana .gt_summary_row {
+#apvdxhfyov .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -710,16 +709,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lkktsngana .gt_first_summary_row {
+#apvdxhfyov .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lkktsngana .gt_first_summary_row.thick {
+#apvdxhfyov .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lkktsngana .gt_last_summary_row {
+#apvdxhfyov .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -729,7 +728,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#lkktsngana .gt_grand_summary_row {
+#apvdxhfyov .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -739,7 +738,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lkktsngana .gt_first_grand_summary_row {
+#apvdxhfyov .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -749,7 +748,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#lkktsngana .gt_last_grand_summary_row_top {
+#apvdxhfyov .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -759,11 +758,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#lkktsngana .gt_striped {
+#apvdxhfyov .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lkktsngana .gt_table_body {
+#apvdxhfyov .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -772,7 +771,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#lkktsngana .gt_footnotes {
+#apvdxhfyov .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -786,7 +785,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#lkktsngana .gt_footnote {
+#apvdxhfyov .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -795,7 +794,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lkktsngana .gt_sourcenotes {
+#apvdxhfyov .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -809,7 +808,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#lkktsngana .gt_sourcenote {
+#apvdxhfyov .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -817,72 +816,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lkktsngana .gt_left {
+#apvdxhfyov .gt_left {
   text-align: left;
 }
 
-#lkktsngana .gt_center {
+#apvdxhfyov .gt_center {
   text-align: center;
 }
 
-#lkktsngana .gt_right {
+#apvdxhfyov .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lkktsngana .gt_font_normal {
+#apvdxhfyov .gt_font_normal {
   font-weight: normal;
 }
 
-#lkktsngana .gt_font_bold {
+#apvdxhfyov .gt_font_bold {
   font-weight: bold;
 }
 
-#lkktsngana .gt_font_italic {
+#apvdxhfyov .gt_font_italic {
   font-style: italic;
 }
 
-#lkktsngana .gt_super {
+#apvdxhfyov .gt_super {
   font-size: 65%;
 }
 
-#lkktsngana .gt_footnote_marks {
+#apvdxhfyov .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lkktsngana .gt_asterisk {
+#apvdxhfyov .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lkktsngana .gt_indent_1 {
+#apvdxhfyov .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lkktsngana .gt_indent_2 {
+#apvdxhfyov .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lkktsngana .gt_indent_3 {
+#apvdxhfyov .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lkktsngana .gt_indent_4 {
+#apvdxhfyov .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lkktsngana .gt_indent_5 {
+#apvdxhfyov .gt_indent_5 {
   text-indent: 25px;
 }
 
-#lkktsngana .katex-display {
+#apvdxhfyov .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#lkktsngana div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#apvdxhfyov div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -908,9 +907,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td class="gt_row gt_left" headers="component">Parametric</td>
 <td class="gt_row gt_left" headers="term">(Intercept)</td>
-<td class="gt_row gt_right" headers="estimate">3.129</td>
-<td class="gt_row gt_right" headers="std.error">0.209</td>
-<td class="gt_row gt_right" headers="statistic">14.964</td>
+<td class="gt_row gt_right" headers="estimate">3.083</td>
+<td class="gt_row gt_right" headers="std.error">0.219</td>
+<td class="gt_row gt_right" headers="statistic">14.073</td>
 <td class="gt_row gt_right" headers="p.value">0.000</td>
 <td class="gt_row gt_right" headers="edf">NA</td>
 <td class="gt_row gt_right" headers="ref.df">NA</td>
@@ -921,10 +920,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left gt_striped" headers="term">s(temperature,region)</td>
 <td class="gt_row gt_right gt_striped" headers="estimate">NA</td>
 <td class="gt_row gt_right gt_striped" headers="std.error">NA</td>
-<td class="gt_row gt_right gt_striped" headers="statistic">10.088</td>
+<td class="gt_row gt_right gt_striped" headers="statistic">15.736</td>
 <td class="gt_row gt_right gt_striped" headers="p.value">0.000</td>
-<td class="gt_row gt_right gt_striped" headers="edf">11.782</td>
-<td class="gt_row gt_right gt_striped" headers="ref.df">37.000</td>
+<td class="gt_row gt_right gt_striped" headers="edf">8.781</td>
+<td class="gt_row gt_right gt_striped" headers="ref.df">19.000</td>
 <td class="gt_row gt_right gt_striped" headers="value">NA</td>
 </tr>
 <tr class="odd">
@@ -933,76 +932,65 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="estimate">NA</td>
 <td class="gt_row gt_right" headers="std.error">NA</td>
 <td class="gt_row gt_right" headers="statistic">0.000</td>
-<td class="gt_row gt_right" headers="p.value">0.659</td>
+<td class="gt_row gt_right" headers="p.value">0.952</td>
 <td class="gt_row gt_right" headers="edf">0.005</td>
 <td class="gt_row gt_right" headers="ref.df">226.000</td>
 <td class="gt_row gt_right" headers="value">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left gt_striped" headers="component">Smooth</td>
-<td class="gt_row gt_left gt_striped" headers="term">s(mission_number)</td>
-<td class="gt_row gt_right gt_striped" headers="estimate">NA</td>
-<td class="gt_row gt_right gt_striped" headers="std.error">NA</td>
-<td class="gt_row gt_right gt_striped" headers="statistic">33.182</td>
-<td class="gt_row gt_right gt_striped" headers="p.value">0.000</td>
-<td class="gt_row gt_right gt_striped" headers="edf">1.944</td>
-<td class="gt_row gt_right gt_striped" headers="ref.df">2.000</td>
-<td class="gt_row gt_right gt_striped" headers="value">NA</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="component">Model</td>
-<td class="gt_row gt_left" headers="term">R-sq (adj)</td>
-<td class="gt_row gt_right" headers="estimate">NA</td>
-<td class="gt_row gt_right" headers="std.error">NA</td>
-<td class="gt_row gt_right" headers="statistic">NA</td>
-<td class="gt_row gt_right" headers="p.value">NA</td>
-<td class="gt_row gt_right" headers="edf">NA</td>
-<td class="gt_row gt_right" headers="ref.df">NA</td>
-<td class="gt_row gt_right" headers="value">0.388</td>
-</tr>
-<tr class="even">
 <td class="gt_row gt_left gt_striped" headers="component">Model</td>
-<td class="gt_row gt_left gt_striped" headers="term">Deviance explained</td>
+<td class="gt_row gt_left gt_striped" headers="term">R-sq (adj)</td>
 <td class="gt_row gt_right gt_striped" headers="estimate">NA</td>
 <td class="gt_row gt_right gt_striped" headers="std.error">NA</td>
 <td class="gt_row gt_right gt_striped" headers="statistic">NA</td>
 <td class="gt_row gt_right gt_striped" headers="p.value">NA</td>
 <td class="gt_row gt_right gt_striped" headers="edf">NA</td>
 <td class="gt_row gt_right gt_striped" headers="ref.df">NA</td>
-<td class="gt_row gt_right gt_striped" headers="value">39.900%</td>
+<td class="gt_row gt_right gt_striped" headers="value">0.297</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="component">Model</td>
-<td class="gt_row gt_left" headers="term">REML</td>
+<td class="gt_row gt_left" headers="term">Deviance explained</td>
 <td class="gt_row gt_right" headers="estimate">NA</td>
 <td class="gt_row gt_right" headers="std.error">NA</td>
 <td class="gt_row gt_right" headers="statistic">NA</td>
 <td class="gt_row gt_right" headers="p.value">NA</td>
 <td class="gt_row gt_right" headers="edf">NA</td>
 <td class="gt_row gt_right" headers="ref.df">NA</td>
-<td class="gt_row gt_right" headers="value">2501.900</td>
+<td class="gt_row gt_right" headers="value">31.600%</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left gt_striped" headers="component">Model</td>
-<td class="gt_row gt_left gt_striped" headers="term">Scale est.</td>
+<td class="gt_row gt_left gt_striped" headers="term">REML</td>
 <td class="gt_row gt_right gt_striped" headers="estimate">NA</td>
 <td class="gt_row gt_right gt_striped" headers="std.error">NA</td>
 <td class="gt_row gt_right gt_striped" headers="statistic">NA</td>
 <td class="gt_row gt_right gt_striped" headers="p.value">NA</td>
 <td class="gt_row gt_right gt_striped" headers="edf">NA</td>
 <td class="gt_row gt_right gt_striped" headers="ref.df">NA</td>
-<td class="gt_row gt_right gt_striped" headers="value">2.451</td>
+<td class="gt_row gt_right gt_striped" headers="value">2533.800</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="component">Model</td>
-<td class="gt_row gt_left" headers="term">n</td>
+<td class="gt_row gt_left" headers="term">Scale est.</td>
 <td class="gt_row gt_right" headers="estimate">NA</td>
 <td class="gt_row gt_right" headers="std.error">NA</td>
 <td class="gt_row gt_right" headers="statistic">NA</td>
 <td class="gt_row gt_right" headers="p.value">NA</td>
 <td class="gt_row gt_right" headers="edf">NA</td>
 <td class="gt_row gt_right" headers="ref.df">NA</td>
-<td class="gt_row gt_right" headers="value">624</td>
+<td class="gt_row gt_right" headers="value">2.263</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left gt_striped" headers="component">Model</td>
+<td class="gt_row gt_left gt_striped" headers="term">n</td>
+<td class="gt_row gt_right gt_striped" headers="estimate">NA</td>
+<td class="gt_row gt_right gt_striped" headers="std.error">NA</td>
+<td class="gt_row gt_right gt_striped" headers="statistic">NA</td>
+<td class="gt_row gt_right gt_striped" headers="p.value">NA</td>
+<td class="gt_row gt_right gt_striped" headers="edf">NA</td>
+<td class="gt_row gt_right gt_striped" headers="ref.df">NA</td>
+<td class="gt_row gt_right gt_striped" headers="value">624</td>
 </tr>
 </tbody>
 </table>
@@ -1482,88 +1470,90 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "2021 Locust x Temperature"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "2021 Locust × Temperature"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r package loading}</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup}</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: "hide"</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearth)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearthhires)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MetBrewer)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmmTMB)</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mgcv)</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gratia)</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>here<span class="sc">::</span><span class="fu">i_am</span>(<span class="st">'README.md'</span>)</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co"># setting project root</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co"># sourcing functions</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>((<span class="st">'R/functions/data_preprocessing.R'</span>), <span class="at">local =</span> knitr<span class="sc">::</span><span class="fu">knit_global</span>())</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>((<span class="st">'R/functions/table_variable_summary.R'</span>), <span class="at">local =</span> knitr<span class="sc">::</span><span class="fu">knit_global</span>())</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>((<span class="st">'R/functions/locust_density_temperature.R'</span>), <span class="at">local =</span> knitr<span class="sc">::</span><span class="fu">knit_global</span>())</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>((<span class="st">'R/functions/locust_density_modeling.R'</span>), <span class="at">local =</span> knitr<span class="sc">::</span><span class="fu">knit_global</span>())</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="in">```{r data loading and processing}</span></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">process_senegal_data</span>(<span class="st">'data/raw/Toure_OSE2021data_v03.xlsx'</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(fertilizer_treatment <span class="sc">==</span> <span class="st">'control'</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(year,region,farmer,mission_number,ose_count,temperature)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Load common setup (packages, functions, configuration)</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"R"</span>, <span class="st">"_common.R"</span>))</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the current analysis for organized output</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">set_current_analysis</span>(<span class="st">"locust_density_temperature"</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="in">```{r data-loading}</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Load processed data and filter for control plots only</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">load_ose_data</span>(<span class="at">cache_processed =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(fertilizer_treatment <span class="sc">==</span> <span class="st">'control'</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(year, region, farmer, mission_number, ose_count, temperature)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="fu"># How is locust density related to temperature through the missions</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>We would like to model the influence of temperature on locust density. Let's plot the raw data by region to see how it falls. I also removed the fertilizer plots since this variable influences OSE counts.</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="in">```{r raw-data-viz}</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>raw_temp_plot <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> temperature, <span class="at">y =</span> ose_count, <span class="at">color =</span> region)) <span class="sc">+</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_pubr</span>() <span class="sc">+</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_color_met_d</span>(<span class="at">name =</span> <span class="st">'Degas'</span>) <span class="sc">+</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>        <span class="fu">facet_wrap</span>(<span class="sc">~</span>region, <span class="at">scales =</span> <span class="st">'free'</span>)</span>
 <span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="fu"># How is locust density related to temperature through the missions</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the raw data plot</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>raw_temp_plot</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>We would like to model the influence of temperature on locust density. Lets plot the raw data by region to see how it falls. I also removed the fertilizer plots since this variable influences OSE counts.</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>The raw plots do not look very compelling, but let's construct a generalized additive model and see if there is a statistically significant trend.</span>
 <span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>temperature,<span class="at">y=</span>ose_count,<span class="at">color=</span>region)) <span class="sc">+</span></span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_pubr</span>() <span class="sc">+</span></span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_color_met_d</span>(<span class="at">name=</span><span class="st">'Degas'</span>) <span class="sc">+</span></span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>        <span class="fu">facet_wrap</span>(<span class="sc">~</span>region,<span class="at">scales=</span><span class="st">'free'</span>)</span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>The raw plots do not look very compelling, but lets construct a quick generalized additive model and see if there is a statistically significant trend.</span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a><span class="in">```{r building gam}</span></span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">gam</span>(</span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>    ose_count <span class="sc">~</span></span>
-<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>        <span class="fu">s</span>(temperature,region,<span class="at">bs=</span><span class="st">'fs'</span>,<span class="at">k=</span><span class="dv">10</span>) <span class="sc">+</span></span>
-<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>        <span class="fu">s</span>(farmer,<span class="at">bs=</span><span class="fu">c</span>(<span class="st">'re'</span>))  <span class="sc">+</span></span>
-<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>        <span class="fu">s</span>(mission_number,<span class="at">bs=</span><span class="fu">c</span>(<span class="st">'re'</span>)),</span>
-<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>data,</span>
-<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>    <span class="at">family=</span><span class="fu">tw</span>(),</span>
-<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>    <span class="at">select=</span><span class="cn">TRUE</span></span>
-<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="in">```{r building-gam}</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Use model caching for the temperature GAM</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">cache_model</span>(</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">model_name =</span> <span class="st">"locust_temperature_gam"</span>,</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data,</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">fit_function =</span> <span class="cf">function</span>(data) {</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>        mgcv<span class="sc">::</span><span class="fu">gam</span>(</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>            ose_count <span class="sc">~</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>                <span class="fu">s</span>(temperature, region, <span class="at">bs =</span> <span class="st">'fs'</span>, <span class="at">k =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>                <span class="fu">s</span>(farmer, <span class="at">bs =</span> <span class="st">'re'</span>) <span class="sc">+</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>                <span class="fu">s</span>(mission_number, <span class="at">bs =</span> <span class="st">'re'</span>),</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> data,</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>            <span class="at">family =</span> mgcv<span class="sc">::</span><span class="fu">tw</span>(),</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>            <span class="at">select =</span> <span class="cn">TRUE</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Simpler model for CI (reduced complexity)</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>    <span class="at">fit_function_simple =</span> <span class="cf">function</span>(data) {</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>        mgcv<span class="sc">::</span><span class="fu">gam</span>(</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>            ose_count <span class="sc">~</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>                <span class="fu">s</span>(temperature, region, <span class="at">bs =</span> <span class="st">'fs'</span>, <span class="at">k =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>                <span class="fu">s</span>(farmer, <span class="at">bs =</span> <span class="st">'re'</span>),</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> data,</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>            <span class="at">family =</span> mgcv<span class="sc">::</span><span class="fu">tw</span>(),</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>            <span class="at">select =</span> <span class="cn">TRUE</span></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
@@ -1571,7 +1561,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
 <span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
 <span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_temperature_smooth</span>(mod,</span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>temp_smooth_plot <span class="ot">&lt;-</span> <span class="fu">plot_temperature_smooth</span>(mod,</span>
 <span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>    <span class="at">smooth =</span> <span class="st">"s(temperature,region)"</span>,</span>
 <span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>    <span class="at">xvar =</span> <span class="st">"temperature"</span>,</span>
 <span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> <span class="st">"region"</span>,</span>
@@ -1582,19 +1572,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>    <span class="at">ribbon_fill =</span> <span class="st">"grey70"</span>,</span>
 <span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>    <span class="at">ribbon_alpha =</span> <span class="fl">0.3</span>) </span>
 <span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>There seems to be some positive realationship between temperature and locust denisty for Fatick, Saint Louis, and Thies. Kaffrine is a different relationship, however I wonder if this is partially still driven by the high densities in the first mission.</span>
-<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>Here is the model summary for what it's worth:</span>
-<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a><span class="in">```{r locust_temperature_model_summary}</span></span>
-<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a><span class="fu">model_summary_gt</span>(mod, <span class="at">title =</span> <span class="st">'Locust x Temperature model summary'</span>, <span class="at">digits =</span> <span class="dv">3</span>) </span>
-<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a><span class="co"># Display and save the temperature smooth plot</span></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>temp_smooth_plot</span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a><span class="fu">save_temperature_smooth</span>(mod,</span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>    <span class="at">smooth =</span> <span class="st">"s(temperature,region)"</span>,</span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>    <span class="at">xvar =</span> <span class="st">"temperature"</span>,</span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> <span class="st">"region"</span>,</span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="cn">NULL</span>,</span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="cn">NULL</span>,</span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"locust density x temperature"</span>,</span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="st">"Degas"</span>,</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>    <span class="at">ribbon_fill =</span> <span class="st">"grey70"</span>,</span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>    <span class="at">ribbon_alpha =</span> <span class="fl">0.3</span>,</span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>    <span class="at">filename =</span> <span class="st">"temperature_gam_smooths"</span>)</span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a><span class="co"># Save model summary</span></span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a><span class="fu">save_model_summary</span>(mod, <span class="st">"temperature_gam_summary"</span>)</span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a>There seems to be some positive realationship between temperature and locust denisty for Fatick, Saint Louis, and Thies. Kaffrine is a different relationship, however I wonder if this is partially still driven by the high densities in the first mission.</span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>Here is the model summary for what it's worth:</span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a><span class="in">```{r locust_temperature_model_summary}</span></span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a><span class="fu">model_summary_gt</span>(mod, <span class="at">title =</span> <span class="st">'Locust x Temperature model summary'</span>, <span class="at">digits =</span> <span class="dv">3</span>) </span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

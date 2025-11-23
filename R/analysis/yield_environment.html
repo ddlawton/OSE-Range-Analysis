@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -65,7 +30,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../outputs/figures/favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -283,8 +247,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../outputs/figures/logo.png" alt="" class="navbar-logo light-content">
-    <img src="../../outputs/figures/logo.png" alt="" class="navbar-logo dark-content">
+    <img src="../../outputs/figures/gli_logo.jpg" alt="" class="navbar-logo light-content">
+    <img src="../../outputs/figures/gli_logo.jpg" alt="" class="navbar-logo dark-content">
     </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">OSE Range Analysis</span>
@@ -371,7 +335,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#goal" id="toc-goal" class="nav-link active" data-scroll-target="#goal">Goal</a></li>
-  <li><a href="#raw-data-visualization" id="toc-raw-data-visualization" class="nav-link" data-scroll-target="#raw-data-visualization">Raw data visualization</a></li>
   </ul>
 </nav>
     </div>
@@ -381,7 +344,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">2021 Yield x Temperature</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title">2021 Yield x Temperature</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 <p class="subtitle lead">figures and tables</p>
 </div>
 
@@ -402,51 +365,129 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="goal" class="level1">
 <h1>Goal</h1>
 <p>How is yield millet influenced by temperature during the growing season? This may be overkill, but I thought I would show this as well since the data has already been collected.</p>
-</section>
-<section id="raw-data-visualization" class="level1">
-<h1>Raw data visualization</h1>
-<p>So I will calculate the mean and sd temperature and plot against yield to see if there are any interesting trends.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(region,farmer) <span class="sc">|&gt;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">mean_temp =</span> <span class="fu">mean</span>(temperature),</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">sd_temp =</span> <span class="fu">sd</span>(temperature),</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">rendement_en_kg_ha =</span> <span class="fu">first</span>(rendement_en_kg_ha)) <span class="sc">|&gt;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">!</span><span class="fu">c</span>(farmer,region,rendement_en_kg_ha)) <span class="sc">|&gt;</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>value,<span class="at">y=</span>rendement_en_kg_ha)) <span class="sc">+</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">'gam'</span>,<span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">facet_grid</span>(region<span class="sc">~</span>name,<span class="at">scales=</span><span class="st">'free'</span>) <span class="sc">+</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_pubr</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>`summarise()` has grouped output by 'region'. You can override using the
-`.groups` argument.
-`geom_smooth()` using formula = 'y ~ s(x, bs = "cs")'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 12 rows containing non-finite outside the scale range
-(`stat_smooth()`).</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 12 rows containing missing values or values outside the scale range
-(`geom_point()`).</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="yield_environment_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
+<pre><code>
+# Raw data visualization
+
+So I will calculate the mean and sd temperature and plot against yield to see if there are any interesting trends.
+
+
+::: {.cell}
+::: {.cell-output-display}
+![](yield_environment_files/figure-html/unnamed-chunk-1-1.png){width=672}
+:::
+:::
+
+
+Not sure what to think about the potential non-linear relationship with yield x temperature. It might not be significant anyway. Happy to go further here if y'all are interested but for now I will leave it.
+
+
+
+
+
+:::{#quarto-navigation-envelope .hidden}
+[OSE Range Analysis]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1zaWRlYmFyLXRpdGxl"}
+[OSE Range Analysis]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXItdGl0bGU="}
+[Download Figures]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6RG93bmxvYWQgRmlndXJlcw=="}
+[/outputs/figures/all_figures.zip]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6L291dHB1dHMvZmlndXJlcy9hbGxfZmlndXJlcy56aXA="}
+[Home]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6SG9tZQ=="}
+[/R/index.html]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6L1IvaW5kZXguaHRtbA=="}
+[Map and Basic Stats]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6TWFwIGFuZCBCYXNpYyBTdGF0cw=="}
+[/R/analysis/basic_stats.html]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6L1IvYW5hbHlzaXMvYmFzaWNfc3RhdHMuaHRtbA=="}
+[Locust Dynamics]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6TG9jdXN0IER5bmFtaWNz"}
+[Density × Treatment / Region]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6RGVuc2l0eSDDlyBUcmVhdG1lbnQgLyBSZWdpb24="}
+[/R/analysis/locust_density_treatment_region.html]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6L1IvYW5hbHlzaXMvbG9jdXN0X2RlbnNpdHlfdHJlYXRtZW50X3JlZ2lvbi5odG1s"}
+[Locust × Ground Cover]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6TG9jdXN0IMOXIEdyb3VuZCBDb3Zlcg=="}
+[/R/analysis/locust_density_ground_cover.html]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6L1IvYW5hbHlzaXMvbG9jdXN0X2RlbnNpdHlfZ3JvdW5kX2NvdmVyLmh0bWw="}
+[Locust × Temperature]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6TG9jdXN0IMOXIFRlbXBlcmF0dXJl"}
+[/R/analysis/locust_density_temperature.html]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6L1IvYW5hbHlzaXMvbG9jdXN0X2RlbnNpdHlfdGVtcGVyYXR1cmUuaHRtbA=="}
+[Yield Outcomes]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6WWllbGQgT3V0Y29tZXM="}
+[Yield × Locust Density]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6WWllbGQgw5cgTG9jdXN0IERlbnNpdHk="}
+[/R/analysis/yield_locust.html]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6L1IvYW5hbHlzaXMveWllbGRfbG9jdXN0Lmh0bWw="}
+[Yield × Fertilizer / Region]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6WWllbGQgw5cgRmVydGlsaXplciAvIFJlZ2lvbg=="}
+[/R/analysis/yield_treatment_region.html]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6L1IvYW5hbHlzaXMveWllbGRfdHJlYXRtZW50X3JlZ2lvbi5odG1s"}
+[Yield × Temperature]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6WWllbGQgw5cgVGVtcGVyYXR1cmU="}
+[/R/analysis/yield_environment.html]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6L1IvYW5hbHlzaXMveWllbGRfZW52aXJvbm1lbnQuaHRtbA=="}
+[https://github.com/ddlawton/OSE-Range-Analysis]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLWludC1uYXZiYXI6aHR0cHM6Ly9naXRodWIuY29tL2RkbGF3dG9uL09TRS1SYW5nZS1BbmFseXNpcw=="}
+
+:::{.hidden .quarto-markdown-envelope-contents render-id="Zm9vdGVyLXJpZ2h0"}
+[View on GitHub](https://github.com/ddlawton/OSE-Range-Analysis) • [Zenodo DOI](https://doi.org/10.5281/zenodo.xxxxxx)
+
+:::
+
+:::
+
+
+
+:::{#quarto-meta-markdown .hidden}
+[2021 Yield x Temperature – OSE Range Analysis]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLW1ldGF0aXRsZQ=="}
+[2021 Yield x Temperature – OSE Range Analysis]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLXR3aXR0ZXJjYXJkdGl0bGU="}
+[2021 Yield x Temperature – OSE Range Analysis]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLW9nY2FyZHRpdGxl"}
+[OSE Range Analysis]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLW1ldGFzaXRlbmFtZQ=="}
+[figures and tables]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLXR3aXR0ZXJjYXJkZGVzYw=="}
+[figures and tables]{.hidden .quarto-markdown-envelope-contents render-id="cXVhcnRvLW9nY2FyZGRkZXNj"}
+:::
+
+
+
+
+&lt;!-- --&gt;
+
+::: {.quarto-embedded-source-code}
+```````````````````{.markdown shortcodes="false"}
+---
+title: "2021 Yield x Temperature"
+subtitle: "figures and tables"
+format: html
+toc: true
+---
+
+# Goal
+
+How is yield millet influenced by temperature during the growing season? This may be overkill, but I thought I would show this as well since the data has already been collected.
+
+```{r setup}
+#| echo: false
+#| results: "hide"
+#| message: false
+#| warning: false
+
+# Load common setup (packages, functions, configuration)
+source(here::here("R", "_common.R"))
+
+# Set the current analysis for organized output
+set_current_analysis("yield_environment")</code></pre>
+<pre class="{r data-loading}"><code>#| echo: false
+#| message: false
+#| warning: false
+
+# Load processed data
+data &lt;- load_ose_data(cache_processed = TRUE) |&gt;
+    select(year, region, farmer, temperature, fertilizer_treatment, rendement_en_kg_ha) |&gt;
+    drop_na(rendement_en_kg_ha, fertilizer_treatment) |&gt;
+    distinct()</code></pre>
+<pre><code>
+# Raw data visualization
+
+So I will calculate the mean and sd temperature and plot against yield to see if there are any interesting trends.
+
+quarto-executable-code-5450563D
+
+```r
+data |&gt;
+    group_by(region,farmer) |&gt;
+    summarize(mean_temp = mean(temperature),
+        sd_temp = sd(temperature),
+        rendement_en_kg_ha = first(rendement_en_kg_ha)) |&gt;
+    pivot_longer(!c(farmer,region,rendement_en_kg_ha)) |&gt;
+    ggplot(aes(x=value,y=rendement_en_kg_ha)) +
+        geom_point() +
+        geom_smooth(method='gam',se=FALSE) +
+        facet_grid(region~name,scales='free') +
+        theme_pubr()
+
+</code></pre>
 <p>Not sure what to think about the potential non-linear relationship with yield x temperature. It might not be significant anyway. Happy to go further here if y’all are interested but for now I will leave it.</p>
-
-
-<!-- -->
-
+<p>``````````````````` :::</p>
 </section>
 
 </main> <!-- /main -->
@@ -913,82 +954,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       }
     }
   });
-  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "2021 Yield x Temperature"</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "figures and tables"</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu"># Goal</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>How is yield millet influenced by temperature during the growing season? This may be overkill, but I thought I would show this as well since the data has already been collected.</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r package loading}</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: "hide"</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearth)</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearthhires)</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MetBrewer)</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmmTMB)</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mgcv)</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gratia)</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>here<span class="sc">::</span><span class="fu">i_am</span>(<span class="st">'README.md'</span>)</span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="co"># setting project root</span></span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="co"># sourcing functions</span></span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>((<span class="st">'R/functions/data_preprocessing.R'</span>), <span class="at">local =</span> knitr<span class="sc">::</span><span class="fu">knit_global</span>())</span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{r data loading and processing}</span></span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">process_senegal_data</span>(<span class="st">'data/raw/Toure_OSE2021data_v03.xlsx'</span>) <span class="sc">|&gt;</span></span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(year,region,farmer,temperature,fertilizer_treatment,rendement_en_kg_ha) <span class="sc">|&gt;</span></span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">drop_na</span>(rendement_en_kg_ha,fertilizer_treatment) <span class="sc">|&gt;</span></span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">distinct</span>()</span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a><span class="fu"># Raw data visualization</span></span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>So I will calculate the mean and sd temperature and plot against yield to see if there are any interesting trends.</span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
-<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(region,farmer) <span class="sc">|&gt;</span></span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">mean_temp =</span> <span class="fu">mean</span>(temperature),</span>
-<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>        <span class="at">sd_temp =</span> <span class="fu">sd</span>(temperature),</span>
-<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>        <span class="at">rendement_en_kg_ha =</span> <span class="fu">first</span>(rendement_en_kg_ha)) <span class="sc">|&gt;</span></span>
-<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">!</span><span class="fu">c</span>(farmer,region,rendement_en_kg_ha)) <span class="sc">|&gt;</span></span>
-<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>value,<span class="at">y=</span>rendement_en_kg_ha)) <span class="sc">+</span></span>
-<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">'gam'</span>,<span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>        <span class="fu">facet_grid</span>(region<span class="sc">~</span>name,<span class="at">scales=</span><span class="st">'free'</span>) <span class="sc">+</span></span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_pubr</span>()</span>
-<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>Not sure what to think about the potential non-linear relationship with yield x temperature. It might not be significant anyway. Happy to go further here if y'all are interested but for now I will leave it.</span>
-</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
-</div></div></div></div></div>
+  </script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -999,8 +965,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       &nbsp;
     </div>
     <div class="nav-footer-right">
-<p><a href="https://github.com/ddlawton/OSE-Range-Analysis">View on GitHub</a> • <a href="https://doi.org/10.5281/zenodo.xxxxxx">Zenodo DOI</a></p>
-</div>
+      <div class="footer-contents">[View on GitHub](https://github.com/ddlawton/OSE-Range-Analysis) • [Zenodo DOI](https://doi.org/10.5281/zenodo.xxxxxx)
+</div>  
+    </div>
   </div>
 </footer>
 
