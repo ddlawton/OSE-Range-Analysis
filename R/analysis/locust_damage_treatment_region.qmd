@@ -1,5 +1,5 @@
 ---
-title: "2021 Locust Density Analysis"
+title: "2021 Locust Damage Analysis"
 subtitle: "Density patterns by treatment and region"
 format: html
 toc: true
@@ -7,7 +7,7 @@ toc: true
 
 ## Summary
 
-The goal of this page is to analyze locust density patterns across fertilizer treatments and regions. This analysis replicates key figures from the manuscript to ensure consistent theming and validates our data management approach. If you see errors, please let me know!
+The goal of this page is to analyze locust damage patterns across fertilizer treatments and regions. This analysis replicates key figures from the manuscript to ensure consistent theming and validates our data management approach. If you see errors, please let me know!
 
 ```{r setup}
 #| echo: false
@@ -19,7 +19,8 @@ The goal of this page is to analyze locust density patterns across fertilizer tr
 source(here::here("R", "_common.R"))
 
 # Set the current analysis for organized output
-set_current_analysis("locust_density_treatment_region")
+# update to refelct damage
+set_current_analysis("locust_damage_treatment_region")
 ```
 
 ```{r data-loading}
@@ -29,25 +30,17 @@ set_current_analysis("locust_density_treatment_region")
 
 # Load processed data
 data <- load_ose_data(cache_processed = TRUE)
+
+data <- data |>
+    mutate(ose_damage_percent = ose_damage_percent/100)
 ```
+
 
 # Locust density and region by treatment
 
-To assess how locust count changes between treatment (fertilized and control) and region (four regions), I built a generalized linear mixed model (family: Poisson) per mission as follows:
+To assess how locust damage percent changes between treatment (fertilized and control) and region (four regions), I built a generalized linear mixed model (family: Poisson) per mission as follows:
 
-$$
-\begin{align*}
-\text{ose count}_{ij} =\ 
-  &\beta_0 \\
-  &+ \beta_1 \cdot \text{fertilizer treatment}_i \\
-  &+ \beta_2 \cdot \text{region}_i \\
-  &+ \beta_3 \cdot (\text{fertilizer treatment}_i \times \text{region}_i) \\
-  &+ u_j \\
-  &+ \varepsilon_{ij}
-\end{align*}
-$$
-
-Where: - $\text{ose count}_{ij}$: observed ose count for observation $i$ from farmer $j$ - $\text{fertilizer treatment}_i$: fertilizer treatment group of observation $i$ - $\text{region}_i$: region of observation $i$ - $(\text{fertilizer treatment}_i \times \text{region}_i)$: interaction between fertilizer treatment and region - $u_j$: random effect for farmer $j$, $u_j \sim N(0, \sigma^2_{farmer})$ - $\varepsilon_{ij}$: residual error
+*add formula here*
 
 Below are the diagnostic plots for these models:
 
@@ -71,9 +64,9 @@ for (i in seq_along(model_data)){
     
     # Cache each mission model separately
     mission_mods[[i]] <- cache_model(
-        model_name = paste0("locust_density_mission_", i),
+        model_name = paste0("locust_damage_mission_", i),
         data = model_data[[i]],
-        fit_function = create_count_glmm_model
+        fit_function = create_damage_glmm_model
     )
     
     mission_diagnostic_plots[[i]] <- plot_model_diagnostics(mission_mods[[i]], plot_title = diagnostic_plot_title)
@@ -106,9 +99,9 @@ for (i in 1:3) {
 }
 ```
 
-These models are not perfect, but I think they are adequate for this analysis. Happy to investigate further if you would like me to!
+The tweedie models look like they capture the overdispersion quite well. There is a lot of zeros in this data.
 
-## OSE density by treatment and region (option 1)
+## OSE damage by treatment and region
 
 ```{r density-option-1-plot}
 #| echo: false
@@ -128,8 +121,8 @@ mission_emms <- bind_rows(
   .id = 'mission_numer' 
 )
 
-count_plot_option_1 <- plot_mission_density(
-    data |> drop_na(ose_count, fertilizer_treatment),
+count_plot_option_1 <- plot_mission_damage(
+    data |> drop_na(ose_damage_percent, fertilizer_treatment),
     mission_emms,
     ncol = 1,
     regions = ALT_STUDY_REGIONS,
@@ -143,24 +136,7 @@ count_plot_option_1
 save_data_table(mission_emms, "combined_mission_emmeans")
 ```
 
-## OSE density by treatment and region (option 2)
-
-Instead of a plot per mission, let's plot the missions together (x-axis) and see how region counts shifted through time
-
-```{r count-plot-option-2}
-#| echo: false
-#| message: false
-#| warning: false
-
-count_plot_option_2 <- plot_emmeans(mission_emms,
-    color_palette = DEFAULT_PALETTE,
-    ylab = "OSE count",
-    xlab = "Mission")
-
-count_plot_option_2
-```
-
-## OSE density by teatment and region model summaries (tabulated)
+## OSE damage by teatment and region model summaries (tabulated)
 
 Here are the model summaries and pairwise comparisons. This will be *across* missions, but please keep in mind each mission had it's own model. So we cant make across-mission comparions just yet.
 
@@ -256,7 +232,7 @@ mission_pairs |>
 
 ```
 
-# Table: annual OSE density by region and field type
+# Table: annual OSE damage by region and field type
 
 The data discrepancies seen the the OSE count x ground cover are really shown in this table as well. We can see that the trends are the same (e.g. fertilized plots have less than control), but the actual averages are totally different.
 
@@ -266,23 +242,23 @@ The data discrepancies seen the the OSE count x ground cover are really shown in
 #| warning: false
 #| 
 ose_dat <- data |>
-  select(region, fertilizer_treatment, ose_count) |>
+  select(region, fertilizer_treatment, ose_damage_percent) |>
   mutate(region = factor(region, levels = c('Saint Louis', 'Thies', 'Fatick', 'Kaffrine')),
          fertilizer_treatment = factor(fertilizer_treatment, levels = c('fertilized', 'control'))) |>
-  drop_na(ose_count, fertilizer_treatment) |>
+  drop_na(ose_damage_percent, fertilizer_treatment) |>
   group_by(region, fertilizer_treatment) |>
-  summarize(ose_mean = mean(ose_count, na.rm = TRUE), .groups = "drop") |>
+  summarize(ose_mean = mean(ose_damage_percent, na.rm = TRUE), .groups = "drop") |>
   pivot_wider(names_from = region, values_from = ose_mean)
 
 # Create the gt table
 ose_dat |>
   gt(rowname_col = "fertilizer_treatment") |>
   tab_header(
-    title = "Mean OSE Count by Region and Fertilizer Treatment"
+    title = "Mean OSE damage by Region and Fertilizer Treatment"
   ) |>
   fmt_number(
     columns = everything(),
-    decimals = 2
+    decimals = 4
   ) |>
   cols_label(
     fertilizer_treatment = "Treatment",

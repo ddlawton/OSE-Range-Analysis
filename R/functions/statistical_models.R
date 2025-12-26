@@ -22,13 +22,39 @@
 #' @return A fitted glmmTMB object.
 #' @examples
 #' # Example usage:
-#' # mod1 <- create_glmm_model(mission_dat[[1]])
+#' # mod1 <- create_count_glmm_model(mission_dat[[1]])
 #' @export
-create_glmm_model <- function(df) {
+create_count_glmm_model <- function(df) {
   glmmTMB(
     ose_count ~ fertilizer_treatment * region + (1|farmer),
     data = df,
     family = poisson()
+  )
+}
+
+#' Fit a GLMM for ose_damage_percent with fertilizer_treatment, region, and random farmer effects
+#'
+#' This function fits a generalized linear mixed model (GLMM) using the
+#' glmmTMB package for the response variable `ose_count`. The model includes
+#' fixed effects for fertilizer treatment and region, their interaction, and
+#' a random intercept for each farmer.
+#'
+#' @param df A data frame containing the columns:
+#'   - ose_damage_percent: (numeric) Response variable (percentage data)
+#'   - fertilizer_treatment: Treatment applied (factor or character)
+#'   - region: Region identifier (factor or character)
+#'   - farmer: Farmer identifier (factor or character)
+#'
+#' @return A fitted glmmTMB object.
+#' @examples
+#' # Example usage:
+#' # mod1 <- create_damage_glmm_model(mission_dat[[1]])
+#' @export
+create_damage_glmm_model <- function(df) {
+  glmmTMB(
+    ose_damage_percent ~ fertilizer_treatment * region + (1|farmer),
+    data = df,
+    family = tweedie()
   )
 }
 

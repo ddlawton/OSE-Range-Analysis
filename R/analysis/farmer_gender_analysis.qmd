@@ -1,0 +1,155 @@
+---
+title: "2021 Farmer gender analysis"
+format: html
+toc: true
+---
+
+## Summary
+
+The goal of this page is to analyze the difference between OSE count, damage and millet between farmer gender.
+
+TLDR:
+
+-   no significant impact of gender on OSE count
+
+-   Male farmers had lower locust damage than female farmers
+
+-   Female farmers had lower yield than male farmers
+
+```{r setup}
+#| echo: false
+#| results: "hide"
+#| message: false
+#| warning: false
+
+# Load common setup (packages, functions, configuration)
+source(here::here("R", "_common.R"))
+
+# Load processed data
+data <- load_ose_data(cache_processed = TRUE)
+
+data <- data |>
+    mutate(ose_damage_percent = ose_damage_percent/100,mission_number=factor(mission_number)) |>
+    select(year,region,mission_number,farmer_gender,ose_count,ose_damage_percent,rendement_en_kg_ha)
+```
+
+# OSE count analysis
+
+There doesnt seem to be a big difference between farmer gender and density. A poisson model was insigificant.
+
+```{r}
+
+data |>
+    ggplot(aes(x=farmer_gender,y=ose_count)) +
+        geom_boxplot(outlier.size=-1) +
+        geom_jitter(width=0.2,height=0) +
+        facet_wrap(~mission_number,ncol=1)
+
+```
+
+I will create a quick poisson glmm with mission_number as a random effect and farmer gender as a fixed effect to see if there is a difference between male and female farmer.
+
+```{r}
+
+density_mod <- glmmTMB(ose_count ~ farmer_gender + (1|region) + (1|mission_number),data=data,
+    family=tweedie())
+
+summary(density_mod)
+
+resids <- simulateResiduals(density_mod)
+plot(resids)
+
+```
+
+```{r}
+
+emm <- emmeans(density_mod,~farmer_gender,type='response') |> as_tibble()
+
+
+emm |> 
+    ggplot(aes(x=farmer_gender,y=response)) +
+        geom_point(size=5) +
+        geom_errorbar(aes(ymin=asymp.LCL,ymax=asymp.UCL),width=0) +
+        ylab('OSE count (marginal means)') +
+        xlab("")
+
+```
+
+# OSE damage
+
+```{r}
+
+data |>
+    ggplot(aes(x=farmer_gender,y=ose_damage_percent)) +
+        geom_boxplot(outlier.size=-1) +
+        geom_jitter(width=0.2,height=0) +
+        facet_wrap(~mission_number,ncol=1)
+
+```
+
+I will create a quick poisson glmm with mission_number as a random effect and farmer gender as a fixed effect to see if there is a statistical significance.
+
+```{r}
+
+damage_mod <- glmmTMB(ose_damage_percent ~ farmer_gender + (1|region) + (1|mission_number),data=data,
+    family=tweedie())
+
+summary(damage_mod)
+
+resids <- simulateResiduals(damage_mod)
+plot(resids)
+
+```
+
+```{r}
+
+emm <- emmeans(damage_mod,~farmer_gender,type='response') |> as_tibble()
+
+
+emm |> 
+    ggplot(aes(x=farmer_gender,y=response)) +
+        geom_point(size=5) +
+        geom_errorbar(aes(ymin=asymp.LCL,ymax=asymp.UCL),width=0) +
+        ylab('OSE count (marginal means)') +
+        xlab("")
+
+```
+
+# Millet Yield
+
+```{r}
+
+yield_dat <- data |>
+    drop_na(rendement_en_kg_ha)
+
+yield_dat |>
+    ggplot(aes(x=farmer_gender,y=rendement_en_kg_ha)) +
+        geom_boxplot(outlier.size=-1) +
+        geom_jitter(width=0.2,height=0) 
+
+```
+
+```{r}
+
+yield_mod <- glmmTMB(rendement_en_kg_ha ~ farmer_gender + (1|region) + (1|mission_number),data=yield_dat,family=tweedie())
+
+summary(yield_mod)
+
+resids <- simulateResiduals(yield_mod)
+plot(resids)
+
+```
+
+```{r}
+
+emm <- emmeans(yield_mod,~farmer_gender,type='response') |> as_tibble()
+
+
+emm |> 
+    ggplot(aes(x=farmer_gender,y=response)) +
+        geom_point(size=5) +
+        geom_errorbar(aes(ymin=asymp.LCL,ymax=asymp.UCL),width=0) +
+        ylab('OSE count (marginal means)') +
+        xlab("")
+
+```

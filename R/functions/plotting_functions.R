@@ -47,7 +47,9 @@ plot_mission_density <- function(
         )) |>
         dplyr::mutate(region = factor(region, levels = regions))
 
-    plot_mission <- function(md) {
+    mission_titles <- sub(" \\(.*\\)", "", MISSION_LABELS)
+
+    plot_mission <- function(md, title) {
         ggplot(
             dplyr::filter(density_dat, mission_date == md),
             aes(x = region, y = ose_count, color = fertilizer_treatment)
@@ -65,6 +67,84 @@ plot_mission_density <- function(
         scale_color_manual(values = FERTILIZER_COLORS) +
         scale_fill_manual(values = FERTILIZER_COLORS) +
         ylab(bquote('individuals'~bold('•')~100~m^-2)) +
+        labs(title = title) +
+        theme_pubr(legend = 'bottom') +
+        theme(
+            legend.title = element_blank(),
+            plot.title = element_text(hjust = 0.5),
+            axis.title.x = element_blank(),
+        )
+    }
+
+    plots <- Map(plot_mission, MISSION_LABELS, mission_titles)
+
+    combined_plot <- patchwork::wrap_plots(plots, ncol = ncol) +
+        patchwork::plot_annotation(tag_levels = 'a') +
+        patchwork::plot_layout(guides = "collect") &
+        theme(legend.position = legend_position)
+
+    return(combined_plot)
+}
+
+#' Plot OSE damage by region and mission date, faceted by mission
+#'
+#' This function creates a series of ggplot jitter plots of OSE/100m counts,
+#' colored by fertilizer treatment, faceted by mission and region. Plots are
+#' arranged using patchwork, with consistent legend placement and plot tagging.
+#'
+#' @param data A data.frame or tibble containing columns: year, region, farmer,
+#'   fertilizer_treatment, mission_number, ose_damage_percent
+#' @param emmeans Data frame with estimated marginal means for overlaying
+#' @param ncol Number of columns for plot arrangement (default: 1)
+#' @param emmean_point_size Size of emmean points (default: 5)
+#' @param regions Character vector of region names to use as factor levels
+#' @param legend_position Position of legend in combined plot (default: 'bottom')
+#' @return A patchwork object with combined, annotated plots
+plot_mission_damage <- function(
+    data,
+    emmeans,
+    ncol = 1,
+    emmean_point_size = DEFAULT_EMMEAN_POINT_SIZE,
+    regions = ALT_STUDY_REGIONS,
+    legend_position = 'bottom'
+) {
+    # Data prep
+    density_dat <- data |>
+        dplyr::select(year, region, farmer, fertilizer_treatment, mission_number, ose_damage_percent) |>
+        dplyr::mutate(region = factor(region, levels = regions)) |>
+        dplyr::mutate(mission_date = dplyr::case_when(
+            mission_number == 1 ~ MISSION_LABELS[1],
+            mission_number == 2 ~ MISSION_LABELS[2],
+            mission_number == 3 ~ MISSION_LABELS[3]
+        ))
+
+    # Map mission_numer in emmeans to mission_date labels
+    emmeans <- emmeans |>
+        dplyr::mutate(mission_date = dplyr::case_when(
+            mission_numer == "1" | mission_numer == 1 ~ MISSION_LABELS[1],
+            mission_numer == "2" | mission_numer == 2 ~ MISSION_LABELS[2],
+            mission_numer == "3" | mission_numer == 3 ~ MISSION_LABELS[3]
+        )) |>
+        dplyr::mutate(region = factor(region, levels = regions))
+
+    plot_mission <- function(md) {
+        ggplot(
+            dplyr::filter(density_dat, mission_date == md),
+            aes(x = region, y = ose_damage_percent, color = fertilizer_treatment)
+        ) +
+        geom_jitter(position = position_jitterdodge(jitter.width = 0.2, jitter.height = 0),
+            pch = 21, alpha = 0.3) +
+        geom_jitter(
+            data = dplyr::filter(emmeans, mission_date == md),
+            aes(y = response, x = region, fill = fertilizer_treatment),
+            position = position_jitterdodge(jitter.width = 0.00001, jitter.height = 0),
+            pch = 21,
+            color = 'black',
+            size = emmean_point_size
+        ) +
+        scale_color_manual(values = FERTILIZER_COLORS) +
+        scale_fill_manual(values = FERTILIZER_COLORS) +
+        ylab('leaf damage proportion') +
         labs(title = md) +
         theme_pubr(legend = 'bottom') +
         theme(

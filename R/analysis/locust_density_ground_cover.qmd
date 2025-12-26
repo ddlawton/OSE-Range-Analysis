@@ -55,7 +55,8 @@ where:
 ground_cover_dat <- data |>
     dplyr::select(region, farmer, fertilizer_treatment, mission_number, ose_count, percent_ground_cover) |>
     mutate(
-        region_treat = factor(paste0(region, '_', fertilizer_treatment))
+        region_treat = factor(paste0(region, '_', fertilizer_treatment)),
+        farmer = factor(farmer)
     ) |>
     drop_na(ose_count, fertilizer_treatment)
 
@@ -73,8 +74,9 @@ ground_cover_mod <- cache_model(
     fit_function_simple = function(data, formula, nthreads, family) {
         # Use simpler GAM with reduced complexity for CI
         build_gam(data,
-                 formula = ose_count ~ te(percent_ground_cover, region_treat, bs = 'fs', k = 5) + s(farmer, bs = 're'),
-                 nthreads = 2,
+                 formula = ose_count ~ te(percent_ground_cover, region_treat, bs = 'fs', k = 5) + s(farmer, bs = 're') +
+                 mission_number,
+                 nthreads = 1,
                  family = family)
     },
     formula = ose_count ~ te(percent_ground_cover, region_treat, bs = 'fs', k = 10) + s(farmer, bs = 're'),
@@ -138,3 +140,92 @@ broom.mixed::tidy(ground_cover_mod) |>
 
 
 ```
+
+
+# New analysis (12/26/2025)
+
+I built a GAM with a Tweedie family and log link to model `ose_count`. The model includes a smooth for percent ground cover and random effects for region, fertilizer treatment, mission number, and farmer. 
+
+The relationship between ground cover and OSE count is non-linear, peaking at around 50% ground cover—OSE numbers are lower at both low and high cover. Region, fertilizer, mission, and farmer all accounted for substantial variation. 
+
+Overall, the model explains about 52% of the deviance in the data.  
+
+
+
+```{r running_new_model}
+
+
+data <- data |>
+    select(year,region,farmer,farmer_gender,fertilizer_treatment,mission_number,ose_count,percent_ground_cover) |>
+    mutate(fertilizer_treatment = factor(fertilizer_treatment),
+           region = factor(region),
+           farmer = factor(farmer),
+           mission_number = factor(mission_number),
+           region_treat = factor(paste0(region, '_', fertilizer_treatment))
+           )
+
+data |> 
+  glimpse()
+
+
+mod <- bam(
+  ose_count ~ 
+    s(percent_ground_cover) + 
+    s(region, bs="re") +
+    s(fertilizer_treatment, bs="re") +
+    s(mission_number, bs="re") +
+    s(farmer, bs="re"),
+  data = data,
+  family = tw()
+)
+
+gratia::appraise(mod)
+
+```
+
+
+
+Here is the final modeled results for the relationship between ose_count and ground cover
+
+
+```{r plotting_estimates}
+
+
+
+est <- smooth_estimates(mod, select = "percent_ground_cover",partial_match=TRUE)
+
+est$adj_est <- est$.estimate + coef(mod)[1]
+
+
+ggplot(est, aes(x = percent_ground_cover, y = adj_est)) +
+  geom_ribbon(aes(ymin = adj_est - .se, ymax = adj_est + .se), alpha = 0.2) +
+  geom_line() +
+  labs(
+    x = "Percent Ground Cover",
+    y = "Estimated OSE Count"
+  ) +
+  theme_minimal()
+
+
+
+```
+
+
+# ground cover by mission
+
+in general, ground cover increased through the year. It does not really seem theres a big difference between regions.
+
+```{r}
+
+data |>
+  ggplot(aes(x=mission_number,y=percent_ground_cover)) +
+  geom_boxplot(outlier.size=-1) +
+  geom_jitter(width=0.2,height=0) +
+  facet_wrap(~region) +
+  ggtitle('ground cover by region') +
+  xlab('mission number') +
+  ylab('ground cover (%)')
+
+
+```
+

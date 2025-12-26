@@ -21,6 +21,9 @@ Each field was surveyed three times to record:
 - Grasshopper density and developmental stage
 - Vegetation cover and temperature  
 - Millet yield at harvest
+- OSE damage to millet leaves (percent leaf damage)
+
+Additional metadata collected includes farmer gender for demographic analysis.
 
 **Total Coverage:** 500 ha across 1,500 sampling points
 

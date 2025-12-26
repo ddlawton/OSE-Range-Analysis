@@ -22,6 +22,8 @@ website:
         href: R/analysis/basic_stats.qmd
       - text: "Locust Dynamics"
         menu:
+          - text: "Damage × Treatment / Region"
+            href: R/analysis/locust_damage_treatment_region.qmd
           - text: "Density × Treatment / Region"
             href: R/analysis/locust_density_treatment_region.qmd
           - text: "Locust × Ground Cover"
@@ -36,6 +38,10 @@ website:
             href: R/analysis/yield_treatment_region.qmd
           - text: "Yield × Temperature"
             href: R/analysis/yield_environment.qmd
+      - text: "Gender dynamics"
+        menu:
+          - text: "gender dynamics"
+            href: R/analysis/farmer_gender_analysis.qmd
       - icon: github
         href: https://github.com/ddlawton/OSE-Range-Analysis
     left:

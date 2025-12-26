@@ -25,7 +25,12 @@ set_current_analysis("locust_density_temperature")
 # Load processed data and filter for control plots only
 data <- load_ose_data(cache_processed = TRUE) |>
     filter(fertilizer_treatment == 'control') |>
-    select(year, region, farmer, mission_number, ose_count, temperature)
+    select(year, region, farmer, mission_number, ose_count, temperature) |>
+    mutate(
+        region = factor(region),
+        farmer = factor(farmer),
+        mission_number = factor(mission_number)
+    )
 ```
 
 # How is locust density related to temperature through the missions
@@ -64,8 +69,7 @@ mod <- cache_model(
         mgcv::gam(
             ose_count ~
                 s(temperature, region, bs = 'fs', k = 10) +
-                s(farmer, bs = 're') +
-                s(mission_number, bs = 're'),
+                s(farmer, bs = 're'),
             data = data,
             family = mgcv::tw(),
             select = TRUE
@@ -130,3 +134,93 @@ Here is the model summary for what it's worth:
 
 model_summary_gt(mod, title = 'Locust x Temperature model summary', digits = 3) 
 ```
+
+
+
+# New analysis (12/26/2025)
+
+## Overview
+
+I checked how temperature varied across missions and regions. Fatick heated up through the sampling period, but Kaffrine, Thies, and Saint Louis were more stable. Saint Louis was generally colder than the other regions.
+
+I then ran a GAM with a flexible smooth for temperature by region, including mission number and farmer as random effects. The trends were pretty similar to the original model, with the exception of some odd patterns at cooler temps.
+
+To simplify, I also ran a model with temperature as the main variable and region/mission as random effects. In this case, both region and mission number came up significant for explaining OSE counts, but temperature and farmer had little effect.
+
+Overall, it seems like temperature at the time of the survey isn't a real driver for OSE counts once you control for region and mission—suggesting most of any pattern is noise or an artifact of timing/activity. I’m inclined to say temperature doesn’t need to be a focus in the main model, but happy to dig further if needed.
+
+
+```{r}
+
+data |>
+    ggplot(aes(x=factor(mission_number),y=temperature)) +
+    geom_jitter(width=0.2,height=0) +
+    facet_wrap(~region) +
+    xlab('mission number') +
+    ylab('Temperature')
+
+
+```
+
+
+It looks like Fatick became hotter through the sampling period. Kaffrine, Thies, and Saint Louis seem more consistent between missions. Saint louis is definitely colder than the other three regions. So I would expect with the exception of Fatick, adding mission number to the model will not really add anything different.
+
+Lets create the same model above with mission number included:
+
+```{r new model}
+
+
+model_with_mission_number <- mgcv::gam(
+            ose_count ~
+                s(temperature, region, bs = 'fs', k = 10) +
+                s(farmer, bs = 're') +
+                s(mission_number, bs = 're'),
+            data = data,
+            family = mgcv::tw(),
+            select = TRUE
+        )
+
+est <- gratia::smooth_estimates(model_with_mission_number,select = 'temperature',partial_match =TRUE)
+
+
+ggplot(est, aes(x = temperature, y = .estimate)) +
+  geom_ribbon(aes(ymin = .estimate - .se, ymax = .estimate + .se,fill=region), alpha = 0.2) +
+  geom_line(aes(color=region)) +
+  labs(
+    x = "Percent Ground Cover",
+    y = "Estimated OSE Count (Partial effects)"
+  ) +
+  theme_minimal()
+```
+
+
+
+Seems like very similiar trends to the original model with the exception of more weird patterns in cooler temperatures. 
+
+
+# Holding region and mission number as random effects
+
+Lets try one more model where we do not try to look at the relationship between ose_count and region separately, but rather hold temperature as a random effect and look solely at temperature
+
+```{r}
+
+temp_model <- mgcv::gam(
+            ose_count ~
+                s(temperature, k = 10) +
+                s(region,bs='re') +
+                s(farmer, bs = 're') +
+                s(mission_number, bs = 're'),
+            data = data,
+            family = mgcv::tw(),
+            select = TRUE
+        )
+
+summary(temp_model)
+
+```
+
+
+
+So this model has region and mission number being significant effects on ose_count which makes sense. However, temperature and farmer did not meaningfully impact ose_count. This makes me believe that we may be looking too deep into this relationship between ose_count and temperature and that we are fitting the model to pure noise. 
+
+I am happy to work through this more, however I want to see what you think before going forward.

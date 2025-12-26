@@ -55,17 +55,17 @@ DEFAULT_FIGURE_DPI <- 2
 
 # === DATA LOADING ===
 #' Load and process the main dataset
-#' @param cache_processed If TRUE, save/load processed data as RDS for faster loading
+#' @param cache_processed If TRUE, save/load processed data as CSV for faster loading
 #' @return Processed tibble ready for analysis
 load_ose_data <- function(cache_processed = TRUE) {
-  processed_file <- here::here("data", "processed", "ose_data_processed.rds")
-  raw_file <- here::here("data", "raw", "Toure_OSE2021data_v03.xlsx")
+  processed_file <- here::here("data", "processed", "ose_data_processed.csv")
+  raw_file <- here::here("data", "raw", "Toure_OSE2021data_v05.xlsx")
   
   # Check if processed data exists and is newer than raw data
   if (cache_processed && file.exists(processed_file) && 
       file.mtime(processed_file) > file.mtime(raw_file)) {
     message("Loading cached processed data...")
-    return(readRDS(processed_file))
+    return(read_csv(processed_file, show_col_types = FALSE))
   }
   
   # Process raw data
@@ -75,7 +75,7 @@ load_ose_data <- function(cache_processed = TRUE) {
   # Cache processed data
   if (cache_processed) {
     dir.create(dirname(processed_file), showWarnings = FALSE, recursive = TRUE)
-    saveRDS(data, processed_file)
+    write_csv(data, processed_file)
     message("Processed data cached to: ", processed_file)
   }
   
@@ -259,14 +259,14 @@ standardize_regions <- function(data, region_col = "region", alt_names = FALSE) 
   return(data)
 }
 
-message("✓ OSE Range Analysis common setup loaded successfully")
-message("✓ Available regions: ", paste(STUDY_REGIONS, collapse = ", "))
-message("✓ Functions sourced from R/functions/")
+message("OSE Range Analysis common setup loaded successfully")
+message("Available regions: ", paste(STUDY_REGIONS, collapse = ", "))
+message("Functions sourced from R/functions/")
 
 # Environment-specific messages
 is_ci <- Sys.getenv("CI") != "" || Sys.getenv("GITHUB_ACTIONS") != ""
 if (is_ci) {
-  message("✓ CI environment detected - using GitHub Actions cache for models")
+  message("CI environment detected - using GitHub Actions cache for models")
 } else {
-  message("✓ Model caching enabled - models saved to data/model_objects/")
+  message("Model caching enabled - models saved to data/model_objects/")
 }
