@@ -315,6 +315,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-locust-dynamics">    
         <li>
+    <a class="dropdown-item" href="../../R/analysis/locust_damage_treatment_region.html">
+ <span class="dropdown-text">Damage × Treatment / Region</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../R/analysis/locust_density_treatment_region.html">
  <span class="dropdown-text">Density × Treatment / Region</span></a>
   </li>  
@@ -344,6 +348,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="../../R/analysis/yield_environment.html">
  <span class="dropdown-text">Yield × Temperature</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-gender-dynamics" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Gender dynamics</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-gender-dynamics">    
+        <li>
+    <a class="dropdown-item" href="../../R/analysis/farmer_gender_analysis.html">
+ <span class="dropdown-text">gender dynamics</span></a>
   </li>  
     </ul>
   </li>
@@ -402,48 +417,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The goal of this page is to provide the map and a basic understanding of the data I have. This is to ensure visuals for publication have the same themeing but also to ensure that my data management aligns well with expectations and that there are no errors. If you see errors, please let me know!</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 20 × 3
-   variable             statistic   value
-   &lt;chr&gt;                &lt;chr&gt;       &lt;dbl&gt;
- 1 ose_count            min          0   
- 2 ose_count            max        145   
- 3 ose_count            mean        21.0 
- 4 ose_count            median      14   
- 5 ose_count            sd          20.1 
- 6 temperature          min         23   
- 7 temperature          max         41   
- 8 temperature          mean        31.0 
- 9 temperature          median      31   
-10 temperature          sd           3.27
-11 percent_ground_cover min         10   
-12 percent_ground_cover max        100   
-13 percent_ground_cover mean        67.2 
-14 percent_ground_cover median      70   
-15 percent_ground_cover sd          20.1 
-16 rendement_en_kg_ha   min         20   
-17 rendement_en_kg_ha   max       2000   
-18 rendement_en_kg_ha   mean       637.  
-19 rendement_en_kg_ha   median     560   
-20 rendement_en_kg_ha   sd         413.  </code></pre>
+<pre><code># A tibble: 35 × 3
+   variable       statistic    value
+   &lt;chr&gt;          &lt;chr&gt;        &lt;dbl&gt;
+ 1 year           min       2021    
+ 2 year           max       2021    
+ 3 year           mean      2021    
+ 4 year           median    2021    
+ 5 year           sd           0    
+ 6 mission_number min          1    
+ 7 mission_number max          3    
+ 8 mission_number mean         2    
+ 9 mission_number median       2    
+10 mission_number sd           0.817
+# ℹ 25 more rows</code></pre>
 </div>
 <div class="cell-output-display">
-<div id="fbgeuywffj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fbgeuywffj table {
+<div id="wvjzsbiugt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wvjzsbiugt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fbgeuywffj thead, #fbgeuywffj tbody, #fbgeuywffj tfoot, #fbgeuywffj tr, #fbgeuywffj td, #fbgeuywffj th {
+#wvjzsbiugt thead, #wvjzsbiugt tbody, #wvjzsbiugt tfoot, #wvjzsbiugt tr, #wvjzsbiugt td, #wvjzsbiugt th {
   border-style: none;
 }
 
-#fbgeuywffj p {
+#wvjzsbiugt p {
   margin: 0;
   padding: 0;
 }
 
-#fbgeuywffj .gt_table {
+#wvjzsbiugt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -469,12 +475,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#fbgeuywffj .gt_caption {
+#wvjzsbiugt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fbgeuywffj .gt_title {
+#wvjzsbiugt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -486,7 +492,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#fbgeuywffj .gt_subtitle {
+#wvjzsbiugt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -498,7 +504,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#fbgeuywffj .gt_heading {
+#wvjzsbiugt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -510,13 +516,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#fbgeuywffj .gt_bottom_border {
+#wvjzsbiugt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fbgeuywffj .gt_col_headings {
+#wvjzsbiugt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -531,7 +537,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#fbgeuywffj .gt_col_heading {
+#wvjzsbiugt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -551,7 +557,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#fbgeuywffj .gt_column_spanner_outer {
+#wvjzsbiugt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -563,15 +569,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#fbgeuywffj .gt_column_spanner_outer:first-child {
+#wvjzsbiugt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fbgeuywffj .gt_column_spanner_outer:last-child {
+#wvjzsbiugt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fbgeuywffj .gt_column_spanner {
+#wvjzsbiugt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -583,11 +589,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#fbgeuywffj .gt_spanner_row {
+#wvjzsbiugt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fbgeuywffj .gt_group_heading {
+#wvjzsbiugt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -613,7 +619,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#fbgeuywffj .gt_empty_group_heading {
+#wvjzsbiugt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -628,15 +634,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#fbgeuywffj .gt_from_md > :first-child {
+#wvjzsbiugt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fbgeuywffj .gt_from_md > :last-child {
+#wvjzsbiugt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fbgeuywffj .gt_row {
+#wvjzsbiugt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -655,7 +661,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#fbgeuywffj .gt_stub {
+#wvjzsbiugt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -668,7 +674,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#fbgeuywffj .gt_stub_row_group {
+#wvjzsbiugt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -682,15 +688,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#fbgeuywffj .gt_row_group_first td {
+#wvjzsbiugt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fbgeuywffj .gt_row_group_first th {
+#wvjzsbiugt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fbgeuywffj .gt_summary_row {
+#wvjzsbiugt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -700,16 +706,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#fbgeuywffj .gt_first_summary_row {
+#wvjzsbiugt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fbgeuywffj .gt_first_summary_row.thick {
+#wvjzsbiugt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fbgeuywffj .gt_last_summary_row {
+#wvjzsbiugt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -719,7 +725,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#fbgeuywffj .gt_grand_summary_row {
+#wvjzsbiugt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -729,7 +735,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#fbgeuywffj .gt_first_grand_summary_row {
+#wvjzsbiugt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -739,7 +745,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#fbgeuywffj .gt_last_grand_summary_row_top {
+#wvjzsbiugt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -749,11 +755,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#fbgeuywffj .gt_striped {
+#wvjzsbiugt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fbgeuywffj .gt_table_body {
+#wvjzsbiugt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -762,7 +768,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#fbgeuywffj .gt_footnotes {
+#wvjzsbiugt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -776,7 +782,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#fbgeuywffj .gt_footnote {
+#wvjzsbiugt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -785,7 +791,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#fbgeuywffj .gt_sourcenotes {
+#wvjzsbiugt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -799,7 +805,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#fbgeuywffj .gt_sourcenote {
+#wvjzsbiugt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -807,72 +813,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#fbgeuywffj .gt_left {
+#wvjzsbiugt .gt_left {
   text-align: left;
 }
 
-#fbgeuywffj .gt_center {
+#wvjzsbiugt .gt_center {
   text-align: center;
 }
 
-#fbgeuywffj .gt_right {
+#wvjzsbiugt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fbgeuywffj .gt_font_normal {
+#wvjzsbiugt .gt_font_normal {
   font-weight: normal;
 }
 
-#fbgeuywffj .gt_font_bold {
+#wvjzsbiugt .gt_font_bold {
   font-weight: bold;
 }
 
-#fbgeuywffj .gt_font_italic {
+#wvjzsbiugt .gt_font_italic {
   font-style: italic;
 }
 
-#fbgeuywffj .gt_super {
+#wvjzsbiugt .gt_super {
   font-size: 65%;
 }
 
-#fbgeuywffj .gt_footnote_marks {
+#wvjzsbiugt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fbgeuywffj .gt_asterisk {
+#wvjzsbiugt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fbgeuywffj .gt_indent_1 {
+#wvjzsbiugt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fbgeuywffj .gt_indent_2 {
+#wvjzsbiugt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fbgeuywffj .gt_indent_3 {
+#wvjzsbiugt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fbgeuywffj .gt_indent_4 {
+#wvjzsbiugt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fbgeuywffj .gt_indent_5 {
+#wvjzsbiugt .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fbgeuywffj .katex-display {
+#wvjzsbiugt .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fbgeuywffj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wvjzsbiugt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -897,18 +903,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody class="gt_table_body">
 <tr class="odd">
 <th id="stub_1_1" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">year</th>
-<td class="gt_row gt_left" headers="stub_1_1 type">factor</td>
-<td class="gt_row gt_right" headers="stub_1_1 min">-</td>
-<td class="gt_row gt_right" headers="stub_1_1 max">-</td>
-<td class="gt_row gt_right" headers="stub_1_1 mean">-</td>
-<td class="gt_row gt_right" headers="stub_1_1 median">-</td>
-<td class="gt_row gt_right" headers="stub_1_1 sd">-</td>
+<td class="gt_row gt_left" headers="stub_1_1 type">numeric</td>
+<td class="gt_row gt_right" headers="stub_1_1 min">2,021.00</td>
+<td class="gt_row gt_right" headers="stub_1_1 max">2,021.00</td>
+<td class="gt_row gt_right" headers="stub_1_1 mean">2,021.00</td>
+<td class="gt_row gt_right" headers="stub_1_1 median">2,021.00</td>
+<td class="gt_row gt_right" headers="stub_1_1 sd">0.00</td>
 <td class="gt_row gt_right" headers="stub_1_1 missing">0</td>
-<td class="gt_row gt_right" headers="stub_1_1 levels">1</td>
+<td class="gt_row gt_right" headers="stub_1_1 levels">-</td>
 </tr>
 <tr class="even">
 <th id="stub_1_2" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">region</th>
-<td class="gt_row gt_left" headers="stub_1_2 type">factor</td>
+<td class="gt_row gt_left" headers="stub_1_2 type">character</td>
 <td class="gt_row gt_right" headers="stub_1_2 min">-</td>
 <td class="gt_row gt_right" headers="stub_1_2 max">-</td>
 <td class="gt_row gt_right" headers="stub_1_2 mean">-</td>
@@ -919,7 +925,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <th id="stub_1_3" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">farmer</th>
-<td class="gt_row gt_left" headers="stub_1_3 type">factor</td>
+<td class="gt_row gt_left" headers="stub_1_3 type">character</td>
 <td class="gt_row gt_right" headers="stub_1_3 min">-</td>
 <td class="gt_row gt_right" headers="stub_1_3 max">-</td>
 <td class="gt_row gt_right" headers="stub_1_3 mean">-</td>
@@ -929,103 +935,125 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="stub_1_3 levels">250</td>
 </tr>
 <tr class="even">
-<th id="stub_1_4" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">fertilizer_treatment</th>
-<td class="gt_row gt_left" headers="stub_1_4 type">factor</td>
+<th id="stub_1_4" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">farmer_gender</th>
+<td class="gt_row gt_left" headers="stub_1_4 type">character</td>
 <td class="gt_row gt_right" headers="stub_1_4 min">-</td>
 <td class="gt_row gt_right" headers="stub_1_4 max">-</td>
 <td class="gt_row gt_right" headers="stub_1_4 mean">-</td>
 <td class="gt_row gt_right" headers="stub_1_4 median">-</td>
 <td class="gt_row gt_right" headers="stub_1_4 sd">-</td>
-<td class="gt_row gt_right" headers="stub_1_4 missing">18</td>
+<td class="gt_row gt_right" headers="stub_1_4 missing">0</td>
 <td class="gt_row gt_right" headers="stub_1_4 levels">2</td>
 </tr>
 <tr class="odd">
-<th id="stub_1_5" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">code</th>
-<td class="gt_row gt_left" headers="stub_1_5 type">factor</td>
+<th id="stub_1_5" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">fertilizer_treatment</th>
+<td class="gt_row gt_left" headers="stub_1_5 type">character</td>
 <td class="gt_row gt_right" headers="stub_1_5 min">-</td>
 <td class="gt_row gt_right" headers="stub_1_5 max">-</td>
 <td class="gt_row gt_right" headers="stub_1_5 mean">-</td>
 <td class="gt_row gt_right" headers="stub_1_5 median">-</td>
 <td class="gt_row gt_right" headers="stub_1_5 sd">-</td>
 <td class="gt_row gt_right" headers="stub_1_5 missing">18</td>
-<td class="gt_row gt_right" headers="stub_1_5 levels">489</td>
+<td class="gt_row gt_right" headers="stub_1_5 levels">2</td>
 </tr>
 <tr class="even">
-<th id="stub_1_6" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">mission_number</th>
-<td class="gt_row gt_left" headers="stub_1_6 type">factor</td>
+<th id="stub_1_6" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">code</th>
+<td class="gt_row gt_left" headers="stub_1_6 type">character</td>
 <td class="gt_row gt_right" headers="stub_1_6 min">-</td>
 <td class="gt_row gt_right" headers="stub_1_6 max">-</td>
 <td class="gt_row gt_right" headers="stub_1_6 mean">-</td>
 <td class="gt_row gt_right" headers="stub_1_6 median">-</td>
 <td class="gt_row gt_right" headers="stub_1_6 sd">-</td>
-<td class="gt_row gt_right" headers="stub_1_6 missing">0</td>
-<td class="gt_row gt_right" headers="stub_1_6 levels">3</td>
+<td class="gt_row gt_right" headers="stub_1_6 missing">18</td>
+<td class="gt_row gt_right" headers="stub_1_6 levels">489</td>
 </tr>
 <tr class="odd">
-<th id="stub_1_7" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">date_surveyed</th>
-<td class="gt_row gt_left" headers="stub_1_7 type">factor</td>
-<td class="gt_row gt_right" headers="stub_1_7 min">-</td>
-<td class="gt_row gt_right" headers="stub_1_7 max">-</td>
-<td class="gt_row gt_right" headers="stub_1_7 mean">-</td>
-<td class="gt_row gt_right" headers="stub_1_7 median">-</td>
-<td class="gt_row gt_right" headers="stub_1_7 sd">-</td>
-<td class="gt_row gt_right" headers="stub_1_7 missing">100</td>
-<td class="gt_row gt_right" headers="stub_1_7 levels">8</td>
+<th id="stub_1_7" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">mission_number</th>
+<td class="gt_row gt_left" headers="stub_1_7 type">numeric</td>
+<td class="gt_row gt_right" headers="stub_1_7 min">1.00</td>
+<td class="gt_row gt_right" headers="stub_1_7 max">3.00</td>
+<td class="gt_row gt_right" headers="stub_1_7 mean">2.00</td>
+<td class="gt_row gt_right" headers="stub_1_7 median">2.00</td>
+<td class="gt_row gt_right" headers="stub_1_7 sd">0.82</td>
+<td class="gt_row gt_right" headers="stub_1_7 missing">0</td>
+<td class="gt_row gt_right" headers="stub_1_7 levels">-</td>
 </tr>
 <tr class="even">
-<th id="stub_1_8" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">ose_count</th>
-<td class="gt_row gt_left" headers="stub_1_8 type">numeric</td>
-<td class="gt_row gt_right" headers="stub_1_8 min">0.00</td>
-<td class="gt_row gt_right" headers="stub_1_8 max">145.00</td>
-<td class="gt_row gt_right" headers="stub_1_8 mean">20.99</td>
-<td class="gt_row gt_right" headers="stub_1_8 median">14.00</td>
-<td class="gt_row gt_right" headers="stub_1_8 sd">20.06</td>
-<td class="gt_row gt_right" headers="stub_1_8 missing">199</td>
-<td class="gt_row gt_right" headers="stub_1_8 levels">-</td>
+<th id="stub_1_8" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">date_surveyed</th>
+<td class="gt_row gt_left" headers="stub_1_8 type">character</td>
+<td class="gt_row gt_right" headers="stub_1_8 min">-</td>
+<td class="gt_row gt_right" headers="stub_1_8 max">-</td>
+<td class="gt_row gt_right" headers="stub_1_8 mean">-</td>
+<td class="gt_row gt_right" headers="stub_1_8 median">-</td>
+<td class="gt_row gt_right" headers="stub_1_8 sd">-</td>
+<td class="gt_row gt_right" headers="stub_1_8 missing">100</td>
+<td class="gt_row gt_right" headers="stub_1_8 levels">8</td>
 </tr>
 <tr class="odd">
-<th id="stub_1_9" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">temperature</th>
+<th id="stub_1_9" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">ose_count</th>
 <td class="gt_row gt_left" headers="stub_1_9 type">numeric</td>
-<td class="gt_row gt_right" headers="stub_1_9 min">23.00</td>
-<td class="gt_row gt_right" headers="stub_1_9 max">41.00</td>
-<td class="gt_row gt_right" headers="stub_1_9 mean">31.04</td>
-<td class="gt_row gt_right" headers="stub_1_9 median">31.00</td>
-<td class="gt_row gt_right" headers="stub_1_9 sd">3.27</td>
+<td class="gt_row gt_right" headers="stub_1_9 min">0.00</td>
+<td class="gt_row gt_right" headers="stub_1_9 max">145.00</td>
+<td class="gt_row gt_right" headers="stub_1_9 mean">20.99</td>
+<td class="gt_row gt_right" headers="stub_1_9 median">14.00</td>
+<td class="gt_row gt_right" headers="stub_1_9 sd">20.06</td>
 <td class="gt_row gt_right" headers="stub_1_9 missing">199</td>
 <td class="gt_row gt_right" headers="stub_1_9 levels">-</td>
 </tr>
 <tr class="even">
-<th id="stub_1_10" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">percent_ground_cover</th>
+<th id="stub_1_10" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">temperature</th>
 <td class="gt_row gt_left" headers="stub_1_10 type">numeric</td>
-<td class="gt_row gt_right" headers="stub_1_10 min">10.00</td>
-<td class="gt_row gt_right" headers="stub_1_10 max">100.00</td>
-<td class="gt_row gt_right" headers="stub_1_10 mean">67.23</td>
-<td class="gt_row gt_right" headers="stub_1_10 median">70.00</td>
-<td class="gt_row gt_right" headers="stub_1_10 sd">20.12</td>
-<td class="gt_row gt_right" headers="stub_1_10 missing">204</td>
+<td class="gt_row gt_right" headers="stub_1_10 min">23.00</td>
+<td class="gt_row gt_right" headers="stub_1_10 max">41.00</td>
+<td class="gt_row gt_right" headers="stub_1_10 mean">31.04</td>
+<td class="gt_row gt_right" headers="stub_1_10 median">31.00</td>
+<td class="gt_row gt_right" headers="stub_1_10 sd">3.27</td>
+<td class="gt_row gt_right" headers="stub_1_10 missing">199</td>
 <td class="gt_row gt_right" headers="stub_1_10 levels">-</td>
 </tr>
 <tr class="odd">
-<th id="stub_1_11" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">yield_date_havested</th>
-<td class="gt_row gt_left" headers="stub_1_11 type">factor</td>
-<td class="gt_row gt_right" headers="stub_1_11 min">-</td>
-<td class="gt_row gt_right" headers="stub_1_11 max">-</td>
-<td class="gt_row gt_right" headers="stub_1_11 mean">-</td>
-<td class="gt_row gt_right" headers="stub_1_11 median">-</td>
-<td class="gt_row gt_right" headers="stub_1_11 sd">-</td>
-<td class="gt_row gt_right" headers="stub_1_11 missing">300</td>
-<td class="gt_row gt_right" headers="stub_1_11 levels">2</td>
+<th id="stub_1_11" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">percent_ground_cover</th>
+<td class="gt_row gt_left" headers="stub_1_11 type">numeric</td>
+<td class="gt_row gt_right" headers="stub_1_11 min">10.00</td>
+<td class="gt_row gt_right" headers="stub_1_11 max">100.00</td>
+<td class="gt_row gt_right" headers="stub_1_11 mean">67.23</td>
+<td class="gt_row gt_right" headers="stub_1_11 median">70.00</td>
+<td class="gt_row gt_right" headers="stub_1_11 sd">20.12</td>
+<td class="gt_row gt_right" headers="stub_1_11 missing">204</td>
+<td class="gt_row gt_right" headers="stub_1_11 levels">-</td>
 </tr>
 <tr class="even">
-<th id="stub_1_12" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">rendement_en_kg_ha</th>
+<th id="stub_1_12" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">ose_damage_percent</th>
 <td class="gt_row gt_left" headers="stub_1_12 type">numeric</td>
-<td class="gt_row gt_right" headers="stub_1_12 min">20.00</td>
-<td class="gt_row gt_right" headers="stub_1_12 max">2,000.00</td>
-<td class="gt_row gt_right" headers="stub_1_12 mean">637.24</td>
-<td class="gt_row gt_right" headers="stub_1_12 median">560.00</td>
-<td class="gt_row gt_right" headers="stub_1_12 sd">412.74</td>
-<td class="gt_row gt_right" headers="stub_1_12 missing">465</td>
+<td class="gt_row gt_right" headers="stub_1_12 min">0.00</td>
+<td class="gt_row gt_right" headers="stub_1_12 max">46.00</td>
+<td class="gt_row gt_right" headers="stub_1_12 mean">1.92</td>
+<td class="gt_row gt_right" headers="stub_1_12 median">0.00</td>
+<td class="gt_row gt_right" headers="stub_1_12 sd">4.32</td>
+<td class="gt_row gt_right" headers="stub_1_12 missing">200</td>
 <td class="gt_row gt_right" headers="stub_1_12 levels">-</td>
+</tr>
+<tr class="odd">
+<th id="stub_1_13" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">yield_date_havested</th>
+<td class="gt_row gt_left" headers="stub_1_13 type">character</td>
+<td class="gt_row gt_right" headers="stub_1_13 min">-</td>
+<td class="gt_row gt_right" headers="stub_1_13 max">-</td>
+<td class="gt_row gt_right" headers="stub_1_13 mean">-</td>
+<td class="gt_row gt_right" headers="stub_1_13 median">-</td>
+<td class="gt_row gt_right" headers="stub_1_13 sd">-</td>
+<td class="gt_row gt_right" headers="stub_1_13 missing">300</td>
+<td class="gt_row gt_right" headers="stub_1_13 levels">2</td>
+</tr>
+<tr class="even">
+<th id="stub_1_14" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">rendement_en_kg_ha</th>
+<td class="gt_row gt_left" headers="stub_1_14 type">numeric</td>
+<td class="gt_row gt_right" headers="stub_1_14 min">20.00</td>
+<td class="gt_row gt_right" headers="stub_1_14 max">2,000.00</td>
+<td class="gt_row gt_right" headers="stub_1_14 mean">637.24</td>
+<td class="gt_row gt_right" headers="stub_1_14 median">560.00</td>
+<td class="gt_row gt_right" headers="stub_1_14 sd">412.74</td>
+<td class="gt_row gt_right" headers="stub_1_14 missing">465</td>
+<td class="gt_row gt_right" headers="stub_1_14 levels">-</td>
 </tr>
 </tbody>
 </table>

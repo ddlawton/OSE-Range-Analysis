@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2021 Locust Density Analysis – OSE Range Analysis</title>
+<title>2021 Locust Damage Analysis – OSE Range Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -109,35 +109,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -416,11 +387,10 @@ window.Quarto = {
   <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a></li>
   <li><a href="#locust-density-and-region-by-treatment" id="toc-locust-density-and-region-by-treatment" class="nav-link" data-scroll-target="#locust-density-and-region-by-treatment">Locust density and region by treatment</a>
   <ul class="collapse">
-  <li><a href="#ose-density-by-treatment-and-region-option-1" id="toc-ose-density-by-treatment-and-region-option-1" class="nav-link" data-scroll-target="#ose-density-by-treatment-and-region-option-1">OSE density by treatment and region (option 1)</a></li>
-  <li><a href="#ose-density-by-treatment-and-region-option-2" id="toc-ose-density-by-treatment-and-region-option-2" class="nav-link" data-scroll-target="#ose-density-by-treatment-and-region-option-2">OSE density by treatment and region (option 2)</a></li>
-  <li><a href="#ose-density-by-teatment-and-region-model-summaries-tabulated" id="toc-ose-density-by-teatment-and-region-model-summaries-tabulated" class="nav-link" data-scroll-target="#ose-density-by-teatment-and-region-model-summaries-tabulated">OSE density by teatment and region model summaries (tabulated)</a></li>
+  <li><a href="#ose-damage-by-treatment-and-region" id="toc-ose-damage-by-treatment-and-region" class="nav-link" data-scroll-target="#ose-damage-by-treatment-and-region">OSE damage by treatment and region</a></li>
+  <li><a href="#ose-damage-by-teatment-and-region-model-summaries-tabulated" id="toc-ose-damage-by-teatment-and-region-model-summaries-tabulated" class="nav-link" data-scroll-target="#ose-damage-by-teatment-and-region-model-summaries-tabulated">OSE damage by teatment and region model summaries (tabulated)</a></li>
   </ul></li>
-  <li><a href="#table-annual-ose-density-by-region-and-field-type" id="toc-table-annual-ose-density-by-region-and-field-type" class="nav-link" data-scroll-target="#table-annual-ose-density-by-region-and-field-type">Table: annual OSE density by region and field type</a></li>
+  <li><a href="#table-annual-ose-damage-by-region-and-field-type" id="toc-table-annual-ose-damage-by-region-and-field-type" class="nav-link" data-scroll-target="#table-annual-ose-damage-by-region-and-field-type">Table: annual OSE damage by region and field type</a></li>
   </ul>
 </nav>
     </div>
@@ -430,7 +400,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">2021 Locust Density Analysis</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">2021 Locust Damage Analysis</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 <p class="subtitle lead">Density patterns by treatment and region</p>
 </div>
 
@@ -450,98 +420,74 @@ window.Quarto = {
 
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
-<p>The goal of this page is to analyze locust density patterns across fertilizer treatments and regions. This analysis replicates key figures from the manuscript to ensure consistent theming and validates our data management approach. If you see errors, please let me know!</p>
+<p>The goal of this page is to analyze locust damage patterns across fertilizer treatments and regions. This analysis replicates key figures from the manuscript to ensure consistent theming and validates our data management approach. If you see errors, please let me know!</p>
 </section>
 <section id="locust-density-and-region-by-treatment" class="level1">
 <h1>Locust density and region by treatment</h1>
-<p>To assess how locust count changes between treatment (fertilized and control) and region (four regions), I built a generalized linear mixed model (family: Poisson) per mission as follows:</p>
-<p><span class="math display">\[
-\begin{align*}
-\text{ose count}_{ij} =\
-  &amp;\beta_0 \\
-  &amp;+ \beta_1 \cdot \text{fertilizer treatment}_i \\
-  &amp;+ \beta_2 \cdot \text{region}_i \\
-  &amp;+ \beta_3 \cdot (\text{fertilizer treatment}_i \times \text{region}_i) \\
-  &amp;+ u_j \\
-  &amp;+ \varepsilon_{ij}
-\end{align*}
-\]</span></p>
-<p>Where: - <span class="math inline">\(\text{ose count}_{ij}\)</span>: observed ose count for observation <span class="math inline">\(i\)</span> from farmer <span class="math inline">\(j\)</span> - <span class="math inline">\(\text{fertilizer treatment}_i\)</span>: fertilizer treatment group of observation <span class="math inline">\(i\)</span> - <span class="math inline">\(\text{region}_i\)</span>: region of observation <span class="math inline">\(i\)</span> - <span class="math inline">\((\text{fertilizer treatment}_i \times \text{region}_i)\)</span>: interaction between fertilizer treatment and region - <span class="math inline">\(u_j\)</span>: random effect for farmer <span class="math inline">\(j\)</span>, <span class="math inline">\(u_j \sim N(0, \sigma^2_{farmer})\)</span> - <span class="math inline">\(\varepsilon_{ij}\)</span>: residual error</p>
+<p>To assess how locust damage percent changes between treatment (fertilized and control) and region (four regions), I built a generalized linear mixed model (family: Poisson) per mission as follows:</p>
+<p><em>add formula here</em></p>
 <p>Below are the diagnostic plots for these models:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="locust_density_treatment_region_files/figure-html/plot-diagnostic-plots-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="locust_damage_treatment_region_files/figure-html/plot-diagnostic-plots-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>These models are not perfect, but I think they are adequate for this analysis. Happy to investigate further if you would like me to!</p>
-<section id="ose-density-by-treatment-and-region-option-1" class="level2">
-<h2 class="anchored" data-anchor-id="ose-density-by-treatment-and-region-option-1">OSE density by treatment and region (option 1)</h2>
+<p>The tweedie models look like they capture the overdispersion quite well. There is a lot of zeros in this data.</p>
+<section id="ose-damage-by-treatment-and-region" class="level2">
+<h2 class="anchored" data-anchor-id="ose-damage-by-treatment-and-region">OSE damage by treatment and region</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="locust_density_treatment_region_files/figure-html/density-option-1-plot-1.png" class="img-fluid figure-img" width="480"></p>
+<p><img src="locust_damage_treatment_region_files/figure-html/density-option-1-plot-1.png" class="img-fluid figure-img" width="480"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 22 × 10
-   mission_numer fertilizer_treatment region       rate    SE    df asymp.LCL
-   &lt;chr&gt;         &lt;fct&gt;                &lt;fct&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
- 1 1             control              Fatick      17.8  1.26    Inf     15.5 
- 2 1             fertilized           Fatick      19.1  1.32    Inf     16.6 
- 3 1             control              Kaffrine    53.9  3.35    Inf     47.7 
- 4 1             fertilized           Kaffrine    43.8  2.74    Inf     38.8 
- 5 1             control              Saint Louis  7.63 0.769   Inf      6.26
- 6 1             fertilized           Saint Louis  9.37 0.920   Inf      7.73
- 7 1             control              Thies        8.24 0.743   Inf      6.90
- 8 1             fertilized           Thies        7.45 0.678   Inf      6.23
- 9 2             control              Fatick      16.0  1.14    Inf     14.0 
-10 2             fertilized           Fatick       6.68 0.518   Inf      5.73
+   mission_numer fertilizer_treatment region    response      SE    df asymp.LCL
+   &lt;chr&gt;         &lt;fct&gt;                &lt;fct&gt;        &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
+ 1 1             control              Fatick     0.0148  0.00292   Inf   0.0100 
+ 2 1             fertilized           Fatick     0.0206  0.00372   Inf   0.0145 
+ 3 1             control              Kaffrine   0.0517  0.00742   Inf   0.0391 
+ 4 1             fertilized           Kaffrine   0.0439  0.00637   Inf   0.0330 
+ 5 1             control              Saint Lo…  0.00635 0.00199   Inf   0.00344
+ 6 1             fertilized           Saint Lo…  0.00405 0.00143   Inf   0.00202
+ 7 1             control              Thies      0.00684 0.00190   Inf   0.00398
+ 8 1             fertilized           Thies      0.00560 0.00164   Inf   0.00315
+ 9 2             control              Fatick     0.00675 0.00216   Inf   0.00360
+10 2             fertilized           Fatick     0.00264 0.00112   Inf   0.00115
 # ℹ 12 more rows
 # ℹ 3 more variables: asymp.UCL &lt;dbl&gt;, mission &lt;int&gt;, source &lt;chr&gt;</code></pre>
 </div>
 </div>
 </section>
-<section id="ose-density-by-treatment-and-region-option-2" class="level2">
-<h2 class="anchored" data-anchor-id="ose-density-by-treatment-and-region-option-2">OSE density by treatment and region (option 2)</h2>
-<p>Instead of a plot per mission, let’s plot the missions together (x-axis) and see how region counts shifted through time</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="locust_density_treatment_region_files/figure-html/count-plot-option-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="ose-density-by-teatment-and-region-model-summaries-tabulated" class="level2">
-<h2 class="anchored" data-anchor-id="ose-density-by-teatment-and-region-model-summaries-tabulated">OSE density by teatment and region model summaries (tabulated)</h2>
+<section id="ose-damage-by-teatment-and-region-model-summaries-tabulated" class="level2">
+<h2 class="anchored" data-anchor-id="ose-damage-by-teatment-and-region-model-summaries-tabulated">OSE damage by teatment and region model summaries (tabulated)</h2>
 <p>Here are the model summaries and pairwise comparisons. This will be <em>across</em> missions, but please keep in mind each mission had it’s own model. So we cant make across-mission comparions just yet.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="kyrrskipor" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kyrrskipor table {
+<div id="lcyigihqmc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lcyigihqmc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kyrrskipor thead, #kyrrskipor tbody, #kyrrskipor tfoot, #kyrrskipor tr, #kyrrskipor td, #kyrrskipor th {
+#lcyigihqmc thead, #lcyigihqmc tbody, #lcyigihqmc tfoot, #lcyigihqmc tr, #lcyigihqmc td, #lcyigihqmc th {
   border-style: none;
 }
 
-#kyrrskipor p {
+#lcyigihqmc p {
   margin: 0;
   padding: 0;
 }
 
-#kyrrskipor .gt_table {
+#lcyigihqmc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -567,12 +513,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#kyrrskipor .gt_caption {
+#lcyigihqmc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kyrrskipor .gt_title {
+#lcyigihqmc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -584,7 +530,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#kyrrskipor .gt_subtitle {
+#lcyigihqmc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -596,7 +542,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#kyrrskipor .gt_heading {
+#lcyigihqmc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -608,13 +554,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#kyrrskipor .gt_bottom_border {
+#lcyigihqmc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kyrrskipor .gt_col_headings {
+#lcyigihqmc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -629,7 +575,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#kyrrskipor .gt_col_heading {
+#lcyigihqmc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -649,7 +595,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#kyrrskipor .gt_column_spanner_outer {
+#lcyigihqmc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -661,15 +607,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#kyrrskipor .gt_column_spanner_outer:first-child {
+#lcyigihqmc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kyrrskipor .gt_column_spanner_outer:last-child {
+#lcyigihqmc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kyrrskipor .gt_column_spanner {
+#lcyigihqmc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -681,11 +627,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#kyrrskipor .gt_spanner_row {
+#lcyigihqmc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kyrrskipor .gt_group_heading {
+#lcyigihqmc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -711,7 +657,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#kyrrskipor .gt_empty_group_heading {
+#lcyigihqmc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -726,15 +672,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#kyrrskipor .gt_from_md > :first-child {
+#lcyigihqmc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kyrrskipor .gt_from_md > :last-child {
+#lcyigihqmc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kyrrskipor .gt_row {
+#lcyigihqmc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -753,7 +699,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#kyrrskipor .gt_stub {
+#lcyigihqmc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -766,7 +712,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#kyrrskipor .gt_stub_row_group {
+#lcyigihqmc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -780,15 +726,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#kyrrskipor .gt_row_group_first td {
+#lcyigihqmc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kyrrskipor .gt_row_group_first th {
+#lcyigihqmc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kyrrskipor .gt_summary_row {
+#lcyigihqmc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -798,16 +744,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#kyrrskipor .gt_first_summary_row {
+#lcyigihqmc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kyrrskipor .gt_first_summary_row.thick {
+#lcyigihqmc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kyrrskipor .gt_last_summary_row {
+#lcyigihqmc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -817,7 +763,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#kyrrskipor .gt_grand_summary_row {
+#lcyigihqmc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -827,7 +773,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#kyrrskipor .gt_first_grand_summary_row {
+#lcyigihqmc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -837,7 +783,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#kyrrskipor .gt_last_grand_summary_row_top {
+#lcyigihqmc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -847,11 +793,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#kyrrskipor .gt_striped {
+#lcyigihqmc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kyrrskipor .gt_table_body {
+#lcyigihqmc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -860,7 +806,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#kyrrskipor .gt_footnotes {
+#lcyigihqmc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -874,7 +820,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#kyrrskipor .gt_footnote {
+#lcyigihqmc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -883,7 +829,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#kyrrskipor .gt_sourcenotes {
+#lcyigihqmc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -897,7 +843,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#kyrrskipor .gt_sourcenote {
+#lcyigihqmc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -905,72 +851,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#kyrrskipor .gt_left {
+#lcyigihqmc .gt_left {
   text-align: left;
 }
 
-#kyrrskipor .gt_center {
+#lcyigihqmc .gt_center {
   text-align: center;
 }
 
-#kyrrskipor .gt_right {
+#lcyigihqmc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kyrrskipor .gt_font_normal {
+#lcyigihqmc .gt_font_normal {
   font-weight: normal;
 }
 
-#kyrrskipor .gt_font_bold {
+#lcyigihqmc .gt_font_bold {
   font-weight: bold;
 }
 
-#kyrrskipor .gt_font_italic {
+#lcyigihqmc .gt_font_italic {
   font-style: italic;
 }
 
-#kyrrskipor .gt_super {
+#lcyigihqmc .gt_super {
   font-size: 65%;
 }
 
-#kyrrskipor .gt_footnote_marks {
+#lcyigihqmc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kyrrskipor .gt_asterisk {
+#lcyigihqmc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kyrrskipor .gt_indent_1 {
+#lcyigihqmc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kyrrskipor .gt_indent_2 {
+#lcyigihqmc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kyrrskipor .gt_indent_3 {
+#lcyigihqmc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kyrrskipor .gt_indent_4 {
+#lcyigihqmc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kyrrskipor .gt_indent_5 {
+#lcyigihqmc .gt_indent_5 {
   text-indent: 25px;
 }
 
-#kyrrskipor .katex-display {
+#lcyigihqmc .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#kyrrskipor div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#lcyigihqmc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -996,71 +942,71 @@ window.Quarto = {
 <tr class="gt_row_group_first even">
 <td class="gt_row gt_left" headers="1  effect">fixed</td>
 <td class="gt_row gt_left" headers="1  term">(Intercept)</td>
-<td class="gt_row gt_right" headers="1  estimate">2.882</td>
-<td class="gt_row gt_right" headers="1  std.error">0.071</td>
-<td class="gt_row gt_right" headers="1  statistic">40.818</td>
+<td class="gt_row gt_right" headers="1  estimate">−4.216</td>
+<td class="gt_row gt_right" headers="1  std.error">0.198</td>
+<td class="gt_row gt_right" headers="1  statistic">−21.290</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="1  effect">fixed</td>
 <td class="gt_row gt_left" headers="1  term">fertilized</td>
-<td class="gt_row gt_right" headers="1  estimate">0.066</td>
-<td class="gt_row gt_right" headers="1  std.error">0.039</td>
-<td class="gt_row gt_right" headers="1  statistic">1.677</td>
-<td class="gt_row gt_right" headers="1  p.value">0.094</td>
+<td class="gt_row gt_right" headers="1  estimate">0.335</td>
+<td class="gt_row gt_right" headers="1  std.error">0.184</td>
+<td class="gt_row gt_right" headers="1  statistic">1.816</td>
+<td class="gt_row gt_right" headers="1  p.value">0.069</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="1  effect">fixed</td>
 <td class="gt_row gt_left" headers="1  term">Kaffrine</td>
-<td class="gt_row gt_right" headers="1  estimate">1.106</td>
-<td class="gt_row gt_right" headers="1  std.error">0.094</td>
-<td class="gt_row gt_right" headers="1  statistic">11.760</td>
+<td class="gt_row gt_right" headers="1  estimate">1.254</td>
+<td class="gt_row gt_right" headers="1  std.error">0.240</td>
+<td class="gt_row gt_right" headers="1  statistic">5.234</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="1  effect">fixed</td>
 <td class="gt_row gt_left" headers="1  term">Saint Louis</td>
-<td class="gt_row gt_right" headers="1  estimate">−0.850</td>
-<td class="gt_row gt_right" headers="1  std.error">0.123</td>
-<td class="gt_row gt_right" headers="1  statistic">−6.917</td>
-<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+<td class="gt_row gt_right" headers="1  estimate">−0.844</td>
+<td class="gt_row gt_right" headers="1  std.error">0.358</td>
+<td class="gt_row gt_right" headers="1  statistic">−2.353</td>
+<td class="gt_row gt_right" headers="1  p.value">0.019</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="1  effect">fixed</td>
 <td class="gt_row gt_left" headers="1  term">Thies</td>
-<td class="gt_row gt_right" headers="1  estimate">−0.773</td>
-<td class="gt_row gt_right" headers="1  std.error">0.114</td>
-<td class="gt_row gt_right" headers="1  statistic">−6.754</td>
-<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+<td class="gt_row gt_right" headers="1  estimate">−0.769</td>
+<td class="gt_row gt_right" headers="1  std.error">0.329</td>
+<td class="gt_row gt_right" headers="1  statistic">−2.337</td>
+<td class="gt_row gt_right" headers="1  p.value">0.019</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="1  effect">fixed</td>
 <td class="gt_row gt_left" headers="1  term">fertilized:Kaffrine</td>
-<td class="gt_row gt_right" headers="1  estimate">−0.272</td>
-<td class="gt_row gt_right" headers="1  std.error">0.045</td>
-<td class="gt_row gt_right" headers="1  statistic">−6.024</td>
-<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+<td class="gt_row gt_right" headers="1  estimate">−0.499</td>
+<td class="gt_row gt_right" headers="1  std.error">0.217</td>
+<td class="gt_row gt_right" headers="1  statistic">−2.306</td>
+<td class="gt_row gt_right" headers="1  p.value">0.021</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="1  effect">fixed</td>
 <td class="gt_row gt_left" headers="1  term">fertilized:Saint Louis</td>
-<td class="gt_row gt_right" headers="1  estimate">0.140</td>
-<td class="gt_row gt_right" headers="1  std.error">0.081</td>
-<td class="gt_row gt_right" headers="1  statistic">1.734</td>
-<td class="gt_row gt_right" headers="1  p.value">0.083</td>
+<td class="gt_row gt_right" headers="1  estimate">−0.785</td>
+<td class="gt_row gt_right" headers="1  std.error">0.418</td>
+<td class="gt_row gt_right" headers="1  statistic">−1.880</td>
+<td class="gt_row gt_right" headers="1  p.value">0.060</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="1  effect">fixed</td>
 <td class="gt_row gt_left" headers="1  term">fertilized:Thies</td>
-<td class="gt_row gt_right" headers="1  estimate">−0.167</td>
-<td class="gt_row gt_right" headers="1  std.error">0.079</td>
-<td class="gt_row gt_right" headers="1  statistic">−2.124</td>
-<td class="gt_row gt_right" headers="1  p.value">0.034</td>
+<td class="gt_row gt_right" headers="1  estimate">−0.536</td>
+<td class="gt_row gt_right" headers="1  std.error">0.363</td>
+<td class="gt_row gt_right" headers="1  statistic">−1.477</td>
+<td class="gt_row gt_right" headers="1  p.value">0.140</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="1  effect">random</td>
 <td class="gt_row gt_left" headers="1  term">farmer</td>
-<td class="gt_row gt_right" headers="1  estimate">0.527</td>
+<td class="gt_row gt_right" headers="1  estimate">0.977</td>
 <td class="gt_row gt_right" headers="1  std.error">NA</td>
 <td class="gt_row gt_right" headers="1  statistic">NA</td>
 <td class="gt_row gt_right" headers="1  p.value">NA</td>
@@ -1071,71 +1017,71 @@ window.Quarto = {
 <tr class="gt_row_group_first even">
 <td class="gt_row gt_left" headers="2  effect">fixed</td>
 <td class="gt_row gt_left" headers="2  term">(Intercept)</td>
-<td class="gt_row gt_right" headers="2  estimate">2.775</td>
-<td class="gt_row gt_right" headers="2  std.error">0.071</td>
-<td class="gt_row gt_right" headers="2  statistic">38.897</td>
+<td class="gt_row gt_right" headers="2  estimate">−4.999</td>
+<td class="gt_row gt_right" headers="2  std.error">0.320</td>
+<td class="gt_row gt_right" headers="2  statistic">−15.631</td>
 <td class="gt_row gt_right" headers="2  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="2  effect">fixed</td>
 <td class="gt_row gt_left" headers="2  term">fertilized</td>
-<td class="gt_row gt_right" headers="2  estimate">−0.877</td>
-<td class="gt_row gt_right" headers="2  std.error">0.055</td>
-<td class="gt_row gt_right" headers="2  statistic">−16.077</td>
-<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+<td class="gt_row gt_right" headers="2  estimate">−0.940</td>
+<td class="gt_row gt_right" headers="2  std.error">0.486</td>
+<td class="gt_row gt_right" headers="2  statistic">−1.934</td>
+<td class="gt_row gt_right" headers="2  p.value">0.053</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="2  effect">fixed</td>
 <td class="gt_row gt_left" headers="2  term">Kaffrine</td>
-<td class="gt_row gt_right" headers="2  estimate">0.127</td>
-<td class="gt_row gt_right" headers="2  std.error">0.097</td>
-<td class="gt_row gt_right" headers="2  statistic">1.306</td>
-<td class="gt_row gt_right" headers="2  p.value">0.191</td>
+<td class="gt_row gt_right" headers="2  estimate">0.977</td>
+<td class="gt_row gt_right" headers="2  std.error">0.363</td>
+<td class="gt_row gt_right" headers="2  statistic">2.692</td>
+<td class="gt_row gt_right" headers="2  p.value">0.007</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="2  effect">fixed</td>
 <td class="gt_row gt_left" headers="2  term">Saint Louis</td>
-<td class="gt_row gt_right" headers="2  estimate">0.573</td>
-<td class="gt_row gt_right" headers="2  std.error">0.113</td>
-<td class="gt_row gt_right" headers="2  statistic">5.088</td>
+<td class="gt_row gt_right" headers="2  estimate">1.617</td>
+<td class="gt_row gt_right" headers="2  std.error">0.380</td>
+<td class="gt_row gt_right" headers="2  statistic">4.259</td>
 <td class="gt_row gt_right" headers="2  p.value">0.000</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="2  effect">fixed</td>
 <td class="gt_row gt_left" headers="2  term">Thies</td>
-<td class="gt_row gt_right" headers="2  estimate">−0.596</td>
-<td class="gt_row gt_right" headers="2  std.error">0.115</td>
-<td class="gt_row gt_right" headers="2  statistic">−5.166</td>
-<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+<td class="gt_row gt_right" headers="2  estimate">0.325</td>
+<td class="gt_row gt_right" headers="2  std.error">0.436</td>
+<td class="gt_row gt_right" headers="2  statistic">0.744</td>
+<td class="gt_row gt_right" headers="2  p.value">0.457</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="2  effect">fixed</td>
 <td class="gt_row gt_left" headers="2  term">fertilized:Kaffrine</td>
-<td class="gt_row gt_right" headers="2  estimate">0.742</td>
-<td class="gt_row gt_right" headers="2  std.error">0.066</td>
-<td class="gt_row gt_right" headers="2  statistic">11.277</td>
-<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+<td class="gt_row gt_right" headers="2  estimate">0.606</td>
+<td class="gt_row gt_right" headers="2  std.error">0.553</td>
+<td class="gt_row gt_right" headers="2  statistic">1.096</td>
+<td class="gt_row gt_right" headers="2  p.value">0.273</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="2  effect">fixed</td>
 <td class="gt_row gt_left" headers="2  term">fertilized:Saint Louis</td>
-<td class="gt_row gt_right" headers="2  estimate">−0.390</td>
-<td class="gt_row gt_right" headers="2  std.error">0.083</td>
-<td class="gt_row gt_right" headers="2  statistic">−4.716</td>
-<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+<td class="gt_row gt_right" headers="2  estimate">−1.186</td>
+<td class="gt_row gt_right" headers="2  std.error">0.681</td>
+<td class="gt_row gt_right" headers="2  statistic">−1.742</td>
+<td class="gt_row gt_right" headers="2  p.value">0.081</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="2  effect">fixed</td>
 <td class="gt_row gt_left" headers="2  term">fertilized:Thies</td>
-<td class="gt_row gt_right" headers="2  estimate">−0.185</td>
-<td class="gt_row gt_right" headers="2  std.error">0.106</td>
-<td class="gt_row gt_right" headers="2  statistic">−1.743</td>
-<td class="gt_row gt_right" headers="2  p.value">0.081</td>
+<td class="gt_row gt_right" headers="2  estimate">−1.324</td>
+<td class="gt_row gt_right" headers="2  std.error">0.896</td>
+<td class="gt_row gt_right" headers="2  statistic">−1.478</td>
+<td class="gt_row gt_right" headers="2  p.value">0.139</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="2  effect">random</td>
 <td class="gt_row gt_left" headers="2  term">farmer</td>
-<td class="gt_row gt_right" headers="2  estimate">0.523</td>
+<td class="gt_row gt_right" headers="2  estimate">0.787</td>
 <td class="gt_row gt_right" headers="2  std.error">NA</td>
 <td class="gt_row gt_right" headers="2  statistic">NA</td>
 <td class="gt_row gt_right" headers="2  p.value">NA</td>
@@ -1146,55 +1092,55 @@ window.Quarto = {
 <tr class="gt_row_group_first even">
 <td class="gt_row gt_left" headers="3  effect">fixed</td>
 <td class="gt_row gt_left" headers="3  term">(Intercept)</td>
-<td class="gt_row gt_right" headers="3  estimate">3.338</td>
-<td class="gt_row gt_right" headers="3  std.error">0.046</td>
-<td class="gt_row gt_right" headers="3  statistic">72.288</td>
+<td class="gt_row gt_right" headers="3  estimate">−4.376</td>
+<td class="gt_row gt_right" headers="3  std.error">0.293</td>
+<td class="gt_row gt_right" headers="3  statistic">−14.942</td>
 <td class="gt_row gt_right" headers="3  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="3  effect">fixed</td>
 <td class="gt_row gt_left" headers="3  term">fertilized</td>
-<td class="gt_row gt_right" headers="3  estimate">−1.373</td>
-<td class="gt_row gt_right" headers="3  std.error">0.050</td>
-<td class="gt_row gt_right" headers="3  statistic">−27.260</td>
-<td class="gt_row gt_right" headers="3  p.value">0.000</td>
+<td class="gt_row gt_right" headers="3  estimate">−2.384</td>
+<td class="gt_row gt_right" headers="3  std.error">0.698</td>
+<td class="gt_row gt_right" headers="3  statistic">−3.417</td>
+<td class="gt_row gt_right" headers="3  p.value">0.001</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="3  effect">fixed</td>
 <td class="gt_row gt_left" headers="3  term">Kaffrine</td>
-<td class="gt_row gt_right" headers="3  estimate">0.342</td>
-<td class="gt_row gt_right" headers="3  std.error">0.062</td>
-<td class="gt_row gt_right" headers="3  statistic">5.507</td>
-<td class="gt_row gt_right" headers="3  p.value">0.000</td>
+<td class="gt_row gt_right" headers="3  estimate">−0.123</td>
+<td class="gt_row gt_right" headers="3  std.error">0.409</td>
+<td class="gt_row gt_right" headers="3  statistic">−0.302</td>
+<td class="gt_row gt_right" headers="3  p.value">0.763</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="3  effect">fixed</td>
 <td class="gt_row gt_left" headers="3  term">Thies</td>
-<td class="gt_row gt_right" headers="3  estimate">−0.209</td>
-<td class="gt_row gt_right" headers="3  std.error">0.072</td>
-<td class="gt_row gt_right" headers="3  statistic">−2.884</td>
-<td class="gt_row gt_right" headers="3  p.value">0.004</td>
+<td class="gt_row gt_right" headers="3  estimate">0.003</td>
+<td class="gt_row gt_right" headers="3  std.error">0.451</td>
+<td class="gt_row gt_right" headers="3  statistic">0.007</td>
+<td class="gt_row gt_right" headers="3  p.value">0.995</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="3  effect">fixed</td>
 <td class="gt_row gt_left" headers="3  term">fertilized:Kaffrine</td>
-<td class="gt_row gt_right" headers="3  estimate">0.162</td>
-<td class="gt_row gt_right" headers="3  std.error">0.063</td>
-<td class="gt_row gt_right" headers="3  statistic">2.570</td>
-<td class="gt_row gt_right" headers="3  p.value">0.010</td>
+<td class="gt_row gt_right" headers="3  estimate">1.280</td>
+<td class="gt_row gt_right" headers="3  std.error">0.856</td>
+<td class="gt_row gt_right" headers="3  statistic">1.495</td>
+<td class="gt_row gt_right" headers="3  p.value">0.135</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="3  effect">fixed</td>
 <td class="gt_row gt_left" headers="3  term">fertilized:Thies</td>
-<td class="gt_row gt_right" headers="3  estimate">0.032</td>
-<td class="gt_row gt_right" headers="3  std.error">0.082</td>
-<td class="gt_row gt_right" headers="3  statistic">0.395</td>
-<td class="gt_row gt_right" headers="3  p.value">0.693</td>
+<td class="gt_row gt_right" headers="3  estimate">1.032</td>
+<td class="gt_row gt_right" headers="3  std.error">0.939</td>
+<td class="gt_row gt_right" headers="3  statistic">1.100</td>
+<td class="gt_row gt_right" headers="3  p.value">0.271</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="3  effect">random</td>
 <td class="gt_row gt_left" headers="3  term">farmer</td>
-<td class="gt_row gt_right" headers="3  estimate">0.319</td>
+<td class="gt_row gt_right" headers="3  estimate">0.000</td>
 <td class="gt_row gt_right" headers="3  std.error">NA</td>
 <td class="gt_row gt_right" headers="3  statistic">NA</td>
 <td class="gt_row gt_right" headers="3  p.value">NA</td>
@@ -1208,23 +1154,23 @@ window.Quarto = {
 <p>Here are the pairwise comparisons between region and treatment by mission number. Fair warning, its a large table since there are a lot of regions.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="ekgwagagjc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ekgwagagjc table {
+<div id="zggaodmscb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zggaodmscb table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ekgwagagjc thead, #ekgwagagjc tbody, #ekgwagagjc tfoot, #ekgwagagjc tr, #ekgwagagjc td, #ekgwagagjc th {
+#zggaodmscb thead, #zggaodmscb tbody, #zggaodmscb tfoot, #zggaodmscb tr, #zggaodmscb td, #zggaodmscb th {
   border-style: none;
 }
 
-#ekgwagagjc p {
+#zggaodmscb p {
   margin: 0;
   padding: 0;
 }
 
-#ekgwagagjc .gt_table {
+#zggaodmscb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1250,12 +1196,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#ekgwagagjc .gt_caption {
+#zggaodmscb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ekgwagagjc .gt_title {
+#zggaodmscb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1267,7 +1213,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#ekgwagagjc .gt_subtitle {
+#zggaodmscb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1279,7 +1225,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#ekgwagagjc .gt_heading {
+#zggaodmscb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1291,13 +1237,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ekgwagagjc .gt_bottom_border {
+#zggaodmscb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ekgwagagjc .gt_col_headings {
+#zggaodmscb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1312,7 +1258,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ekgwagagjc .gt_col_heading {
+#zggaodmscb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1332,7 +1278,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ekgwagagjc .gt_column_spanner_outer {
+#zggaodmscb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1344,15 +1290,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#ekgwagagjc .gt_column_spanner_outer:first-child {
+#zggaodmscb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ekgwagagjc .gt_column_spanner_outer:last-child {
+#zggaodmscb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ekgwagagjc .gt_column_spanner {
+#zggaodmscb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1364,11 +1310,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#ekgwagagjc .gt_spanner_row {
+#zggaodmscb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ekgwagagjc .gt_group_heading {
+#zggaodmscb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1394,7 +1340,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#ekgwagagjc .gt_empty_group_heading {
+#zggaodmscb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1409,15 +1355,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#ekgwagagjc .gt_from_md > :first-child {
+#zggaodmscb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ekgwagagjc .gt_from_md > :last-child {
+#zggaodmscb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ekgwagagjc .gt_row {
+#zggaodmscb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1436,7 +1382,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ekgwagagjc .gt_stub {
+#zggaodmscb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1449,7 +1395,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ekgwagagjc .gt_stub_row_group {
+#zggaodmscb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1463,15 +1409,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#ekgwagagjc .gt_row_group_first td {
+#zggaodmscb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ekgwagagjc .gt_row_group_first th {
+#zggaodmscb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ekgwagagjc .gt_summary_row {
+#zggaodmscb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1481,16 +1427,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ekgwagagjc .gt_first_summary_row {
+#zggaodmscb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ekgwagagjc .gt_first_summary_row.thick {
+#zggaodmscb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ekgwagagjc .gt_last_summary_row {
+#zggaodmscb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1500,7 +1446,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ekgwagagjc .gt_grand_summary_row {
+#zggaodmscb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1510,7 +1456,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ekgwagagjc .gt_first_grand_summary_row {
+#zggaodmscb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1520,7 +1466,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#ekgwagagjc .gt_last_grand_summary_row_top {
+#zggaodmscb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1530,11 +1476,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ekgwagagjc .gt_striped {
+#zggaodmscb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ekgwagagjc .gt_table_body {
+#zggaodmscb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1543,7 +1489,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ekgwagagjc .gt_footnotes {
+#zggaodmscb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1557,7 +1503,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ekgwagagjc .gt_footnote {
+#zggaodmscb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1566,7 +1512,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ekgwagagjc .gt_sourcenotes {
+#zggaodmscb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1580,7 +1526,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ekgwagagjc .gt_sourcenote {
+#zggaodmscb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1588,72 +1534,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ekgwagagjc .gt_left {
+#zggaodmscb .gt_left {
   text-align: left;
 }
 
-#ekgwagagjc .gt_center {
+#zggaodmscb .gt_center {
   text-align: center;
 }
 
-#ekgwagagjc .gt_right {
+#zggaodmscb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ekgwagagjc .gt_font_normal {
+#zggaodmscb .gt_font_normal {
   font-weight: normal;
 }
 
-#ekgwagagjc .gt_font_bold {
+#zggaodmscb .gt_font_bold {
   font-weight: bold;
 }
 
-#ekgwagagjc .gt_font_italic {
+#zggaodmscb .gt_font_italic {
   font-style: italic;
 }
 
-#ekgwagagjc .gt_super {
+#zggaodmscb .gt_super {
   font-size: 65%;
 }
 
-#ekgwagagjc .gt_footnote_marks {
+#zggaodmscb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ekgwagagjc .gt_asterisk {
+#zggaodmscb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ekgwagagjc .gt_indent_1 {
+#zggaodmscb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ekgwagagjc .gt_indent_2 {
+#zggaodmscb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ekgwagagjc .gt_indent_3 {
+#zggaodmscb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ekgwagagjc .gt_indent_4 {
+#zggaodmscb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ekgwagagjc .gt_indent_5 {
+#zggaodmscb .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ekgwagagjc .katex-display {
+#zggaodmscb .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ekgwagagjc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#zggaodmscb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1679,648 +1625,648 @@ window.Quarto = {
 </tr>
 <tr class="gt_row_group_first even">
 <td class="gt_row gt_center" headers="1  contrast">control Fatick / control Kaffrine</td>
-<td class="gt_row gt_right" headers="1  ratio">0.331</td>
-<td class="gt_row gt_right" headers="1  SE">0.031</td>
+<td class="gt_row gt_right" headers="1  ratio">0.285</td>
+<td class="gt_row gt_right" headers="1  SE">0.068</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">−11.760</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−5.234</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">control Fatick / control Saint Louis</td>
-<td class="gt_row gt_right" headers="1  ratio">2.339</td>
-<td class="gt_row gt_right" headers="1  SE">0.287</td>
+<td class="gt_row gt_right" headers="1  ratio">2.325</td>
+<td class="gt_row gt_right" headers="1  SE">0.833</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">6.917</td>
-<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+<td class="gt_row gt_right" headers="1  z.ratio">2.353</td>
+<td class="gt_row gt_right" headers="1  p.value">0.265</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">control Fatick / control Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">2.166</td>
-<td class="gt_row gt_right" headers="1  SE">0.248</td>
+<td class="gt_row gt_right" headers="1  ratio">2.157</td>
+<td class="gt_row gt_right" headers="1  SE">0.710</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">6.754</td>
-<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+<td class="gt_row gt_right" headers="1  z.ratio">2.337</td>
+<td class="gt_row gt_right" headers="1  p.value">0.274</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">control Fatick / fertilized Fatick</td>
-<td class="gt_row gt_right" headers="1  ratio">0.936</td>
-<td class="gt_row gt_right" headers="1  SE">0.037</td>
+<td class="gt_row gt_right" headers="1  ratio">0.716</td>
+<td class="gt_row gt_right" headers="1  SE">0.132</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">−1.677</td>
-<td class="gt_row gt_right" headers="1  p.value">0.702</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−1.816</td>
+<td class="gt_row gt_right" headers="1  p.value">0.609</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">control Fatick / fertilized Kaffrine</td>
-<td class="gt_row gt_right" headers="1  ratio">0.407</td>
-<td class="gt_row gt_right" headers="1  SE">0.038</td>
+<td class="gt_row gt_right" headers="1  ratio">0.336</td>
+<td class="gt_row gt_right" headers="1  SE">0.081</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">−9.539</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−4.537</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">control Fatick / fertilized Saint Louis</td>
-<td class="gt_row gt_right" headers="1  ratio">1.904</td>
-<td class="gt_row gt_right" headers="1  SE">0.230</td>
+<td class="gt_row gt_right" headers="1  ratio">3.648</td>
+<td class="gt_row gt_right" headers="1  SE">1.439</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">5.332</td>
-<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+<td class="gt_row gt_right" headers="1  z.ratio">3.281</td>
+<td class="gt_row gt_right" headers="1  p.value">0.023</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">control Fatick / fertilized Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">2.396</td>
-<td class="gt_row gt_right" headers="1  SE">0.276</td>
+<td class="gt_row gt_right" headers="1  ratio">2.638</td>
+<td class="gt_row gt_right" headers="1  SE">0.905</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">7.592</td>
-<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+<td class="gt_row gt_right" headers="1  z.ratio">2.829</td>
+<td class="gt_row gt_right" headers="1  p.value">0.088</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">control Kaffrine / control Saint Louis</td>
-<td class="gt_row gt_right" headers="1  ratio">7.066</td>
-<td class="gt_row gt_right" headers="1  SE">0.836</td>
+<td class="gt_row gt_right" headers="1  ratio">8.147</td>
+<td class="gt_row gt_right" headers="1  SE">2.755</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">16.526</td>
+<td class="gt_row gt_right" headers="1  z.ratio">6.203</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">control Kaffrine / control Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">6.545</td>
-<td class="gt_row gt_right" headers="1  SE">0.717</td>
+<td class="gt_row gt_right" headers="1  ratio">7.560</td>
+<td class="gt_row gt_right" headers="1  SE">2.313</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">17.159</td>
+<td class="gt_row gt_right" headers="1  z.ratio">6.610</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">control Kaffrine / fertilized Kaffrine</td>
-<td class="gt_row gt_right" headers="1  ratio">1.230</td>
-<td class="gt_row gt_right" headers="1  SE">0.028</td>
+<td class="gt_row gt_right" headers="1  ratio">1.179</td>
+<td class="gt_row gt_right" headers="1  SE">0.134</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">9.176</td>
-<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+<td class="gt_row gt_right" headers="1  z.ratio">1.449</td>
+<td class="gt_row gt_right" headers="1  p.value">0.834</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">control Kaffrine / fertilized Saint Louis</td>
-<td class="gt_row gt_right" headers="1  ratio">5.751</td>
-<td class="gt_row gt_right" headers="1  SE">0.668</td>
+<td class="gt_row gt_right" headers="1  ratio">12.784</td>
+<td class="gt_row gt_right" headers="1  SE">4.807</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">15.065</td>
+<td class="gt_row gt_right" headers="1  z.ratio">6.778</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">control Kaffrine / fertilized Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">7.240</td>
-<td class="gt_row gt_right" headers="1  SE">0.798</td>
+<td class="gt_row gt_right" headers="1  ratio">9.246</td>
+<td class="gt_row gt_right" headers="1  SE">2.968</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">17.966</td>
+<td class="gt_row gt_right" headers="1  z.ratio">6.928</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">control Saint Louis / control Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">0.926</td>
-<td class="gt_row gt_right" headers="1  SE">0.125</td>
+<td class="gt_row gt_right" headers="1  ratio">0.928</td>
+<td class="gt_row gt_right" headers="1  SE">0.372</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">−0.568</td>
-<td class="gt_row gt_right" headers="1  p.value">0.999</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−0.186</td>
+<td class="gt_row gt_right" headers="1  p.value">1.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">control Saint Louis / fertilized Saint Louis</td>
-<td class="gt_row gt_right" headers="1  ratio">0.814</td>
-<td class="gt_row gt_right" headers="1  SE">0.058</td>
+<td class="gt_row gt_right" headers="1  ratio">1.569</td>
+<td class="gt_row gt_right" headers="1  SE">0.588</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">−2.913</td>
-<td class="gt_row gt_right" headers="1  p.value">0.070</td>
+<td class="gt_row gt_right" headers="1  z.ratio">1.202</td>
+<td class="gt_row gt_right" headers="1  p.value">0.932</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">control Saint Louis / fertilized Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">1.025</td>
-<td class="gt_row gt_right" headers="1  SE">0.139</td>
+<td class="gt_row gt_right" headers="1  ratio">1.135</td>
+<td class="gt_row gt_right" headers="1  SE">0.468</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">0.179</td>
+<td class="gt_row gt_right" headers="1  z.ratio">0.307</td>
 <td class="gt_row gt_right" headers="1  p.value">1.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">control Thies / fertilized Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">1.106</td>
-<td class="gt_row gt_right" headers="1  SE">0.075</td>
+<td class="gt_row gt_right" headers="1  ratio">1.223</td>
+<td class="gt_row gt_right" headers="1  SE">0.382</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">1.485</td>
-<td class="gt_row gt_right" headers="1  p.value">0.816</td>
+<td class="gt_row gt_right" headers="1  z.ratio">0.644</td>
+<td class="gt_row gt_right" headers="1  p.value">0.998</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Fatick / control Kaffrine</td>
-<td class="gt_row gt_right" headers="1  ratio">0.353</td>
-<td class="gt_row gt_right" headers="1  SE">0.033</td>
+<td class="gt_row gt_right" headers="1  ratio">0.399</td>
+<td class="gt_row gt_right" headers="1  SE">0.090</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">−11.183</td>
-<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−4.086</td>
+<td class="gt_row gt_right" headers="1  p.value">0.001</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Fatick / control Saint Louis</td>
-<td class="gt_row gt_right" headers="1  ratio">2.498</td>
-<td class="gt_row gt_right" headers="1  SE">0.305</td>
+<td class="gt_row gt_right" headers="1  ratio">3.249</td>
+<td class="gt_row gt_right" headers="1  SE">1.131</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">7.501</td>
-<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+<td class="gt_row gt_right" headers="1  z.ratio">3.385</td>
+<td class="gt_row gt_right" headers="1  p.value">0.016</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Fatick / control Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">2.313</td>
-<td class="gt_row gt_right" headers="1  SE">0.263</td>
+<td class="gt_row gt_right" headers="1  ratio">3.015</td>
+<td class="gt_row gt_right" headers="1  SE">0.958</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">7.383</td>
-<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+<td class="gt_row gt_right" headers="1  z.ratio">3.472</td>
+<td class="gt_row gt_right" headers="1  p.value">0.012</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Fatick / fertilized Kaffrine</td>
-<td class="gt_row gt_right" headers="1  ratio">0.435</td>
-<td class="gt_row gt_right" headers="1  SE">0.041</td>
+<td class="gt_row gt_right" headers="1  ratio">0.470</td>
+<td class="gt_row gt_right" headers="1  SE">0.106</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">−8.938</td>
-<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−3.347</td>
+<td class="gt_row gt_right" headers="1  p.value">0.019</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Fatick / fertilized Saint Louis</td>
-<td class="gt_row gt_right" headers="1  ratio">2.033</td>
-<td class="gt_row gt_right" headers="1  SE">0.244</td>
+<td class="gt_row gt_right" headers="1  ratio">5.098</td>
+<td class="gt_row gt_right" headers="1  SE">1.962</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">5.916</td>
-<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+<td class="gt_row gt_right" headers="1  z.ratio">4.232</td>
+<td class="gt_row gt_right" headers="1  p.value">0.001</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Fatick / fertilized Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">2.559</td>
-<td class="gt_row gt_right" headers="1  SE">0.292</td>
+<td class="gt_row gt_right" headers="1  ratio">3.687</td>
+<td class="gt_row gt_right" headers="1  SE">1.225</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">8.223</td>
-<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+<td class="gt_row gt_right" headers="1  z.ratio">3.928</td>
+<td class="gt_row gt_right" headers="1  p.value">0.002</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Kaffrine / control Saint Louis</td>
-<td class="gt_row gt_right" headers="1  ratio">5.747</td>
-<td class="gt_row gt_right" headers="1  SE">0.681</td>
+<td class="gt_row gt_right" headers="1  ratio">6.909</td>
+<td class="gt_row gt_right" headers="1  SE">2.336</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">14.757</td>
+<td class="gt_row gt_right" headers="1  z.ratio">5.716</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Kaffrine / control Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">5.323</td>
-<td class="gt_row gt_right" headers="1  SE">0.584</td>
+<td class="gt_row gt_right" headers="1  ratio">6.412</td>
+<td class="gt_row gt_right" headers="1  SE">1.963</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">15.244</td>
+<td class="gt_row gt_right" headers="1  z.ratio">6.070</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Kaffrine / fertilized Saint Louis</td>
-<td class="gt_row gt_right" headers="1  ratio">4.678</td>
-<td class="gt_row gt_right" headers="1  SE">0.544</td>
+<td class="gt_row gt_right" headers="1  ratio">10.843</td>
+<td class="gt_row gt_right" headers="1  SE">4.077</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">13.264</td>
+<td class="gt_row gt_right" headers="1  z.ratio">6.339</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Kaffrine / fertilized Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">5.889</td>
-<td class="gt_row gt_right" headers="1  SE">0.650</td>
+<td class="gt_row gt_right" headers="1  ratio">7.842</td>
+<td class="gt_row gt_right" headers="1  SE">2.518</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">16.062</td>
+<td class="gt_row gt_right" headers="1  z.ratio">6.414</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Saint Louis / control Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">1.138</td>
-<td class="gt_row gt_right" headers="1  SE">0.151</td>
+<td class="gt_row gt_right" headers="1  ratio">0.591</td>
+<td class="gt_row gt_right" headers="1  SE">0.256</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">0.971</td>
-<td class="gt_row gt_right" headers="1  p.value">0.978</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−1.212</td>
+<td class="gt_row gt_right" headers="1  p.value">0.929</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Saint Louis / fertilized Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">1.259</td>
-<td class="gt_row gt_right" headers="1  SE">0.168</td>
+<td class="gt_row gt_right" headers="1  ratio">0.723</td>
+<td class="gt_row gt_right" headers="1  SE">0.321</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">1.722</td>
-<td class="gt_row gt_right" headers="1  p.value">0.673</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−0.730</td>
+<td class="gt_row gt_right" headers="1  p.value">0.996</td>
 </tr>
 <tr class="gt_group_heading_row even">
 <th colspan="7" id="2" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">2</th>
 </tr>
 <tr class="gt_row_group_first odd">
 <td class="gt_row gt_center" headers="2  contrast">control Fatick / control Kaffrine</td>
-<td class="gt_row gt_right" headers="2  ratio">0.881</td>
-<td class="gt_row gt_right" headers="2  SE">0.086</td>
+<td class="gt_row gt_right" headers="2  ratio">0.376</td>
+<td class="gt_row gt_right" headers="2  SE">0.137</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−1.306</td>
-<td class="gt_row gt_right" headers="2  p.value">0.897</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−2.692</td>
+<td class="gt_row gt_right" headers="2  p.value">0.125</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">control Fatick / control Saint Louis</td>
-<td class="gt_row gt_right" headers="2  ratio">0.564</td>
-<td class="gt_row gt_right" headers="2  SE">0.064</td>
+<td class="gt_row gt_right" headers="2  ratio">0.198</td>
+<td class="gt_row gt_right" headers="2  SE">0.075</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−5.088</td>
-<td class="gt_row gt_right" headers="2  p.value">0.000</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_center" headers="2  contrast">control Fatick / control Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">1.815</td>
-<td class="gt_row gt_right" headers="2  SE">0.209</td>
-<td class="gt_row gt_right" headers="2  df">Inf</td>
-<td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">5.166</td>
-<td class="gt_row gt_right" headers="2  p.value">0.000</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_center" headers="2  contrast">control Fatick / fertilized Fatick</td>
-<td class="gt_row gt_right" headers="2  ratio">2.404</td>
-<td class="gt_row gt_right" headers="2  SE">0.131</td>
-<td class="gt_row gt_right" headers="2  df">Inf</td>
-<td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">16.077</td>
-<td class="gt_row gt_right" headers="2  p.value">0.000</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_center" headers="2  contrast">control Fatick / fertilized Kaffrine</td>
-<td class="gt_row gt_right" headers="2  ratio">1.008</td>
-<td class="gt_row gt_right" headers="2  SE">0.098</td>
-<td class="gt_row gt_right" headers="2  df">Inf</td>
-<td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">0.078</td>
-<td class="gt_row gt_right" headers="2  p.value">1.000</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_center" headers="2  contrast">control Fatick / fertilized Saint Louis</td>
-<td class="gt_row gt_right" headers="2  ratio">2.002</td>
-<td class="gt_row gt_right" headers="2  SE">0.243</td>
-<td class="gt_row gt_right" headers="2  df">Inf</td>
-<td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">5.724</td>
-<td class="gt_row gt_right" headers="2  p.value">0.000</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_center" headers="2  contrast">control Fatick / fertilized Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">5.250</td>
-<td class="gt_row gt_right" headers="2  SE">0.681</td>
-<td class="gt_row gt_right" headers="2  df">Inf</td>
-<td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">12.780</td>
-<td class="gt_row gt_right" headers="2  p.value">0.000</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_center" headers="2  contrast">control Kaffrine / control Saint Louis</td>
-<td class="gt_row gt_right" headers="2  ratio">0.640</td>
-<td class="gt_row gt_right" headers="2  SE">0.070</td>
-<td class="gt_row gt_right" headers="2  df">Inf</td>
-<td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−4.076</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−4.259</td>
 <td class="gt_row gt_right" headers="2  p.value">0.001</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="2  contrast">control Kaffrine / control Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">2.061</td>
-<td class="gt_row gt_right" headers="2  SE">0.231</td>
+<td class="gt_row gt_center" headers="2  contrast">control Fatick / control Thies</td>
+<td class="gt_row gt_right" headers="2  ratio">0.723</td>
+<td class="gt_row gt_right" headers="2  SE">0.315</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">6.444</td>
-<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−0.744</td>
+<td class="gt_row gt_right" headers="2  p.value">0.996</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="2  contrast">control Fatick / fertilized Fatick</td>
+<td class="gt_row gt_right" headers="2  ratio">2.559</td>
+<td class="gt_row gt_right" headers="2  SE">1.243</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">1.934</td>
+<td class="gt_row gt_right" headers="2  p.value">0.528</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="2  contrast">control Fatick / fertilized Kaffrine</td>
+<td class="gt_row gt_right" headers="2  ratio">0.526</td>
+<td class="gt_row gt_right" headers="2  SE">0.196</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−1.722</td>
+<td class="gt_row gt_right" headers="2  p.value">0.673</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="2  contrast">control Fatick / fertilized Saint Louis</td>
+<td class="gt_row gt_right" headers="2  ratio">1.663</td>
+<td class="gt_row gt_right" headers="2  SE">0.905</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">0.934</td>
+<td class="gt_row gt_right" headers="2  p.value">0.983</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="2  contrast">control Fatick / fertilized Thies</td>
+<td class="gt_row gt_right" headers="2  ratio">6.952</td>
+<td class="gt_row gt_right" headers="2  SE">5.356</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">2.517</td>
+<td class="gt_row gt_right" headers="2  p.value">0.188</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="2  contrast">control Kaffrine / control Saint Louis</td>
+<td class="gt_row gt_right" headers="2  ratio">0.527</td>
+<td class="gt_row gt_right" headers="2  SE">0.163</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−2.076</td>
+<td class="gt_row gt_right" headers="2  p.value">0.430</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="2  contrast">control Kaffrine / control Thies</td>
+<td class="gt_row gt_right" headers="2  ratio">1.921</td>
+<td class="gt_row gt_right" headers="2  SE">0.720</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">1.742</td>
+<td class="gt_row gt_right" headers="2  p.value">0.659</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">control Kaffrine / fertilized Kaffrine</td>
-<td class="gt_row gt_right" headers="2  ratio">1.144</td>
-<td class="gt_row gt_right" headers="2  SE">0.042</td>
+<td class="gt_row gt_right" headers="2  ratio">1.396</td>
+<td class="gt_row gt_right" headers="2  SE">0.368</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">3.652</td>
-<td class="gt_row gt_right" headers="2  p.value">0.006</td>
+<td class="gt_row gt_right" headers="2  z.ratio">1.268</td>
+<td class="gt_row gt_right" headers="2  p.value">0.911</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="2  contrast">control Kaffrine / fertilized Saint Louis</td>
-<td class="gt_row gt_right" headers="2  ratio">2.273</td>
-<td class="gt_row gt_right" headers="2  SE">0.269</td>
+<td class="gt_row gt_right" headers="2  ratio">4.418</td>
+<td class="gt_row gt_right" headers="2  SE">2.193</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">6.941</td>
-<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+<td class="gt_row gt_right" headers="2  z.ratio">2.993</td>
+<td class="gt_row gt_right" headers="2  p.value">0.056</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">control Kaffrine / fertilized Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">5.961</td>
-<td class="gt_row gt_right" headers="2  SE">0.757</td>
+<td class="gt_row gt_right" headers="2  ratio">18.471</td>
+<td class="gt_row gt_right" headers="2  SE">13.620</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">14.063</td>
-<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+<td class="gt_row gt_right" headers="2  z.ratio">3.955</td>
+<td class="gt_row gt_right" headers="2  p.value">0.002</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="2  contrast">control Saint Louis / control Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">3.219</td>
-<td class="gt_row gt_right" headers="2  SE">0.405</td>
+<td class="gt_row gt_right" headers="2  ratio">3.643</td>
+<td class="gt_row gt_right" headers="2  SE">1.430</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">9.288</td>
-<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+<td class="gt_row gt_right" headers="2  z.ratio">3.294</td>
+<td class="gt_row gt_right" headers="2  p.value">0.022</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">control Saint Louis / fertilized Saint Louis</td>
-<td class="gt_row gt_right" headers="2  ratio">3.552</td>
-<td class="gt_row gt_right" headers="2  SE">0.221</td>
+<td class="gt_row gt_right" headers="2  ratio">8.380</td>
+<td class="gt_row gt_right" headers="2  SE">4.001</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">20.348</td>
+<td class="gt_row gt_right" headers="2  z.ratio">4.453</td>
 <td class="gt_row gt_right" headers="2  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="2  contrast">control Saint Louis / fertilized Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">9.313</td>
-<td class="gt_row gt_right" headers="2  SE">1.296</td>
+<td class="gt_row gt_right" headers="2  ratio">35.033</td>
+<td class="gt_row gt_right" headers="2  SE">26.183</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">16.030</td>
+<td class="gt_row gt_right" headers="2  z.ratio">4.758</td>
 <td class="gt_row gt_right" headers="2  p.value">0.000</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">control Thies / fertilized Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">2.893</td>
-<td class="gt_row gt_right" headers="2  SE">0.264</td>
+<td class="gt_row gt_right" headers="2  ratio">9.617</td>
+<td class="gt_row gt_right" headers="2  SE">7.236</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">11.652</td>
-<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+<td class="gt_row gt_right" headers="2  z.ratio">3.008</td>
+<td class="gt_row gt_right" headers="2  p.value">0.053</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="2  contrast">fertilized Fatick / control Kaffrine</td>
-<td class="gt_row gt_right" headers="2  ratio">0.366</td>
-<td class="gt_row gt_right" headers="2  SE">0.037</td>
+<td class="gt_row gt_right" headers="2  ratio">0.147</td>
+<td class="gt_row gt_right" headers="2  SE">0.067</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−9.858</td>
-<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−4.204</td>
+<td class="gt_row gt_right" headers="2  p.value">0.001</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">fertilized Fatick / control Saint Louis</td>
-<td class="gt_row gt_right" headers="2  ratio">0.235</td>
-<td class="gt_row gt_right" headers="2  SE">0.027</td>
+<td class="gt_row gt_right" headers="2  ratio">0.078</td>
+<td class="gt_row gt_right" headers="2  SE">0.036</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−12.427</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−5.442</td>
 <td class="gt_row gt_right" headers="2  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="2  contrast">fertilized Fatick / control Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">0.755</td>
-<td class="gt_row gt_right" headers="2  SE">0.090</td>
+<td class="gt_row gt_right" headers="2  ratio">0.282</td>
+<td class="gt_row gt_right" headers="2  SE">0.146</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−2.355</td>
-<td class="gt_row gt_right" headers="2  p.value">0.264</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−2.450</td>
+<td class="gt_row gt_right" headers="2  p.value">0.217</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">fertilized Fatick / fertilized Kaffrine</td>
-<td class="gt_row gt_right" headers="2  ratio">0.419</td>
-<td class="gt_row gt_right" headers="2  SE">0.043</td>
+<td class="gt_row gt_right" headers="2  ratio">0.205</td>
+<td class="gt_row gt_right" headers="2  SE">0.095</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−8.521</td>
-<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−3.409</td>
+<td class="gt_row gt_right" headers="2  p.value">0.015</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="2  contrast">fertilized Fatick / fertilized Saint Louis</td>
-<td class="gt_row gt_right" headers="2  ratio">0.833</td>
-<td class="gt_row gt_right" headers="2  SE">0.104</td>
+<td class="gt_row gt_right" headers="2  ratio">0.650</td>
+<td class="gt_row gt_right" headers="2  SE">0.396</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−1.461</td>
-<td class="gt_row gt_right" headers="2  p.value">0.828</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−0.707</td>
+<td class="gt_row gt_right" headers="2  p.value">0.997</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">fertilized Fatick / fertilized Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">2.184</td>
-<td class="gt_row gt_right" headers="2  SE">0.291</td>
+<td class="gt_row gt_right" headers="2  ratio">2.717</td>
+<td class="gt_row gt_right" headers="2  SE">2.223</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">5.863</td>
-<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+<td class="gt_row gt_right" headers="2  z.ratio">1.221</td>
+<td class="gt_row gt_right" headers="2  p.value">0.926</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="2  contrast">fertilized Kaffrine / control Saint Louis</td>
-<td class="gt_row gt_right" headers="2  ratio">0.559</td>
-<td class="gt_row gt_right" headers="2  SE">0.061</td>
-<td class="gt_row gt_right" headers="2  df">Inf</td>
-<td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−5.297</td>
-<td class="gt_row gt_right" headers="2  p.value">0.000</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_center" headers="2  contrast">fertilized Kaffrine / control Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">1.801</td>
-<td class="gt_row gt_right" headers="2  SE">0.202</td>
-<td class="gt_row gt_right" headers="2  df">Inf</td>
-<td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">5.237</td>
-<td class="gt_row gt_right" headers="2  p.value">0.000</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_center" headers="2  contrast">fertilized Kaffrine / fertilized Saint Louis</td>
-<td class="gt_row gt_right" headers="2  ratio">1.987</td>
-<td class="gt_row gt_right" headers="2  SE">0.235</td>
-<td class="gt_row gt_right" headers="2  df">Inf</td>
-<td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">5.796</td>
-<td class="gt_row gt_right" headers="2  p.value">0.000</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_center" headers="2  contrast">fertilized Kaffrine / fertilized Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">5.211</td>
-<td class="gt_row gt_right" headers="2  SE">0.662</td>
-<td class="gt_row gt_right" headers="2  df">Inf</td>
-<td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">12.988</td>
-<td class="gt_row gt_right" headers="2  p.value">0.000</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_center" headers="2  contrast">fertilized Saint Louis / control Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">0.906</td>
+<td class="gt_row gt_right" headers="2  ratio">0.378</td>
 <td class="gt_row gt_right" headers="2  SE">0.121</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−0.735</td>
-<td class="gt_row gt_right" headers="2  p.value">0.996</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−3.027</td>
+<td class="gt_row gt_right" headers="2  p.value">0.051</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="2  contrast">fertilized Kaffrine / control Thies</td>
+<td class="gt_row gt_right" headers="2  ratio">1.376</td>
+<td class="gt_row gt_right" headers="2  SE">0.529</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">0.829</td>
+<td class="gt_row gt_right" headers="2  p.value">0.992</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="2  contrast">fertilized Kaffrine / fertilized Saint Louis</td>
+<td class="gt_row gt_right" headers="2  ratio">3.164</td>
+<td class="gt_row gt_right" headers="2  SE">1.594</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">2.286</td>
+<td class="gt_row gt_right" headers="2  p.value">0.301</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="2  contrast">fertilized Kaffrine / fertilized Thies</td>
+<td class="gt_row gt_right" headers="2  ratio">13.228</td>
+<td class="gt_row gt_right" headers="2  SE">9.817</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">3.479</td>
+<td class="gt_row gt_right" headers="2  p.value">0.012</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="2  contrast">fertilized Saint Louis / control Thies</td>
+<td class="gt_row gt_right" headers="2  ratio">0.435</td>
+<td class="gt_row gt_right" headers="2  SE">0.240</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−1.509</td>
+<td class="gt_row gt_right" headers="2  p.value">0.803</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">fertilized Saint Louis / fertilized Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">2.622</td>
-<td class="gt_row gt_right" headers="2  SE">0.383</td>
+<td class="gt_row gt_right" headers="2  ratio">4.181</td>
+<td class="gt_row gt_right" headers="2  SE">3.516</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">6.591</td>
-<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+<td class="gt_row gt_right" headers="2  z.ratio">1.701</td>
+<td class="gt_row gt_right" headers="2  p.value">0.687</td>
 </tr>
 <tr class="gt_group_heading_row odd">
 <th colspan="7" id="3" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">3</th>
 </tr>
 <tr class="gt_row_group_first even">
 <td class="gt_row gt_center" headers="3  contrast">control Fatick / control Kaffrine</td>
-<td class="gt_row gt_right" headers="3  ratio">0.711</td>
-<td class="gt_row gt_right" headers="3  SE">0.044</td>
+<td class="gt_row gt_right" headers="3  ratio">1.131</td>
+<td class="gt_row gt_right" headers="3  SE">0.463</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">−5.507</td>
-<td class="gt_row gt_right" headers="3  p.value">0.000</td>
+<td class="gt_row gt_right" headers="3  z.ratio">0.302</td>
+<td class="gt_row gt_right" headers="3  p.value">1.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="3  contrast">control Fatick / control Thies</td>
-<td class="gt_row gt_right" headers="3  ratio">1.232</td>
-<td class="gt_row gt_right" headers="3  SE">0.089</td>
+<td class="gt_row gt_right" headers="3  ratio">0.997</td>
+<td class="gt_row gt_right" headers="3  SE">0.449</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">2.884</td>
-<td class="gt_row gt_right" headers="3  p.value">0.045</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−0.007</td>
+<td class="gt_row gt_right" headers="3  p.value">1.000</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="3  contrast">control Fatick / fertilized Fatick</td>
-<td class="gt_row gt_right" headers="3  ratio">3.947</td>
-<td class="gt_row gt_right" headers="3  SE">0.199</td>
+<td class="gt_row gt_right" headers="3  ratio">10.843</td>
+<td class="gt_row gt_right" headers="3  SE">7.563</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">27.260</td>
-<td class="gt_row gt_right" headers="3  p.value">0.000</td>
+<td class="gt_row gt_right" headers="3  z.ratio">3.417</td>
+<td class="gt_row gt_right" headers="3  p.value">0.008</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="3  contrast">control Fatick / fertilized Kaffrine</td>
-<td class="gt_row gt_right" headers="3  ratio">2.386</td>
-<td class="gt_row gt_right" headers="3  SE">0.161</td>
+<td class="gt_row gt_right" headers="3  ratio">3.412</td>
+<td class="gt_row gt_right" headers="3  SE">1.708</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">12.898</td>
-<td class="gt_row gt_right" headers="3  p.value">0.000</td>
+<td class="gt_row gt_right" headers="3  z.ratio">2.452</td>
+<td class="gt_row gt_right" headers="3  p.value">0.139</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="3  contrast">control Fatick / fertilized Thies</td>
-<td class="gt_row gt_right" headers="3  ratio">4.708</td>
-<td class="gt_row gt_right" headers="3  SE">0.407</td>
+<td class="gt_row gt_right" headers="3  ratio">3.850</td>
+<td class="gt_row gt_right" headers="3  SE">2.321</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">17.917</td>
-<td class="gt_row gt_right" headers="3  p.value">0.000</td>
+<td class="gt_row gt_right" headers="3  z.ratio">2.236</td>
+<td class="gt_row gt_right" headers="3  p.value">0.221</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="3  contrast">control Kaffrine / control Thies</td>
-<td class="gt_row gt_right" headers="3  ratio">1.733</td>
-<td class="gt_row gt_right" headers="3  SE">0.121</td>
+<td class="gt_row gt_right" headers="3  ratio">0.881</td>
+<td class="gt_row gt_right" headers="3  SE">0.393</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">7.907</td>
-<td class="gt_row gt_right" headers="3  p.value">0.000</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−0.283</td>
+<td class="gt_row gt_right" headers="3  p.value">1.000</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="3  contrast">control Kaffrine / fertilized Kaffrine</td>
-<td class="gt_row gt_right" headers="3  ratio">3.357</td>
-<td class="gt_row gt_right" headers="3  SE">0.127</td>
+<td class="gt_row gt_right" headers="3  ratio">3.016</td>
+<td class="gt_row gt_right" headers="3  SE">1.497</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">32.021</td>
-<td class="gt_row gt_right" headers="3  p.value">0.000</td>
+<td class="gt_row gt_right" headers="3  z.ratio">2.223</td>
+<td class="gt_row gt_right" headers="3  p.value">0.227</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="3  contrast">control Kaffrine / fertilized Thies</td>
-<td class="gt_row gt_right" headers="3  ratio">6.624</td>
-<td class="gt_row gt_right" headers="3  SE">0.558</td>
+<td class="gt_row gt_right" headers="3  ratio">3.403</td>
+<td class="gt_row gt_right" headers="3  SE">2.040</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">22.462</td>
-<td class="gt_row gt_right" headers="3  p.value">0.000</td>
+<td class="gt_row gt_right" headers="3  z.ratio">2.043</td>
+<td class="gt_row gt_right" headers="3  p.value">0.318</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="3  contrast">control Thies / fertilized Thies</td>
-<td class="gt_row gt_right" headers="3  ratio">3.822</td>
-<td class="gt_row gt_right" headers="3  SE">0.248</td>
+<td class="gt_row gt_right" headers="3  ratio">3.861</td>
+<td class="gt_row gt_right" headers="3  SE">2.427</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">20.676</td>
-<td class="gt_row gt_right" headers="3  p.value">0.000</td>
+<td class="gt_row gt_right" headers="3  z.ratio">2.150</td>
+<td class="gt_row gt_right" headers="3  p.value">0.262</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="3  contrast">fertilized Fatick / control Kaffrine</td>
-<td class="gt_row gt_right" headers="3  ratio">0.180</td>
-<td class="gt_row gt_right" headers="3  SE">0.013</td>
+<td class="gt_row gt_right" headers="3  ratio">0.104</td>
+<td class="gt_row gt_right" headers="3  SE">0.072</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">−23.850</td>
-<td class="gt_row gt_right" headers="3  p.value">0.000</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−3.254</td>
+<td class="gt_row gt_right" headers="3  p.value">0.014</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="3  contrast">fertilized Fatick / control Thies</td>
-<td class="gt_row gt_right" headers="3  ratio">0.312</td>
-<td class="gt_row gt_right" headers="3  SE">0.025</td>
+<td class="gt_row gt_right" headers="3  ratio">0.092</td>
+<td class="gt_row gt_right" headers="3  SE">0.066</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">−14.383</td>
-<td class="gt_row gt_right" headers="3  p.value">0.000</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−3.316</td>
+<td class="gt_row gt_right" headers="3  p.value">0.012</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="3  contrast">fertilized Fatick / fertilized Kaffrine</td>
-<td class="gt_row gt_right" headers="3  ratio">0.604</td>
-<td class="gt_row gt_right" headers="3  SE">0.046</td>
+<td class="gt_row gt_right" headers="3  ratio">0.315</td>
+<td class="gt_row gt_right" headers="3  SE">0.237</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">−6.572</td>
-<td class="gt_row gt_right" headers="3  p.value">0.000</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−1.537</td>
+<td class="gt_row gt_right" headers="3  p.value">0.640</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="3  contrast">fertilized Fatick / fertilized Thies</td>
-<td class="gt_row gt_right" headers="3  ratio">1.193</td>
-<td class="gt_row gt_right" headers="3  SE">0.112</td>
+<td class="gt_row gt_right" headers="3  ratio">0.355</td>
+<td class="gt_row gt_right" headers="3  SE">0.292</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">1.878</td>
-<td class="gt_row gt_right" headers="3  p.value">0.416</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−1.257</td>
+<td class="gt_row gt_right" headers="3  p.value">0.808</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="3  contrast">fertilized Kaffrine / control Thies</td>
-<td class="gt_row gt_right" headers="3  ratio">0.516</td>
-<td class="gt_row gt_right" headers="3  SE">0.038</td>
+<td class="gt_row gt_right" headers="3  ratio">0.292</td>
+<td class="gt_row gt_right" headers="3  SE">0.155</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">−8.882</td>
-<td class="gt_row gt_right" headers="3  p.value">0.000</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−2.317</td>
+<td class="gt_row gt_right" headers="3  p.value">0.187</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="3  contrast">fertilized Kaffrine / fertilized Thies</td>
-<td class="gt_row gt_right" headers="3  ratio">1.973</td>
-<td class="gt_row gt_right" headers="3  SE">0.174</td>
+<td class="gt_row gt_right" headers="3  ratio">1.128</td>
+<td class="gt_row gt_right" headers="3  SE">0.751</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">7.702</td>
-<td class="gt_row gt_right" headers="3  p.value">0.000</td>
+<td class="gt_row gt_right" headers="3  z.ratio">0.181</td>
+<td class="gt_row gt_right" headers="3  p.value">1.000</td>
 </tr>
 </tbody>
 </table>
@@ -2330,28 +2276,28 @@ window.Quarto = {
 </div>
 </section>
 </section>
-<section id="table-annual-ose-density-by-region-and-field-type" class="level1">
-<h1>Table: annual OSE density by region and field type</h1>
+<section id="table-annual-ose-damage-by-region-and-field-type" class="level1">
+<h1>Table: annual OSE damage by region and field type</h1>
 <p>The data discrepancies seen the the OSE count x ground cover are really shown in this table as well. We can see that the trends are the same (e.g.&nbsp;fertilized plots have less than control), but the actual averages are totally different.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="wwamclebri" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wwamclebri table {
+<div id="ficugvyfnb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ficugvyfnb table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wwamclebri thead, #wwamclebri tbody, #wwamclebri tfoot, #wwamclebri tr, #wwamclebri td, #wwamclebri th {
+#ficugvyfnb thead, #ficugvyfnb tbody, #ficugvyfnb tfoot, #ficugvyfnb tr, #ficugvyfnb td, #ficugvyfnb th {
   border-style: none;
 }
 
-#wwamclebri p {
+#ficugvyfnb p {
   margin: 0;
   padding: 0;
 }
 
-#wwamclebri .gt_table {
+#ficugvyfnb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2377,12 +2323,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#wwamclebri .gt_caption {
+#ficugvyfnb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wwamclebri .gt_title {
+#ficugvyfnb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2394,7 +2340,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#wwamclebri .gt_subtitle {
+#ficugvyfnb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2406,7 +2352,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#wwamclebri .gt_heading {
+#ficugvyfnb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2418,13 +2364,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#wwamclebri .gt_bottom_border {
+#ficugvyfnb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wwamclebri .gt_col_headings {
+#ficugvyfnb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2439,7 +2385,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#wwamclebri .gt_col_heading {
+#ficugvyfnb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2459,7 +2405,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#wwamclebri .gt_column_spanner_outer {
+#ficugvyfnb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2471,15 +2417,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#wwamclebri .gt_column_spanner_outer:first-child {
+#ficugvyfnb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wwamclebri .gt_column_spanner_outer:last-child {
+#ficugvyfnb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wwamclebri .gt_column_spanner {
+#ficugvyfnb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2491,11 +2437,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#wwamclebri .gt_spanner_row {
+#ficugvyfnb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wwamclebri .gt_group_heading {
+#ficugvyfnb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2521,7 +2467,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#wwamclebri .gt_empty_group_heading {
+#ficugvyfnb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2536,15 +2482,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#wwamclebri .gt_from_md > :first-child {
+#ficugvyfnb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wwamclebri .gt_from_md > :last-child {
+#ficugvyfnb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wwamclebri .gt_row {
+#ficugvyfnb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2563,7 +2509,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#wwamclebri .gt_stub {
+#ficugvyfnb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2576,7 +2522,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#wwamclebri .gt_stub_row_group {
+#ficugvyfnb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2590,15 +2536,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#wwamclebri .gt_row_group_first td {
+#ficugvyfnb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wwamclebri .gt_row_group_first th {
+#ficugvyfnb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wwamclebri .gt_summary_row {
+#ficugvyfnb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2608,16 +2554,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#wwamclebri .gt_first_summary_row {
+#ficugvyfnb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wwamclebri .gt_first_summary_row.thick {
+#ficugvyfnb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wwamclebri .gt_last_summary_row {
+#ficugvyfnb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2627,7 +2573,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#wwamclebri .gt_grand_summary_row {
+#ficugvyfnb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2637,7 +2583,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#wwamclebri .gt_first_grand_summary_row {
+#ficugvyfnb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2647,7 +2593,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#wwamclebri .gt_last_grand_summary_row_top {
+#ficugvyfnb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2657,11 +2603,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#wwamclebri .gt_striped {
+#ficugvyfnb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wwamclebri .gt_table_body {
+#ficugvyfnb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2670,7 +2616,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#wwamclebri .gt_footnotes {
+#ficugvyfnb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2684,7 +2630,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#wwamclebri .gt_footnote {
+#ficugvyfnb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2693,7 +2639,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#wwamclebri .gt_sourcenotes {
+#ficugvyfnb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2707,7 +2653,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#wwamclebri .gt_sourcenote {
+#ficugvyfnb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2715,72 +2661,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#wwamclebri .gt_left {
+#ficugvyfnb .gt_left {
   text-align: left;
 }
 
-#wwamclebri .gt_center {
+#ficugvyfnb .gt_center {
   text-align: center;
 }
 
-#wwamclebri .gt_right {
+#ficugvyfnb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wwamclebri .gt_font_normal {
+#ficugvyfnb .gt_font_normal {
   font-weight: normal;
 }
 
-#wwamclebri .gt_font_bold {
+#ficugvyfnb .gt_font_bold {
   font-weight: bold;
 }
 
-#wwamclebri .gt_font_italic {
+#ficugvyfnb .gt_font_italic {
   font-style: italic;
 }
 
-#wwamclebri .gt_super {
+#ficugvyfnb .gt_super {
   font-size: 65%;
 }
 
-#wwamclebri .gt_footnote_marks {
+#ficugvyfnb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wwamclebri .gt_asterisk {
+#ficugvyfnb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wwamclebri .gt_indent_1 {
+#ficugvyfnb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wwamclebri .gt_indent_2 {
+#ficugvyfnb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wwamclebri .gt_indent_3 {
+#ficugvyfnb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wwamclebri .gt_indent_4 {
+#ficugvyfnb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wwamclebri .gt_indent_5 {
+#ficugvyfnb .gt_indent_5 {
   text-indent: 25px;
 }
 
-#wwamclebri .katex-display {
+#ficugvyfnb .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#wwamclebri div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ficugvyfnb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2788,7 +2734,7 @@ window.Quarto = {
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading header">
-<td colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border">Mean OSE Count by Region and Fertilizer Treatment</td>
+<td colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border">Mean OSE damage by Region and Fertilizer Treatment</td>
 </tr>
 <tr class="gt_col_headings even">
 <th id="a::stub" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
@@ -2801,17 +2747,17 @@ window.Quarto = {
 <tbody class="gt_table_body">
 <tr class="odd">
 <th id="stub_1_1" class="gt_row gt_center gt_stub" data-quarto-table-cell-role="th" scope="row">fertilized</th>
-<td class="gt_row gt_right" headers="stub_1_1 Saint Louis">9.95</td>
-<td class="gt_row gt_right" headers="stub_1_1 Thies">6.10</td>
-<td class="gt_row gt_right" headers="stub_1_1 Fatick">12.28</td>
-<td class="gt_row gt_right" headers="stub_1_1 Kaffrine">26.64</td>
+<td class="gt_row gt_right" headers="stub_1_1 Saint Louis">0.0064</td>
+<td class="gt_row gt_right" headers="stub_1_1 Thies">0.0047</td>
+<td class="gt_row gt_right" headers="stub_1_1 Fatick">0.0125</td>
+<td class="gt_row gt_right" headers="stub_1_1 Kaffrine">0.0296</td>
 </tr>
 <tr class="even">
 <th id="stub_1_2" class="gt_row gt_center gt_stub" data-quarto-table-cell-role="th" scope="row">control</th>
-<td class="gt_row gt_right" headers="stub_1_2 Saint Louis">19.10</td>
-<td class="gt_row gt_right" headers="stub_1_2 Thies">14.46</td>
-<td class="gt_row gt_right" headers="stub_1_2 Fatick">22.61</td>
-<td class="gt_row gt_right" headers="stub_1_2 Kaffrine">41.14</td>
+<td class="gt_row gt_right" headers="stub_1_2 Saint Louis">0.0264</td>
+<td class="gt_row gt_right" headers="stub_1_2 Thies">0.0123</td>
+<td class="gt_row gt_right" headers="stub_1_2 Fatick">0.0143</td>
+<td class="gt_row gt_right" headers="stub_1_2 Kaffrine">0.0366</td>
 </tr>
 </tbody>
 </table>
@@ -3291,7 +3237,7 @@ window.Quarto = {
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "2021 Locust Density Analysis"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "2021 Locust Damage Analysis"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Density patterns by treatment and region"</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
@@ -3299,7 +3245,7 @@ window.Quarto = {
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## Summary</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>The goal of this page is to analyze locust density patterns across fertilizer treatments and regions. This analysis replicates key figures from the manuscript to ensure consistent theming and validates our data management approach. If you see errors, please let me know!</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>The goal of this page is to analyze locust damage patterns across fertilizer treatments and regions. This analysis replicates key figures from the manuscript to ensure consistent theming and validates our data management approach. If you see errors, please let me know!</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup}</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
@@ -3311,285 +3257,261 @@ window.Quarto = {
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"R"</span>, <span class="st">"_common.R"</span>))</span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the current analysis for organized output</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">set_current_analysis</span>(<span class="st">"locust_density_treatment_region"</span>)</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{r data-loading}</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Load processed data</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">load_ose_data</span>(<span class="at">cache_processed =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># update to refelct damage</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="fu">set_current_analysis</span>(<span class="st">"locust_damage_treatment_region"</span>)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="in">```{r data-loading}</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Load processed data</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">load_ose_data</span>(<span class="at">cache_processed =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="fu"># Locust density and region by treatment</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>To assess how locust count changes between treatment (fertilized and control) and region (four regions), I built a generalized linear mixed model (family: Poisson) per mission as follows:</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">ose_damage_percent =</span> ose_damage_percent<span class="sc">/</span><span class="dv">100</span>)</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>\begin{align*}</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>\text{ose count}_{ij} =\ </span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  &amp;\beta_0 <span class="sc">\\</span></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  &amp;+ \beta_1 \cdot \text{fertilizer treatment}_i <span class="sc">\\</span></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  &amp;+ \beta_2 \cdot \text{region}_i <span class="sc">\\</span></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  &amp;+ \beta_3 \cdot (\text{fertilizer treatment}_i \times \text{region}_i) <span class="sc">\\</span></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  &amp;+ u_j <span class="sc">\\</span></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  &amp;+ \varepsilon_{ij}</span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>Where: - $\text{ose count}_{ij}$: observed ose count for observation $i$ from farmer $j$ - $\text{fertilizer treatment}_i$: fertilizer treatment group of observation $i$ - $\text{region}_i$: region of observation $i$ - $(\text{fertilizer treatment}_i \times \text{region}_i)$: interaction between fertilizer treatment and region - $u_j$: random effect for farmer $j$, $u_j \sim N(0, \sigma^2_{farmer})$ - $\varepsilon_{ij}$: residual error</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="fu"># Locust density and region by treatment</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>To assess how locust damage percent changes between treatment (fertilized and control) and region (four regions), I built a generalized linear mixed model (family: Poisson) per mission as follows:</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>*add formula here*</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>Below are the diagnostic plots for these models:</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="in">```{r computing-ose-density-models}</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
 <span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>Below are the diagnostic plots for these models:</span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="in">```{r computing-ose-density-models}</span></span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into a list of data based on mission date</span></span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>model_data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_split</span>(mission_number)</span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="co"># Create lists to store objects</span></span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>mission_mods <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>mission_diagnostic_plots <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>mission_emmeans <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through missions: create model, diagnostic plot, and emmeans with caching</span></span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(model_data)){</span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>    diagnostic_plot_title <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">'Mission '</span>, i)</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data into a list of data based on mission date</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>model_data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_split</span>(mission_number)</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Create lists to store objects</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>mission_mods <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>mission_diagnostic_plots <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>mission_emmeans <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through missions: create model, diagnostic plot, and emmeans with caching</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(model_data)){</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>    diagnostic_plot_title <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">'Mission '</span>, i)</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Cache each mission model separately</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>    mission_mods[[i]] <span class="ot">&lt;-</span> <span class="fu">cache_model</span>(</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>        <span class="at">model_name =</span> <span class="fu">paste0</span>(<span class="st">"locust_damage_mission_"</span>, i),</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> model_data[[i]],</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>        <span class="at">fit_function =</span> create_damage_glmm_model</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Cache each mission model separately</span></span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    mission_mods[[i]] <span class="ot">&lt;-</span> <span class="fu">cache_model</span>(</span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>        <span class="at">model_name =</span> <span class="fu">paste0</span>(<span class="st">"locust_density_mission_"</span>, i),</span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> model_data[[i]],</span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>        <span class="at">fit_function =</span> create_count_glmm_model</span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>    mission_diagnostic_plots[[i]] <span class="ot">&lt;-</span> <span class="fu">plot_model_diagnostics</span>(mission_mods[[i]], <span class="at">plot_title =</span> diagnostic_plot_title)</span>
-<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>    mission_emmeans[[i]] <span class="ot">&lt;-</span> <span class="fu">get_emmeans_and_pairs</span>(mission_mods[[i]], <span class="at">mission_num =</span> i)</span>
-<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mission_mods) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'m1'</span>, <span class="st">'m2'</span>, <span class="st">'m3'</span>)</span>
-<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mission_diagnostic_plots) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'m1'</span>, <span class="st">'m2'</span>, <span class="st">'m3'</span>)</span>
-<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mission_emmeans) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'m1'</span>, <span class="st">'m2'</span>, <span class="st">'m3'</span>)</span>
-<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a><span class="in">```{r plot-diagnostic-plots}</span></span>
-<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>diagnostic_plots <span class="ot">&lt;-</span> (mission_diagnostic_plots<span class="sc">$</span>m1 <span class="sc">+</span></span>
-<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>    mission_diagnostic_plots<span class="sc">$</span>m2) <span class="sc">/</span></span>
-<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>    (mission_diagnostic_plots<span class="sc">$</span>m3 <span class="sc">+</span></span>
-<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>    patchwork<span class="sc">::</span><span class="fu">plot_spacer</span>())</span>
-<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a><span class="co"># Display diagnostic plots</span></span>
-<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>diagnostic_plots</span>
-<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a><span class="co"># Save model summaries for each mission (tables only)</span></span>
-<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
-<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>  <span class="fu">save_model_summary</span>(mission_mods[[i]], <span class="fu">paste0</span>(<span class="st">"mission_"</span>, i, <span class="st">"_model_summary"</span>))</span>
-<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">save_emmeans_table</span>(mission_emmeans[[i]]<span class="sc">$</span>emmeans, <span class="fu">paste0</span>(<span class="st">"mission_"</span>, i, <span class="st">"_emmeans"</span>))</span>
-<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>  <span class="fu">save_data_table</span>(mission_emmeans[[i]]<span class="sc">$</span>pairwise, <span class="fu">paste0</span>(<span class="st">"mission_"</span>, i, <span class="st">"_pairwise_comparisons"</span>))</span>
-<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>These models are not perfect, but I think they are adequate for this analysis. Happy to investigate further if you would like me to!</span>
-<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a><span class="fu">## OSE density by treatment and region (option 1)</span></span>
-<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{r density-option-1-plot}</span></span>
-<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 5       </span></span>
-<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 10      </span></span>
-<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-retina: 2      </span></span>
-<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine model results with emmeans</span></span>
-<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>mission_emms <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
-<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(<span class="fu">names</span>(mission_emmeans), <span class="cf">function</span>(nm) {</span>
-<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">&lt;-</span> mission_emmeans[[nm]]<span class="sc">$</span>emmeans</span>
-<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>source <span class="ot">&lt;-</span> nm</span>
-<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>    df</span>
-<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>  }),</span>
-<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>  <span class="at">.id =</span> <span class="st">'mission_numer'</span> </span>
-<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>count_plot_option_1 <span class="ot">&lt;-</span> <span class="fu">plot_mission_density</span>(</span>
-<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>    data <span class="sc">|&gt;</span> <span class="fu">drop_na</span>(ose_count, fertilizer_treatment),</span>
-<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>    mission_emms,</span>
-<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>    <span class="at">ncol =</span> <span class="dv">1</span>,</span>
-<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>    <span class="at">regions =</span> ALT_STUDY_REGIONS,</span>
-<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend_position =</span> <span class="st">'bottom'</span></span>
-<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    mission_diagnostic_plots[[i]] <span class="ot">&lt;-</span> <span class="fu">plot_model_diagnostics</span>(mission_mods[[i]], <span class="at">plot_title =</span> diagnostic_plot_title)</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    mission_emmeans[[i]] <span class="ot">&lt;-</span> <span class="fu">get_emmeans_and_pairs</span>(mission_mods[[i]], <span class="at">mission_num =</span> i)</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mission_mods) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'m1'</span>, <span class="st">'m2'</span>, <span class="st">'m3'</span>)</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mission_diagnostic_plots) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'m1'</span>, <span class="st">'m2'</span>, <span class="st">'m3'</span>)</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mission_emmeans) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'m1'</span>, <span class="st">'m2'</span>, <span class="st">'m3'</span>)</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a><span class="in">```{r plot-diagnostic-plots}</span></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>diagnostic_plots <span class="ot">&lt;-</span> (mission_diagnostic_plots<span class="sc">$</span>m1 <span class="sc">+</span></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>    mission_diagnostic_plots<span class="sc">$</span>m2) <span class="sc">/</span></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>    (mission_diagnostic_plots<span class="sc">$</span>m3 <span class="sc">+</span></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>    patchwork<span class="sc">::</span><span class="fu">plot_spacer</span>())</span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a><span class="co"># Display diagnostic plots</span></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>diagnostic_plots</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a><span class="co"># Save model summaries for each mission (tables only)</span></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>  <span class="fu">save_model_summary</span>(mission_mods[[i]], <span class="fu">paste0</span>(<span class="st">"mission_"</span>, i, <span class="st">"_model_summary"</span>))</span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">save_emmeans_table</span>(mission_emmeans[[i]]<span class="sc">$</span>emmeans, <span class="fu">paste0</span>(<span class="st">"mission_"</span>, i, <span class="st">"_emmeans"</span>))</span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>  <span class="fu">save_data_table</span>(mission_emmeans[[i]]<span class="sc">$</span>pairwise, <span class="fu">paste0</span>(<span class="st">"mission_"</span>, i, <span class="st">"_pairwise_comparisons"</span>))</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>The tweedie models look like they capture the overdispersion quite well. There is a lot of zeros in this data.</span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a><span class="fu">## OSE damage by treatment and region</span></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a><span class="in">```{r density-option-1-plot}</span></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 5       </span></span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 10      </span></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-retina: 2      </span></span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine model results with emmeans</span></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>mission_emms <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(<span class="fu">names</span>(mission_emmeans), <span class="cf">function</span>(nm) {</span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">&lt;-</span> mission_emmeans[[nm]]<span class="sc">$</span>emmeans</span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>source <span class="ot">&lt;-</span> nm</span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>    df</span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>  }),</span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>  <span class="at">.id =</span> <span class="st">'mission_numer'</span> </span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a>count_plot_option_1 <span class="ot">&lt;-</span> <span class="fu">plot_mission_damage</span>(</span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a>    data <span class="sc">|&gt;</span> <span class="fu">drop_na</span>(ose_damage_percent, fertilizer_treatment),</span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>    mission_emms,</span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>    <span class="at">ncol =</span> <span class="dv">1</span>,</span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>    <span class="at">regions =</span> ALT_STUDY_REGIONS,</span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend_position =</span> <span class="st">'bottom'</span></span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>count_plot_option_1</span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the combined emmeans data (table only)</span></span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a><span class="fu">save_data_table</span>(mission_emms, <span class="st">"combined_mission_emmeans"</span>)</span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
-<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a>count_plot_option_1</span>
-<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the combined emmeans data (table only)</span></span>
-<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a><span class="fu">save_data_table</span>(mission_emms, <span class="st">"combined_mission_emmeans"</span>)</span>
-<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a><span class="fu">## OSE density by treatment and region (option 2)</span></span>
-<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a>Instead of a plot per mission, let's plot the missions together (x-axis) and see how region counts shifted through time</span>
-<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a><span class="in">```{r count-plot-option-2}</span></span>
-<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a>count_plot_option_2 <span class="ot">&lt;-</span> <span class="fu">plot_emmeans</span>(mission_emms,</span>
-<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a>    <span class="at">color_palette =</span> DEFAULT_PALETTE,</span>
-<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">"OSE count"</span>,</span>
-<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="st">"Mission"</span>)</span>
-<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a>count_plot_option_2</span>
-<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a><span class="fu">## OSE density by teatment and region model summaries (tabulated)</span></span>
-<span id="cb2-164"><a href="#cb2-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-165"><a href="#cb2-165" aria-hidden="true" tabindex="-1"></a>Here are the model summaries and pairwise comparisons. This will be *across* missions, but please keep in mind each mission had it's own model. So we cant make across-mission comparions just yet.</span>
-<span id="cb2-166"><a href="#cb2-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-169"><a href="#cb2-169" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-170"><a href="#cb2-170" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-171"><a href="#cb2-171" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb2-172"><a href="#cb2-172" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb2-173"><a href="#cb2-173" aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
-<span id="cb2-174"><a href="#cb2-174" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom.mixed)</span>
-<span id="cb2-175"><a href="#cb2-175" aria-hidden="true" tabindex="-1"></a>mission_mod_summary <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
-<span id="cb2-176"><a href="#cb2-176" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(<span class="fu">names</span>(mission_mods), <span class="cf">function</span>(nm) {</span>
-<span id="cb2-177"><a href="#cb2-177" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add the list element name as a column:</span></span>
-<span id="cb2-178"><a href="#cb2-178" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">&lt;-</span> mission_mods[[nm]] <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span>
-<span id="cb2-179"><a href="#cb2-179" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>source <span class="ot">&lt;-</span> nm</span>
-<span id="cb2-180"><a href="#cb2-180" aria-hidden="true" tabindex="-1"></a>    df</span>
-<span id="cb2-181"><a href="#cb2-181" aria-hidden="true" tabindex="-1"></a>  }),</span>
-<span id="cb2-182"><a href="#cb2-182" aria-hidden="true" tabindex="-1"></a>  <span class="at">.id =</span> <span class="st">'mission_number'</span> </span>
-<span id="cb2-183"><a href="#cb2-183" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a><span class="fu">## OSE damage by teatment and region model summaries (tabulated)</span></span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a>Here are the model summaries and pairwise comparisons. This will be *across* missions, but please keep in mind each mission had it's own model. So we cant make across-mission comparions just yet.</span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
+<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom.mixed)</span>
+<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a>mission_mod_summary <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(<span class="fu">names</span>(mission_mods), <span class="cf">function</span>(nm) {</span>
+<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add the list element name as a column:</span></span>
+<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">&lt;-</span> mission_mods[[nm]] <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span>
+<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>source <span class="ot">&lt;-</span> nm</span>
+<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a>    df</span>
+<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a>  }),</span>
+<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a>  <span class="at">.id =</span> <span class="st">'mission_number'</span> </span>
+<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a>mission_emms <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(<span class="fu">names</span>(mission_emmeans), <span class="cf">function</span>(nm) {</span>
+<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add the list element name as a column:</span></span>
+<span id="cb2-164"><a href="#cb2-164" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">&lt;-</span> mission_emmeans[[nm]]<span class="sc">$</span>emmeans</span>
+<span id="cb2-165"><a href="#cb2-165" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>source <span class="ot">&lt;-</span> nm</span>
+<span id="cb2-166"><a href="#cb2-166" aria-hidden="true" tabindex="-1"></a>    df</span>
+<span id="cb2-167"><a href="#cb2-167" aria-hidden="true" tabindex="-1"></a>  }),</span>
+<span id="cb2-168"><a href="#cb2-168" aria-hidden="true" tabindex="-1"></a>  <span class="at">.id =</span> <span class="st">'mission_number'</span> </span>
+<span id="cb2-169"><a href="#cb2-169" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-170"><a href="#cb2-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-171"><a href="#cb2-171" aria-hidden="true" tabindex="-1"></a>mission_pairs <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb2-172"><a href="#cb2-172" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(<span class="fu">names</span>(mission_emmeans), <span class="cf">function</span>(nm) {</span>
+<span id="cb2-173"><a href="#cb2-173" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add the list element name as a column:</span></span>
+<span id="cb2-174"><a href="#cb2-174" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">&lt;-</span> mission_emmeans[[nm]]<span class="sc">$</span>pairwise</span>
+<span id="cb2-175"><a href="#cb2-175" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>source <span class="ot">&lt;-</span> nm</span>
+<span id="cb2-176"><a href="#cb2-176" aria-hidden="true" tabindex="-1"></a>    df</span>
+<span id="cb2-177"><a href="#cb2-177" aria-hidden="true" tabindex="-1"></a>  }),</span>
+<span id="cb2-178"><a href="#cb2-178" aria-hidden="true" tabindex="-1"></a>  <span class="at">.id =</span> <span class="st">'mission_number'</span> </span>
+<span id="cb2-179"><a href="#cb2-179" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-180"><a href="#cb2-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-181"><a href="#cb2-181" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb2-182"><a href="#cb2-182" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-183"><a href="#cb2-183" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-184"><a href="#cb2-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-185"><a href="#cb2-185" aria-hidden="true" tabindex="-1"></a>mission_emms <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
-<span id="cb2-186"><a href="#cb2-186" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(<span class="fu">names</span>(mission_emmeans), <span class="cf">function</span>(nm) {</span>
-<span id="cb2-187"><a href="#cb2-187" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add the list element name as a column:</span></span>
-<span id="cb2-188"><a href="#cb2-188" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">&lt;-</span> mission_emmeans[[nm]]<span class="sc">$</span>emmeans</span>
-<span id="cb2-189"><a href="#cb2-189" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>source <span class="ot">&lt;-</span> nm</span>
-<span id="cb2-190"><a href="#cb2-190" aria-hidden="true" tabindex="-1"></a>    df</span>
-<span id="cb2-191"><a href="#cb2-191" aria-hidden="true" tabindex="-1"></a>  }),</span>
-<span id="cb2-192"><a href="#cb2-192" aria-hidden="true" tabindex="-1"></a>  <span class="at">.id =</span> <span class="st">'mission_number'</span> </span>
-<span id="cb2-193"><a href="#cb2-193" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-194"><a href="#cb2-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-195"><a href="#cb2-195" aria-hidden="true" tabindex="-1"></a>mission_pairs <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
-<span id="cb2-196"><a href="#cb2-196" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(<span class="fu">names</span>(mission_emmeans), <span class="cf">function</span>(nm) {</span>
-<span id="cb2-197"><a href="#cb2-197" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add the list element name as a column:</span></span>
-<span id="cb2-198"><a href="#cb2-198" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">&lt;-</span> mission_emmeans[[nm]]<span class="sc">$</span>pairwise</span>
-<span id="cb2-199"><a href="#cb2-199" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>source <span class="ot">&lt;-</span> nm</span>
-<span id="cb2-200"><a href="#cb2-200" aria-hidden="true" tabindex="-1"></a>    df</span>
-<span id="cb2-201"><a href="#cb2-201" aria-hidden="true" tabindex="-1"></a>  }),</span>
-<span id="cb2-202"><a href="#cb2-202" aria-hidden="true" tabindex="-1"></a>  <span class="at">.id =</span> <span class="st">'mission_number'</span> </span>
-<span id="cb2-203"><a href="#cb2-203" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-204"><a href="#cb2-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-205"><a href="#cb2-205" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
-<span id="cb2-206"><a href="#cb2-206" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb2-207"><a href="#cb2-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-208"><a href="#cb2-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-209"><a href="#cb2-209" aria-hidden="true" tabindex="-1"></a>mission_mod_summary <span class="ot">&lt;-</span> mission_mod_summary <span class="sc">|&gt;</span></span>
-<span id="cb2-210"><a href="#cb2-210" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(mission_number) <span class="sc">|&gt;</span></span>
-<span id="cb2-211"><a href="#cb2-211" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">effect =</span> <span class="fu">ifelse</span>(effect <span class="sc">==</span> <span class="st">'ran_pars'</span>, <span class="st">'random'</span>, <span class="st">'fixed'</span>),</span>
-<span id="cb2-212"><a href="#cb2-212" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> <span class="fu">ifelse</span>(term <span class="sc">==</span> <span class="st">'sd__(Intercept)'</span>,<span class="st">'farmer'</span>,term),</span>
-<span id="cb2-213"><a href="#cb2-213" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> <span class="fu">gsub</span>(<span class="st">'fertilizer_treatment|region'</span>,<span class="st">''</span>,term)) <span class="sc">|&gt;</span></span>
-<span id="cb2-214"><a href="#cb2-214" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">c</span>(component,group))</span>
+<span id="cb2-185"><a href="#cb2-185" aria-hidden="true" tabindex="-1"></a>mission_mod_summary <span class="ot">&lt;-</span> mission_mod_summary <span class="sc">|&gt;</span></span>
+<span id="cb2-186"><a href="#cb2-186" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(mission_number) <span class="sc">|&gt;</span></span>
+<span id="cb2-187"><a href="#cb2-187" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">effect =</span> <span class="fu">ifelse</span>(effect <span class="sc">==</span> <span class="st">'ran_pars'</span>, <span class="st">'random'</span>, <span class="st">'fixed'</span>),</span>
+<span id="cb2-188"><a href="#cb2-188" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> <span class="fu">ifelse</span>(term <span class="sc">==</span> <span class="st">'sd__(Intercept)'</span>,<span class="st">'farmer'</span>,term),</span>
+<span id="cb2-189"><a href="#cb2-189" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> <span class="fu">gsub</span>(<span class="st">'fertilizer_treatment|region'</span>,<span class="st">''</span>,term)) <span class="sc">|&gt;</span></span>
+<span id="cb2-190"><a href="#cb2-190" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">c</span>(component,group))</span>
+<span id="cb2-191"><a href="#cb2-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-192"><a href="#cb2-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-193"><a href="#cb2-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-194"><a href="#cb2-194" aria-hidden="true" tabindex="-1"></a>mission_mod_summary <span class="sc">|&gt;</span></span>
+<span id="cb2-195"><a href="#cb2-195" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>source) <span class="sc">|&gt;</span></span>
+<span id="cb2-196"><a href="#cb2-196" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(<span class="at">groupname_col =</span> <span class="st">"mission_number"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-197"><a href="#cb2-197" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
+<span id="cb2-198"><a href="#cb2-198" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(estimate, std.error, statistic, p.value),</span>
+<span id="cb2-199"><a href="#cb2-199" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">3</span></span>
+<span id="cb2-200"><a href="#cb2-200" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-201"><a href="#cb2-201" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb2-202"><a href="#cb2-202" aria-hidden="true" tabindex="-1"></a>    <span class="at">mission_number =</span> <span class="st">"Mission"</span>,</span>
+<span id="cb2-203"><a href="#cb2-203" aria-hidden="true" tabindex="-1"></a>    <span class="at">effect =</span> <span class="st">"Effect"</span>,</span>
+<span id="cb2-204"><a href="#cb2-204" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> <span class="st">"Term"</span>,</span>
+<span id="cb2-205"><a href="#cb2-205" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimate =</span> <span class="st">"Estimate"</span>,</span>
+<span id="cb2-206"><a href="#cb2-206" aria-hidden="true" tabindex="-1"></a>    <span class="at">std.error =</span> <span class="st">"Std. Error"</span>,</span>
+<span id="cb2-207"><a href="#cb2-207" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="st">"Statistic"</span>,</span>
+<span id="cb2-208"><a href="#cb2-208" aria-hidden="true" tabindex="-1"></a>    <span class="at">p.value =</span> <span class="st">"P-value"</span></span>
+<span id="cb2-209"><a href="#cb2-209" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-210"><a href="#cb2-210" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb2-211"><a href="#cb2-211" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"OSE density by treatment and region by mission"</span></span>
+<span id="cb2-212"><a href="#cb2-212" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-213"><a href="#cb2-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-214"><a href="#cb2-214" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb2-215"><a href="#cb2-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-216"><a href="#cb2-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-216"><a href="#cb2-216" aria-hidden="true" tabindex="-1"></a>Here are the pairwise comparisons between region and treatment by mission number. Fair warning, its a large table since there are a lot of regions.</span>
 <span id="cb2-217"><a href="#cb2-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-218"><a href="#cb2-218" aria-hidden="true" tabindex="-1"></a>mission_mod_summary <span class="sc">|&gt;</span></span>
-<span id="cb2-219"><a href="#cb2-219" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>source) <span class="sc">|&gt;</span></span>
-<span id="cb2-220"><a href="#cb2-220" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(<span class="at">groupname_col =</span> <span class="st">"mission_number"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-221"><a href="#cb2-221" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
-<span id="cb2-222"><a href="#cb2-222" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(estimate, std.error, statistic, p.value),</span>
-<span id="cb2-223"><a href="#cb2-223" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">3</span></span>
-<span id="cb2-224"><a href="#cb2-224" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb2-225"><a href="#cb2-225" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb2-226"><a href="#cb2-226" aria-hidden="true" tabindex="-1"></a>    <span class="at">mission_number =</span> <span class="st">"Mission"</span>,</span>
-<span id="cb2-227"><a href="#cb2-227" aria-hidden="true" tabindex="-1"></a>    <span class="at">effect =</span> <span class="st">"Effect"</span>,</span>
-<span id="cb2-228"><a href="#cb2-228" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> <span class="st">"Term"</span>,</span>
-<span id="cb2-229"><a href="#cb2-229" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimate =</span> <span class="st">"Estimate"</span>,</span>
-<span id="cb2-230"><a href="#cb2-230" aria-hidden="true" tabindex="-1"></a>    <span class="at">std.error =</span> <span class="st">"Std. Error"</span>,</span>
-<span id="cb2-231"><a href="#cb2-231" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="st">"Statistic"</span>,</span>
-<span id="cb2-232"><a href="#cb2-232" aria-hidden="true" tabindex="-1"></a>    <span class="at">p.value =</span> <span class="st">"P-value"</span></span>
-<span id="cb2-233"><a href="#cb2-233" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb2-234"><a href="#cb2-234" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb2-235"><a href="#cb2-235" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"OSE density by treatment and region by mission"</span></span>
-<span id="cb2-236"><a href="#cb2-236" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb2-237"><a href="#cb2-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-238"><a href="#cb2-238" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-239"><a href="#cb2-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-240"><a href="#cb2-240" aria-hidden="true" tabindex="-1"></a>Here are the pairwise comparisons between region and treatment by mission number. Fair warning, its a large table since there are a lot of regions.</span>
-<span id="cb2-241"><a href="#cb2-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-244"><a href="#cb2-244" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-245"><a href="#cb2-245" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-246"><a href="#cb2-246" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb2-247"><a href="#cb2-247" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb2-248"><a href="#cb2-248" aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
-<span id="cb2-249"><a href="#cb2-249" aria-hidden="true" tabindex="-1"></a>mission_pairs <span class="sc">|&gt;</span></span>
-<span id="cb2-250"><a href="#cb2-250" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(contrast) <span class="sc">|&gt;</span></span>
-<span id="cb2-251"><a href="#cb2-251" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>source) <span class="sc">|&gt;</span></span>
-<span id="cb2-252"><a href="#cb2-252" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(<span class="at">groupname_col =</span> <span class="st">"mission_number"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-253"><a href="#cb2-253" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
-<span id="cb2-254"><a href="#cb2-254" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(ratio, SE, z.ratio, p.value),</span>
-<span id="cb2-255"><a href="#cb2-255" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">3</span></span>
-<span id="cb2-256"><a href="#cb2-256" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb2-257"><a href="#cb2-257" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb2-258"><a href="#cb2-258" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"OSE density model pairwise comparisons by mission"</span></span>
-<span id="cb2-259"><a href="#cb2-259" aria-hidden="true" tabindex="-1"></a>  ) </span>
-<span id="cb2-260"><a href="#cb2-260" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-261"><a href="#cb2-261" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-262"><a href="#cb2-262" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-263"><a href="#cb2-263" aria-hidden="true" tabindex="-1"></a><span class="fu"># Table: annual OSE density by region and field type</span></span>
-<span id="cb2-264"><a href="#cb2-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-265"><a href="#cb2-265" aria-hidden="true" tabindex="-1"></a>The data discrepancies seen the the OSE count x ground cover are really shown in this table as well. We can see that the trends are the same (e.g. fertilized plots have less than control), but the actual averages are totally different.</span>
-<span id="cb2-266"><a href="#cb2-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-269"><a href="#cb2-269" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-270"><a href="#cb2-270" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-271"><a href="#cb2-271" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb2-272"><a href="#cb2-272" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb2-273"><a href="#cb2-273" aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
-<span id="cb2-274"><a href="#cb2-274" aria-hidden="true" tabindex="-1"></a>ose_dat <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
-<span id="cb2-275"><a href="#cb2-275" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(region, fertilizer_treatment, ose_count) <span class="sc">|&gt;</span></span>
-<span id="cb2-276"><a href="#cb2-276" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">region =</span> <span class="fu">factor</span>(region, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">'Saint Louis'</span>, <span class="st">'Thies'</span>, <span class="st">'Fatick'</span>, <span class="st">'Kaffrine'</span>)),</span>
-<span id="cb2-277"><a href="#cb2-277" aria-hidden="true" tabindex="-1"></a>         <span class="at">fertilizer_treatment =</span> <span class="fu">factor</span>(fertilizer_treatment, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">'fertilized'</span>, <span class="st">'control'</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb2-278"><a href="#cb2-278" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(ose_count, fertilizer_treatment) <span class="sc">|&gt;</span></span>
-<span id="cb2-279"><a href="#cb2-279" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region, fertilizer_treatment) <span class="sc">|&gt;</span></span>
-<span id="cb2-280"><a href="#cb2-280" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">ose_mean =</span> <span class="fu">mean</span>(ose_count, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-281"><a href="#cb2-281" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> region, <span class="at">values_from =</span> ose_mean)</span>
-<span id="cb2-282"><a href="#cb2-282" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-283"><a href="#cb2-283" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the gt table</span></span>
-<span id="cb2-284"><a href="#cb2-284" aria-hidden="true" tabindex="-1"></a>ose_dat <span class="sc">|&gt;</span></span>
-<span id="cb2-285"><a href="#cb2-285" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(<span class="at">rowname_col =</span> <span class="st">"fertilizer_treatment"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-286"><a href="#cb2-286" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb2-287"><a href="#cb2-287" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Mean OSE Count by Region and Fertilizer Treatment"</span></span>
-<span id="cb2-288"><a href="#cb2-288" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb2-289"><a href="#cb2-289" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
-<span id="cb2-290"><a href="#cb2-290" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">everything</span>(),</span>
-<span id="cb2-291"><a href="#cb2-291" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">2</span></span>
-<span id="cb2-292"><a href="#cb2-292" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb2-293"><a href="#cb2-293" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb2-294"><a href="#cb2-294" aria-hidden="true" tabindex="-1"></a>    <span class="at">fertilizer_treatment =</span> <span class="st">"Treatment"</span>,</span>
-<span id="cb2-295"><a href="#cb2-295" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Saint Louis</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Saint Louis"</span>,</span>
-<span id="cb2-296"><a href="#cb2-296" aria-hidden="true" tabindex="-1"></a>    <span class="at">Thies =</span> <span class="st">"Thies"</span>,</span>
-<span id="cb2-297"><a href="#cb2-297" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fatick =</span> <span class="st">"Fatick"</span>,</span>
-<span id="cb2-298"><a href="#cb2-298" aria-hidden="true" tabindex="-1"></a>    <span class="at">Kaffrine =</span> <span class="st">"Kaffrine"</span></span>
-<span id="cb2-299"><a href="#cb2-299" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb2-300"><a href="#cb2-300" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb2-301"><a href="#cb2-301" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
-<span id="cb2-302"><a href="#cb2-302" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="fu">everything</span>())</span>
-<span id="cb2-303"><a href="#cb2-303" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb2-304"><a href="#cb2-304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-305"><a href="#cb2-305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-306"><a href="#cb2-306" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-220"><a href="#cb2-220" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb2-221"><a href="#cb2-221" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb2-222"><a href="#cb2-222" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb2-223"><a href="#cb2-223" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb2-224"><a href="#cb2-224" aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
+<span id="cb2-225"><a href="#cb2-225" aria-hidden="true" tabindex="-1"></a>mission_pairs <span class="sc">|&gt;</span></span>
+<span id="cb2-226"><a href="#cb2-226" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(contrast) <span class="sc">|&gt;</span></span>
+<span id="cb2-227"><a href="#cb2-227" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>source) <span class="sc">|&gt;</span></span>
+<span id="cb2-228"><a href="#cb2-228" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(<span class="at">groupname_col =</span> <span class="st">"mission_number"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-229"><a href="#cb2-229" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
+<span id="cb2-230"><a href="#cb2-230" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(ratio, SE, z.ratio, p.value),</span>
+<span id="cb2-231"><a href="#cb2-231" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">3</span></span>
+<span id="cb2-232"><a href="#cb2-232" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-233"><a href="#cb2-233" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb2-234"><a href="#cb2-234" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"OSE density model pairwise comparisons by mission"</span></span>
+<span id="cb2-235"><a href="#cb2-235" aria-hidden="true" tabindex="-1"></a>  ) </span>
+<span id="cb2-236"><a href="#cb2-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-237"><a href="#cb2-237" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-238"><a href="#cb2-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-239"><a href="#cb2-239" aria-hidden="true" tabindex="-1"></a><span class="fu"># Table: annual OSE damage by region and field type</span></span>
+<span id="cb2-240"><a href="#cb2-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-241"><a href="#cb2-241" aria-hidden="true" tabindex="-1"></a>The data discrepancies seen the the OSE count x ground cover are really shown in this table as well. We can see that the trends are the same (e.g. fertilized plots have less than control), but the actual averages are totally different.</span>
+<span id="cb2-242"><a href="#cb2-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-245"><a href="#cb2-245" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb2-246"><a href="#cb2-246" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb2-247"><a href="#cb2-247" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb2-248"><a href="#cb2-248" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb2-249"><a href="#cb2-249" aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
+<span id="cb2-250"><a href="#cb2-250" aria-hidden="true" tabindex="-1"></a>ose_dat <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb2-251"><a href="#cb2-251" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(region, fertilizer_treatment, ose_damage_percent) <span class="sc">|&gt;</span></span>
+<span id="cb2-252"><a href="#cb2-252" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">region =</span> <span class="fu">factor</span>(region, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">'Saint Louis'</span>, <span class="st">'Thies'</span>, <span class="st">'Fatick'</span>, <span class="st">'Kaffrine'</span>)),</span>
+<span id="cb2-253"><a href="#cb2-253" aria-hidden="true" tabindex="-1"></a>         <span class="at">fertilizer_treatment =</span> <span class="fu">factor</span>(fertilizer_treatment, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">'fertilized'</span>, <span class="st">'control'</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb2-254"><a href="#cb2-254" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(ose_damage_percent, fertilizer_treatment) <span class="sc">|&gt;</span></span>
+<span id="cb2-255"><a href="#cb2-255" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region, fertilizer_treatment) <span class="sc">|&gt;</span></span>
+<span id="cb2-256"><a href="#cb2-256" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">ose_mean =</span> <span class="fu">mean</span>(ose_damage_percent, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-257"><a href="#cb2-257" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> region, <span class="at">values_from =</span> ose_mean)</span>
+<span id="cb2-258"><a href="#cb2-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-259"><a href="#cb2-259" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the gt table</span></span>
+<span id="cb2-260"><a href="#cb2-260" aria-hidden="true" tabindex="-1"></a>ose_dat <span class="sc">|&gt;</span></span>
+<span id="cb2-261"><a href="#cb2-261" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(<span class="at">rowname_col =</span> <span class="st">"fertilizer_treatment"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-262"><a href="#cb2-262" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb2-263"><a href="#cb2-263" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Mean OSE damage by Region and Fertilizer Treatment"</span></span>
+<span id="cb2-264"><a href="#cb2-264" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-265"><a href="#cb2-265" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
+<span id="cb2-266"><a href="#cb2-266" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">everything</span>(),</span>
+<span id="cb2-267"><a href="#cb2-267" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">4</span></span>
+<span id="cb2-268"><a href="#cb2-268" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-269"><a href="#cb2-269" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb2-270"><a href="#cb2-270" aria-hidden="true" tabindex="-1"></a>    <span class="at">fertilizer_treatment =</span> <span class="st">"Treatment"</span>,</span>
+<span id="cb2-271"><a href="#cb2-271" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Saint Louis</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Saint Louis"</span>,</span>
+<span id="cb2-272"><a href="#cb2-272" aria-hidden="true" tabindex="-1"></a>    <span class="at">Thies =</span> <span class="st">"Thies"</span>,</span>
+<span id="cb2-273"><a href="#cb2-273" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fatick =</span> <span class="st">"Fatick"</span>,</span>
+<span id="cb2-274"><a href="#cb2-274" aria-hidden="true" tabindex="-1"></a>    <span class="at">Kaffrine =</span> <span class="st">"Kaffrine"</span></span>
+<span id="cb2-275"><a href="#cb2-275" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-276"><a href="#cb2-276" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb2-277"><a href="#cb2-277" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
+<span id="cb2-278"><a href="#cb2-278" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="fu">everything</span>())</span>
+<span id="cb2-279"><a href="#cb2-279" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-280"><a href="#cb2-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-281"><a href="#cb2-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-282"><a href="#cb2-282" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
