@@ -1,0 +1,1501 @@
+year,region,farmer,farmer_gender,fertilizer_treatment,code,mission_number,date_surveyed,ose_count,temperature,percent_ground_cover,ose_damage_percent,yield_date_havested,rendement_en_kg_ha
+2021,Kaffrine,02.51,M,control,02-51-00.,1,July 27th to august 3th,28,29,70,10,October 20th to 31th,700
+2021,Kaffrine,02.51,M,control,02-51-00.,2,August 30th toseptember 4th,21,26,80,5,October 20th to 31th,700
+2021,Kaffrine,02.51,M,control,02-51-00.,3,September 28th to october 5th,15,32,70,0,October 20th to 31th,700
+2021,Kaffrine,02.51,M,fertilized,02-51-01.,1,July 27th to august 3th,42,29,60,7,October 20th to 31th,1000
+2021,Kaffrine,02.51,M,fertilized,02-51-01.,2,August 30th toseptember 4th,24,24,90,5,October 20th to 31th,1000
+2021,Kaffrine,02.51,M,fertilized,02-51-01.,3,September 28th to october 5th,20,32,90,6,October 20th to 31th,1000
+2021,Kaffrine,02.52,M,control,02-52-00.,1,July 27th to august 3th,82,31,45,9,October 20th to 31th,227
+2021,Kaffrine,02.52,M,control,02-52-00.,2,August 30th toseptember 4th,46,23,75,3,October 20th to 31th,227
+2021,Kaffrine,02.52,M,control,02-52-00.,3,September 28th to october 5th,74,24,75,3,October 20th to 31th,227
+2021,Kaffrine,02.52,M,fertilized,02-52-01.,1,July 27th to august 3th,48,32,75,4,October 20th to 31th,500
+2021,Kaffrine,02.52,M,fertilized,02-52-01.,2,August 30th toseptember 4th,22,25,90,4,October 20th to 31th,500
+2021,Kaffrine,02.52,M,fertilized,02-52-01.,3,September 28th to october 5th,2,25,90,4,October 20th to 31th,500
+2021,Kaffrine,02.53,M,control,02-53-00,1,July 27th to august 3th,35,26,30,4,October 20th to 31th,300
+2021,Kaffrine,02.53,M,control,02-53-00,2,August 30th toseptember 4th,21,26,80,4,October 20th to 31th,300
+2021,Kaffrine,02.53,M,control,02-53-00,3,September 28th to october 5th,34,27,70,4,October 20th to 31th,300
+2021,Kaffrine,02.53,M,fertilized,02-53-01,1,July 27th to august 3th,23,26,30,2,October 20th to 31th,500
+2021,Kaffrine,02.53,M,fertilized,02-53-01,2,August 30th toseptember 4th,16,24,70,2,October 20th to 31th,500
+2021,Kaffrine,02.53,M,fertilized,02-53-01,3,September 28th to october 5th,12,26,60,0,October 20th to 31th,500
+2021,Kaffrine,02.54,M,control,02-54-00,1,July 27th to august 3th,96,34,10,6,October 20th to 31th,NA
+2021,Kaffrine,02.54,M,control,02-54-00,2,August 30th toseptember 4th,62,33,90,15,October 20th to 31th,NA
+2021,Kaffrine,02.54,M,control,02-54-00,3,September 28th to october 5th,72,32,80,15,October 20th to 31th,NA
+2021,Kaffrine,02.54,M,fertilized,02-54-01,1,July 27th to august 3th,77,33,10,8,October 20th to 31th,NA
+2021,Kaffrine,02.54,M,fertilized,02-54-01,2,August 30th toseptember 4th,46,34,90,15,October 20th to 31th,NA
+2021,Kaffrine,02.54,M,fertilized,02-54-01,3,September 28th to october 5th,2,32,90,0,October 20th to 31th,NA
+2021,Kaffrine,02.55,M,control,02-55-00,1,July 27th to august 3th,16,30,15,6,October 20th to 31th,567
+2021,Kaffrine,02.55,M,control,02-55-00,2,August 30th toseptember 4th,10,32,80,0,October 20th to 31th,567
+2021,Kaffrine,02.55,M,control,02-55-00,3,September 28th to october 5th,23,32,70,0,October 20th to 31th,567
+2021,Kaffrine,02.55,M,fertilized,02-55-01,1,July 27th to august 3th,18,30,15,4,October 20th to 31th,810
+2021,Kaffrine,02.55,M,fertilized,02-55-01,2,August 30th toseptember 4th,12,32,70,0,October 20th to 31th,810
+2021,Kaffrine,02.55,M,fertilized,02-55-01,3,September 28th to october 5th,1,32,60,0,October 20th to 31th,810
+2021,Kaffrine,02.56,M,control,02-56-00.,1,July 27th to august 3th,63,24,95,10,October 20th to 31th,340
+2021,Kaffrine,02.56,M,control,02-56-00.,2,August 30th toseptember 4th,41,30,85,10,October 20th to 31th,340
+2021,Kaffrine,02.56,M,control,02-56-00.,3,September 28th to october 5th,48,31,85,5,October 20th to 31th,340
+2021,Kaffrine,02.56,M,fertilized,02-56-01.,1,July 27th to august 3th,39,24,90,7,October 20th to 31th,510
+2021,Kaffrine,02.56,M,fertilized,02-56-01.,2,August 30th toseptember 4th,24,30,95,7,October 20th to 31th,510
+2021,Kaffrine,02.56,M,fertilized,02-56-01.,3,September 28th to october 5th,13,31,95,0,October 20th to 31th,510
+2021,Kaffrine,02.57,M,control,02-57-00.,1,July 27th to august 3th,50,33,85,15,October 20th to 31th,640
+2021,Kaffrine,02.57,M,control,02-57-00.,2,August 30th toseptember 4th,26,23,70,4,October 20th to 31th,640
+2021,Kaffrine,02.57,M,control,02-57-00.,3,September 28th to october 5th,42,24,70,1,October 20th to 31th,640
+2021,Kaffrine,02.57,M,fertilized,02-57-01.,1,July 27th to august 3th,29,33,75,8,October 20th to 31th,1274
+2021,Kaffrine,02.57,M,fertilized,02-57-01.,2,August 30th toseptember 4th,16,23,85,0,October 20th to 31th,1274
+2021,Kaffrine,02.57,M,fertilized,02-57-01.,3,September 28th to october 5th,8,24,85,0,October 20th to 31th,1274
+2021,Kaffrine,02.58,M,control,02-58-00.,1,July 27th to august 3th,44,30,80,7,October 20th to 31th,1040
+2021,Kaffrine,02.58,M,control,02-58-00.,2,August 30th toseptember 4th,48,26,85,10,October 20th to 31th,1040
+2021,Kaffrine,02.58,M,control,02-58-00.,3,September 28th to october 5th,78,26,85,0,October 20th to 31th,1040
+2021,Kaffrine,02.58,M,fertilized,02-58-01.,1,July 27th to august 3th,32,31,70,6,October 20th to 31th,1040
+2021,Kaffrine,02.58,M,fertilized,02-58-01.,2,August 30th toseptember 4th,30,26,85,6,October 20th to 31th,1040
+2021,Kaffrine,02.58,M,fertilized,02-58-01.,3,September 28th to october 5th,12,26,85,0,October 20th to 31th,1040
+2021,Kaffrine,02.59,M,control,02-59-00.,1,July 27th to august 3th,42,35,75,8,October 20th to 31th,240
+2021,Kaffrine,02.59,M,control,02-59-00.,2,August 30th toseptember 4th,26,33,75,4,October 20th to 31th,240
+2021,Kaffrine,02.59,M,control,02-59-00.,3,September 28th to october 5th,36,26,75,0,October 20th to 31th,240
+2021,Kaffrine,02.59,M,fertilized,02-59-01.,1,July 27th to august 3th,30,34,70,7,October 20th to 31th,320
+2021,Kaffrine,02.59,M,fertilized,02-59-01.,2,August 30th toseptember 4th,20,33,80,0,October 20th to 31th,320
+2021,Kaffrine,02.59,M,fertilized,02-59-01.,3,September 28th to october 5th,21,26,80,0,October 20th to 31th,320
+2021,Kaffrine,02.60,M,control,02-60-00,1,July 27th to august 3th,40,28,50,3,October 20th to 31th,255
+2021,Kaffrine,02.60,M,control,02-60-00,2,August 30th toseptember 4th,26,28,50,2,October 20th to 31th,255
+2021,Kaffrine,02.60,M,control,02-60-00,3,September 28th to october 5th,65,29,70,2,October 20th to 31th,255
+2021,Kaffrine,02.60,M,fertilized,02-60-01,1,July 27th to august 3th,60,26,50,5,October 20th to 31th,510
+2021,Kaffrine,02.60,M,fertilized,02-60-01,2,August 30th toseptember 4th,38,26,50,5,October 20th to 31th,510
+2021,Kaffrine,02.60,M,fertilized,02-60-01,3,September 28th to october 5th,21,28,60,0,October 20th to 31th,510
+2021,Kaffrine,02.61,M,control,02-61-00,1,July 27th to august 3th,16,26,20,1,October 20th to 31th,1400
+2021,Kaffrine,02.61,M,control,02-61-00,2,August 30th toseptember 4th,11,31,20,0,October 20th to 31th,1400
+2021,Kaffrine,02.61,M,control,02-61-00,3,September 28th to october 5th,53,26,45,0,October 20th to 31th,1400
+2021,Kaffrine,02.61,M,fertilized,02-61-01,1,July 27th to august 3th,28,26,20,2,October 20th to 31th,2000
+2021,Kaffrine,02.61,M,fertilized,02-61-01,2,August 30th toseptember 4th,18,32,20,0,October 20th to 31th,2000
+2021,Kaffrine,02.61,M,fertilized,02-61-01,3,September 28th to october 5th,19,26,60,0,October 20th to 31th,2000
+2021,Kaffrine,02.62,M,control,02-62-00,1,July 27th to august 3th,12,29,20,0,October 20th to 31th,250
+2021,Kaffrine,02.62,M,control,02-62-00,2,August 30th toseptember 4th,8,32,20,0,October 20th to 31th,250
+2021,Kaffrine,02.62,M,control,02-62-00,3,September 28th to october 5th,62,27,65,5,October 20th to 31th,250
+2021,Kaffrine,02.62,M,fertilized,02-62-01,1,July 27th to august 3th,14,29,20,0,October 20th to 31th,700
+2021,Kaffrine,02.62,M,fertilized,02-62-01,2,August 30th toseptember 4th,7,30,20,0,October 20th to 31th,700
+2021,Kaffrine,02.62,M,fertilized,02-62-01,3,September 28th to october 5th,8,27,70,0,October 20th to 31th,700
+2021,Kaffrine,02.63,M,control,02-63-00,1,July 27th to august 3th,32,31,15,5,October 20th to 31th,644
+2021,Kaffrine,02.63,M,control,02-63-00,2,August 30th toseptember 4th,21,31,15,0,October 20th to 31th,644
+2021,Kaffrine,02.63,M,control,02-63-00,3,September 28th to october 5th,53,31,50,0,October 20th to 31th,644
+2021,Kaffrine,02.63,M,fertilized,02-63-01,1,July 27th to august 3th,18,31,15,3,October 20th to 31th,1080
+2021,Kaffrine,02.63,M,fertilized,02-63-01,2,August 30th toseptember 4th,12,32,15,0,October 20th to 31th,1080
+2021,Kaffrine,02.63,M,fertilized,02-63-01,3,September 28th to october 5th,10,38,60,0,October 20th to 31th,1080
+2021,Kaffrine,02.64,M,control,02-64-00,1,July 27th to august 3th,32,27,15,6,October 20th to 31th,155
+2021,Kaffrine,02.64,M,control,02-64-00,2,August 30th toseptember 4th,21,30,15,0,October 20th to 31th,155
+2021,Kaffrine,02.64,M,control,02-64-00,3,September 28th to october 5th,62,26,70,3,October 20th to 31th,155
+2021,Kaffrine,02.64,M,fertilized,02-64-01,1,July 27th to august 3th,23,26,20,4,October 20th to 31th,540
+2021,Kaffrine,02.64,M,fertilized,02-64-01,2,August 30th toseptember 4th,16,30,20,0,October 20th to 31th,540
+2021,Kaffrine,02.64,M,fertilized,02-64-01,3,September 28th to october 5th,14,26,70,0,October 20th to 31th,540
+2021,Kaffrine,02.65,M,control,02-65-00,1,July 27th to august 3th,21,28,40,3,October 20th to 31th,NA
+2021,Kaffrine,02.65,M,control,02-65-00,2,August 30th toseptember 4th,14,29,40,0,October 20th to 31th,NA
+2021,Kaffrine,02.65,M,control,02-65-00,3,September 28th to october 5th,43,27,80,0,October 20th to 31th,NA
+2021,Kaffrine,02.65,M,fertilized,02-65-01,1,July 27th to august 3th,22,28,40,2,October 20th to 31th,NA
+2021,Kaffrine,02.65,M,fertilized,02-65-01,2,August 30th toseptember 4th,14,28,40,0,October 20th to 31th,NA
+2021,Kaffrine,02.65,M,fertilized,02-65-01,3,September 28th to october 5th,8,27,60,0,October 20th to 31th,NA
+2021,Kaffrine,02.66,M,control,02-66-00,1,July 27th to august 3th,81,29,30,7,October 20th to 31th,640
+2021,Kaffrine,02.66,M,control,02-66-00,2,August 30th toseptember 4th,34,29,30,7,October 20th to 31th,640
+2021,Kaffrine,02.66,M,control,02-66-00,3,September 28th to october 5th,39,31,50,0,October 20th to 31th,640
+2021,Kaffrine,02.66,M,fertilized,02-66-01,1,July 27th to august 3th,108,30,30,17,October 20th to 31th,800
+2021,Kaffrine,02.66,M,fertilized,02-66-01,2,August 30th toseptember 4th,62,30,30,17,October 20th to 31th,800
+2021,Kaffrine,02.66,M,fertilized,02-66-01,3,September 28th to october 5th,28,32,70,0,October 20th to 31th,800
+2021,Kaffrine,02.67,M,control,02-67-00,1,July 27th to august 3th,75,28,30,12,October 20th to 31th,540
+2021,Kaffrine,02.67,M,control,02-67-00,2,August 30th toseptember 4th,30,28,30,10,October 20th to 31th,540
+2021,Kaffrine,02.67,M,control,02-67-00,3,September 28th to october 5th,54,30,90,0,October 20th to 31th,540
+2021,Kaffrine,02.67,M,fertilized,02-67-01,1,July 27th to august 3th,22,27,30,1,October 20th to 31th,1260
+2021,Kaffrine,02.67,M,fertilized,02-67-01,2,August 30th toseptember 4th,14,27,30,1,October 20th to 31th,1260
+2021,Kaffrine,02.67,M,fertilized,02-67-01,3,September 28th to october 5th,9,29,70,0,October 20th to 31th,1260
+2021,Kaffrine,02.68,M,control,02-68-00,1,July 27th to august 3th,78,28,40,4,October 20th to 31th,510
+2021,Kaffrine,02.68,M,control,02-68-00,2,August 30th toseptember 4th,42,28,40,5,October 20th to 31th,510
+2021,Kaffrine,02.68,M,control,02-68-00,3,September 28th to october 5th,45,26,80,5,October 20th to 31th,510
+2021,Kaffrine,02.68,M,fertilized,02-68-01,1,July 27th to august 3th,56,29,50,2,October 20th to 31th,935
+2021,Kaffrine,02.68,M,fertilized,02-68-01,2,August 30th toseptember 4th,30,29,50,4,October 20th to 31th,935
+2021,Kaffrine,02.68,M,fertilized,02-68-01,3,September 28th to october 5th,4,25,65,0,October 20th to 31th,935
+2021,Kaffrine,02.69,M,control,02-69-00,1,July 27th to august 3th,44,29,35,2,October 20th to 31th,895
+2021,Kaffrine,02.69,M,control,02-69-00,2,August 30th toseptember 4th,28,29,35,0,October 20th to 31th,895
+2021,Kaffrine,02.69,M,control,02-69-00,3,September 28th to october 5th,39,31,90,0,October 20th to 31th,895
+2021,Kaffrine,02.69,M,fertilized,02-69-01,1,July 27th to august 3th,86,30,25,3,October 20th to 31th,1020
+2021,Kaffrine,02.69,M,fertilized,02-69-01,2,August 30th toseptember 4th,45,30,25,8,October 20th to 31th,1020
+2021,Kaffrine,02.69,M,fertilized,02-69-01,3,September 28th to october 5th,13,32,70,5,October 20th to 31th,1020
+2021,Kaffrine,02.70,M,control,02-70-00,1,July 27th to august 3th,77,33,30,8,October 20th to 31th,NA
+2021,Kaffrine,02.70,M,control,02-70-00,2,August 30th toseptember 4th,42,33,30,8,October 20th to 31th,NA
+2021,Kaffrine,02.70,M,control,02-70-00,3,September 28th to october 5th,59,33,65,0,October 20th to 31th,NA
+2021,Kaffrine,02.70,M,fertilized,02-70-01,1,July 27th to august 3th,100,33,30,14,October 20th to 31th,NA
+2021,Kaffrine,02.70,M,fertilized,02-70-01,2,August 30th toseptember 4th,60,33,30,17,October 20th to 31th,NA
+2021,Kaffrine,02.70,M,fertilized,02-70-01,3,September 28th to october 5th,11,32,80,3,October 20th to 31th,NA
+2021,Kaffrine,02.71,M,control,02-71-00,1,July 27th to august 3th,14,32,20,1,October 20th to 31th,450
+2021,Kaffrine,02.71,M,control,02-71-00,2,August 30th toseptember 4th,8,32,20,0,October 20th to 31th,450
+2021,Kaffrine,02.71,M,control,02-71-00,3,September 28th to october 5th,35,27,60,0,October 20th to 31th,450
+2021,Kaffrine,02.71,M,fertilized,02-71-01,1,July 27th to august 3th,18,27,20,1,October 20th to 31th,900
+2021,Kaffrine,02.71,M,fertilized,02-71-01,2,August 30th toseptember 4th,12,27,20,0,October 20th to 31th,900
+2021,Kaffrine,02.71,M,fertilized,02-71-01,3,September 28th to october 5th,7,26,70,0,October 20th to 31th,900
+2021,Kaffrine,02.72,M,control,02-72-00,1,July 27th to august 3th,65,32,30,2,October 20th to 31th,80
+2021,Kaffrine,02.72,M,control,02-72-00,2,August 30th toseptember 4th,41,32,30,8,October 20th to 31th,80
+2021,Kaffrine,02.72,M,control,02-72-00,3,September 28th to october 5th,37,33,70,0,October 20th to 31th,80
+2021,Kaffrine,02.72,M,fertilized,02-72-01,1,July 27th to august 3th,47,32,30,2,October 20th to 31th,1120
+2021,Kaffrine,02.72,M,fertilized,02-72-01,2,August 30th toseptember 4th,32,32,30,0,October 20th to 31th,1120
+2021,Kaffrine,02.72,M,fertilized,02-72-01,3,September 28th to october 5th,20,32,60,0,October 20th to 31th,1120
+2021,Kaffrine,02.73,M,control,02-73-00,1,July 27th to august 3th,85,25,90,5,October 20th to 31th,546
+2021,Kaffrine,02.73,M,control,02-73-00,2,August 30th toseptember 4th,40,32,70,5,October 20th to 31th,546
+2021,Kaffrine,02.73,M,control,02-73-00,3,September 28th to october 5th,43,33,70,0,October 20th to 31th,546
+2021,Kaffrine,02.73,M,fertilized,02-73-01,1,July 27th to august 3th,58,25,85,3,October 20th to 31th,1092
+2021,Kaffrine,02.73,M,fertilized,02-73-01,2,August 30th toseptember 4th,23,32,75,0,October 20th to 31th,1092
+2021,Kaffrine,02.73,M,fertilized,02-73-01,3,September 28th to october 5th,13,33,75,0,October 20th to 31th,1092
+2021,Kaffrine,02.74,M,control,02-74-00,1,July 27th to august 3th,105,30,45,6,October 20th to 31th,450
+2021,Kaffrine,02.74,M,control,02-74-00,2,August 30th toseptember 4th,47,30,45,7,October 20th to 31th,450
+2021,Kaffrine,02.74,M,control,02-74-00,3,September 28th to october 5th,32,32,60,0,October 20th to 31th,450
+2021,Kaffrine,02.74,M,fertilized,02-74-01,1,July 27th to august 3th,71,30,45,6,October 20th to 31th,810
+2021,Kaffrine,02.74,M,fertilized,02-74-01,2,August 30th toseptember 4th,31,30,45,0,October 20th to 31th,810
+2021,Kaffrine,02.74,M,fertilized,02-74-01,3,September 28th to october 5th,6,32,60,0,October 20th to 31th,810
+2021,Kaffrine,02.75,M,control,02-75-00.,1,July 27th to august 3th,121,34,90,18,October 20th to 31th,850
+2021,Kaffrine,02.75,M,control,02-75-00.,2,August 30th toseptember 4th,12,31,95,0,October 20th to 31th,850
+2021,Kaffrine,02.75,M,control,02-75-00.,3,September 28th to october 5th,20,33,80,0,October 20th to 31th,850
+2021,Kaffrine,02.75,M,fertilized,02-75-01.,1,July 27th to august 3th,134,34,80,7,October 20th to 31th,1800
+2021,Kaffrine,02.75,M,fertilized,02-75-01.,2,August 30th toseptember 4th,14,31,90,0,October 20th to 31th,1800
+2021,Kaffrine,02.75,M,fertilized,02-75-01.,3,September 28th to october 5th,8,33,70,0,October 20th to 31th,1800
+2021,Kaffrine,02.76,M,control,02-76-00.,1,July 27th to august 3th,78,35,45,5,October 20th to 31th,245
+2021,Kaffrine,02.76,M,control,02-76-00.,2,August 30th toseptember 4th,30,31,60,0,October 20th to 31th,245
+2021,Kaffrine,02.76,M,control,02-76-00.,3,September 28th to october 5th,54,34,60,0,October 20th to 31th,245
+2021,Kaffrine,02.76,M,fertilized,02-76-01.,1,July 27th to august 3th,42,35,50,2,October 20th to 31th,1105
+2021,Kaffrine,02.76,M,fertilized,02-76-01.,2,August 30th toseptember 4th,28,31,65,3,October 20th to 31th,1105
+2021,Kaffrine,02.76,M,fertilized,02-76-01.,3,September 28th to october 5th,20,34,65,0,October 20th to 31th,1105
+2021,Kaffrine,02.77,M,control,02-77-00.,1,July 27th to august 3th,33,33,95,3,October 20th to 31th,800
+2021,Kaffrine,02.77,M,control,02-77-00.,2,August 30th toseptember 4th,32,32,80,4,October 20th to 31th,800
+2021,Kaffrine,02.77,M,control,02-77-00.,3,September 28th to october 5th,50,34,80,0,October 20th to 31th,800
+2021,Kaffrine,02.77,M,fertilized,02-77-01.,1,July 27th to august 3th,46,33,90,4,October 20th to 31th,1440
+2021,Kaffrine,02.77,M,fertilized,02-77-01.,2,August 30th toseptember 4th,28,32,90,4,October 20th to 31th,1440
+2021,Kaffrine,02.77,M,fertilized,02-77-01.,3,September 28th to october 5th,7,34,90,0,October 20th to 31th,1440
+2021,Kaffrine,02.78,M,control,02-78-00.,1,July 27th to august 3th,56,36,65,3,October 20th to 31th,1000
+2021,Kaffrine,02.78,M,control,02-78-00.,2,August 30th toseptember 4th,37,31,75,9,October 20th to 31th,1000
+2021,Kaffrine,02.78,M,control,02-78-00.,3,September 28th to october 5th,54,34,75,1,October 20th to 31th,1000
+2021,Kaffrine,02.78,M,fertilized,02-78-01.,1,July 27th to august 3th,36,36,70,2,October 20th to 31th,1600
+2021,Kaffrine,02.78,M,fertilized,02-78-01.,2,August 30th toseptember 4th,32,31,80,5,October 20th to 31th,1600
+2021,Kaffrine,02.78,M,fertilized,02-78-01.,3,September 28th to october 5th,15,34,80,0,October 20th to 31th,1600
+2021,Kaffrine,02.79,M,control,02-79-00.,1,July 27th to august 3th,63,25,75,3,October 20th to 31th,1200
+2021,Kaffrine,02.79,M,control,02-79-00.,2,August 30th toseptember 4th,31,23,65,4,October 20th to 31th,1200
+2021,Kaffrine,02.79,M,control,02-79-00.,3,September 28th to october 5th,44,28,65,0,October 20th to 31th,1200
+2021,Kaffrine,02.79,M,fertilized,02-79-01.,1,July 27th to august 3th,45,25,65,5,October 20th to 31th,1800
+2021,Kaffrine,02.79,M,fertilized,02-79-01.,2,August 30th toseptember 4th,33,23,70,0,October 20th to 31th,1800
+2021,Kaffrine,02.79,M,fertilized,02-79-01.,3,September 28th to october 5th,8,28,70,0,October 20th to 31th,1800
+2021,Kaffrine,02.80,M,control,02-80-00.,1,July 27th to august 3th,37,35,75,8,October 20th to 31th,800
+2021,Kaffrine,02.80,M,control,02-80-00.,2,August 30th toseptember 4th,41,29,70,8,October 20th to 31th,800
+2021,Kaffrine,02.80,M,control,02-80-00.,3,September 28th to october 5th,48,34,70,0,October 20th to 31th,800
+2021,Kaffrine,02.80,M,fertilized,02-80-01.,1,July 27th to august 3th,29,34,85,1,October 20th to 31th,1120
+2021,Kaffrine,02.80,M,fertilized,02-80-01.,2,August 30th toseptember 4th,20,29,85,0,October 20th to 31th,1120
+2021,Kaffrine,02.80,M,fertilized,02-80-01.,3,September 28th to october 5th,28,34,85,0,October 20th to 31th,1120
+2021,Kaffrine,02.81,M,control,02-81-00.,1,July 27th to august 3th,48,27,85,4,October 20th to 31th,800
+2021,Kaffrine,02.81,M,control,02-81-00.,2,August 30th toseptember 4th,7,32,90,0,October 20th to 31th,800
+2021,Kaffrine,02.81,M,control,02-81-00.,3,September 28th to october 5th,63,34,95,0,October 20th to 31th,800
+2021,Kaffrine,02.81,M,fertilized,02-81-01.,1,July 27th to august 3th,67,27,55,2,October 20th to 31th,1200
+2021,Kaffrine,02.81,M,fertilized,02-81-01.,2,August 30th toseptember 4th,8,32,80,0,October 20th to 31th,1200
+2021,Kaffrine,02.81,M,fertilized,02-81-01.,3,September 28th to october 5th,12,34,90,0,October 20th to 31th,1200
+2021,Kaffrine,02.82,M,control,02-82-00.,1,July 27th to august 3th,71,29,60,4,October 20th to 31th,364
+2021,Kaffrine,02.82,M,control,02-82-00.,2,August 30th toseptember 4th,2,29,85,0,October 20th to 31th,364
+2021,Kaffrine,02.82,M,control,02-82-00.,3,September 28th to october 5th,32,34,95,0,October 20th to 31th,364
+2021,Kaffrine,02.82,M,fertilized,02-82-01.,1,July 27th to august 3th,42,29,70,7,October 20th to 31th,637
+2021,Kaffrine,02.82,M,fertilized,02-82-01.,2,August 30th toseptember 4th,4,29,80,0,October 20th to 31th,637
+2021,Kaffrine,02.82,M,fertilized,02-82-01.,3,September 28th to october 5th,13,34,95,0,October 20th to 31th,637
+2021,Kaffrine,02.83,M,control,02-83-00.,1,July 27th to august 3th,NA,30,NA,NA,October 20th to 31th,227
+2021,Kaffrine,02.83,M,control,02-83-00.,2,August 30th toseptember 4th,NA,NA,NA,NA,October 20th to 31th,227
+2021,Kaffrine,02.83,M,control,02-83-00.,3,September 28th to october 5th,NA,NA,NA,NA,October 20th to 31th,227
+2021,Kaffrine,02.83,M,fertilized,02-83-01.,1,July 27th to august 3th,45,30,60,5,October 20th to 31th,500
+2021,Kaffrine,02.83,M,fertilized,02-83-01.,2,August 30th toseptember 4th,30,31,95,5,October 20th to 31th,500
+2021,Kaffrine,02.83,M,fertilized,02-83-01.,3,September 28th to october 5th,9,34,95,0,October 20th to 31th,500
+2021,Kaffrine,02.84,M,control,02-84-00.,1,July 27th to august 3th,145,34,65,2,October 20th to 31th,665
+2021,Kaffrine,02.84,M,control,02-84-00.,2,August 30th toseptember 4th,9,33,95,0,October 20th to 31th,665
+2021,Kaffrine,02.84,M,control,02-84-00.,3,September 28th to october 5th,50,28,95,0,October 20th to 31th,665
+2021,Kaffrine,02.84,M,fertilized,02-84-01.,1,July 27th to august 3th,128,34,70,18,October 20th to 31th,1045
+2021,Kaffrine,02.84,M,fertilized,02-84-01.,2,August 30th toseptember 4th,12,33,85,0,October 20th to 31th,1045
+2021,Kaffrine,02.84,M,fertilized,02-84-01.,3,September 28th to october 5th,7,28,90,0,October 20th to 31th,1045
+2021,Kaffrine,02.85,M,control,02-85-00.,1,July 27th to august 3th,76,26,75,5,October 20th to 31th,962
+2021,Kaffrine,02.85,M,control,02-85-00.,2,August 30th toseptember 4th,20,24,90,0,October 20th to 31th,962
+2021,Kaffrine,02.85,M,control,02-85-00.,3,September 28th to october 5th,30,28,90,5,October 20th to 31th,962
+2021,Kaffrine,02.85,M,fertilized,02-85-01.,1,July 27th to august 3th,82,26,60,5,October 20th to 31th,1332
+2021,Kaffrine,02.85,M,fertilized,02-85-01.,2,August 30th toseptember 4th,53,24,70,12,October 20th to 31th,1332
+2021,Kaffrine,02.85,M,fertilized,02-85-01.,3,September 28th to october 5th,14,28,80,0,October 20th to 31th,1332
+2021,Kaffrine,02.86,M,control,02-86-00.,1,July 27th to august 3th,54,26,85,3,October 20th to 31th,260
+2021,Kaffrine,02.86,M,control,02-86-00.,2,August 30th toseptember 4th,12,24,80,0,October 20th to 31th,260
+2021,Kaffrine,02.86,M,control,02-86-00.,3,September 28th to october 5th,36,28,95,0,October 20th to 31th,260
+2021,Kaffrine,02.86,M,fertilized,02-86-01.,1,July 27th to august 3th,32,26,90,1,October 20th to 31th,455
+2021,Kaffrine,02.86,M,fertilized,02-86-01.,2,August 30th toseptember 4th,17,24,50,0,October 20th to 31th,455
+2021,Kaffrine,02.86,M,fertilized,02-86-01.,3,September 28th to october 5th,10,28,90,0,October 20th to 31th,455
+2021,Kaffrine,02.87,M,control,02-87-00.,1,July 27th to august 3th,30,33,60,3,October 20th to 31th,NA
+2021,Kaffrine,02.87,M,control,02-87-00.,2,August 30th toseptember 4th,NA,NA,NA,NA,October 20th to 31th,NA
+2021,Kaffrine,02.87,M,control,02-87-00.,3,September 28th to october 5th,NA,NA,NA,NA,October 20th to 31th,NA
+2021,Kaffrine,02.87,M,fertilized,02-87-01.,1,July 27th to august 3th,23,33,70,2,October 20th to 31th,NA
+2021,Kaffrine,02.87,M,fertilized,02-87-01.,2,August 30th toseptember 4th,NA,NA,NA,NA,October 20th to 31th,NA
+2021,Kaffrine,02.87,M,fertilized,02-87-01.,3,September 28th to october 5th,NA,NA,NA,NA,October 20th to 31th,NA
+2021,Kaffrine,02.88,M,control,02-88-00.,1,July 27th to august 3th,35,25,60,3,October 20th to 31th,560
+2021,Kaffrine,02.88,M,control,02-88-00.,2,August 30th toseptember 4th,23,33,70,3,October 20th to 31th,560
+2021,Kaffrine,02.88,M,control,02-88-00.,3,September 28th to october 5th,24,33,70,0,October 20th to 31th,560
+2021,Kaffrine,02.88,M,fertilized,02-88-01.,1,July 27th to august 3th,28,24,65,2,October 20th to 31th,800
+2021,Kaffrine,02.88,M,fertilized,02-88-01.,2,August 30th toseptember 4th,21,32,75,0,October 20th to 31th,800
+2021,Kaffrine,02.88,M,fertilized,02-88-01.,3,September 28th to october 5th,20,33,75,0,October 20th to 31th,800
+2021,Kaffrine,02.89,M,control,02-89-00.,1,July 27th to august 3th,85,29,60,5,October 20th to 31th,NA
+2021,Kaffrine,02.89,M,control,02-89-00.,2,August 30th toseptember 4th,41,29,60,5,October 20th to 31th,NA
+2021,Kaffrine,02.89,M,control,02-89-00.,3,September 28th to october 5th,41,29,60,0,October 20th to 31th,NA
+2021,Kaffrine,02.89,M,fertilized,02-89-01.,1,July 27th to august 3th,65,29,60,2,October 20th to 31th,NA
+2021,Kaffrine,02.89,M,fertilized,02-89-01.,2,August 30th toseptember 4th,31,29,60,0,October 20th to 31th,NA
+2021,Kaffrine,02.89,M,fertilized,02-89-01.,3,September 28th to october 5th,20,33,75,0,October 20th to 31th,NA
+2021,Kaffrine,02.90,M,control,02-90-00.,1,July 27th to august 3th,32,29,75,1,October 20th to 31th,1020
+2021,Kaffrine,02.90,M,control,02-90-00.,2,August 30th toseptember 4th,36,33,60,4,October 20th to 31th,1020
+2021,Kaffrine,02.90,M,control,02-90-00.,3,September 28th to october 5th,32,34,60,0,October 20th to 31th,1020
+2021,Kaffrine,02.90,M,fertilized,02-90-01.,1,July 27th to august 3th,25,29,90,2,October 20th to 31th,1360
+2021,Kaffrine,02.90,M,fertilized,02-90-01.,2,August 30th toseptember 4th,8,33,95,0,October 20th to 31th,1360
+2021,Kaffrine,02.90,M,fertilized,02-90-01.,3,September 28th to october 5th,12,34,70,0,October 20th to 31th,1360
+2021,Kaffrine,02.91,M,control,02-91-00.,1,July 27th to august 3th,31,31,60,2,October 20th to 31th,280
+2021,Kaffrine,02.91,M,control,02-91-00.,2,August 30th toseptember 4th,12,37,70,0,October 20th to 31th,280
+2021,Kaffrine,02.91,M,control,02-91-00.,3,September 28th to october 5th,37,39,65,0,October 20th to 31th,280
+2021,Kaffrine,02.91,M,fertilized,02-91-01.,1,July 27th to august 3th,23,31,80,4,October 20th to 31th,400
+2021,Kaffrine,02.91,M,fertilized,02-91-01.,2,August 30th toseptember 4th,6,37,90,0,October 20th to 31th,400
+2021,Kaffrine,02.91,M,fertilized,02-91-01.,3,September 28th to october 5th,12,39,60,0,October 20th to 31th,400
+2021,Kaffrine,02.92,M,control,02-92-00.,1,July 27th to august 3th,102,34,60,3,October 20th to 31th,350
+2021,Kaffrine,02.92,M,control,02-92-00.,2,August 30th toseptember 4th,5,29,90,0,October 20th to 31th,350
+2021,Kaffrine,02.92,M,control,02-92-00.,3,September 28th to october 5th,30,29,80,0,October 20th to 31th,350
+2021,Kaffrine,02.92,M,fertilized,02-92-01.,1,July 27th to august 3th,98,34,40,2,October 20th to 31th,1100
+2021,Kaffrine,02.92,M,fertilized,02-92-01.,2,August 30th toseptember 4th,16,29,70,0,October 20th to 31th,1100
+2021,Kaffrine,02.92,M,fertilized,02-92-01.,3,September 28th to october 5th,8,29,75,0,October 20th to 31th,1100
+2021,Kaffrine,02.93,M,control,02-93-00.,1,July 27th to august 3th,53,30,80,2,October 20th to 31th,1000
+2021,Kaffrine,02.93,M,control,02-93-00.,2,August 30th toseptember 4th,24,33,75,2,October 20th to 31th,1000
+2021,Kaffrine,02.93,M,control,02-93-00.,3,September 28th to october 5th,20,33,75,0,October 20th to 31th,1000
+2021,Kaffrine,02.93,M,fertilized,02-93-01.,1,July 27th to august 3th,39,31,90,1,October 20th to 31th,1500
+2021,Kaffrine,02.93,M,fertilized,02-93-01.,2,August 30th toseptember 4th,22,33,85,0,October 20th to 31th,1500
+2021,Kaffrine,02.93,M,fertilized,02-93-01.,3,September 28th to october 5th,30,33,85,0,October 20th to 31th,1500
+2021,Kaffrine,02.94,M,control,02-94-00.,1,July 27th to august 3th,44,33,80,1,October 20th to 31th,NA
+2021,Kaffrine,02.94,M,control,02-94-00.,2,August 30th toseptember 4th,26,26,85,0,October 20th to 31th,NA
+2021,Kaffrine,02.94,M,control,02-94-00.,3,September 28th to october 5th,58,25,85,0,October 20th to 31th,NA
+2021,Kaffrine,02.94,M,fertilized,02-94-01.,1,July 27th to august 3th,29,33,75,2,October 20th to 31th,NA
+2021,Kaffrine,02.94,M,fertilized,02-94-01.,2,August 30th toseptember 4th,28,26,85,2,October 20th to 31th,NA
+2021,Kaffrine,02.94,M,fertilized,02-94-01.,3,September 28th to october 5th,24,25,85,5,October 20th to 31th,NA
+2021,Kaffrine,02.95,M,control,02-95-00.,1,July 27th to august 3th,67,29,80,1,October 20th to 31th,240
+2021,Kaffrine,02.95,M,control,02-95-00.,2,August 30th toseptember 4th,18,34,90,0,October 20th to 31th,240
+2021,Kaffrine,02.95,M,control,02-95-00.,3,September 28th to october 5th,35,34,80,0,October 20th to 31th,240
+2021,Kaffrine,02.95,M,fertilized,02-95-01.,1,July 27th to august 3th,84,29,80,1,October 20th to 31th,560
+2021,Kaffrine,02.95,M,fertilized,02-95-01.,2,August 30th toseptember 4th,10,34,90,0,October 20th to 31th,560
+2021,Kaffrine,02.95,M,fertilized,02-95-01.,3,September 28th to october 5th,9,34,90,0,October 20th to 31th,560
+2021,Kaffrine,02.96,M,NA,NA,1,July 27th to august 3th,NA,NA,NA,NA,October 20th to 31th,640
+2021,Kaffrine,02.96,M,NA,NA,2,August 30th toseptember 4th,5,37,90,0,October 20th to 31th,640
+2021,Kaffrine,02.96,M,NA,NA,3,September 28th to october 5th,41,37,90,0,October 20th to 31th,640
+2021,Kaffrine,02.96,M,NA,NA,1,July 27th to august 3th,NA,NA,NA,NA,October 20th to 31th,1040
+2021,Kaffrine,02.96,M,NA,NA,2,August 30th toseptember 4th,2,37,90,0,October 20th to 31th,1040
+2021,Kaffrine,02.96,M,NA,NA,3,September 28th to october 5th,13,37,80,0,October 20th to 31th,1040
+2021,Kaffrine,02.97,M,control,02-97-00.,1,July 27th to august 3th,75,27,40,3,October 20th to 31th,150
+2021,Kaffrine,02.97,M,control,02-97-00.,2,August 30th toseptember 4th,12,26,90,0,October 20th to 31th,150
+2021,Kaffrine,02.97,M,control,02-97-00.,3,September 28th to october 5th,38,29,60,0,October 20th to 31th,150
+2021,Kaffrine,02.97,M,fertilized,02-97-01.,1,July 27th to august 3th,82,27,50,4,October 20th to 31th,300
+2021,Kaffrine,02.97,M,fertilized,02-97-01.,2,August 30th toseptember 4th,6,26,70,0,October 20th to 31th,300
+2021,Kaffrine,02.97,M,fertilized,02-97-01.,3,September 28th to october 5th,10,29,70,0,October 20th to 31th,300
+2021,Kaffrine,02.98,M,control,02-98-00,1,July 27th to august 3th,38,26,60,5,October 20th to 31th,400
+2021,Kaffrine,02.98,M,control,02-98-00,2,August 30th toseptember 4th,32,32,50,5,October 20th to 31th,400
+2021,Kaffrine,02.98,M,control,02-98-00,3,September 28th to october 5th,32,32,50,0,October 20th to 31th,400
+2021,Kaffrine,02.98,M,fertilized,02-98-01.,1,July 27th to august 3th,33,26,50,0,October 20th to 31th,800
+2021,Kaffrine,02.98,M,fertilized,02-98-01.,2,August 30th toseptember 4th,20,32,60,0,October 20th to 31th,800
+2021,Kaffrine,02.98,M,fertilized,02-98-01.,3,September 28th to october 5th,20,32,60,0,October 20th to 31th,800
+2021,Kaffrine,02.99,M,control,02-99-00,1,July 27th to august 3th,97,34,60,2,October 20th to 31th,1050
+2021,Kaffrine,02.99,M,control,02-99-00,2,August 30th toseptember 4th,8,39,90,0,October 20th to 31th,1050
+2021,Kaffrine,02.99,M,control,02-99-00,3,September 28th to october 5th,43,37,80,0,October 20th to 31th,1050
+2021,Kaffrine,02.99,M,fertilized,02-99-01.,1,July 27th to august 3th,76,34,70,0,October 20th to 31th,1860
+2021,Kaffrine,02.99,M,fertilized,02-99-01.,2,August 30th toseptember 4th,6,39,80,0,October 20th to 31th,1860
+2021,Kaffrine,02.99,M,fertilized,02-99-01.,3,September 28th to october 5th,23,37,70,0,October 20th to 31th,1860
+2021,Kaffrine,02.100,M,control,02-100-00,1,July 27th to august 3th,82,32,60,2,October 20th to 31th,1000
+2021,Kaffrine,02.100,M,control,02-100-00,2,August 30th toseptember 4th,10,36,70,0,October 20th to 31th,1000
+2021,Kaffrine,02.100,M,control,02-100-00,3,September 28th to october 5th,37,36,60,0,October 20th to 31th,1000
+2021,Kaffrine,02.100,M,fertilized,02-100-01.,1,July 27th to august 3th,70,32,80,1,October 20th to 31th,1500
+2021,Kaffrine,02.100,M,fertilized,02-100-01.,2,August 30th toseptember 4th,7,36,90,0,October 20th to 31th,1500
+2021,Kaffrine,02.100,M,fertilized,02-100-01.,3,September 28th to october 5th,9,36,70,0,October 20th to 31th,1500
+2021,Kaffrine,02.221,F,control,02-221-00,1,July 27th to august 3th,42,32,60,4,October 20th to 31th,70
+2021,Kaffrine,02.221,F,control,02-221-00,2,August 30th toseptember 4th,19,31,40,0,October 20th to 31th,70
+2021,Kaffrine,02.221,F,control,02-221-00,3,September 28th to october 5th,36,31,85,0,October 20th to 31th,70
+2021,Kaffrine,02.221,F,fertilized,02-22101.,1,July 27th to august 3th,32,32,50,5,October 20th to 31th,90
+2021,Kaffrine,02.221,F,fertilized,02-22101.,2,August 30th toseptember 4th,5,31,65,0,October 20th to 31th,90
+2021,Kaffrine,02.221,F,fertilized,02-22101.,3,September 28th to october 5th,10,31,75,0,October 20th to 31th,90
+2021,Kaffrine,02.222,F,control,02-222-00,1,July 27th to august 3th,95,27,NA,NA,October 20th to 31th,NA
+2021,Kaffrine,02.222,F,control,02-222-00,2,August 30th toseptember 4th,20,33,80,0,October 20th to 31th,NA
+2021,Kaffrine,02.222,F,control,02-222-00,3,September 28th to october 5th,46,32,90,0,October 20th to 31th,NA
+2021,Kaffrine,02.222,F,fertilized,02-222-01.,1,July 27th to august 3th,NA,27,80,6,October 20th to 31th,250
+2021,Kaffrine,02.222,F,fertilized,02-222-01.,2,August 30th toseptember 4th,39,33,60,7,October 20th to 31th,250
+2021,Kaffrine,02.222,F,fertilized,02-222-01.,3,September 28th to october 5th,11,33,65,0,October 20th to 31th,250
+2021,Kaffrine,02.223,F,NA,NA,1,July 27th to august 3th,NA,NA,NA,NA,October 20th to 31th,NA
+2021,Kaffrine,02.223,F,NA,NA,2,August 30th toseptember 4th,NA,33,95,0,October 20th to 31th,NA
+2021,Kaffrine,02.223,F,NA,NA,3,September 28th to october 5th,4,32,95,0,October 20th to 31th,NA
+2021,Kaffrine,02.223,F,NA,NA,1,July 27th to august 3th,NA,NA,NA,NA,October 20th to 31th,NA
+2021,Kaffrine,02.223,F,NA,NA,2,August 30th toseptember 4th,NA,33,70,1,October 20th to 31th,NA
+2021,Kaffrine,02.223,F,NA,NA,3,September 28th to october 5th,15,32,70,0,October 20th to 31th,NA
+2021,Kaffrine,02.224,F,control,02-224-00,1,July 27th to august 3th,42,31,60,2,October 20th to 31th,NA
+2021,Kaffrine,02.224,F,control,02-224-00,2,August 30th toseptember 4th,NA,NA,NA,NA,October 20th to 31th,NA
+2021,Kaffrine,02.224,F,control,02-224-00,3,September 28th to october 5th,NA,NA,NA,NA,October 20th to 31th,NA
+2021,Kaffrine,02.224,F,fertilized,02-224-01.,1,July 27th to august 3th,23,31,80,1,October 20th to 31th,300
+2021,Kaffrine,02.224,F,fertilized,02-224-01.,2,August 30th toseptember 4th,21,31,75,2,October 20th to 31th,300
+2021,Kaffrine,02.224,F,fertilized,02-224-01.,3,September 28th to october 5th,21,30,75,0,October 20th to 31th,300
+2021,Kaffrine,02.225,F,control,02-225-00.,1,July 27th to august 3th,70,27,90,4,October 20th to 31th,750
+2021,Kaffrine,02.225,F,control,02-225-00.,2,August 30th toseptember 4th,6,32,85,0,October 20th to 31th,750
+2021,Kaffrine,02.225,F,control,02-225-00.,3,September 28th to october 5th,6,33,85,0,October 20th to 31th,750
+2021,Kaffrine,02.225,F,fertilized,02-225-01.,1,July 27th to august 3th,20,27,80,6,October 20th to 31th,825
+2021,Kaffrine,02.225,F,fertilized,02-225-01.,2,August 30th toseptember 4th,14,32,75,0,October 20th to 31th,825
+2021,Kaffrine,02.225,F,fertilized,02-225-01.,3,September 28th to october 5th,14,33,75,0,October 20th to 31th,825
+2021,Kaffrine,02.226,F,control,02-226-00.,1,July 27th to august 3th,56,29,80,12,October 20th to 31th,150
+2021,Kaffrine,02.226,F,control,02-226-00.,2,August 30th toseptember 4th,7,33,85,0,October 20th to 31th,150
+2021,Kaffrine,02.226,F,control,02-226-00.,3,September 28th to october 5th,7,24,85,0,October 20th to 31th,150
+2021,Kaffrine,02.226,F,fertilized,02-226-01.,1,July 27th to august 3th,43,29,60,9,October 20th to 31th,350
+2021,Kaffrine,02.226,F,fertilized,02-226-01.,2,August 30th toseptember 4th,11,33,65,0,October 20th to 31th,350
+2021,Kaffrine,02.226,F,fertilized,02-226-01.,3,September 28th to october 5th,11,24,65,0,October 20th to 31th,350
+2021,Kaffrine,02.227,F,control,02-227-00.,1,July 27th to august 3th,45,27,40,7,October 20th to 31th,NA
+2021,Kaffrine,02.227,F,control,02-227-00.,2,August 30th toseptember 4th,5,NA,NA,NA,October 20th to 31th,NA
+2021,Kaffrine,02.227,F,control,02-227-00.,3,September 28th to october 5th,NA,NA,NA,NA,October 20th to 31th,NA
+2021,Kaffrine,02.227,F,fertilized,02-227-01.,1,July 27th to august 3th,34,27,85,8,October 20th to 31th,900
+2021,Kaffrine,02.227,F,fertilized,02-227-01.,2,August 30th toseptember 4th,5,32,85,0,October 20th to 31th,900
+2021,Kaffrine,02.227,F,fertilized,02-227-01.,3,September 28th to october 5th,5,25,85,0,October 20th to 31th,900
+2021,Kaffrine,02.228,F,control,02-228-00.,1,July 27th to august 3th,65,27,90,0,October 20th to 31th,NA
+2021,Kaffrine,02.228,F,control,02-228-00.,2,August 30th toseptember 4th,4,32,85,0,October 20th to 31th,NA
+2021,Kaffrine,02.228,F,control,02-228-00.,3,September 28th to october 5th,48,33,95,0,October 20th to 31th,NA
+2021,Kaffrine,02.228,F,fertilized,02-228-01.,1,July 27th to august 3th,52,27,80,2,October 20th to 31th,560
+2021,Kaffrine,02.228,F,fertilized,02-228-01.,2,August 30th toseptember 4th,12,32,75,0,October 20th to 31th,560
+2021,Kaffrine,02.228,F,fertilized,02-228-01.,3,September 28th to october 5th,14,33,85,0,October 20th to 31th,560
+2021,Kaffrine,02.229,F,control,02-229-00.,1,July 27th to august 3th,71,29,85,5,October 20th to 31th,504
+2021,Kaffrine,02.229,F,control,02-229-00.,2,August 30th toseptember 4th,13,32,85,0,October 20th to 31th,504
+2021,Kaffrine,02.229,F,control,02-229-00.,3,September 28th to october 5th,20,30,95,0,October 20th to 31th,504
+2021,Kaffrine,02.229,F,fertilized,02-229-01.,1,July 27th to august 3th,83,29,80,7,October 20th to 31th,840
+2021,Kaffrine,02.229,F,fertilized,02-229-01.,2,August 30th toseptember 4th,18,32,70,0,October 20th to 31th,840
+2021,Kaffrine,02.229,F,fertilized,02-229-01.,3,September 28th to october 5th,1,30,90,0,October 20th to 31th,840
+2021,Kaffrine,02.230,F,control,02-230-01.,1,July 27th to august 3th,80,NA,NA,NA,October 20th to 31th,300
+2021,Kaffrine,02.230,F,control,02-230-01.,2,August 30th toseptember 4th,7,23,85,0,October 20th to 31th,300
+2021,Kaffrine,02.230,F,control,02-230-01.,3,September 28th to october 5th,36,34,85,0,October 20th to 31th,300
+2021,Kaffrine,02.230,F,fertilized,02-230-01.,1,July 27th to august 3th,42,NA,NA,NA,October 20th to 31th,500
+2021,Kaffrine,02.230,F,fertilized,02-230-01.,2,August 30th toseptember 4th,4,23,75,0,October 20th to 31th,500
+2021,Kaffrine,02.230,F,fertilized,02-230-01.,3,September 28th to october 5th,6,34,80,0,October 20th to 31th,500
+2021,Kaffrine,02.231,F,NA,NA,1,July 27th to august 3th,NA,NA,NA,NA,October 20th to 31th,560
+2021,Kaffrine,02.231,F,NA,NA,2,August 30th toseptember 4th,6,27,90,0,October 20th to 31th,560
+2021,Kaffrine,02.231,F,NA,NA,3,September 28th to october 5th,31,30,70,0,October 20th to 31th,560
+2021,Kaffrine,02.231,F,NA,NA,1,July 27th to august 3th,NA,NA,NA,NA,October 20th to 31th,1500
+2021,Kaffrine,02.231,F,NA,NA,2,August 30th toseptember 4th,3,27,80,0,October 20th to 31th,1500
+2021,Kaffrine,02.231,F,NA,NA,3,September 28th to october 5th,12,30,60,0,October 20th to 31th,1500
+2021,Kaffrine,02.232,F,control,02-232-00.,1,July 27th to august 3th,22,28,58,1,October 20th to 31th,45
+2021,Kaffrine,02.232,F,control,02-232-00.,2,August 30th toseptember 4th,12,28,58,0,October 20th to 31th,45
+2021,Kaffrine,02.232,F,control,02-232-00.,3,September 28th to october 5th,26,32,70,0,October 20th to 31th,45
+2021,Kaffrine,02.232,F,fertilized,02-232-01.,1,July 27th to august 3th,10,28,59,1,October 20th to 31th,250
+2021,Kaffrine,02.232,F,fertilized,02-232-01.,2,August 30th toseptember 4th,6,28,59,0,October 20th to 31th,250
+2021,Kaffrine,02.232,F,fertilized,02-232-01.,3,September 28th to october 5th,2,32,80,0,October 20th to 31th,250
+2021,Kaffrine,02.233,F,control,02-233-00.,1,July 27th to august 3th,50,28,39,3,October 20th to 31th,90
+2021,Kaffrine,02.233,F,control,02-233-00.,2,August 30th toseptember 4th,30,28,39,6,October 20th to 31th,90
+2021,Kaffrine,02.233,F,control,02-233-00.,3,September 28th to october 5th,54,33,50,15,October 20th to 31th,90
+2021,Kaffrine,02.233,F,fertilized,02-233-01.,1,July 27th to august 3th,20,28,65,3,October 20th to 31th,290
+2021,Kaffrine,02.233,F,fertilized,02-233-01.,2,August 30th toseptember 4th,12,28,65,0,October 20th to 31th,290
+2021,Kaffrine,02.233,F,fertilized,02-233-01.,3,September 28th to october 5th,21,33,70,0,October 20th to 31th,290
+2021,Kaffrine,02.234,F,control,02-234-00.,1,July 27th to august 3th,56,29,68,1,October 20th to 31th,200
+2021,Kaffrine,02.234,F,control,02-234-00.,2,August 30th toseptember 4th,28,29,68,5,October 20th to 31th,200
+2021,Kaffrine,02.234,F,control,02-234-00.,3,September 28th to october 5th,39,28,80,0,October 20th to 31th,200
+2021,Kaffrine,02.234,F,fertilized,02-234-01.,1,July 27th to august 3th,70,29,39,4,October 20th to 31th,560
+2021,Kaffrine,02.234,F,fertilized,02-234-01.,2,August 30th toseptember 4th,32,29,39,8,October 20th to 31th,560
+2021,Kaffrine,02.234,F,fertilized,02-234-01.,3,September 28th to october 5th,30,28,60,5,October 20th to 31th,560
+2021,Kaffrine,02.235,F,control,02-235-00.,1,July 27th to august 3th,78,30,73,5,October 20th to 31th,50
+2021,Kaffrine,02.235,F,control,02-235-00.,2,August 30th toseptember 4th,34,30,73,5,October 20th to 31th,50
+2021,Kaffrine,02.235,F,control,02-235-00.,3,September 28th to october 5th,46,30,75,8,October 20th to 31th,50
+2021,Kaffrine,02.235,F,fertilized,02-235-01.,1,July 27th to august 3th,46,30,87,2,October 20th to 31th,200
+2021,Kaffrine,02.235,F,fertilized,02-235-01.,2,August 30th toseptember 4th,27,30,87,0,October 20th to 31th,200
+2021,Kaffrine,02.235,F,fertilized,02-235-01.,3,September 28th to october 5th,9,30,85,0,October 20th to 31th,200
+2021,Kaffrine,02.236,F,control,02-236-00.,1,July 27th to august 3th,50,30,66,2,October 20th to 31th,60
+2021,Kaffrine,02.236,F,control,02-236-00.,2,August 30th toseptember 4th,31,30,66,5,October 20th to 31th,60
+2021,Kaffrine,02.236,F,control,02-236-00.,3,September 28th to october 5th,28,31,75,0,October 20th to 31th,60
+2021,Kaffrine,02.236,F,fertilized,02-236-01.,1,July 27th to august 3th,26,30,48,3,October 20th to 31th,200
+2021,Kaffrine,02.236,F,fertilized,02-236-01.,2,August 30th toseptember 4th,19,30,48,0,October 20th to 31th,200
+2021,Kaffrine,02.236,F,fertilized,02-236-01.,3,September 28th to october 5th,10,31,80,0,October 20th to 31th,200
+2021,Kaffrine,02.237,F,control,02-237-00.,1,July 27th to august 3th,20,29,48,4,October 20th to 31th,NA
+2021,Kaffrine,02.237,F,control,02-237-00.,2,August 30th toseptember 4th,12,29,48,0,October 20th to 31th,NA
+2021,Kaffrine,02.237,F,control,02-237-00.,3,September 28th to october 5th,56,34,80,0,October 20th to 31th,NA
+2021,Kaffrine,02.237,F,fertilized,02-237-01.,1,July 27th to august 3th,26,29,69,3,October 20th to 31th,25
+2021,Kaffrine,02.237,F,fertilized,02-237-01.,2,August 30th toseptember 4th,15,29,69,0,October 20th to 31th,25
+2021,Kaffrine,02.237,F,fertilized,02-237-01.,3,September 28th to october 5th,12,33,70,0,October 20th to 31th,25
+2021,Kaffrine,02.238,F,control,02-238-00.,1,July 27th to august 3th,60,31,64,4,October 20th to 31th,150
+2021,Kaffrine,02.238,F,control,02-238-00.,2,August 30th toseptember 4th,24,31,64,0,October 20th to 31th,150
+2021,Kaffrine,02.238,F,control,02-238-00.,3,September 28th to october 5th,32,32,70,0,October 20th to 31th,150
+2021,Kaffrine,02.238,F,fertilized,02-238-01.,1,July 27th to august 3th,24,31,58,1,October 20th to 31th,200
+2021,Kaffrine,02.238,F,fertilized,02-238-01.,2,August 30th toseptember 4th,14,31,58,0,October 20th to 31th,200
+2021,Kaffrine,02.238,F,fertilized,02-238-01.,3,September 28th to october 5th,8,32,55,0,October 20th to 31th,200
+2021,Kaffrine,02.239,F,control,02-239-00.,1,July 27th to august 3th,48,30,66,2,October 20th to 31th,100
+2021,Kaffrine,02.239,F,control,02-239-00.,2,August 30th toseptember 4th,26,30,66,0,October 20th to 31th,100
+2021,Kaffrine,02.239,F,control,02-239-00.,3,September 28th to october 5th,29,33,70,0,October 20th to 31th,100
+2021,Kaffrine,02.239,F,fertilized,02-239-01.,1,July 27th to august 3th,8,30,75,4,October 20th to 31th,300
+2021,Kaffrine,02.239,F,fertilized,02-239-01.,2,August 30th toseptember 4th,5,30,75,0,October 20th to 31th,300
+2021,Kaffrine,02.239,F,fertilized,02-239-01.,3,September 28th to october 5th,3,33,70,0,October 20th to 31th,300
+2021,Kaffrine,02.240,F,control,02-240-00.,1,July 27th to august 3th,54,28,76,2,October 20th to 31th,460
+2021,Kaffrine,02.240,F,control,02-240-00.,2,August 30th toseptember 4th,28,28,76,2,October 20th to 31th,460
+2021,Kaffrine,02.240,F,control,02-240-00.,3,September 28th to october 5th,40,30,80,0,October 20th to 31th,460
+2021,Kaffrine,02.240,F,fertilized,02-240-01.,1,July 27th to august 3th,24,32,50,3,October 20th to 31th,600
+2021,Kaffrine,02.240,F,fertilized,02-240-01.,2,August 30th toseptember 4th,16,32,50,0,October 20th to 31th,600
+2021,Kaffrine,02.240,F,fertilized,02-240-01.,3,September 28th to october 5th,24,27,60,0,October 20th to 31th,600
+2021,Kaffrine,02.241,F,control,02-241-00,1,July 27th to august 3th,58,27,80,26,October 20th to 31th,100
+2021,Kaffrine,02.241,F,control,02-241-00,2,August 30th toseptember 4th,14,37,90,0,October 20th to 31th,100
+2021,Kaffrine,02.241,F,control,02-241-00,3,September 28th to october 5th,52,34,90,0,October 20th to 31th,100
+2021,Kaffrine,02.241,F,fertilized,02-241-01.,1,July 27th to august 3th,43,27,60,23,October 20th to 31th,700
+2021,Kaffrine,02.241,F,fertilized,02-241-01.,2,August 30th toseptember 4th,15,37,70,0,October 20th to 31th,700
+2021,Kaffrine,02.241,F,fertilized,02-241-01.,3,September 28th to october 5th,10,34,80,0,October 20th to 31th,700
+2021,Kaffrine,02.242,F,control,02-242-00,1,July 27th to august 3th,78,27,60,37,October 20th to 31th,350
+2021,Kaffrine,02.242,F,control,02-242-00,2,August 30th toseptember 4th,9,37,90,0,October 20th to 31th,350
+2021,Kaffrine,02.242,F,control,02-242-00,3,September 28th to october 5th,61,36,70,0,October 20th to 31th,350
+2021,Kaffrine,02.242,F,fertilized,02-242-01.,1,July 27th to august 3th,98,27,40,34,October 20th to 31th,823
+2021,Kaffrine,02.242,F,fertilized,02-242-01.,2,August 30th toseptember 4th,11,37,90,0,October 20th to 31th,823
+2021,Kaffrine,02.242,F,fertilized,02-242-01.,3,September 28th to october 5th,8,36,70,0,October 20th to 31th,823
+2021,Kaffrine,02.243,F,control,02-243-00,1,July 27th to august 3th,74,26,60,31,October 20th to 31th,337
+2021,Kaffrine,02.243,F,control,02-243-00,2,August 30th toseptember 4th,4,37,90,0,October 20th to 31th,337
+2021,Kaffrine,02.243,F,control,02-243-00,3,September 28th to october 5th,47,38,80,0,October 20th to 31th,337
+2021,Kaffrine,02.243,F,fertilized,02-243-01.,1,July 27th to august 3th,53,26,80,24,October 20th to 31th,960
+2021,Kaffrine,02.243,F,fertilized,02-243-01.,2,August 30th toseptember 4th,3,37,90,0,October 20th to 31th,960
+2021,Kaffrine,02.243,F,fertilized,02-243-01.,3,September 28th to october 5th,9,38,80,0,October 20th to 31th,960
+2021,Kaffrine,02.244,F,control,02-244-00,1,July 27th to august 3th,98,29,80,24,October 20th to 31th,140
+2021,Kaffrine,02.244,F,control,02-244-00,2,August 30th toseptember 4th,7,27,90,0,October 20th to 31th,140
+2021,Kaffrine,02.244,F,control,02-244-00,3,September 28th to october 5th,48,29,70,0,October 20th to 31th,140
+2021,Kaffrine,02.244,F,fertilized,02-244-01.,1,July 27th to august 3th,80,29,60,23,October 20th to 31th,1700
+2021,Kaffrine,02.244,F,fertilized,02-244-01.,2,August 30th toseptember 4th,6,27,70,0,October 20th to 31th,1700
+2021,Kaffrine,02.244,F,fertilized,02-244-01.,3,September 28th to october 5th,16,29,60,0,October 20th to 31th,1700
+2021,Kaffrine,02.245,F,control,02-245-00,1,July 27th to august 3th,NA,29,NA,NA,October 20th to 31th,NA
+2021,Kaffrine,02.245,F,control,02-245-00,2,August 30th toseptember 4th,NA,NA,NA,NA,October 20th to 31th,NA
+2021,Kaffrine,02.245,F,control,02-245-00,3,September 28th to october 5th,NA,NA,NA,NA,October 20th to 31th,NA
+2021,Kaffrine,02.245,F,fertilized,02-245-01.,1,July 27th to august 3th,87,29,40,46,October 20th to 31th,NA
+2021,Kaffrine,02.245,F,fertilized,02-245-01.,2,August 30th toseptember 4th,12,29,70,0,October 20th to 31th,NA
+2021,Kaffrine,02.245,F,fertilized,02-245-01.,3,September 28th to october 5th,8,34,80,0,October 20th to 31th,NA
+2021,Kaffrine,02.246,F,control,02-246-00,1,July 27th to august 3th,84,26,80,26,October 20th to 31th,665
+2021,Kaffrine,02.246,F,control,02-246-00,2,August 30th toseptember 4th,8,35,90,0,October 20th to 31th,665
+2021,Kaffrine,02.246,F,control,02-246-00,3,September 28th to october 5th,51,34,70,0,October 20th to 31th,665
+2021,Kaffrine,02.246,F,fertilized,02-246-01.,1,July 27th to august 3th,62,26,80,21,October 20th to 31th,950
+2021,Kaffrine,02.246,F,fertilized,02-246-01.,2,August 30th toseptember 4th,2,35,90,0,October 20th to 31th,950
+2021,Kaffrine,02.246,F,fertilized,02-246-01.,3,September 28th to october 5th,19,34,60,0,October 20th to 31th,950
+2021,Kaffrine,02.247,F,control,02-247-00,1,July 27th to august 3th,82,24,60,23,October 20th to 31th,350
+2021,Kaffrine,02.247,F,control,02-247-00,2,August 30th toseptember 4th,10,29,90,0,October 20th to 31th,350
+2021,Kaffrine,02.247,F,control,02-247-00,3,September 28th to october 5th,48,37,70,0,October 20th to 31th,350
+2021,Kaffrine,02.247,F,fertilized,02-247-01.,1,July 27th to august 3th,58,24,50,24,October 20th to 31th,460
+2021,Kaffrine,02.247,F,fertilized,02-247-01.,2,August 30th toseptember 4th,6,29,90,0,October 20th to 31th,460
+2021,Kaffrine,02.247,F,fertilized,02-247-01.,3,September 28th to october 5th,10,37,80,0,October 20th to 31th,460
+2021,Kaffrine,02.248,F,control,02-248-00,1,July 27th to august 3th,74,29,80,26,October 20th to 31th,245
+2021,Kaffrine,02.248,F,control,02-248-00,2,August 30th toseptember 4th,4,27,90,1,October 20th to 31th,245
+2021,Kaffrine,02.248,F,control,02-248-00,3,September 28th to october 5th,37,36,80,8,October 20th to 31th,245
+2021,Kaffrine,02.248,F,fertilized,02-248-01.,1,July 27th to august 3th,79,29,80,24,October 20th to 31th,269
+2021,Kaffrine,02.248,F,fertilized,02-248-01.,2,August 30th toseptember 4th,6,27,90,0,October 20th to 31th,269
+2021,Kaffrine,02.248,F,fertilized,02-248-01.,3,September 28th to october 5th,7,36,60,0,October 20th to 31th,269
+2021,Kaffrine,02.249,F,control,02-249-00,1,July 27th to august 3th,67,27,80,35,October 20th to 31th,460
+2021,Kaffrine,02.249,F,control,02-249-00,2,August 30th toseptember 4th,7,37,80,0,October 20th to 31th,460
+2021,Kaffrine,02.249,F,control,02-249-00,3,September 28th to october 5th,29,34,70,0,October 20th to 31th,460
+2021,Kaffrine,02.249,F,fertilized,02-249-01.,1,July 27th to august 3th,43,27,80,3,October 20th to 31th,900
+2021,Kaffrine,02.249,F,fertilized,02-249-01.,2,August 30th toseptember 4th,7,37,80,0,October 20th to 31th,900
+2021,Kaffrine,02.249,F,fertilized,02-249-01.,3,September 28th to october 5th,2,34,70,0,October 20th to 31th,900
+2021,Kaffrine,02.250,F,control,02-250-00,1,July 27th to august 3th,78,25,60,23,October 20th to 31th,200
+2021,Kaffrine,02.250,F,control,02-250-00,2,August 30th toseptember 4th,10,29,90,0,October 20th to 31th,200
+2021,Kaffrine,02.250,F,control,02-250-00,3,September 28th to october 5th,21,29,60,0,October 20th to 31th,200
+2021,Kaffrine,02.250,F,fertilized,02-250-01.,1,July 27th to august 3th,42,25,40,17,October 20th to 31th,400
+2021,Kaffrine,02.250,F,fertilized,02-250-01.,2,August 30th toseptember 4th,9,29,90,0,October 20th to 31th,400
+2021,Kaffrine,02.250,F,fertilized,02-250-01.,3,September 28th to october 5th,7,29,75,0,October 20th to 31th,400
+2021,Thies,03.101,F,control,03-101-00,1,July 27th to august 3th,8,31,20,0,October 20th to 31th,120
+2021,Thies,03.101,F,control,03-101-00,2,August 30th toseptember 4th,4,30,65,0,October 20th to 31th,120
+2021,Thies,03.101,F,control,03-101-00,3,September 28th to october 5th,12,36,80,0,October 20th to 31th,120
+2021,Thies,03.101,F,fertilized,03-101-01.,1,July 27th to august 3th,6,31,40,0,October 20th to 31th,560
+2021,Thies,03.101,F,fertilized,03-101-01.,2,August 30th toseptember 4th,8,30,50,0,October 20th to 31th,560
+2021,Thies,03.101,F,fertilized,03-101-01.,3,September 28th to october 5th,2,36,65,0,October 20th to 31th,560
+2021,Thies,03.102,F,control,03-102-00,1,July 27th to august 3th,18,33,20,5,October 20th to 31th,100
+2021,Thies,03.102,F,control,03-102-00,2,August 30th toseptember 4th,21,29,40,10,October 20th to 31th,100
+2021,Thies,03.102,F,control,03-102-00,3,September 28th to october 5th,19,30,60,10,October 20th to 31th,100
+2021,Thies,03.102,F,fertilized,03-102-01.,1,July 27th to august 3th,12,27,35,0,October 20th to 31th,740
+2021,Thies,03.102,F,fertilized,03-102-01.,2,August 30th toseptember 4th,12,30,20,5,October 20th to 31th,740
+2021,Thies,03.102,F,fertilized,03-102-01.,3,September 28th to october 5th,5,30,70,5,October 20th to 31th,740
+2021,Thies,03.103,M,control,03-103-00,1,July 27th to august 3th,5,26,55,0,October 20th to 31th,410
+2021,Thies,03.103,M,control,03-103-00,2,August 30th toseptember 4th,9,25,70,0,October 20th to 31th,410
+2021,Thies,03.103,M,control,03-103-00,3,September 28th to october 5th,27,28,60,0,October 20th to 31th,410
+2021,Thies,03.103,M,fertilized,03-103-01.,1,July 27th to august 3th,8,26,65,0,October 20th to 31th,800
+2021,Thies,03.103,M,fertilized,03-103-01.,2,August 30th toseptember 4th,2,25,60,0,October 20th to 31th,800
+2021,Thies,03.103,M,fertilized,03-103-01.,3,September 28th to october 5th,4,28,60,0,October 20th to 31th,800
+2021,Thies,03.104,M,control,03-104-00,1,July 27th to august 3th,12,29,40,4,October 20th to 31th,340
+2021,Thies,03.104,M,control,03-104-00,2,August 30th toseptember 4th,6,31,70,4,October 20th to 31th,340
+2021,Thies,03.104,M,control,03-104-00,3,September 28th to october 5th,16,36,90,4,October 20th to 31th,340
+2021,Thies,03.104,M,fertilized,03-104-01.,1,July 27th to august 3th,4,29,20,0,October 20th to 31th,1105
+2021,Thies,03.104,M,fertilized,03-104-01.,2,August 30th toseptember 4th,2,31,80,0,October 20th to 31th,1105
+2021,Thies,03.104,M,fertilized,03-104-01.,3,September 28th to october 5th,1,36,90,0,October 20th to 31th,1105
+2021,Thies,03.105,F,control,03-105-00,1,July 27th to august 3th,NA,NA,NA,NA,October 20th to 31th,NA
+2021,Thies,03.105,F,control,03-105-00,2,August 30th toseptember 4th,NA,NA,NA,NA,October 20th to 31th,NA
+2021,Thies,03.105,F,control,03-105-00,3,September 28th to october 5th,NA,NA,NA,NA,October 20th to 31th,NA
+2021,Thies,03.105,F,fertilized,03-105-01.,1,July 27th to august 3th,NA,NA,NA,NA,October 20th to 31th,NA
+2021,Thies,03.105,F,fertilized,03-105-01.,2,August 30th toseptember 4th,NA,NA,NA,NA,October 20th to 31th,NA
+2021,Thies,03.105,F,fertilized,03-105-01.,3,September 28th to october 5th,NA,NA,NA,NA,October 20th to 31th,NA
+2021,Thies,03.106,M,control,03-106-00,1,July 27th to august 3th,10,32,70,5,October 20th to 31th,210
+2021,Thies,03.106,M,control,03-106-00,2,August 30th toseptember 4th,6,26,80,0,October 20th to 31th,210
+2021,Thies,03.106,M,control,03-106-00,3,September 28th to october 5th,19,33,85,0,October 20th to 31th,210
+2021,Thies,03.106,M,fertilized,03-106-01.,1,July 27th to august 3th,6,32,75,0,October 20th to 31th,700
+2021,Thies,03.106,M,fertilized,03-106-01.,2,August 30th toseptember 4th,1,26,70,0,October 20th to 31th,700
+2021,Thies,03.106,M,fertilized,03-106-01.,3,September 28th to october 5th,0,33,70,0,October 20th to 31th,700
+2021,Thies,03.107,F,control,03-107-00,1,July 27th to august 3th,10,33,40,0,October 20th to 31th,350
+2021,Thies,03.107,F,control,03-107-00,2,August 30th toseptember 4th,8,27,60,2,October 20th to 31th,350
+2021,Thies,03.107,F,control,03-107-00,3,September 28th to october 5th,28,26,70,2,October 20th to 31th,350
+2021,Thies,03.107,F,fertilized,03-107-01.,1,July 27th to august 3th,6,33,50,0,October 20th to 31th,930
+2021,Thies,03.107,F,fertilized,03-107-01.,2,August 30th toseptember 4th,2,30,50,0,October 20th to 31th,930
+2021,Thies,03.107,F,fertilized,03-107-01.,3,September 28th to october 5th,7,29,80,0,October 20th to 31th,930
+2021,Thies,03.108,M,control,03-108-00,1,July 27th to august 3th,4,27,80,0,October 20th to 31th,238
+2021,Thies,03.108,M,control,03-108-00,2,August 30th toseptember 4th,12,28,90,0,October 20th to 31th,238
+2021,Thies,03.108,M,control,03-108-00,3,September 28th to october 5th,27,29,90,0,October 20th to 31th,238
+2021,Thies,03.108,M,fertilized,03-108-01.,1,July 27th to august 3th,6,28,75,1,October 20th to 31th,1027
+2021,Thies,03.108,M,fertilized,03-108-01.,2,August 30th toseptember 4th,5,30,95,1,October 20th to 31th,1027
+2021,Thies,03.108,M,fertilized,03-108-01.,3,September 28th to october 5th,10,27,95,10,October 20th to 31th,1027
+2021,Thies,03.109,F,control,03-109-00,1,July 27th to august 3th,6,26,40,0,October 20th to 31th,224
+2021,Thies,03.109,F,control,03-109-00,2,August 30th toseptember 4th,13,31,80,3,October 20th to 31th,224
+2021,Thies,03.109,F,control,03-109-00,3,September 28th to october 5th,30,30,80,3,October 20th to 31th,224
+2021,Thies,03.109,F,fertilized,03-109-01.,1,July 27th to august 3th,5,27,60,0,October 20th to 31th,1040
+2021,Thies,03.109,F,fertilized,03-109-01.,2,August 30th toseptember 4th,5,32,80,0,October 20th to 31th,1040
+2021,Thies,03.109,F,fertilized,03-109-01.,3,September 28th to october 5th,3,31,80,0,October 20th to 31th,1040
+2021,Thies,03.110,M,control,03-110-00,1,July 27th to august 3th,4,28,30,0,October 20th to 31th,130
+2021,Thies,03.110,M,control,03-110-00,2,August 30th toseptember 4th,13,33,60,0,October 20th to 31th,130
+2021,Thies,03.110,M,control,03-110-00,3,September 28th to october 5th,17,35,60,0,October 20th to 31th,130
+2021,Thies,03.110,M,fertilized,03-110-01.,1,July 27th to august 3th,6,28,30,0,October 20th to 31th,432
+2021,Thies,03.110,M,fertilized,03-110-01.,2,August 30th toseptember 4th,2,35,60,0,October 20th to 31th,432
+2021,Thies,03.110,M,fertilized,03-110-01.,3,September 28th to october 5th,2,36,60,0,October 20th to 31th,432
+2021,Thies,03.111,M,control,03-111-00,1,July 27th to august 3th,18,30,60,8,October 20th to 31th,350
+2021,Thies,03.111,M,control,03-111-00,2,August 30th toseptember 4th,2,30,70,8,October 20th to 31th,350
+2021,Thies,03.111,M,control,03-111-00,3,September 28th to october 5th,28,36,95,8,October 20th to 31th,350
+2021,Thies,03.111,M,fertilized,03-111-01.,1,July 27th to august 3th,8,30,80,0,October 20th to 31th,1002
+2021,Thies,03.111,M,fertilized,03-111-01.,2,August 30th toseptember 4th,2,30,50,0,October 20th to 31th,1002
+2021,Thies,03.111,M,fertilized,03-111-01.,3,September 28th to october 5th,1,36,90,0,October 20th to 31th,1002
+2021,Thies,03.112,F,control,03-112-00,1,July 27th to august 3th,10,30,50,5,October 20th to 31th,300
+2021,Thies,03.112,F,control,03-112-00,2,August 30th toseptember 4th,4,26,60,0,October 20th to 31th,300
+2021,Thies,03.112,F,control,03-112-00,3,September 28th to october 5th,4,32,95,0,October 20th to 31th,300
+2021,Thies,03.112,F,fertilized,03-112-01.,1,July 27th to august 3th,8,30,60,0,October 20th to 31th,510
+2021,Thies,03.112,F,fertilized,03-112-01.,2,August 30th toseptember 4th,0,31,70,0,October 20th to 31th,510
+2021,Thies,03.112,F,fertilized,03-112-01.,3,September 28th to october 5th,0,36,80,0,October 20th to 31th,510
+2021,Thies,03.113,M,control,03-113-00,1,July 27th to august 3th,8,28,75,0,October 20th to 31th,200
+2021,Thies,03.113,M,control,03-113-00,2,August 30th toseptember 4th,3,26,80,0,October 20th to 31th,200
+2021,Thies,03.113,M,control,03-113-00,3,September 28th to october 5th,16,31,95,0,October 20th to 31th,200
+2021,Thies,03.113,M,fertilized,03-113-01.,1,July 27th to august 3th,6,28,40,0,October 20th to 31th,1000
+2021,Thies,03.113,M,fertilized,03-113-01.,2,August 30th toseptember 4th,1,26,60,0,October 20th to 31th,1000
+2021,Thies,03.113,M,fertilized,03-113-01.,3,September 28th to october 5th,0,31,90,0,October 20th to 31th,1000
+2021,Thies,03.114,M,control,03-114-00,1,July 27th to august 3th,8,33,60,0,October 20th to 31th,300
+2021,Thies,03.114,M,control,03-114-00,2,August 30th toseptember 4th,6,35,60,0,October 20th to 31th,300
+2021,Thies,03.114,M,control,03-114-00,3,September 28th to october 5th,18,36,50,0,October 20th to 31th,300
+2021,Thies,03.114,M,fertilized,03-114-01.,1,July 27th to august 3th,6,33,70,0,October 20th to 31th,830
+2021,Thies,03.114,M,fertilized,03-114-01.,2,August 30th toseptember 4th,0,35,70,0,October 20th to 31th,830
+2021,Thies,03.114,M,fertilized,03-114-01.,3,September 28th to october 5th,2,36,80,0,October 20th to 31th,830
+2021,Thies,03.115,F,control,03-115-00,1,July 27th to august 3th,14,32,50,7,October 20th to 31th,290
+2021,Thies,03.115,F,control,03-115-00,2,August 30th toseptember 4th,15,39,80,4,October 20th to 31th,290
+2021,Thies,03.115,F,control,03-115-00,3,September 28th to october 5th,16,26,80,4,October 20th to 31th,290
+2021,Thies,03.115,F,fertilized,03-115-01.,1,July 27th to august 3th,4,32,70,0,October 20th to 31th,1025
+2021,Thies,03.115,F,fertilized,03-115-01.,2,August 30th toseptember 4th,4,39,90,0,October 20th to 31th,1025
+2021,Thies,03.115,F,fertilized,03-115-01.,3,September 28th to october 5th,0,27,90,0,October 20th to 31th,1025
+2021,Thies,03.116,F,control,03-116-00,1,July 27th to august 3th,NA,32,50,0,October 20th to 31th,NA
+2021,Thies,03.116,F,control,03-116-00,2,August 30th toseptember 4th,NA,NA,NA,NA,October 20th to 31th,NA
+2021,Thies,03.116,F,control,03-116-00,3,September 28th to october 5th,NA,NA,NA,NA,October 20th to 31th,NA
+2021,Thies,03.116,F,fertilized,03-116-01.,1,July 27th to august 3th,6,NA,NA,NA,October 20th to 31th,240
+2021,Thies,03.116,F,fertilized,03-116-01.,2,August 30th toseptember 4th,4,33,65,0,October 20th to 31th,240
+2021,Thies,03.116,F,fertilized,03-116-01.,3,September 28th to october 5th,10,37,50,0,October 20th to 31th,240
+2021,Thies,03.117,M,control,03-117-00,1,July 27th to august 3th,14,35,40,4,October 20th to 31th,600
+2021,Thies,03.117,M,control,03-117-00,2,August 30th toseptember 4th,12,36,60,0,October 20th to 31th,600
+2021,Thies,03.117,M,control,03-117-00,3,September 28th to october 5th,20,31,70,0,October 20th to 31th,600
+2021,Thies,03.117,M,fertilized,03-117-01.,1,July 27th to august 3th,12,35,30,4,October 20th to 31th,1000
+2021,Thies,03.117,M,fertilized,03-117-01.,2,August 30th toseptember 4th,6,36,60,0,October 20th to 31th,1000
+2021,Thies,03.117,M,fertilized,03-117-01.,3,September 28th to october 5th,2,31,60,0,October 20th to 31th,1000
+2021,Thies,03.118,M,control,03-118-00,1,July 27th to august 3th,12,36,20,2,October 20th to 31th,130
+2021,Thies,03.118,M,control,03-118-00,2,August 30th toseptember 4th,NA,NA,NA,NA,October 20th to 31th,130
+2021,Thies,03.118,M,control,03-118-00,3,September 28th to october 5th,NA,NA,NA,NA,October 20th to 31th,130
+2021,Thies,03.118,M,fertilized,03-118-01.,1,July 27th to august 3th,6,34,40,0,October 20th to 31th,300
+2021,Thies,03.118,M,fertilized,03-118-01.,2,August 30th toseptember 4th,3,34,60,0,October 20th to 31th,300
+2021,Thies,03.118,M,fertilized,03-118-01.,3,September 28th to october 5th,4,34,55,0,October 20th to 31th,300
+2021,Thies,03.119,M,control,03-119-00,1,July 27th to august 3th,4,31,65,0,October 20th to 31th,380
+2021,Thies,03.119,M,control,03-119-00,2,August 30th toseptember 4th,4,30,80,0,October 20th to 31th,380
+2021,Thies,03.119,M,control,03-119-00,3,September 28th to october 5th,17,37,98,0,October 20th to 31th,380
+2021,Thies,03.119,M,fertilized,03-119-01.,1,July 27th to august 3th,2,31,70,0,October 20th to 31th,700
+2021,Thies,03.119,M,fertilized,03-119-01.,2,August 30th toseptember 4th,2,30,50,0,October 20th to 31th,700
+2021,Thies,03.119,M,fertilized,03-119-01.,3,September 28th to october 5th,2,37,80,0,October 20th to 31th,700
+2021,Thies,03.120,M,control,03-120-00,1,July 27th to august 3th,4,30,70,0,October 20th to 31th,270
+2021,Thies,03.120,M,control,03-120-00,2,August 30th toseptember 4th,17,38,90,2,October 20th to 31th,270
+2021,Thies,03.120,M,control,03-120-00,3,September 28th to october 5th,28,29,90,2,October 20th to 31th,270
+2021,Thies,03.120,M,fertilized,03-120-01.,1,July 27th to august 3th,10,30,80,5,October 20th to 31th,700
+2021,Thies,03.120,M,fertilized,03-120-01.,2,August 30th toseptember 4th,12,38,95,1,October 20th to 31th,700
+2021,Thies,03.120,M,fertilized,03-120-01.,3,September 28th to october 5th,8,29,95,1,October 20th to 31th,700
+2021,Thies,03.121,M,control,03-121-00,1,July 27th to august 3th,35,28,20,5,October 20th to 31th,300
+2021,Thies,03.121,M,control,03-121-00,2,August 30th toseptember 4th,8,26,60,0,October 20th to 31th,300
+2021,Thies,03.121,M,control,03-121-00,3,September 28th to october 5th,24,28,80,0,October 20th to 31th,300
+2021,Thies,03.121,M,fertilized,03-121-01.,1,July 27th to august 3th,50,28,40,5,October 20th to 31th,1200
+2021,Thies,03.121,M,fertilized,03-121-01.,2,August 30th toseptember 4th,1,27,50,0,October 20th to 31th,1200
+2021,Thies,03.121,M,fertilized,03-121-01.,3,September 28th to october 5th,5,29,80,0,October 20th to 31th,1200
+2021,Thies,03.122,F,control,03-122-00,1,July 27th to august 3th,8,34,40,0,October 20th to 31th,350
+2021,Thies,03.122,F,control,03-122-00,2,August 30th toseptember 4th,3,29,70,0,October 20th to 31th,350
+2021,Thies,03.122,F,control,03-122-00,3,September 28th to october 5th,20,36,95,0,October 20th to 31th,350
+2021,Thies,03.122,F,fertilized,03-122-01.,1,July 27th to august 3th,6,34,70,1,October 20th to 31th,850
+2021,Thies,03.122,F,fertilized,03-122-01.,2,August 30th toseptember 4th,0,29,80,0,October 20th to 31th,850
+2021,Thies,03.122,F,fertilized,03-122-01.,3,September 28th to october 5th,3,36,85,0,October 20th to 31th,850
+2021,Thies,03.123,F,control,03-123-00,1,July 27th to august 3th,12,27,65,1,October 20th to 31th,50
+2021,Thies,03.123,F,control,03-123-00,2,August 30th toseptember 4th,13,26,80,0,October 20th to 31th,50
+2021,Thies,03.123,F,control,03-123-00,3,September 28th to october 5th,42,27,70,0,October 20th to 31th,50
+2021,Thies,03.123,F,fertilized,03-123-01.,1,July 27th to august 3th,6,27,70,0,October 20th to 31th,255
+2021,Thies,03.123,F,fertilized,03-123-01.,2,August 30th toseptember 4th,0,26,80,0,October 20th to 31th,255
+2021,Thies,03.123,F,fertilized,03-123-01.,3,September 28th to october 5th,3,25,60,0,October 20th to 31th,255
+2021,Thies,03.124,M,control,03-124-00,1,July 27th to august 3th,6,32,40,0,October 20th to 31th,300
+2021,Thies,03.124,M,control,03-124-00,2,August 30th toseptember 4th,14,38,80,4,October 20th to 31th,300
+2021,Thies,03.124,M,control,03-124-00,3,September 28th to october 5th,17,30,80,4,October 20th to 31th,300
+2021,Thies,03.124,M,fertilized,03-124-01.,1,July 27th to august 3th,18,32,80,7,October 20th to 31th,1030
+2021,Thies,03.124,M,fertilized,03-124-01.,2,August 30th toseptember 4th,5,38,90,0,October 20th to 31th,1030
+2021,Thies,03.124,M,fertilized,03-124-01.,3,September 28th to october 5th,5,30,90,0,October 20th to 31th,1030
+2021,Thies,03.125,F,control,03-125-00,1,July 27th to august 3th,12,31,60,1,October 20th to 31th,444
+2021,Thies,03.125,F,control,03-125-00,2,August 30th toseptember 4th,16,38,90,3,October 20th to 31th,444
+2021,Thies,03.125,F,control,03-125-00,3,September 28th to october 5th,25,29,90,3,October 20th to 31th,444
+2021,Thies,03.125,F,fertilized,03-125-01.,1,July 27th to august 3th,8,31,40,0,October 20th to 31th,1000
+2021,Thies,03.125,F,fertilized,03-125-01.,2,August 30th toseptember 4th,1,38,75,0,October 20th to 31th,1000
+2021,Thies,03.125,F,fertilized,03-125-01.,3,September 28th to october 5th,4,29,75,0,October 20th to 31th,1000
+2021,Thies,03.126,M,control,03-126-00,1,July 27th to august 3th,9,34,50,0,October 20th to 31th,460
+2021,Thies,03.126,M,control,03-126-00,2,August 30th toseptember 4th,9,35,70,0,October 20th to 31th,460
+2021,Thies,03.126,M,control,03-126-00,3,September 28th to october 5th,35,36,55,0,October 20th to 31th,460
+2021,Thies,03.126,M,fertilized,03-126-01.,1,July 27th to august 3th,10,32,45,0,October 20th to 31th,900
+2021,Thies,03.126,M,fertilized,03-126-01.,2,August 30th toseptember 4th,4,34,60,0,October 20th to 31th,900
+2021,Thies,03.126,M,fertilized,03-126-01.,3,September 28th to october 5th,12,34,60,0,October 20th to 31th,900
+2021,Thies,03.127,M,control,03-127-00,1,July 27th to august 3th,8,33,40,0,October 20th to 31th,660
+2021,Thies,03.127,M,control,03-127-00,2,August 30th toseptember 4th,10,34,60,0,October 20th to 31th,660
+2021,Thies,03.127,M,control,03-127-00,3,September 28th to october 5th,18,31,70,0,October 20th to 31th,660
+2021,Thies,03.127,M,fertilized,03-127-01.,1,July 27th to august 3th,10,30,30,5,October 20th to 31th,1050
+2021,Thies,03.127,M,fertilized,03-127-01.,2,August 30th toseptember 4th,3,32,60,0,October 20th to 31th,1050
+2021,Thies,03.127,M,fertilized,03-127-01.,3,September 28th to october 5th,9,31,70,0,October 20th to 31th,1050
+2021,Thies,03.128,M,control,03-128-00,1,July 27th to august 3th,5,31,40,0,October 20th to 31th,400
+2021,Thies,03.128,M,control,03-128-00,2,August 30th toseptember 4th,2,26,70,0,October 20th to 31th,400
+2021,Thies,03.128,M,control,03-128-00,3,September 28th to october 5th,37,34,80,0,October 20th to 31th,400
+2021,Thies,03.128,M,fertilized,03-128-01.,1,July 27th to august 3th,4,31,50,0,October 20th to 31th,800
+2021,Thies,03.128,M,fertilized,03-128-01.,2,August 30th toseptember 4th,0,29,60,0,October 20th to 31th,800
+2021,Thies,03.128,M,fertilized,03-128-01.,3,September 28th to october 5th,13,35,70,0,October 20th to 31th,800
+2021,Thies,03.129,M,control,03-129-00,1,July 27th to august 3th,6,27,60,0,October 20th to 31th,450
+2021,Thies,03.129,M,control,03-129-00,2,August 30th toseptember 4th,12,26,60,2,October 20th to 31th,450
+2021,Thies,03.129,M,control,03-129-00,3,September 28th to october 5th,23,25,60,2,October 20th to 31th,450
+2021,Thies,03.129,M,fertilized,03-129-01.,1,July 27th to august 3th,4,27,50,0,October 20th to 31th,750
+2021,Thies,03.129,M,fertilized,03-129-01.,2,August 30th toseptember 4th,4,29,50,0,October 20th to 31th,750
+2021,Thies,03.129,M,fertilized,03-129-01.,3,September 28th to october 5th,1,28,60,0,October 20th to 31th,750
+2021,Thies,03.130,M,control,03-130-00,1,July 27th to august 3th,6,29,50,0,October 20th to 31th,466
+2021,Thies,03.130,M,control,03-130-00,2,August 30th toseptember 4th,23,29,50,8,October 20th to 31th,466
+2021,Thies,03.130,M,control,03-130-00,3,September 28th to october 5th,23,29,50,8,October 20th to 31th,466
+2021,Thies,03.130,M,fertilized,03-130-01.,1,July 27th to august 3th,6,29,50,0,October 20th to 31th,1120
+2021,Thies,03.130,M,fertilized,03-130-01.,2,August 30th toseptember 4th,6,30,50,0,October 20th to 31th,1120
+2021,Thies,03.130,M,fertilized,03-130-01.,3,September 28th to october 5th,6,30,50,0,October 20th to 31th,1120
+2021,Thies,03.131,M,control,03-131-00,1,July 27th to august 3th,8,34,45,0,October 20th to 31th,200
+2021,Thies,03.131,M,control,03-131-00,2,August 30th toseptember 4th,12,33,70,0,October 20th to 31th,200
+2021,Thies,03.131,M,control,03-131-00,3,September 28th to october 5th,38,37,70,0,October 20th to 31th,200
+2021,Thies,03.131,M,fertilized,03-131-01.,1,July 27th to august 3th,10,34,40,5,October 20th to 31th,700
+2021,Thies,03.131,M,fertilized,03-131-01.,2,August 30th toseptember 4th,6,32,70,0,October 20th to 31th,700
+2021,Thies,03.131,M,fertilized,03-131-01.,3,September 28th to october 5th,10,38,60,0,October 20th to 31th,700
+2021,Thies,03.132,M,control,03-132-00,1,July 27th to august 3th,6,29,55,0,October 20th to 31th,690
+2021,Thies,03.132,M,control,03-132-00,2,August 30th toseptember 4th,15,32,60,0,October 20th to 31th,690
+2021,Thies,03.132,M,control,03-132-00,3,September 28th to october 5th,22,37,65,0,October 20th to 31th,690
+2021,Thies,03.132,M,fertilized,03-132-01.,1,July 27th to august 3th,10,29,60,5,October 20th to 31th,980
+2021,Thies,03.132,M,fertilized,03-132-01.,2,August 30th toseptember 4th,8,33,50,0,October 20th to 31th,980
+2021,Thies,03.132,M,fertilized,03-132-01.,3,September 28th to october 5th,8,38,50,0,October 20th to 31th,980
+2021,Thies,03.133,F,control,03-133-00,1,July 27th to august 3th,6,33,60,0,October 20th to 31th,130
+2021,Thies,03.133,F,control,03-133-00,2,August 30th toseptember 4th,3,26,60,0,October 20th to 31th,130
+2021,Thies,03.133,F,control,03-133-00,3,September 28th to october 5th,21,37,95,0,October 20th to 31th,130
+2021,Thies,03.133,F,fertilized,03-133-01.,1,July 27th to august 3th,6,33,50,0,October 20th to 31th,620
+2021,Thies,03.133,F,fertilized,03-133-01.,2,August 30th toseptember 4th,1,26,50,0,October 20th to 31th,620
+2021,Thies,03.133,F,fertilized,03-133-01.,3,September 28th to october 5th,6,37,90,0,October 20th to 31th,620
+2021,Thies,03.134,M,control,03-134-00,1,July 27th to august 3th,42,29,65,9,October 20th to 31th,166
+2021,Thies,03.134,M,control,03-134-00,2,August 30th toseptember 4th,12,25,65,0,October 20th to 31th,166
+2021,Thies,03.134,M,control,03-134-00,3,September 28th to october 5th,40,27,80,0,October 20th to 31th,166
+2021,Thies,03.134,M,fertilized,03-134-01.,1,July 27th to august 3th,31,29,70,7,October 20th to 31th,600
+2021,Thies,03.134,M,fertilized,03-134-01.,2,August 30th toseptember 4th,2,26,70,0,October 20th to 31th,600
+2021,Thies,03.134,M,fertilized,03-134-01.,3,September 28th to october 5th,14,27,75,0,October 20th to 31th,600
+2021,Thies,03.135,M,control,03-135-00,1,July 27th to august 3th,10,29,50,1,October 20th to 31th,400
+2021,Thies,03.135,M,control,03-135-00,2,August 30th toseptember 4th,12,35,80,0,October 20th to 31th,400
+2021,Thies,03.135,M,control,03-135-00,3,September 28th to october 5th,18,31,70,0,October 20th to 31th,400
+2021,Thies,03.135,M,fertilized,03-135-01.,1,July 27th to august 3th,8,29,70,1,October 20th to 31th,800
+2021,Thies,03.135,M,fertilized,03-135-01.,2,August 30th toseptember 4th,14,36,90,0,October 20th to 31th,800
+2021,Thies,03.135,M,fertilized,03-135-01.,3,September 28th to october 5th,12,31,60,0,October 20th to 31th,800
+2021,Thies,03.136,M,control,03-136-00,1,July 27th to august 3th,9,29,40,0,October 20th to 31th,425
+2021,Thies,03.136,M,control,03-136-00,2,August 30th toseptember 4th,12,30,60,0,October 20th to 31th,425
+2021,Thies,03.136,M,control,03-136-00,3,September 28th to october 5th,28,36,55,0,October 20th to 31th,425
+2021,Thies,03.136,M,fertilized,03-136-01.,1,July 27th to august 3th,8,30,30,0,October 20th to 31th,790
+2021,Thies,03.136,M,fertilized,03-136-01.,2,August 30th toseptember 4th,2,31,50,0,October 20th to 31th,790
+2021,Thies,03.136,M,fertilized,03-136-01.,3,September 28th to october 5th,7,37,45,0,October 20th to 31th,790
+2021,Thies,03.137,F,control,03-137-00,1,July 27th to august 3th,8,29,60,0,October 20th to 31th,480
+2021,Thies,03.137,F,control,03-137-00,2,August 30th toseptember 4th,18,36,80,4,October 20th to 31th,480
+2021,Thies,03.137,F,control,03-137-00,3,September 28th to october 5th,33,30,70,4,October 20th to 31th,480
+2021,Thies,03.137,F,fertilized,03-137-01.,1,July 27th to august 3th,10,29,75,0,October 20th to 31th,800
+2021,Thies,03.137,F,fertilized,03-137-01.,2,August 30th toseptember 4th,6,34,95,0,October 20th to 31th,800
+2021,Thies,03.137,F,fertilized,03-137-01.,3,September 28th to october 5th,8,29,80,0,October 20th to 31th,800
+2021,Thies,03.138,M,control,03-138-00,1,July 27th to august 3th,8,29,45,0,October 20th to 31th,630
+2021,Thies,03.138,M,control,03-138-00,2,August 30th toseptember 4th,4,30,70,0,October 20th to 31th,630
+2021,Thies,03.138,M,control,03-138-00,3,September 28th to october 5th,17,34,80,0,October 20th to 31th,630
+2021,Thies,03.138,M,fertilized,03-138-01.,1,July 27th to august 3th,4,29,40,0,October 20th to 31th,1020
+2021,Thies,03.138,M,fertilized,03-138-01.,2,August 30th toseptember 4th,0,30,60,0,October 20th to 31th,1020
+2021,Thies,03.138,M,fertilized,03-138-01.,3,September 28th to october 5th,8,34,90,0,October 20th to 31th,1020
+2021,Thies,03.139,F,control,03-139-00,1,July 27th to august 3th,7,33,40,0,October 20th to 31th,190
+2021,Thies,03.139,F,control,03-139-00,2,August 30th toseptember 4th,12,30,70,0,October 20th to 31th,190
+2021,Thies,03.139,F,control,03-139-00,3,September 28th to october 5th,23,32,70,0,October 20th to 31th,190
+2021,Thies,03.139,F,fertilized,03-139-01.,1,July 27th to august 3th,5,35,30,0,October 20th to 31th,560
+2021,Thies,03.139,F,fertilized,03-139-01.,2,August 30th toseptember 4th,0,30,60,0,October 20th to 31th,560
+2021,Thies,03.139,F,fertilized,03-139-01.,3,September 28th to october 5th,11,32,70,0,October 20th to 31th,560
+2021,Thies,03.140,M,control,03-140-00,1,July 27th to august 3th,7,NA,45,0,October 20th to 31th,NA
+2021,Thies,03.140,M,control,03-140-00,2,August 30th toseptember 4th,NA,NA,NA,NA,October 20th to 31th,NA
+2021,Thies,03.140,M,control,03-140-00,3,September 28th to october 5th,NA,NA,NA,NA,October 20th to 31th,NA
+2021,Thies,03.140,M,fertilized,03-140-01.,1,July 27th to august 3th,2,32,65,0,October 20th to 31th,765
+2021,Thies,03.140,M,fertilized,03-140-01.,2,August 30th toseptember 4th,7,27,70,0,October 20th to 31th,765
+2021,Thies,03.140,M,fertilized,03-140-01.,3,September 28th to october 5th,4,32,80,0,October 20th to 31th,765
+2021,Thies,03.141,F,control,03-141-00,1,July 27th to august 3th,5,28,60,0,October 20th to 31th,350
+2021,Thies,03.141,F,control,03-141-00,2,August 30th toseptember 4th,7,29,80,0,October 20th to 31th,350
+2021,Thies,03.141,F,control,03-141-00,3,September 28th to october 5th,32,35,95,0,October 20th to 31th,350
+2021,Thies,03.141,F,fertilized,03-141-01.,1,July 27th to august 3th,7,28,50,0,October 20th to 31th,750
+2021,Thies,03.141,F,fertilized,03-141-01.,2,August 30th toseptember 4th,2,29,60,0,October 20th to 31th,750
+2021,Thies,03.141,F,fertilized,03-141-01.,3,September 28th to october 5th,7,35,95,0,October 20th to 31th,750
+2021,Thies,03.142,M,control,03-142-00,1,July 27th to august 3th,4,28,45,0,October 20th to 31th,300
+2021,Thies,03.142,M,control,03-142-00,2,August 30th toseptember 4th,4,28,45,0,October 20th to 31th,300
+2021,Thies,03.142,M,control,03-142-00,3,September 28th to october 5th,4,26,45,0,October 20th to 31th,300
+2021,Thies,03.142,M,fertilized,03-142-01.,1,July 27th to august 3th,5,28,50,0,October 20th to 31th,800
+2021,Thies,03.142,M,fertilized,03-142-01.,2,August 30th toseptember 4th,5,28,50,0,October 20th to 31th,800
+2021,Thies,03.142,M,fertilized,03-142-01.,3,September 28th to october 5th,5,26,50,0,October 20th to 31th,800
+2021,Thies,03.143,M,control,03-143-00,1,July 27th to august 3th,6,30,60,0,October 20th to 31th,270
+2021,Thies,03.143,M,control,03-143-00,2,August 30th toseptember 4th,17,37,80,4,October 20th to 31th,270
+2021,Thies,03.143,M,control,03-143-00,3,September 28th to october 5th,17,28,80,4,October 20th to 31th,270
+2021,Thies,03.143,M,fertilized,03-143-01.,1,July 27th to august 3th,10,30,70,0,October 20th to 31th,880
+2021,Thies,03.143,M,fertilized,03-143-01.,2,August 30th toseptember 4th,8,38,90,0,October 20th to 31th,880
+2021,Thies,03.143,M,fertilized,03-143-01.,3,September 28th to october 5th,8,29,90,0,October 20th to 31th,880
+2021,Thies,03.144,M,control,03-144-00,1,July 27th to august 3th,8,33,50,0,October 20th to 31th,160
+2021,Thies,03.144,M,control,03-144-00,2,August 30th toseptember 4th,10,33,70,0,October 20th to 31th,160
+2021,Thies,03.144,M,control,03-144-00,3,September 28th to october 5th,39,35,60,0,October 20th to 31th,160
+2021,Thies,03.144,M,fertilized,03-144-01.,1,July 27th to august 3th,6,32,55,0,October 20th to 31th,640
+2021,Thies,03.144,M,fertilized,03-144-01.,2,August 30th toseptember 4th,2,32,70,0,October 20th to 31th,640
+2021,Thies,03.144,M,fertilized,03-144-01.,3,September 28th to october 5th,18,36,80,0,October 20th to 31th,640
+2021,Thies,03.145,F,control,03-145-00,1,July 27th to august 3th,6,27,30,0,October 20th to 31th,360
+2021,Thies,03.145,F,control,03-145-00,2,August 30th toseptember 4th,10,34,80,0,October 20th to 31th,360
+2021,Thies,03.145,F,control,03-145-00,3,September 28th to october 5th,26,28,90,0,October 20th to 31th,360
+2021,Thies,03.145,F,fertilized,03-145-01.,1,July 27th to august 3th,10,27,70,0,October 20th to 31th,960
+2021,Thies,03.145,F,fertilized,03-145-01.,2,August 30th toseptember 4th,0,33,90,0,October 20th to 31th,960
+2021,Thies,03.145,F,fertilized,03-145-01.,3,September 28th to october 5th,7,28,70,0,October 20th to 31th,960
+2021,Thies,03.146,M,control,03-146-00,1,July 27th to august 3th,12,34,60,0,October 20th to 31th,220
+2021,Thies,03.146,M,control,03-146-00,2,August 30th toseptember 4th,8,34,70,0,October 20th to 31th,220
+2021,Thies,03.146,M,control,03-146-00,3,September 28th to october 5th,34,35,90,0,October 20th to 31th,220
+2021,Thies,03.146,M,fertilized,03-146-01.,1,July 27th to august 3th,8,34,60,0,October 20th to 31th,1020
+2021,Thies,03.146,M,fertilized,03-146-01.,2,August 30th toseptember 4th,0,34,80,0,October 20th to 31th,1020
+2021,Thies,03.146,M,fertilized,03-146-01.,3,September 28th to october 5th,11,35,70,0,October 20th to 31th,1020
+2021,Thies,03.147,F,control,03-147-00,1,July 27th to august 3th,8,35,40,0,October 20th to 31th,290
+2021,Thies,03.147,F,control,03-147-00,2,August 30th toseptember 4th,14,33,60,0,October 20th to 31th,290
+2021,Thies,03.147,F,control,03-147-00,3,September 28th to october 5th,34,36,70,0,October 20th to 31th,290
+2021,Thies,03.147,F,fertilized,03-147-01.,1,July 27th to august 3th,7,36,55,0,October 20th to 31th,900
+2021,Thies,03.147,F,fertilized,03-147-01.,2,August 30th toseptember 4th,3,34,60,0,October 20th to 31th,900
+2021,Thies,03.147,F,fertilized,03-147-01.,3,September 28th to october 5th,15,36,55,0,October 20th to 31th,900
+2021,Thies,03.148,F,control,03-148-00,1,July 27th to august 3th,4,32,50,0,October 20th to 31th,110
+2021,Thies,03.148,F,control,03-148-00,2,August 30th toseptember 4th,8,32,70,0,October 20th to 31th,110
+2021,Thies,03.148,F,control,03-148-00,3,September 28th to october 5th,31,30,80,0,October 20th to 31th,110
+2021,Thies,03.148,F,fertilized,03-148-01.,1,July 27th to august 3th,8,32,60,0,October 20th to 31th,505
+2021,Thies,03.148,F,fertilized,03-148-01.,2,August 30th toseptember 4th,2,32,60,0,October 20th to 31th,505
+2021,Thies,03.148,F,fertilized,03-148-01.,3,September 28th to october 5th,9,33,60,0,October 20th to 31th,505
+2021,Thies,03.149,M,control,03-149-00,1,July 27th to august 3th,4,26,45,0,October 20th to 31th,525
+2021,Thies,03.149,M,control,03-149-00,2,August 30th toseptember 4th,5,31,65,0,October 20th to 31th,525
+2021,Thies,03.149,M,control,03-149-00,3,September 28th to october 5th,29,34,90,0,October 20th to 31th,525
+2021,Thies,03.149,M,fertilized,03-149-01.,1,July 27th to august 3th,5,26,50,0,October 20th to 31th,825
+2021,Thies,03.149,M,fertilized,03-149-01.,2,August 30th toseptember 4th,0,31,60,0,October 20th to 31th,825
+2021,Thies,03.149,M,fertilized,03-149-01.,3,September 28th to october 5th,10,34,70,0,October 20th to 31th,825
+2021,Thies,03.150,F,control,03-150-00,1,July 27th to august 3th,10,35,60,0,October 20th to 31th,280
+2021,Thies,03.150,F,control,03-150-00,2,August 30th toseptember 4th,9,34,70,0,October 20th to 31th,280
+2021,Thies,03.150,F,control,03-150-00,3,September 28th to october 5th,22,31,65,0,October 20th to 31th,280
+2021,Thies,03.150,F,fertilized,03-151-01.,1,July 27th to august 3th,8,32,50,0,October 20th to 31th,840
+2021,Thies,03.150,F,fertilized,03-151-01.,2,August 30th toseptember 4th,5,34,60,0,October 20th to 31th,840
+2021,Thies,03.150,F,fertilized,03-151-01.,3,September 28th to october 5th,8,32,60,0,October 20th to 31th,840
+2021,Fatick,01.01,M,control,01-01-00.,1,August 13th to 18th,16,32,70,3,October 31th to november10th,324
+2021,Fatick,01.01,M,control,01-01-00.,2,September 6th to 10th,4,31,90,0,October 31th to november10th,324
+2021,Fatick,01.01,M,control,01-01-00.,3,October 4th to 9th,31,29,100,0,October 31th to november10th,324
+2021,Fatick,01.01,M,fertilized,01-01-01.,1,August 13th to 18th,12,32,75,2,October 31th to november10th,720
+2021,Fatick,01.01,M,fertilized,01-01-01.,2,September 6th to 10th,2,29,90,0,October 31th to november10th,720
+2021,Fatick,01.01,M,fertilized,01-01-01.,3,October 4th to 9th,7,29,100,0,October 31th to november10th,720
+2021,Fatick,01.02,M,control,01-02-00.,1,August 13th to 18th,16,31,40,5,October 31th to november10th,NA
+2021,Fatick,01.02,M,control,01-02-00.,2,September 6th to 10th,32,32,60,5,October 31th to november10th,NA
+2021,Fatick,01.02,M,control,01-02-00.,3,October 4th to 9th,24,34,80,0,October 31th to november10th,NA
+2021,Fatick,01.02,M,fertilized,01-02-01.,1,August 13th to 18th,12,31,50,1,October 31th to november10th,60
+2021,Fatick,01.02,M,fertilized,01-02-01.,2,September 6th to 10th,6,32,50,0,October 31th to november10th,60
+2021,Fatick,01.02,M,fertilized,01-02-01.,3,October 4th to 9th,1,34,60,0,October 31th to november10th,60
+2021,Fatick,01.03,M,control,01-03-00.,1,August 13th to 18th,42,32,80,6,October 31th to november10th,375
+2021,Fatick,01.03,M,control,01-03-00.,2,September 6th to 10th,4,32,80,0,October 31th to november10th,375
+2021,Fatick,01.03,M,control,01-03-00.,3,October 4th to 9th,19,33,80,0,October 31th to november10th,375
+2021,Fatick,01.03,M,fertilized,01-03-01.,1,August 13th to 18th,18,32,75,8,October 31th to november10th,560
+2021,Fatick,01.03,M,fertilized,01-03-01.,2,September 6th to 10th,0,32,100,0,October 31th to november10th,560
+2021,Fatick,01.03,M,fertilized,01-03-01.,3,October 4th to 9th,5,32,100,0,October 31th to november10th,560
+2021,Fatick,01.04,M,control,01-04-00.,1,August 13th to 18th,48,32,40,1,October 31th to november10th,400
+2021,Fatick,01.04,M,control,01-04-00.,2,September 6th to 10th,12,31,60,0,October 31th to november10th,400
+2021,Fatick,01.04,M,control,01-04-00.,3,October 4th to 9th,41,33,60,0.1,October 31th to november10th,400
+2021,Fatick,01.04,M,fertilized,01-04-01.,1,August 13th to 18th,10,32,60,0,October 31th to november10th,570
+2021,Fatick,01.04,M,fertilized,01-04-01.,2,September 6th to 10th,1,31,80,0,October 31th to november10th,570
+2021,Fatick,01.04,M,fertilized,01-04-01.,3,October 4th to 9th,2,34,80,0,October 31th to november10th,570
+2021,Fatick,01.05,M,control,01-05-00.,1,August 13th to 18th,14,30,30,0,October 31th to november10th,90
+2021,Fatick,01.05,M,control,01-05-00.,2,September 6th to 10th,12,31,80,0,October 31th to november10th,90
+2021,Fatick,01.05,M,control,01-05-00.,3,October 4th to 9th,27,34,80,0,October 31th to november10th,90
+2021,Fatick,01.05,M,fertilized,01-05-01.,1,August 13th to 18th,12,30,30,0,October 31th to november10th,540
+2021,Fatick,01.05,M,fertilized,01-05-01.,2,September 6th to 10th,3,32,100,0,October 31th to november10th,540
+2021,Fatick,01.05,M,fertilized,01-05-01.,3,October 4th to 9th,8,34,100,0,October 31th to november10th,540
+2021,Fatick,01.06,M,control,01-06-00.,1,August 13th to 18th,18,30,65,5,October 31th to november10th,700
+2021,Fatick,01.06,M,control,01-06-00.,2,September 6th to 10th,7,35,100,0,October 31th to november10th,700
+2021,Fatick,01.06,M,control,01-06-00.,3,October 4th to 9th,20,33,100,0,October 31th to november10th,700
+2021,Fatick,01.06,M,fertilized,01-06-01.,1,August 13th to 18th,10,30,20,0,October 31th to november10th,1800
+2021,Fatick,01.06,M,fertilized,01-06-01.,2,September 6th to 10th,0,35,100,0,October 31th to november10th,1800
+2021,Fatick,01.06,M,fertilized,01-06-01.,3,October 4th to 9th,5,33,100,0,October 31th to november10th,1800
+2021,Fatick,01.07,M,control,0-07-00.,1,August 13th to 18th,20,27,40,4,October 31th to november10th,900
+2021,Fatick,01.07,M,control,0-07-00.,2,September 6th to 10th,10,34,100,4,October 31th to november10th,900
+2021,Fatick,01.07,M,control,0-07-00.,3,October 4th to 9th,34,30,100,2,October 31th to november10th,900
+2021,Fatick,01.07,M,fertilized,01-07-01.,1,August 13th to 18th,10,27,20,2,October 31th to november10th,1650
+2021,Fatick,01.07,M,fertilized,01-07-01.,2,September 6th to 10th,0,34,100,0,October 31th to november10th,1650
+2021,Fatick,01.07,M,fertilized,01-07-01.,3,October 4th to 9th,6,30,100,0,October 31th to november10th,1650
+2021,Fatick,01.08,M,control,01-08-00.,1,August 13th to 18th,4,32,35,0,October 31th to november10th,900
+2021,Fatick,01.08,M,control,01-08-00.,2,September 6th to 10th,10,31,70,0,October 31th to november10th,900
+2021,Fatick,01.08,M,control,01-08-00.,3,October 4th to 9th,27,34,70,0,October 31th to november10th,900
+2021,Fatick,01.08,M,fertilized,01-08-01.,1,August 13th to 18th,14,32,55,4,October 31th to november10th,NA
+2021,Fatick,01.08,M,fertilized,01-08-01.,2,September 6th to 10th,2,29,80,0,October 31th to november10th,NA
+2021,Fatick,01.08,M,fertilized,01-08-01.,3,October 4th to 9th,3,34,80,0,October 31th to november10th,NA
+2021,Fatick,01.09,M,control,01-09-00.,1,August 13th to 18th,4,31,65,0,October 31th to november10th,100
+2021,Fatick,01.09,M,control,01-09-00.,2,September 6th to 10th,7,27,60,0,October 31th to november10th,100
+2021,Fatick,01.09,M,control,01-09-00.,3,October 4th to 9th,12,37,60,0,October 31th to november10th,100
+2021,Fatick,01.09,M,fertilized,01-09-01.,1,August 13th to 18th,32,30,40,5,October 31th to november10th,700
+2021,Fatick,01.09,M,fertilized,01-09-01.,2,September 6th to 10th,1,29,100,0,October 31th to november10th,700
+2021,Fatick,01.09,M,fertilized,01-09-01.,3,October 4th to 9th,6,36,100,0,October 31th to november10th,700
+2021,Fatick,01.10,M,control,01-10-00.,1,August 13th to 18th,26,33,20,5,October 31th to november10th,NA
+2021,Fatick,01.10,M,control,01-10-00.,2,September 6th to 10th,10,32,60,2,October 31th to november10th,NA
+2021,Fatick,01.10,M,control,01-10-00.,3,October 4th to 9th,32,36,90,5,October 31th to november10th,NA
+2021,Fatick,01.10,M,fertilized,01-10-01.,1,August 13th to 18th,32,33,65,9,October 31th to november10th,990
+2021,Fatick,01.10,M,fertilized,01-10-01.,2,September 6th to 10th,4,32,80,0,October 31th to november10th,990
+2021,Fatick,01.10,M,fertilized,01-10-01.,3,October 4th to 9th,9,36,80,0,October 31th to november10th,990
+2021,Fatick,01.11,M,control,01-11-00.,1,August 13th to 18th,14,32,60,3,October 31th to november10th,850
+2021,Fatick,01.11,M,control,01-11-00.,2,September 6th to 10th,6,30,100,0,October 31th to november10th,850
+2021,Fatick,01.11,M,control,01-11-00.,3,October 4th to 9th,10,30,100,0,October 31th to november10th,850
+2021,Fatick,01.11,M,fertilized,01-11-01.,1,August 13th to 18th,26,32,80,8,October 31th to november10th,1350
+2021,Fatick,01.11,M,fertilized,01-11-01.,2,September 6th to 10th,2,30,100,0,October 31th to november10th,1350
+2021,Fatick,01.11,M,fertilized,01-11-01.,3,October 4th to 9th,4,30,100,0,October 31th to november10th,1350
+2021,Fatick,01.12,M,control,01-12-00.,1,August 13th to 18th,26,33,50,5,October 31th to november10th,NA
+2021,Fatick,01.12,M,control,01-12-00.,2,September 6th to 10th,18,31,80,5,October 31th to november10th,NA
+2021,Fatick,01.12,M,control,01-12-00.,3,October 4th to 9th,29,33,80,8,October 31th to november10th,NA
+2021,Fatick,01.12,M,fertilized,01-12-01.,1,August 13th to 18th,30,31,60,8,October 31th to november10th,NA
+2021,Fatick,01.12,M,fertilized,01-12-01.,2,September 6th to 10th,6,32,70,0,October 31th to november10th,NA
+2021,Fatick,01.12,M,fertilized,01-12-01.,3,October 4th to 9th,16,33,80,0,October 31th to november10th,NA
+2021,Fatick,01.13,M,control,01-13-00.,1,August 13th to 18th,20,30,75,0,October 31th to november10th,1115
+2021,Fatick,01.13,M,control,01-13-00.,2,September 6th to 10th,8,34,80,0,October 31th to november10th,1115
+2021,Fatick,01.13,M,control,01-13-00.,3,October 4th to 9th,41,32,100,0.1,October 31th to november10th,1115
+2021,Fatick,01.13,M,fertilized,01-13-01.,1,August 13th to 18th,20,29,40,0,October 31th to november10th,1345
+2021,Fatick,01.13,M,fertilized,01-13-01.,2,September 6th to 10th,4,34,60,0,October 31th to november10th,1345
+2021,Fatick,01.13,M,fertilized,01-13-01.,3,October 4th to 9th,5,32,100,0,October 31th to november10th,1345
+2021,Fatick,01.14,M,control,01-14-00.,1,August 13th to 18th,4,27,60,0,October 31th to november10th,640
+2021,Fatick,01.14,M,control,01-14-00.,2,September 6th to 10th,14,33,90,0,October 31th to november10th,640
+2021,Fatick,01.14,M,control,01-14-00.,3,October 4th to 9th,18,36,100,2,October 31th to november10th,640
+2021,Fatick,01.14,M,fertilized,01-14-01.,1,August 13th to 18th,26,27,70,5,October 31th to november10th,1600
+2021,Fatick,01.14,M,fertilized,01-14-01.,2,September 6th to 10th,2,33,90,0,October 31th to november10th,1600
+2021,Fatick,01.14,M,fertilized,01-14-01.,3,October 4th to 9th,1,35,100,0,October 31th to november10th,1600
+2021,Fatick,01.15,M,control,01-15-00.,1,August 13th to 18th,21,28,50,7,October 31th to november10th,NA
+2021,Fatick,01.15,M,control,01-15-00.,2,September 6th to 10th,21,28,50,7,October 31th to november10th,NA
+2021,Fatick,01.15,M,control,01-15-00.,3,October 4th to 9th,28,30,80,0,October 31th to november10th,NA
+2021,Fatick,01.15,M,fertilized,01-15-01.,1,August 13th to 18th,13,27,70,0,October 31th to november10th,NA
+2021,Fatick,01.15,M,fertilized,01-15-01.,2,September 6th to 10th,13,27,70,0,October 31th to november10th,NA
+2021,Fatick,01.15,M,fertilized,01-15-01.,3,October 4th to 9th,2,30,70,0,October 31th to november10th,NA
+2021,Fatick,01.16,M,control,01-16-00.,1,August 13th to 18th,8,29,50,0,October 31th to november10th,NA
+2021,Fatick,01.16,M,control,01-16-00.,2,September 6th to 10th,9,34,60,0,October 31th to november10th,NA
+2021,Fatick,01.16,M,control,01-16-00.,3,October 4th to 9th,21,36,100,0,October 31th to november10th,NA
+2021,Fatick,01.16,M,fertilized,01-16-01.,1,August 13th to 18th,8,29,80,0,October 31th to november10th,560
+2021,Fatick,01.16,M,fertilized,01-16-01.,2,September 6th to 10th,3,34,70,0,October 31th to november10th,560
+2021,Fatick,01.16,M,fertilized,01-16-01.,3,October 4th to 9th,2,36,80,0,October 31th to november10th,560
+2021,Fatick,01.17,M,control,01-17-00.,1,August 13th to 18th,14,29,80,0,October 31th to november10th,NA
+2021,Fatick,01.17,M,control,01-17-00.,2,September 6th to 10th,19,34,90,0,October 31th to november10th,NA
+2021,Fatick,01.17,M,control,01-17-00.,3,October 4th to 9th,18,36,NA,0,October 31th to november10th,NA
+2021,Fatick,01.17,M,fertilized,01-17-01.,1,August 13th to 18th,22,33,60,4,October 31th to november10th,480
+2021,Fatick,01.17,M,fertilized,01-17-01.,2,September 6th to 10th,9,34,80,0,October 31th to november10th,480
+2021,Fatick,01.17,M,fertilized,01-17-01.,3,October 4th to 9th,0,36,80,0,October 31th to november10th,480
+2021,Fatick,01.18,M,control,01-18-00.,1,August 13th to 18th,12,32,50,0,October 31th to november10th,NA
+2021,Fatick,01.18,M,control,01-18-00.,2,September 6th to 10th,31,32,70,0,October 31th to november10th,NA
+2021,Fatick,01.18,M,control,01-18-00.,3,October 4th to 9th,33,33,NA,0,October 31th to november10th,NA
+2021,Fatick,01.18,M,fertilized,01-18-01.,1,August 13th to 18th,44,27,40,15,October 31th to november10th,650
+2021,Fatick,01.18,M,fertilized,01-18-01.,2,September 6th to 10th,12,34,80,0,October 31th to november10th,650
+2021,Fatick,01.18,M,fertilized,01-18-01.,3,October 4th to 9th,10,35,100,0,October 31th to november10th,650
+2021,Fatick,01.19,M,control,01-19-00.,1,August 13th to 18th,12,30,70,0,October 31th to november10th,140
+2021,Fatick,01.19,M,control,01-19-00.,2,September 6th to 10th,12,33,70,0,October 31th to november10th,140
+2021,Fatick,01.19,M,control,01-19-00.,3,October 4th to 9th,32,30,70,0,October 31th to november10th,140
+2021,Fatick,01.19,M,fertilized,01-19-01.,1,August 13th to 18th,7,28,80,0,October 31th to november10th,420
+2021,Fatick,01.19,M,fertilized,01-19-01.,2,September 6th to 10th,7,34,80,0,October 31th to november10th,420
+2021,Fatick,01.19,M,fertilized,01-19-01.,3,October 4th to 9th,2,32,80,0,October 31th to november10th,420
+2021,Fatick,01.20,M,control,01-20-00.,1,August 13th to 18th,16,31,60,0,October 31th to november10th,NA
+2021,Fatick,01.20,M,control,01-20-00.,2,September 6th to 10th,16,30,60,0,October 31th to november10th,NA
+2021,Fatick,01.20,M,control,01-20-00.,3,October 4th to 9th,37,33,90,6,October 31th to november10th,NA
+2021,Fatick,01.20,M,fertilized,01-20-01.,1,August 13th to 18th,14,32,80,0,October 31th to november10th,360
+2021,Fatick,01.20,M,fertilized,01-20-01.,2,September 6th to 10th,14,30,80,0,October 31th to november10th,360
+2021,Fatick,01.20,M,fertilized,01-20-01.,3,October 4th to 9th,10,31,80,0,October 31th to november10th,360
+2021,Fatick,01.21,M,control,01-21-00.,1,August 13th to 18th,14,28,65,5,October 31th to november10th,145
+2021,Fatick,01.21,M,control,01-21-00.,2,September 6th to 10th,14,29,65,0,October 31th to november10th,145
+2021,Fatick,01.21,M,control,01-21-00.,3,October 4th to 9th,14,32,100,0,October 31th to november10th,145
+2021,Fatick,01.21,M,fertilized,01-21-01.,1,August 13th to 18th,48,33,50,5,October 31th to november10th,718
+2021,Fatick,01.21,M,fertilized,01-21-01.,2,September 6th to 10th,48,28,50,5,October 31th to november10th,718
+2021,Fatick,01.21,M,fertilized,01-21-01.,3,October 4th to 9th,1,32,100,0,October 31th to november10th,718
+2021,Fatick,01.22,M,control,01-22-00.,1,August 13th to 18th,8,32,60,0,October 31th to november10th,700
+2021,Fatick,01.22,M,control,01-22-00.,2,September 6th to 10th,8,30,60,0,October 31th to november10th,700
+2021,Fatick,01.22,M,control,01-22-00.,3,October 4th to 9th,22,30,100,0,October 31th to november10th,700
+2021,Fatick,01.22,M,fertilized,01-22-01.,1,August 13th to 18th,12,32,90,1,October 31th to november10th,1600
+2021,Fatick,01.22,M,fertilized,01-22-01.,2,September 6th to 10th,12,30,90,0,October 31th to november10th,1600
+2021,Fatick,01.22,M,fertilized,01-22-01.,3,October 4th to 9th,3,30,100,0,October 31th to november10th,1600
+2021,Fatick,01.23,M,control,01-23-00.,1,August 13th to 18th,17,31,70,1,October 31th to november10th,368
+2021,Fatick,01.23,M,control,01-23-00.,2,September 6th to 10th,17,32,70,0,October 31th to november10th,368
+2021,Fatick,01.23,M,control,01-23-00.,3,October 4th to 9th,14,30,100,0,October 31th to november10th,368
+2021,Fatick,01.23,M,fertilized,01-23-01.,1,August 13th to 18th,12,31,50,0,October 31th to november10th,982
+2021,Fatick,01.23,M,fertilized,01-23-01.,2,September 6th to 10th,12,31,50,0,October 31th to november10th,982
+2021,Fatick,01.23,M,fertilized,01-23-01.,3,October 4th to 9th,4,31,100,0,October 31th to november10th,982
+2021,Fatick,01.24,M,control,01-24-00.,1,August 13th to 18th,36,28,95,1,October 31th to november10th,1200
+2021,Fatick,01.24,M,control,01-24-00.,2,September 6th to 10th,18,34,95,0,October 31th to november10th,1200
+2021,Fatick,01.24,M,control,01-24-00.,3,October 4th to 9th,37,24,90,5,October 31th to november10th,1200
+2021,Fatick,01.24,M,fertilized,01-24-01.,1,August 13th to 18th,28,31,50,2,October 31th to november10th,1575
+2021,Fatick,01.24,M,fertilized,01-24-01.,2,September 6th to 10th,7,34,85,0,October 31th to november10th,1575
+2021,Fatick,01.24,M,fertilized,01-24-01.,3,October 4th to 9th,15,24,90,0,October 31th to november10th,1575
+2021,Fatick,01.25,M,control,01-25-00.,1,August 13th to 18th,48,28,60,5,October 31th to november10th,300
+2021,Fatick,01.25,M,control,01-25-00.,2,September 6th to 10th,19,31,80,0,October 31th to november10th,300
+2021,Fatick,01.25,M,control,01-25-00.,3,October 4th to 9th,31,28,85,5,October 31th to november10th,300
+2021,Fatick,01.25,M,fertilized,01-25-01.,1,August 13th to 18th,12,30,30,0,October 31th to november10th,350
+2021,Fatick,01.25,M,fertilized,01-25-01.,2,September 6th to 10th,5,32,85,0,October 31th to november10th,350
+2021,Fatick,01.25,M,fertilized,01-25-01.,3,October 4th to 9th,3,28,95,0,October 31th to november10th,350
+2021,Fatick,01.26,M,control,01-01-00.,1,August 13th to 18th,28,27,75,0,October 31th to november10th,950
+2021,Fatick,01.26,M,control,01-01-00.,2,September 6th to 10th,26,34,90,0,October 31th to november10th,950
+2021,Fatick,01.26,M,control,01-01-00.,3,October 4th to 9th,30,29,80,2,October 31th to november10th,950
+2021,Fatick,01.26,M,fertilized,01-01-01.,1,August 13th to 18th,24,28,65,0,October 31th to november10th,1235
+2021,Fatick,01.26,M,fertilized,01-01-01.,2,September 6th to 10th,13,33,80,0,October 31th to november10th,1235
+2021,Fatick,01.26,M,fertilized,01-01-01.,3,October 4th to 9th,8,29,85,0,October 31th to november10th,1235
+2021,Fatick,01.27,M,control,01-27-00.,1,August 13th to 18th,NA,NA,NA,NA,October 31th to november10th,NA
+2021,Fatick,01.27,M,control,01-27-00.,2,September 6th to 10th,20,30,85,2,October 31th to november10th,NA
+2021,Fatick,01.27,M,control,01-27-00.,3,October 4th to 9th,42,32,95,1,October 31th to november10th,NA
+2021,Fatick,01.27,M,fertilized,01-27-01.,1,August 13th to 18th,4,26,60,0,October 31th to november10th,650
+2021,Fatick,01.27,M,fertilized,01-27-01.,2,September 6th to 10th,8,30,90,0,October 31th to november10th,650
+2021,Fatick,01.27,M,fertilized,01-27-01.,3,October 4th to 9th,12,32,85,0,October 31th to november10th,650
+2021,Fatick,01.28,M,control,01-28-00.,1,August 13th to 18th,8,31,60,0,October 31th to november10th,400
+2021,Fatick,01.28,M,control,01-28-00.,2,September 6th to 10th,15,33,80,0,October 31th to november10th,400
+2021,Fatick,01.28,M,control,01-28-00.,3,October 4th to 9th,29,34,80,0,October 31th to november10th,400
+2021,Fatick,01.28,M,fertilized,01-28-01.,1,August 13th to 18th,14,31,70,0,October 31th to november10th,960
+2021,Fatick,01.28,M,fertilized,01-28-01.,2,September 6th to 10th,2,33,95,0,October 31th to november10th,960
+2021,Fatick,01.28,M,fertilized,01-28-01.,3,October 4th to 9th,3,34,90,0,October 31th to november10th,960
+2021,Fatick,01.29,M,control,01-29-00.,1,August 13th to 18th,22,31,15,2,October 31th to november10th,200
+2021,Fatick,01.29,M,control,01-29-00.,2,September 6th to 10th,15,31,90,2,October 31th to november10th,200
+2021,Fatick,01.29,M,control,01-29-00.,3,October 4th to 9th,31,35,80,2,October 31th to november10th,200
+2021,Fatick,01.29,M,fertilized,01-29-01.,1,August 13th to 18th,28,30,20,1,October 31th to november10th,300
+2021,Fatick,01.29,M,fertilized,01-29-01.,2,September 6th to 10th,9,32,80,0,October 31th to november10th,300
+2021,Fatick,01.29,M,fertilized,01-29-01.,3,October 4th to 9th,5,35,85,0,October 31th to november10th,300
+2021,Fatick,01.30,M,control,01-30-00.,1,August 13th to 18th,12,31,40,0,October 31th to november10th,NA
+2021,Fatick,01.30,M,control,01-30-00.,2,September 6th to 10th,23,35,95,0,October 31th to november10th,NA
+2021,Fatick,01.30,M,control,01-30-00.,3,October 4th to 9th,29,33,95,0,October 31th to november10th,NA
+2021,Fatick,01.30,M,fertilized,01-30-01.,1,August 13th to 18th,26,30,35,4,October 31th to november10th,NA
+2021,Fatick,01.30,M,fertilized,01-30-01.,2,September 6th to 10th,10,34,90,0,October 31th to november10th,NA
+2021,Fatick,01.30,M,fertilized,01-30-01.,3,October 4th to 9th,7,32,85,0,October 31th to november10th,NA
+2021,Fatick,01.31,M,control,01-31-00.,1,August 13th to 18th,8,27,55,0,October 31th to november10th,440
+2021,Fatick,01.31,M,control,01-31-00.,2,September 6th to 10th,18,30,80,0,October 31th to november10th,440
+2021,Fatick,01.31,M,control,01-31-00.,3,October 4th to 9th,27,38,90,0,October 31th to november10th,440
+2021,Fatick,01.31,M,fertilized,01-31-01.,1,August 13th to 18th,12,27,75,0,October 31th to november10th,880
+2021,Fatick,01.31,M,fertilized,01-31-01.,2,September 6th to 10th,1,30,85,0,October 31th to november10th,880
+2021,Fatick,01.31,M,fertilized,01-31-01.,3,October 4th to 9th,4,38,95,0,October 31th to november10th,880
+2021,Fatick,01.32,M,control,01-32-00.,1,August 13th to 18th,8,26,90,0,October 31th to november10th,750
+2021,Fatick,01.32,M,control,01-32-00.,2,September 6th to 10th,26,36,80,0,October 31th to november10th,750
+2021,Fatick,01.32,M,control,01-32-00.,3,October 4th to 9th,23,35,85,0,October 31th to november10th,750
+2021,Fatick,01.32,M,fertilized,01-32-01.,1,August 13th to 18th,8,27,95,0,October 31th to november10th,1800
+2021,Fatick,01.32,M,fertilized,01-32-01.,2,September 6th to 10th,6,36,90,0,October 31th to november10th,1800
+2021,Fatick,01.32,M,fertilized,01-32-01.,3,October 4th to 9th,0,35,80,0,October 31th to november10th,1800
+2021,Fatick,01.33,M,control,01-33-00.,1,August 13th to 18th,16,28,97,5,October 31th to november10th,1000
+2021,Fatick,01.33,M,control,01-33-00.,2,September 6th to 10th,28,35.1,95,5,October 31th to november10th,1000
+2021,Fatick,01.33,M,control,01-33-00.,3,October 4th to 9th,46,35.2,90,5,October 31th to november10th,1000
+2021,Fatick,01.33,M,fertilized,01-03-01.,1,August 13th to 18th,18,28,95,0,October 31th to november10th,1550
+2021,Fatick,01.33,M,fertilized,01-03-01.,2,September 6th to 10th,2,37,85,0,October 31th to november10th,1550
+2021,Fatick,01.33,M,fertilized,01-03-01.,3,October 4th to 9th,3,35.2,85,0,October 31th to november10th,1550
+2021,Fatick,01.34,M,control,01-34-00.,1,August 13th to 18th,22,28,75,0,October 31th to november10th,700
+2021,Fatick,01.34,M,control,01-34-00.,2,September 6th to 10th,21,30,80,0,October 31th to november10th,700
+2021,Fatick,01.34,M,control,01-34-00.,3,October 4th to 9th,47,35,80,0,October 31th to november10th,700
+2021,Fatick,01.34,M,fertilized,01-34-01.,1,August 13th to 18th,16,28,90,1,October 31th to november10th,1290
+2021,Fatick,01.34,M,fertilized,01-34-01.,2,September 6th to 10th,7,30,80,0,October 31th to november10th,1290
+2021,Fatick,01.34,M,fertilized,01-34-01.,3,October 4th to 9th,5,35,95,0,October 31th to november10th,1290
+2021,Fatick,01.35,M,control,0135-00.,1,August 13th to 18th,8,30,75,0,October 31th to november10th,600
+2021,Fatick,01.35,M,control,0135-00.,2,September 6th to 10th,28,38,90,0,October 31th to november10th,600
+2021,Fatick,01.35,M,control,0135-00.,3,October 4th to 9th,39,37,80,5,October 31th to november10th,600
+2021,Fatick,01.35,M,fertilized,01-35-01.,1,August 13th to 18th,6,30,98,0,October 31th to november10th,900
+2021,Fatick,01.35,M,fertilized,01-35-01.,2,September 6th to 10th,4,39,85,0,October 31th to november10th,900
+2021,Fatick,01.35,M,fertilized,01-35-01.,3,October 4th to 9th,18,37,85,0,October 31th to november10th,900
+2021,Fatick,01.36,M,control,01-36-00.,1,August 13th to 18th,30,26,40,5,October 31th to november10th,298
+2021,Fatick,01.36,M,control,01-36-00.,2,September 6th to 10th,14,38,95,0,October 31th to november10th,298
+2021,Fatick,01.36,M,control,01-36-00.,3,October 4th to 9th,32,33,90,5,October 31th to november10th,298
+2021,Fatick,01.36,M,fertilized,01-36-01.,1,August 13th to 18th,34,24,70,22,October 31th to november10th,450
+2021,Fatick,01.36,M,fertilized,01-36-01.,2,September 6th to 10th,1,39,95,0,October 31th to november10th,450
+2021,Fatick,01.36,M,fertilized,01-36-01.,3,October 4th to 9th,8,34,90,0,October 31th to november10th,450
+2021,Fatick,01.37,M,control,01-37-00.,1,August 13th to 18th,16,27,75,0,October 31th to november10th,NA
+2021,Fatick,01.37,M,control,01-37-00.,2,September 6th to 10th,31,26,75,0,October 31th to november10th,NA
+2021,Fatick,01.37,M,control,01-37-00.,3,October 4th to 9th,45,36,80,0,October 31th to november10th,NA
+2021,Fatick,01.37,M,fertilized,01-37-01.,1,August 13th to 18th,58,27,55,2,October 31th to november10th,NA
+2021,Fatick,01.37,M,fertilized,01-37-01.,2,September 6th to 10th,12,26,55,0,October 31th to november10th,NA
+2021,Fatick,01.37,M,fertilized,01-37-01.,3,October 4th to 9th,13,34,60,0,October 31th to november10th,NA
+2021,Fatick,01.38,M,control,01-38-00.,1,August 13th to 18th,8,31,90,0,October 31th to november10th,450
+2021,Fatick,01.38,M,control,01-38-00.,2,September 6th to 10th,25,32,90,0,October 31th to november10th,450
+2021,Fatick,01.38,M,control,01-38-00.,3,October 4th to 9th,41,37,90,0,October 31th to november10th,450
+2021,Fatick,01.38,M,fertilized,01-38-01.,1,August 13th to 18th,20,31,95,2,October 31th to november10th,520
+2021,Fatick,01.38,M,fertilized,01-38-01.,2,September 6th to 10th,11,32,95,2,October 31th to november10th,520
+2021,Fatick,01.38,M,fertilized,01-38-01.,3,October 4th to 9th,22,37,95,2,October 31th to november10th,520
+2021,Fatick,01.39,M,control,01-39-00.,1,August 13th to 18th,20,29,80,0,October 31th to november10th,500
+2021,Fatick,01.39,M,control,01-39-00.,2,September 6th to 10th,20,27,80,0,October 31th to november10th,500
+2021,Fatick,01.39,M,control,01-39-00.,3,October 4th to 9th,31,30,80,0,October 31th to november10th,500
+2021,Fatick,01.39,M,fertilized,01-39-01.,1,August 13th to 18th,20,31,75,1,October 31th to november10th,1600
+2021,Fatick,01.39,M,fertilized,01-39-01.,2,September 6th to 10th,7,28,75,1,October 31th to november10th,1600
+2021,Fatick,01.39,M,fertilized,01-39-01.,3,October 4th to 9th,10,30,75,1,October 31th to november10th,1600
+2021,Fatick,01.40,M,control,01-40-00.,1,August 13th to 18th,30,34,80,4,October 31th to november10th,800
+2021,Fatick,01.40,M,control,01-40-00.,2,September 6th to 10th,28,34,80,3,October 31th to november10th,800
+2021,Fatick,01.40,M,control,01-40-00.,3,October 4th to 9th,36,30,80,5,October 31th to november10th,800
+2021,Fatick,01.40,M,fertilized,01-40-01.,1,August 13th to 18th,36,34,70,0,October 31th to november10th,1200
+2021,Fatick,01.40,M,fertilized,01-40-01.,2,September 6th to 10th,2,34,70,0,October 31th to november10th,1200
+2021,Fatick,01.40,M,fertilized,01-40-01.,3,October 4th to 9th,12,34,70,0,October 31th to november10th,1200
+2021,Fatick,01.41,M,control,01-41-00.,1,August 13th to 18th,10,33,90,0,October 31th to november10th,666
+2021,Fatick,01.41,M,control,01-41-00.,2,September 6th to 10th,26,31,90,0,October 31th to november10th,666
+2021,Fatick,01.41,M,control,01-41-00.,3,October 4th to 9th,34,27,90,0,October 31th to november10th,666
+2021,Fatick,01.41,M,fertilized,01-41-01.,1,August 13th to 18th,10,32,98,0,October 31th to november10th,1200
+2021,Fatick,01.41,M,fertilized,01-41-01.,2,September 6th to 10th,9,30,98,0,October 31th to november10th,1200
+2021,Fatick,01.41,M,fertilized,01-41-01.,3,October 4th to 9th,12,28,98,0,October 31th to november10th,1200
+2021,Fatick,01.42,M,control,01-42-00.,1,August 13th to 18th,0,27,80,0,October 31th to november10th,1230
+2021,Fatick,01.42,M,control,01-42-00.,2,September 6th to 10th,12,29,80,0,October 31th to november10th,1230
+2021,Fatick,01.42,M,control,01-42-00.,3,October 4th to 9th,11,35,80,0,October 31th to november10th,1230
+2021,Fatick,01.42,M,fertilized,01-42-01.,1,August 13th to 18th,12,27,70,0,October 31th to november10th,1475
+2021,Fatick,01.42,M,fertilized,01-42-01.,2,September 6th to 10th,0,28,70,0,October 31th to november10th,1475
+2021,Fatick,01.42,M,fertilized,01-42-01.,3,October 4th to 9th,1,36,98,0,October 31th to november10th,1475
+2021,Fatick,01.43,M,control,0-43-00.,1,August 13th to 18th,18,31,50,2,October 31th to november10th,375
+2021,Fatick,01.43,M,control,0-43-00.,2,September 6th to 10th,18,30,50,0,October 31th to november10th,375
+2021,Fatick,01.43,M,control,0-43-00.,3,October 4th to 9th,25,34,60,0,October 31th to november10th,375
+2021,Fatick,01.43,M,fertilized,01-43-01.,1,August 13th to 18th,4,27,60,0,October 31th to november10th,950
+2021,Fatick,01.43,M,fertilized,01-43-01.,2,September 6th to 10th,4,30,60,0,October 31th to november10th,950
+2021,Fatick,01.43,M,fertilized,01-43-01.,3,October 4th to 9th,7,34,70,0,October 31th to november10th,950
+2021,Fatick,01.44,M,control,0-44-00.,1,August 13th to 18th,NA,NA,NA,NA,October 31th to november10th,NA
+2021,Fatick,01.44,M,control,0-44-00.,2,September 6th to 10th,NA,NA,NA,NA,October 31th to november10th,NA
+2021,Fatick,01.44,M,control,0-44-00.,3,October 4th to 9th,NA,NA,NA,NA,October 31th to november10th,NA
+2021,Fatick,01.44,M,fertilized,01-44-01.,1,August 13th to 18th,16,31,85,0,October 31th to november10th,500
+2021,Fatick,01.44,M,fertilized,01-44-01.,2,September 6th to 10th,8,32,85,0,October 31th to november10th,500
+2021,Fatick,01.44,M,fertilized,01-44-01.,3,October 4th to 9th,3,34,85,0,October 31th to november10th,500
+2021,Fatick,01.45,M,control,01-45-00.,1,August 13th to 18th,NA,NA,NA,NA,October 31th to november10th,NA
+2021,Fatick,01.45,M,control,01-45-00.,2,September 6th to 10th,NA,NA,NA,NA,October 31th to november10th,NA
+2021,Fatick,01.45,M,control,01-45-00.,3,October 4th to 9th,NA,NA,NA,NA,October 31th to november10th,NA
+2021,Fatick,01.45,M,fertilized,01-45-01.,1,August 13th to 18th,NA,NA,NA,NA,October 31th to november10th,NA
+2021,Fatick,01.45,M,fertilized,01-45-01.,2,September 6th to 10th,NA,NA,NA,NA,October 31th to november10th,NA
+2021,Fatick,01.45,M,fertilized,01-45-01.,3,October 4th to 9th,NA,NA,NA,NA,October 31th to november10th,NA
+2021,Fatick,01.46,M,control,01-46-00.,1,August 13th to 18th,40,27,50,7,October 31th to november10th,NA
+2021,Fatick,01.46,M,control,01-46-00.,2,September 6th to 10th,32,27,50,5,October 31th to november10th,NA
+2021,Fatick,01.46,M,control,01-46-00.,3,October 4th to 9th,34,30,55,0,October 31th to november10th,NA
+2021,Fatick,01.46,M,fertilized,01-46-01.,1,August 13th to 18th,22,28,55,1,October 31th to november10th,600
+2021,Fatick,01.46,M,fertilized,01-46-01.,2,September 6th to 10th,5,28,55,0,October 31th to november10th,600
+2021,Fatick,01.46,M,fertilized,01-46-01.,3,October 4th to 9th,6,33,70,0,October 31th to november10th,600
+2021,Fatick,01.47,M,control,01-47-00.,1,August 13th to 18th,8,35,40,0,October 31th to november10th,324
+2021,Fatick,01.47,M,control,01-47-00.,2,September 6th to 10th,8,35,40,0,October 31th to november10th,324
+2021,Fatick,01.47,M,control,01-47-00.,3,October 4th to 9th,28,33,60,0,October 31th to november10th,324
+2021,Fatick,01.47,M,fertilized,01-47-01.,1,August 13th to 18th,7,36,55,0,October 31th to november10th,640
+2021,Fatick,01.47,M,fertilized,01-47-01.,2,September 6th to 10th,7,36,55,0,October 31th to november10th,640
+2021,Fatick,01.47,M,fertilized,01-47-01.,3,October 4th to 9th,12,33,80,0,October 31th to november10th,640
+2021,Fatick,01.48,M,control,01-48-00.,1,August 13th to 18th,36,29,60,8,October 31th to november10th,NA
+2021,Fatick,01.48,M,control,01-48-00.,2,September 6th to 10th,36,29,60,1,October 31th to november10th,NA
+2021,Fatick,01.48,M,control,01-48-00.,3,October 4th to 9th,30,28,70,0,October 31th to november10th,NA
+2021,Fatick,01.48,M,fertilized,01-48-01.,1,August 13th to 18th,66,29,60,15,October 31th to november10th,NA
+2021,Fatick,01.48,M,fertilized,01-48-01.,2,September 6th to 10th,66,29,60,1,October 31th to november10th,NA
+2021,Fatick,01.48,M,fertilized,01-48-01.,3,October 4th to 9th,29,28,70,0,October 31th to november10th,NA
+2021,Fatick,01.49,M,control,01-49-00.,1,August 13th to 18th,31,27,70,8,October 31th to november10th,1170
+2021,Fatick,01.49,M,control,01-49-00.,2,September 6th to 10th,28,35,80,0,October 31th to november10th,1170
+2021,Fatick,01.49,M,control,01-49-00.,3,October 4th to 9th,41,30,80,8,October 31th to november10th,1170
+2021,Fatick,01.49,M,fertilized,01-49-01.,1,August 13th to 18th,12,27,60,3,October 31th to november10th,1800
+2021,Fatick,01.49,M,fertilized,01-49-01.,2,September 6th to 10th,5,35,70,0,October 31th to november10th,1800
+2021,Fatick,01.49,M,fertilized,01-49-01.,3,October 4th to 9th,7,30,90,0,October 31th to november10th,1800
+2021,Fatick,01.50,M,control,01-50-00.,1,August 13th to 18th,34,31,40,5,October 31th to november10th,614
+2021,Fatick,01.50,M,control,01-50-00.,2,September 6th to 10th,20,30,85,0,October 31th to november10th,614
+2021,Fatick,01.50,M,control,01-50-00.,3,October 4th to 9th,20,30,85,0,October 31th to november10th,614
+2021,Fatick,01.50,M,fertilized,01-50-01.,1,August 13th to 18th,62,31,40,15,October 31th to november10th,1045
+2021,Fatick,01.50,M,fertilized,01-50-01.,2,September 6th to 10th,9,30,90,0,October 31th to november10th,1045
+2021,Fatick,01.50,M,fertilized,01-50-01.,3,October 4th to 9th,9,30,90,0,October 31th to november10th,1045
+2021,Fatick,01.201,F,control,01-201-00.,1,August 13th to 18th,38,27,60,6,October 31th to november10th,20
+2021,Fatick,01.201,F,control,01-201-00.,2,September 6th to 10th,18,30,95,0,October 31th to november10th,20
+2021,Fatick,01.201,F,control,01-201-00.,3,October 4th to 9th,37,39,80,0,October 31th to november10th,20
+2021,Fatick,01.201,F,fertilized,01-201-01.,1,August 13th to 18th,34,27,80,0,October 31th to november10th,320
+2021,Fatick,01.201,F,fertilized,01-201-01.,2,September 6th to 10th,4,29,90,0,October 31th to november10th,320
+2021,Fatick,01.201,F,fertilized,01-201-01.,3,October 4th to 9th,6,39,85,0,October 31th to november10th,320
+2021,Fatick,01.202,F,control,01-202-00.,1,August 13th to 18th,56,30,60,5,October 31th to november10th,500
+2021,Fatick,01.202,F,control,01-202-00.,2,September 6th to 10th,25,36,80,0,October 31th to november10th,500
+2021,Fatick,01.202,F,control,01-202-00.,3,October 4th to 9th,30,39,80,5,October 31th to november10th,500
+2021,Fatick,01.202,F,fertilized,01-202-01.,1,August 13th to 18th,26,29,60,0,October 31th to november10th,800
+2021,Fatick,01.202,F,fertilized,01-202-01.,2,September 6th to 10th,8,37,85,0,October 31th to november10th,800
+2021,Fatick,01.202,F,fertilized,01-202-01.,3,October 4th to 9th,5,39,85,0,October 31th to november10th,800
+2021,Fatick,01.203,F,control,01-203-00.,1,August 13th to 18th,48,25,80,1,October 31th to november10th,308
+2021,Fatick,01.203,F,control,01-203-00.,2,September 6th to 10th,25,30,85,1,October 31th to november10th,308
+2021,Fatick,01.203,F,control,01-203-00.,3,October 4th to 9th,29,40,90,0,October 31th to november10th,308
+2021,Fatick,01.203,F,fertilized,01-203-01.,1,August 13th to 18th,30,25,80,5,October 31th to november10th,435
+2021,Fatick,01.203,F,fertilized,01-203-01.,2,September 6th to 10th,2,31,80,0,October 31th to november10th,435
+2021,Fatick,01.203,F,fertilized,01-203-01.,3,October 4th to 9th,0,28,95,0,October 31th to november10th,435
+2021,Fatick,01.204,F,control,01-204-00.,1,August 13th to 18th,28,28,40,0,October 31th to november10th,320
+2021,Fatick,01.204,F,control,01-204-00.,2,September 6th to 10th,17,29,85,0,October 31th to november10th,320
+2021,Fatick,01.204,F,control,01-204-00.,3,October 4th to 9th,38,41,80,0,October 31th to november10th,320
+2021,Fatick,01.204,F,fertilized,01-204-01.,1,August 13th to 18th,26,29,60,0,October 31th to november10th,430
+2021,Fatick,01.204,F,fertilized,01-204-01.,2,September 6th to 10th,0,28,90,0,October 31th to november10th,430
+2021,Fatick,01.204,F,fertilized,01-204-01.,3,October 4th to 9th,6,41,85,0,October 31th to november10th,430
+2021,Fatick,01.205,F,control,01-205-00.,1,August 13th to 18th,20,29,80,2,October 31th to november10th,305
+2021,Fatick,01.205,F,control,01-205-00.,2,September 6th to 10th,16,37,95,2,October 31th to november10th,305
+2021,Fatick,01.205,F,control,01-205-00.,3,October 4th to 9th,27,37,95,0,October 31th to november10th,305
+2021,Fatick,01.205,F,fertilized,01-205-01.,1,August 13th to 18th,52,29,80,18,October 31th to november10th,420
+2021,Fatick,01.205,F,fertilized,01-205-01.,2,September 6th to 10th,2,36,100,5,October 31th to november10th,420
+2021,Fatick,01.205,F,fertilized,01-205-01.,3,October 4th to 9th,33,36,100,0,October 31th to november10th,420
+2021,Fatick,01.206,F,control,01-206-00.,1,August 13th to 18th,NA,NA,NA,NA,October 31th to november10th,NA
+2021,Fatick,01.206,F,control,01-206-00.,2,September 6th to 10th,NA,NA,NA,NA,October 31th to november10th,NA
+2021,Fatick,01.206,F,control,01-206-00.,3,October 4th to 9th,NA,NA,NA,NA,October 31th to november10th,NA
+2021,Fatick,01.206,F,fertilized,01-206-01.,1,August 13th to 18th,22,27,60,2,October 31th to november10th,NA
+2021,Fatick,01.206,F,fertilized,01-206-01.,2,September 6th to 10th,12,36,85,0,October 31th to november10th,NA
+2021,Fatick,01.206,F,fertilized,01-206-01.,3,October 4th to 9th,7,29,85,0,October 31th to november10th,NA
+2021,Fatick,01.207,F,control,01-207-00.,1,August 13th to 18th,42,30,60,0,October 31th to november10th,230
+2021,Fatick,01.207,F,control,01-207-00.,2,September 6th to 10th,25,29,NA,0,October 31th to november10th,230
+2021,Fatick,01.207,F,control,01-207-00.,3,October 4th to 9th,30,36,80,0,October 31th to november10th,230
+2021,Fatick,01.207,F,fertilized,01-207-01.,1,August 13th to 18th,34,25,40,0,October 31th to november10th,358
+2021,Fatick,01.207,F,fertilized,01-207-01.,2,September 6th to 10th,8,29,90,0,October 31th to november10th,358
+2021,Fatick,01.207,F,fertilized,01-207-01.,3,October 4th to 9th,10,37,90,0,October 31th to november10th,358
+2021,Fatick,01.208,F,control,01-208-00.,1,August 13th to 18th,NA,NA,NA,NA,October 31th to november10th,NA
+2021,Fatick,01.208,F,control,01-208-00.,2,September 6th to 10th,NA,NA,NA,NA,October 31th to november10th,NA
+2021,Fatick,01.208,F,control,01-208-00.,3,October 4th to 9th,NA,NA,NA,NA,October 31th to november10th,NA
+2021,Fatick,01.208,F,fertilized,01-208-01.,1,August 13th to 18th,38,26,60,5,October 31th to november10th,306
+2021,Fatick,01.208,F,fertilized,01-208-01.,2,September 6th to 10th,10,37,80,0,October 31th to november10th,306
+2021,Fatick,01.208,F,fertilized,01-208-01.,3,October 4th to 9th,3,33,85,0,October 31th to november10th,306
+2021,Fatick,01.209,F,control,01-209-00.,1,August 13th to 18th,8,27,80,0,October 31th to november10th,380
+2021,Fatick,01.209,F,control,01-209-00.,2,September 6th to 10th,17,29,80,0,October 31th to november10th,380
+2021,Fatick,01.209,F,control,01-209-00.,3,October 4th to 9th,37,38,80,5,October 31th to november10th,380
+2021,Fatick,01.209,F,fertilized,01-209-01.,1,August 13th to 18th,4,27,80,0,October 31th to november10th,400
+2021,Fatick,01.209,F,fertilized,01-209-01.,2,September 6th to 10th,3,29,85,0,October 31th to november10th,400
+2021,Fatick,01.209,F,fertilized,01-209-01.,3,October 4th to 9th,5,37,85,0,October 31th to november10th,400
+2021,Fatick,01.210,F,control,01-210-00.,1,August 13th to 18th,30,28,40,4,October 31th to november10th,NA
+2021,Fatick,01.210,F,control,01-210-00.,2,September 6th to 10th,30,NA,NA,4,October 31th to november10th,NA
+2021,Fatick,01.210,F,control,01-210-00.,3,October 4th to 9th,34,38,90,0,October 31th to november10th,NA
+2021,Fatick,01.210,F,fertilized,01-210-01.,1,August 13th to 18th,48,28,40,14,October 31th to november10th,NA
+2021,Fatick,01.210,F,fertilized,01-210-01.,2,September 6th to 10th,9,38,80,0,October 31th to november10th,NA
+2021,Fatick,01.210,F,fertilized,01-210-01.,3,October 4th to 9th,7,39,70,0,October 31th to november10th,NA
+2021,Fatick,01.211,F,control,01-211-00.,1,August 13th to 18th,6,29,50,0,October 31th to november10th,320
+2021,Fatick,01.211,F,control,01-211-00.,2,September 6th to 10th,6,29,50,0,October 31th to november10th,320
+2021,Fatick,01.211,F,control,01-211-00.,3,October 4th to 9th,27,33,70,0,October 31th to november10th,320
+2021,Fatick,01.211,F,fertilized,01-211-01.,1,August 13th to 18th,6,29,50,0,October 31th to november10th,765
+2021,Fatick,01.211,F,fertilized,01-211-01.,2,September 6th to 10th,6,29,50,0,October 31th to november10th,765
+2021,Fatick,01.211,F,fertilized,01-211-01.,3,October 4th to 9th,10,33,65,0,October 31th to november10th,765
+2021,Fatick,01.212,F,control,01-212-00.,1,August 13th to 18th,18,28,70,5,October 31th to november10th,200
+2021,Fatick,01.212,F,control,01-212-00.,2,September 6th to 10th,18,32,70,5,October 31th to november10th,200
+2021,Fatick,01.212,F,control,01-212-00.,3,October 4th to 9th,36,28,90,0,October 31th to november10th,200
+2021,Fatick,01.212,F,fertilized,01-212-01.,1,August 13th to 18th,2,28,40,0,October 31th to november10th,200
+2021,Fatick,01.212,F,fertilized,01-212-01.,2,September 6th to 10th,2,32,40,0,October 31th to november10th,200
+2021,Fatick,01.212,F,fertilized,01-212-01.,3,October 4th to 9th,12,28,90,0,October 31th to november10th,200
+2021,Fatick,01.213,F,control,01-213-00.,1,August 13th to 18th,2,29,90,0,October 31th to november10th,444
+2021,Fatick,01.213,F,control,01-213-00.,2,September 6th to 10th,2,30,90,0,October 31th to november10th,444
+2021,Fatick,01.213,F,control,01-213-00.,3,October 4th to 9th,43,31,80,0,October 31th to november10th,444
+2021,Fatick,01.213,F,fertilized,01-213-01.,1,August 13th to 18th,16,29,90,5,October 31th to november10th,814
+2021,Fatick,01.213,F,fertilized,01-213-01.,2,September 6th to 10th,16,31,90,5,October 31th to november10th,814
+2021,Fatick,01.213,F,fertilized,01-213-01.,3,October 4th to 9th,16,31,90,5,October 31th to november10th,814
+2021,Fatick,01.214,F,control,01-214-00.,1,August 13th to 18th,14,33,40,0,October 31th to november10th,300
+2021,Fatick,01.214,F,control,01-214-00.,2,September 6th to 10th,14,29,40,0,October 31th to november10th,300
+2021,Fatick,01.214,F,control,01-214-00.,3,October 4th to 9th,29,33,90,0,October 31th to november10th,300
+2021,Fatick,01.214,F,fertilized,01-214-01.,1,August 13th to 18th,14,33,80,0,October 31th to november10th,780
+2021,Fatick,01.214,F,fertilized,01-214-01.,2,September 6th to 10th,14,28,80,0,October 31th to november10th,780
+2021,Fatick,01.214,F,fertilized,01-214-01.,3,October 4th to 9th,11,33,80,0,October 31th to november10th,780
+2021,Fatick,01.215,F,control,01-215-00.,1,August 13th to 18th,NA,NA,NA,NA,October 31th to november10th,NA
+2021,Fatick,01.215,F,control,01-215-00.,2,September 6th to 10th,NA,NA,NA,NA,October 31th to november10th,NA
+2021,Fatick,01.215,F,control,01-215-00.,3,October 4th to 9th,NA,NA,NA,NA,October 31th to november10th,NA
+2021,Fatick,01.215,F,fertilized,01-215-01.,1,August 13th to 18th,24,27,60,7,October 31th to november10th,74
+2021,Fatick,01.215,F,fertilized,01-215-01.,2,September 6th to 10th,12,32,60,0,October 31th to november10th,74
+2021,Fatick,01.215,F,fertilized,01-215-01.,3,October 4th to 9th,7,33,90,0,October 31th to november10th,74
+2021,Fatick,01.216,F,control,01-216-00.,1,August 13th to 18th,NA,NA,NA,NA,October 31th to november10th,50
+2021,Fatick,01.216,F,control,01-216-00.,2,September 6th to 10th,NA,NA,NA,NA,October 31th to november10th,50
+2021,Fatick,01.216,F,control,01-216-00.,3,October 4th to 9th,NA,NA,NA,NA,October 31th to november10th,50
+2021,Fatick,01.216,F,fertilized,01-216-01.,1,August 13th to 18th,38,27,40,5,October 31th to november10th,100
+2021,Fatick,01.216,F,fertilized,01-216-01.,2,September 6th to 10th,10,26,60,0,October 31th to november10th,100
+2021,Fatick,01.216,F,fertilized,01-216-01.,3,October 4th to 9th,4,29,90,0,October 31th to november10th,100
+2021,Fatick,01.217,F,control,01-217-00.,1,August 13th to 18th,22,34,90,7,October 31th to november10th,320
+2021,Fatick,01.217,F,control,01-217-00.,2,September 6th to 10th,12,32,90,0,October 31th to november10th,320
+2021,Fatick,01.217,F,control,01-217-00.,3,October 4th to 9th,26,32,80,3,October 31th to november10th,320
+2021,Fatick,01.217,F,fertilized,01-217-01.,1,August 13th to 18th,4,34,90,0,October 31th to november10th,765
+2021,Fatick,01.217,F,fertilized,01-217-01.,2,September 6th to 10th,2,31,90,0,October 31th to november10th,765
+2021,Fatick,01.217,F,fertilized,01-217-01.,3,October 4th to 9th,7,32,70,0,October 31th to november10th,765
+2021,Fatick,01.218,F,control,01-218-00.,1,August 13th to 18th,10,31,90,0,October 31th to november10th,140
+2021,Fatick,01.218,F,control,01-218-00.,2,September 6th to 10th,21,33,90,0,October 31th to november10th,140
+2021,Fatick,01.218,F,control,01-218-00.,3,October 4th to 9th,36,33,90,0,October 31th to november10th,140
+2021,Fatick,01.218,F,fertilized,01-218-01.,1,August 13th to 18th,24,32,60,4,October 31th to november10th,450
+2021,Fatick,01.218,F,fertilized,01-218-01.,2,September 6th to 10th,8,32,60,5,October 31th to november10th,450
+2021,Fatick,01.218,F,fertilized,01-218-01.,3,October 4th to 9th,10,36,80,0,October 31th to november10th,450
+2021,Fatick,01.219,F,control,01-219-00.,1,August 13th to 18th,NA,NA,NA,NA,October 31th to november10th,160
+2021,Fatick,01.219,F,control,01-219-00.,2,September 6th to 10th,NA,NA,NA,NA,October 31th to november10th,160
+2021,Fatick,01.219,F,control,01-219-00.,3,October 4th to 9th,NA,NA,NA,NA,October 31th to november10th,160
+2021,Fatick,01.219,F,fertilized,01-219-01.,1,August 13th to 18th,32,32,40,15,October 31th to november10th,300
+2021,Fatick,01.219,F,fertilized,01-219-01.,2,September 6th to 10th,6,30,40,0,October 31th to november10th,300
+2021,Fatick,01.219,F,fertilized,01-219-01.,3,October 4th to 9th,9,30,70,0,October 31th to november10th,300
+2021,Fatick,01.220,F,control,01-220-00.,1,August 13th to 18th,18,33,60,2,October 31th to november10th,NA
+2021,Fatick,01.220,F,control,01-220-00.,2,September 6th to 10th,18,29,60,2,October 31th to november10th,NA
+2021,Fatick,01.220,F,control,01-220-00.,3,October 4th to 9th,18,29,60,0,October 31th to november10th,NA
+2021,Fatick,01.220,F,fertilized,01-220-01.,1,August 13th to 18th,14,32,60,0,October 31th to november10th,NA
+2021,Fatick,01.220,F,fertilized,01-220-01.,2,September 6th to 10th,2,30,60,0,October 31th to november10th,NA
+2021,Fatick,01.220,F,fertilized,01-220-01.,3,October 4th to 9th,2,30,60,0,October 31th to november10th,NA
+2021,Saint Louis,04.151,M,control,04-151-00,1,August 15th to 20th,13,33,35,0,NA,NA
+2021,Saint Louis,04.151,M,control,04-151-00,2,September 20th to 25th,NA,NA,60,NA,NA,NA
+2021,Saint Louis,04.151,M,control,04-151-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.151,M,fertilized,04-151-01.,1,August 15th to 20th,12,33,40,0,NA,NA
+2021,Saint Louis,04.151,M,fertilized,04-151-01.,2,September 20th to 25th,NA,NA,50,NA,NA,NA
+2021,Saint Louis,04.151,M,fertilized,04-151-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.152,M,control,04-152-00,1,August 15th to 20th,9,30,40,5,NA,NA
+2021,Saint Louis,04.152,M,control,04-152-00,2,September 20th to 25th,31,34,60,0,NA,NA
+2021,Saint Louis,04.152,M,control,04-152-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.152,M,fertilized,04-152-01.,1,August 15th to 20th,11,30,65,0,NA,NA
+2021,Saint Louis,04.152,M,fertilized,04-152-01.,2,September 20th to 25th,7,34,55,0,NA,NA
+2021,Saint Louis,04.152,M,fertilized,04-152-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.153,M,control,04-153-00,1,August 15th to 20th,8,32,60,0,NA,NA
+2021,Saint Louis,04.153,M,control,04-153-00,2,September 20th to 25th,8,31,75,0,NA,NA
+2021,Saint Louis,04.153,M,control,04-153-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.153,M,fertilized,04-153-01.,1,August 15th to 20th,15,32,70,4,NA,NA
+2021,Saint Louis,04.153,M,fertilized,04-153-01.,2,September 20th to 25th,15,31,60,0,NA,NA
+2021,Saint Louis,04.153,M,fertilized,04-153-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.154,M,control,04-154-00,1,August 15th to 20th,12,30,20,4,NA,NA
+2021,Saint Louis,04.154,M,control,04-154-00,2,September 20th to 25th,41,31,50,5,NA,NA
+2021,Saint Louis,04.154,M,control,04-154-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.154,M,fertilized,04-154-01.,1,August 15th to 20th,8,30,75,0,NA,NA
+2021,Saint Louis,04.154,M,fertilized,04-154-01.,2,September 20th to 25th,11,31,70,0,NA,NA
+2021,Saint Louis,04.154,M,fertilized,04-154-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.155,M,control,04-155-00,1,August 15th to 20th,10,32,70,0,NA,NA
+2021,Saint Louis,04.155,M,control,04-155-00,2,September 20th to 25th,18,31,65,0,NA,NA
+2021,Saint Louis,04.155,M,control,04-155-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.155,M,fertilized,04-155-01.,1,August 15th to 20th,12,32,75,0,NA,NA
+2021,Saint Louis,04.155,M,fertilized,04-155-01.,2,September 20th to 25th,2,31,80,0,NA,NA
+2021,Saint Louis,04.155,M,fertilized,04-155-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.156,M,control,04-156-00,1,August 15th to 20th,17,33,65,5,NA,NA
+2021,Saint Louis,04.156,M,control,04-156-00,2,September 20th to 25th,29,33,45,5,NA,NA
+2021,Saint Louis,04.156,M,control,04-156-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.156,M,fertilized,04-156-01.,1,August 15th to 20th,19,33,80,0,NA,NA
+2021,Saint Louis,04.156,M,fertilized,04-156-01.,2,September 20th to 25th,6,33,65,0,NA,NA
+2021,Saint Louis,04.156,M,fertilized,04-156-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.157,M,control,04-157-00,1,August 15th to 20th,16,31,40,0,NA,NA
+2021,Saint Louis,04.157,M,control,04-157-00,2,September 20th to 25th,24,32,60,5,NA,NA
+2021,Saint Louis,04.157,M,control,04-157-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.157,M,fertilized,04-157-01.,1,August 15th to 20th,15,31,80,0,NA,NA
+2021,Saint Louis,04.157,M,fertilized,04-157-01.,2,September 20th to 25th,3,32,65,0,NA,NA
+2021,Saint Louis,04.157,M,fertilized,04-157-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.158,M,control,04-158-00,1,August 15th to 20th,9,31,75,0,NA,NA
+2021,Saint Louis,04.158,M,control,04-158-00,2,September 20th to 25th,43,29,60,1,NA,NA
+2021,Saint Louis,04.158,M,control,04-158-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.158,M,fertilized,04-158-01.,1,August 15th to 20th,16,31,75,0,NA,NA
+2021,Saint Louis,04.158,M,fertilized,04-158-01.,2,September 20th to 25th,13,29,65,0,NA,NA
+2021,Saint Louis,04.158,M,fertilized,04-158-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.159,M,control,04-159-00,1,August 15th to 20th,20,32,75,0,NA,NA
+2021,Saint Louis,04.159,M,control,04-159-00,2,September 20th to 25th,28,33,50,0,NA,NA
+2021,Saint Louis,04.159,M,control,04-159-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.159,M,fertilized,04-159-01.,1,August 15th to 20th,16,32,75,0,NA,NA
+2021,Saint Louis,04.159,M,fertilized,04-159-01.,2,September 20th to 25th,7,33,65,0,NA,NA
+2021,Saint Louis,04.159,M,fertilized,04-159-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.160,F,control,04-160-00,1,August 15th to 20th,7,33,70,0,NA,NA
+2021,Saint Louis,04.160,F,control,04-160-00,2,September 20th to 25th,36,32,50,0,NA,NA
+2021,Saint Louis,04.160,F,control,04-160-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.160,F,fertilized,04-160-01.,1,August 15th to 20th,23,33,75,0,NA,NA
+2021,Saint Louis,04.160,F,fertilized,04-160-01.,2,September 20th to 25th,9,32,50,0,NA,NA
+2021,Saint Louis,04.160,F,fertilized,04-160-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.161,M,control,04-161-00,1,August 15th to 20th,21,33,45,8,NA,NA
+2021,Saint Louis,04.161,M,control,04-161-00,2,September 20th to 25th,36,34,75,0,NA,NA
+2021,Saint Louis,04.161,M,control,04-161-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.161,M,fertilized,04-161-01.,1,August 15th to 20th,14,33,65,0,NA,NA
+2021,Saint Louis,04.161,M,fertilized,04-161-01.,2,September 20th to 25th,12,34,80,0,NA,NA
+2021,Saint Louis,04.161,M,fertilized,04-161-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.162,M,control,04-162-00,1,August 15th to 20th,10,30,50,5,NA,NA
+2021,Saint Louis,04.162,M,control,04-162-00,2,September 20th to 25th,32,33,50,6,NA,NA
+2021,Saint Louis,04.162,M,control,04-162-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.162,M,fertilized,04-162-01.,1,August 15th to 20th,8,30,60,0,NA,NA
+2021,Saint Louis,04.162,M,fertilized,04-162-01.,2,September 20th to 25th,10,33,50,5,NA,NA
+2021,Saint Louis,04.162,M,fertilized,04-162-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.163,M,control,04-163-00,1,August 15th to 20th,13,30,60,0,NA,NA
+2021,Saint Louis,04.163,M,control,04-163-00,2,September 20th to 25th,28,33,NA,12,NA,NA
+2021,Saint Louis,04.163,M,control,04-163-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.163,M,fertilized,04-163-00,1,August 15th to 20th,20,30,80,0,NA,NA
+2021,Saint Louis,04.163,M,fertilized,04-163-00,2,September 20th to 25th,9,33,NA,0,NA,NA
+2021,Saint Louis,04.163,M,fertilized,04-163-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.164,M,control,04-164-00,1,August 15th to 20th,16,32,70,0,NA,NA
+2021,Saint Louis,04.164,M,control,04-164-00,2,September 20th to 25th,NA,NA,50,NA,NA,NA
+2021,Saint Louis,04.164,M,control,04-164-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.164,M,fertilized,04-164-01.,1,August 15th to 20th,19,32,85,0,NA,NA
+2021,Saint Louis,04.164,M,fertilized,04-164-01.,2,September 20th to 25th,NA,NA,60,NA,NA,NA
+2021,Saint Louis,04.164,M,fertilized,04-164-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.165,F,control,04-165-00,1,August 15th to 20th,21,32,20,7,NA,NA
+2021,Saint Louis,04.165,F,control,04-165-00,2,September 20th to 25th,35,31,50,5,NA,NA
+2021,Saint Louis,04.165,F,control,04-165-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.165,F,fertilized,04-165-01.,1,August 15th to 20th,30,32,15,0,NA,NA
+2021,Saint Louis,04.165,F,fertilized,04-165-01.,2,September 20th to 25th,12,31,50,0,NA,NA
+2021,Saint Louis,04.165,F,fertilized,04-165-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.166,F,control,04-166-00,1,August 15th to 20th,23,31,35,0,NA,NA
+2021,Saint Louis,04.166,F,control,04-166-00,2,September 20th to 25th,32,30,75,5,NA,NA
+2021,Saint Louis,04.166,F,control,04-166-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.166,F,fertilized,04-166-01.,1,August 15th to 20th,18,31,30,0,NA,NA
+2021,Saint Louis,04.166,F,fertilized,04-166-01.,2,September 20th to 25th,11,30,75,0,NA,NA
+2021,Saint Louis,04.166,F,fertilized,04-166-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.167,F,control,04-167-00,1,August 15th to 20th,8,30,50,4,NA,NA
+2021,Saint Louis,04.167,F,control,04-167-00,2,September 20th to 25th,35,33,85,9,NA,NA
+2021,Saint Louis,04.167,F,control,04-167-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.167,F,fertilized,04-167-01.,1,August 15th to 20th,7,30,50,4,NA,NA
+2021,Saint Louis,04.167,F,fertilized,04-167-01.,2,September 20th to 25th,13,33,85,0,NA,NA
+2021,Saint Louis,04.167,F,fertilized,04-167-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.168,F,control,04-168-00,1,August 15th to 20th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.168,F,control,04-168-00,2,September 20th to 25th,41,33,40,12,NA,NA
+2021,Saint Louis,04.168,F,control,04-168-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.168,F,fertilized,04-168-01.,1,August 15th to 20th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.168,F,fertilized,04-168-01.,2,September 20th to 25th,13,33,50,0,NA,NA
+2021,Saint Louis,04.168,F,fertilized,04-168-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.169,M,control,04-169-00,1,August 15th to 20th,8,31,90,0,NA,NA
+2021,Saint Louis,04.169,M,control,04-169-00,2,September 20th to 25th,41,32,55,9,NA,NA
+2021,Saint Louis,04.169,M,control,04-169-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.169,M,fertilized,04-169-01.,1,August 15th to 20th,12,31,65,0,NA,NA
+2021,Saint Louis,04.169,M,fertilized,04-169-01.,2,September 20th to 25th,9,32,70,0,NA,NA
+2021,Saint Louis,04.169,M,fertilized,04-169-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.170,F,control,04-170-00,1,August 15th to 20th,8,30,20,0,NA,NA
+2021,Saint Louis,04.170,F,control,04-170-00,2,September 20th to 25th,8,30,40,0,NA,NA
+2021,Saint Louis,04.170,F,control,04-170-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.170,F,fertilized,04-170-01.,1,August 15th to 20th,5,30,80,0,NA,NA
+2021,Saint Louis,04.170,F,fertilized,04-170-01.,2,September 20th to 25th,5,30,70,0,NA,NA
+2021,Saint Louis,04.170,F,fertilized,04-170-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.171,F,control,04-171-00,1,August 15th to 20th,12,28,20,5,NA,NA
+2021,Saint Louis,04.171,F,control,04-171-00,2,September 20th to 25th,31,32,50,5,NA,NA
+2021,Saint Louis,04.171,F,control,04-171-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.171,F,fertilized,04-171-01.,1,August 15th to 20th,24,28,40,5,NA,NA
+2021,Saint Louis,04.171,F,fertilized,04-171-01.,2,September 20th to 25th,10,32,70,0,NA,NA
+2021,Saint Louis,04.171,F,fertilized,04-171-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.172,M,control,04-172-00,1,August 15th to 20th,8,34,40,0,NA,NA
+2021,Saint Louis,04.172,M,control,04-172-00,2,September 20th to 25th,28,27,60,3,NA,NA
+2021,Saint Louis,04.172,M,control,04-172-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.172,M,fertilized,04-172-01.,1,August 15th to 20th,6,34,70,0,NA,NA
+2021,Saint Louis,04.172,M,fertilized,04-172-01.,2,September 20th to 25th,12,27,60,0,NA,NA
+2021,Saint Louis,04.172,M,fertilized,04-172-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.173,F,control,04-173-00,1,August 15th to 20th,12,27,65,1,NA,NA
+2021,Saint Louis,04.173,F,control,04-173-00,2,September 20th to 25th,23,33,40,3,NA,NA
+2021,Saint Louis,04.173,F,control,04-173-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.173,F,fertilized,04-173-01.,1,August 15th to 20th,6,27,70,1,NA,NA
+2021,Saint Louis,04.173,F,fertilized,04-173-01.,2,September 20th to 25th,1,33,80,0,NA,NA
+2021,Saint Louis,04.173,F,fertilized,04-173-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.174,M,control,04-174-00,1,August 15th to 20th,6,32,40,0,NA,NA
+2021,Saint Louis,04.174,M,control,04-174-00,2,September 20th to 25th,25,33,60,0,NA,NA
+2021,Saint Louis,04.174,M,control,04-174-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.174,M,fertilized,04-174-01.,1,August 15th to 20th,18,32,80,0,NA,NA
+2021,Saint Louis,04.174,M,fertilized,04-174-01.,2,September 20th to 25th,9,33,40,0,NA,NA
+2021,Saint Louis,04.174,M,fertilized,04-174-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.175,F,control,04-175-00,1,August 15th to 20th,12,31,60,0,NA,NA
+2021,Saint Louis,04.175,F,control,04-175-00,2,September 20th to 25th,38,33,40,15,NA,NA
+2021,Saint Louis,04.175,F,control,04-175-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.175,F,fertilized,04-175-01.,1,August 15th to 20th,8,31,40,0,NA,NA
+2021,Saint Louis,04.175,F,fertilized,04-175-01.,2,September 20th to 25th,5,33,50,0,NA,NA
+2021,Saint Louis,04.175,F,fertilized,04-175-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.176,M,control,04-176-00,1,August 15th to 20th,9,34,50,0,NA,NA
+2021,Saint Louis,04.176,M,control,04-176-00,2,September 20th to 25th,9,32,NA,0,NA,NA
+2021,Saint Louis,04.176,M,control,04-176-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.176,M,fertilized,04-176-01.,1,August 15th to 20th,10,32,45,0,NA,NA
+2021,Saint Louis,04.176,M,fertilized,04-176-01.,2,September 20th to 25th,10,32,NA,0,NA,NA
+2021,Saint Louis,04.176,M,fertilized,04-176-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.177,M,control,04-177-00,1,August 15th to 20th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.177,M,control,04-177-00,2,September 20th to 25th,NA,NA,60,NA,NA,NA
+2021,Saint Louis,04.177,M,control,04-177-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.177,M,fertilized,04-177-01.,1,August 15th to 20th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.177,M,fertilized,04-177-01.,2,September 20th to 25th,NA,NA,60,NA,NA,NA
+2021,Saint Louis,04.177,M,fertilized,04-177-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.178,M,control,04-178-00,1,August 15th to 20th,0,32,30,0,NA,NA
+2021,Saint Louis,04.178,M,control,04-178-00,2,September 20th to 25th,16,33,NA,0,NA,NA
+2021,Saint Louis,04.178,M,control,04-178-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.178,M,fertilized,04-178-01.,1,August 15th to 20th,24,32,30,10,NA,NA
+2021,Saint Louis,04.178,M,fertilized,04-178-01.,2,September 20th to 25th,3,33,NA,4,NA,NA
+2021,Saint Louis,04.178,M,fertilized,04-178-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.179,M,control,04-179-00,1,August 15th to 20th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.179,M,control,04-179-00,2,September 20th to 25th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.179,M,control,04-179-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.179,M,fertilized,04-179-01.,1,August 15th to 20th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.179,M,fertilized,04-179-01.,2,September 20th to 25th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.179,M,fertilized,04-179-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.180,M,control,04-180-00,1,August 15th to 20th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.180,M,control,04-180-00,2,September 20th to 25th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.180,M,control,04-180-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.180,M,fertilized,04-180-01.,1,August 15th to 20th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.180,M,fertilized,04-180-01.,2,September 20th to 25th,NA,NA,75,NA,NA,NA
+2021,Saint Louis,04.180,M,fertilized,04-180-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.181,F,control,04-181-00,1,August 15th to 20th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.181,F,control,04-181-00,2,September 20th to 25th,NA,NA,70,NA,NA,NA
+2021,Saint Louis,04.181,F,control,04-181-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.181,F,fertilized,04-181-01.,1,August 15th to 20th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.181,F,fertilized,04-181-01.,2,September 20th to 25th,37,33,60,10,NA,NA
+2021,Saint Louis,04.181,F,fertilized,04-181-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.182,M,control,04-182-00,1,August 15th to 20th,0,33,40,0,NA,NA
+2021,Saint Louis,04.182,M,control,04-182-00,2,September 20th to 25th,23,33,NA,3,NA,NA
+2021,Saint Louis,04.182,M,control,04-182-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.182,M,fertilized,04-182-01.,1,August 15th to 20th,24,33,40,5,NA,NA
+2021,Saint Louis,04.182,M,fertilized,04-182-01.,2,September 20th to 25th,7,33,NA,0,NA,NA
+2021,Saint Louis,04.182,M,fertilized,04-182-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.183,M,control,04-183-00,1,August 15th to 20th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.183,M,control,04-183-00,2,September 20th to 25th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.183,M,control,04-183-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.183,M,fertilized,04-183-01.,1,August 15th to 20th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.183,M,fertilized,04-183-01.,2,September 20th to 25th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.183,M,fertilized,04-183-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.184,M,control,04-184-00,1,August 15th to 20th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.184,M,control,04-184-00,2,September 20th to 25th,NA,NA,50,NA,NA,NA
+2021,Saint Louis,04.184,M,control,04-184-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.184,M,fertilized,04-184-01.,1,August 15th to 20th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.184,M,fertilized,04-184-01.,2,September 20th to 25th,NA,NA,40,NA,NA,NA
+2021,Saint Louis,04.184,M,fertilized,04-184-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.185,M,control,04-185-00,1,August 15th to 20th,12,31,20,0,NA,NA
+2021,Saint Louis,04.185,M,control,04-185-00,2,September 20th to 25th,21,32,50,0,NA,NA
+2021,Saint Louis,04.185,M,control,04-185-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.185,M,fertilized,04-185-01.,1,August 15th to 20th,8,31,20,0,NA,NA
+2021,Saint Louis,04.185,M,fertilized,04-185-01.,2,September 20th to 25th,3,32,40,0,NA,NA
+2021,Saint Louis,04.185,M,fertilized,04-185-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.186,M,control,04-186-00,1,August 15th to 20th,3,31,20,0,NA,NA
+2021,Saint Louis,04.186,M,control,04-186-00,2,September 20th to 25th,19,32,NA,0,NA,NA
+2021,Saint Louis,04.186,M,control,04-186-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.186,M,fertilized,04-186-01.,1,August 15th to 20th,6,31,20,0,NA,NA
+2021,Saint Louis,04.186,M,fertilized,04-186-01.,2,September 20th to 25th,1,32,NA,0,NA,NA
+2021,Saint Louis,04.186,M,fertilized,04-186-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.187,M,control,04-187-00,1,August 15th to 20th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.187,M,control,04-187-00,2,September 20th to 25th,NA,NA,60,NA,NA,NA
+2021,Saint Louis,04.187,M,control,04-187-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.187,M,fertilized,04-187-01.,1,August 15th to 20th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.187,M,fertilized,04-187-01.,2,September 20th to 25th,NA,NA,65,NA,NA,NA
+2021,Saint Louis,04.187,M,fertilized,04-187-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.188,M,control,04-188-00,1,August 15th to 20th,0,32,30,0,NA,NA
+2021,Saint Louis,04.188,M,control,04-188-00,2,September 20th to 25th,38,33,45,12,NA,NA
+2021,Saint Louis,04.188,M,control,04-188-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.188,M,fertilized,04-188-01.,1,August 15th to 20th,0,32,30,0,NA,NA
+2021,Saint Louis,04.188,M,fertilized,04-188-01.,2,September 20th to 25th,4,33,60,0,NA,NA
+2021,Saint Louis,04.188,M,fertilized,04-188-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.189,M,control,04-189-00,1,August 15th to 20th,7,33,40,0,NA,NA
+2021,Saint Louis,04.189,M,control,04-189-00,2,September 20th to 25th,40,33,70,8,NA,NA
+2021,Saint Louis,04.189,M,control,04-189-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.189,M,fertilized,04-189-01.,1,August 15th to 20th,9,35,40,0,NA,NA
+2021,Saint Louis,04.189,M,fertilized,04-189-01.,2,September 20th to 25th,10,33,60,0,NA,NA
+2021,Saint Louis,04.189,M,fertilized,04-189-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.190,F,control,04-190-00,1,August 15th to 20th,10,32,20,0,NA,NA
+2021,Saint Louis,04.190,F,control,04-190-00,2,September 20th to 25th,31,31,15,5,NA,NA
+2021,Saint Louis,04.190,F,control,04-190-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.190,F,fertilized,04-190-01.,1,August 15th to 20th,2,32,20,0,NA,NA
+2021,Saint Louis,04.190,F,fertilized,04-190-01.,2,September 20th to 25th,4,31,15,0,NA,NA
+2021,Saint Louis,04.190,F,fertilized,04-190-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.191,F,control,04-191-00,1,August 15th to 20th,0,28,15,0,NA,NA
+2021,Saint Louis,04.191,F,control,04-191-00,2,September 20th to 25th,32,29,70,10,NA,NA
+2021,Saint Louis,04.191,F,control,04-191-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.191,F,fertilized,04-191-01.,1,August 15th to 20th,0,28,15,0,NA,NA
+2021,Saint Louis,04.191,F,fertilized,04-191-01.,2,September 20th to 25th,12,29,50,4,NA,NA
+2021,Saint Louis,04.191,F,fertilized,04-191-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.192,F,control,04-192-00,1,August 15th to 20th,3,28,35,0,NA,NA
+2021,Saint Louis,04.192,F,control,04-192-00,2,September 20th to 25th,24,30,50,0,NA,NA
+2021,Saint Louis,04.192,F,control,04-192-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.192,F,fertilized,04-192-01.,1,August 15th to 20th,8,28,35,0,NA,NA
+2021,Saint Louis,04.192,F,fertilized,04-192-01.,2,September 20th to 25th,7,30,60,0,NA,NA
+2021,Saint Louis,04.192,F,fertilized,04-192-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.193,M,control,04-193-00,1,August 15th to 20th,9,30,30,0,NA,NA
+2021,Saint Louis,04.193,M,control,04-193-00,2,September 20th to 25th,25,34,60,2,NA,NA
+2021,Saint Louis,04.193,M,control,04-193-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.193,M,fertilized,04-193-01.,1,August 15th to 20th,4,30,30,0,NA,NA
+2021,Saint Louis,04.193,M,fertilized,04-193-01.,2,September 20th to 25th,6,34,60,0,NA,NA
+2021,Saint Louis,04.193,M,fertilized,04-193-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.194,M,control,04-194-00,1,August 15th to 20th,2,33,20,0,NA,NA
+2021,Saint Louis,04.194,M,control,04-194-00,2,September 20th to 25th,28,27,70,7,NA,NA
+2021,Saint Louis,04.194,M,control,04-194-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.194,M,fertilized,03-194-01.,1,August 15th to 20th,1,32,20,0,NA,NA
+2021,Saint Louis,04.194,M,fertilized,03-194-01.,2,September 20th to 25th,12,27,70,0,NA,NA
+2021,Saint Louis,04.194,M,fertilized,03-194-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.195,M,control,04-195-00,1,August 15th to 20th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.195,M,control,04-195-00,2,September 20th to 25th,32,33,80,5,NA,NA
+2021,Saint Louis,04.195,M,control,04-195-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.195,M,fertilized,04-195-01.,1,August 15th to 20th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.195,M,fertilized,04-195-01.,2,September 20th to 25th,9,33,70,0,NA,NA
+2021,Saint Louis,04.195,M,fertilized,04-195-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.196,M,control,04-196-00,1,August 15th to 20th,7,32,20,0,NA,NA
+2021,Saint Louis,04.196,M,control,04-196-00,2,September 20th to 25th,27,33,60,0,NA,NA
+2021,Saint Louis,04.196,M,control,04-196-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.196,M,fertilized,04-196-01.,1,August 15th to 20th,5,31,20,0,NA,NA
+2021,Saint Louis,04.196,M,fertilized,04-196-01.,2,September 20th to 25th,2,33,50,0,NA,NA
+2021,Saint Louis,04.196,M,fertilized,04-196-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.197,M,control,04-197-00,1,August 15th to 20th,0,31,30,0,NA,NA
+2021,Saint Louis,04.197,M,control,04-197-00,2,September 20th to 25th,29,34,NA,0,NA,NA
+2021,Saint Louis,04.197,M,control,04-197-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.197,M,fertilized,04-197-01.,1,August 15th to 20th,3,30,30,0,NA,NA
+2021,Saint Louis,04.197,M,fertilized,04-197-01.,2,September 20th to 25th,4,34,NA,0,NA,NA
+2021,Saint Louis,04.197,M,fertilized,04-197-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.198,M,control,04-198-00,1,August 15th to 20th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.198,M,control,04-198-00,2,September 20th to 25th,NA,NA,60,NA,NA,NA
+2021,Saint Louis,04.198,M,control,04-198-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.198,M,fertilized,04-198-01.,1,August 15th to 20th,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.198,M,fertilized,04-198-01.,2,September 20th to 25th,NA,NA,50,NA,NA,NA
+2021,Saint Louis,04.198,M,fertilized,04-198-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.199,F,control,04-199-00,1,August 15th to 20th,0,29,20,0,NA,NA
+2021,Saint Louis,04.199,F,control,04-199-00,2,September 20th to 25th,29,32,60,0,NA,NA
+2021,Saint Louis,04.199,F,control,04-199-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.199,F,fertilized,04-199-01.,1,August 15th to 20th,0,29,20,0,NA,NA
+2021,Saint Louis,04.199,F,fertilized,04-199-01.,2,September 20th to 25th,6,32,70,0,NA,NA
+2021,Saint Louis,04.199,F,fertilized,04-199-01.,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.200,F,control,04-200-00,1,August 15th to 20th,2,31,35,0,NA,NA
+2021,Saint Louis,04.200,F,control,04-200-00,2,September 20th to 25th,51,33,NA,15,NA,NA
+2021,Saint Louis,04.200,F,control,04-200-00,3,NA,NA,NA,NA,NA,NA,NA
+2021,Saint Louis,04.200,F,fertilized,04-200-01.,1,August 15th to 20th,0,32,35,0,NA,NA
+2021,Saint Louis,04.200,F,fertilized,04-200-01.,2,September 20th to 25th,19,33,NA,0,NA,NA
+2021,Saint Louis,04.200,F,fertilized,04-200-01.,3,NA,NA,NA,NA,NA,NA,NA

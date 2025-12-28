@@ -127,35 +127,37 @@ plot_mission_damage <- function(
         )) |>
         dplyr::mutate(region = factor(region, levels = regions))
 
-    plot_mission <- function(md) {
-        ggplot(
-            dplyr::filter(density_dat, mission_date == md),
-            aes(x = region, y = ose_damage_percent, color = fertilizer_treatment)
-        ) +
-        geom_jitter(position = position_jitterdodge(jitter.width = 0.2, jitter.height = 0),
-            pch = 21, alpha = 0.3) +
-        geom_jitter(
-            data = dplyr::filter(emmeans, mission_date == md),
-            aes(y = response, x = region, fill = fertilizer_treatment),
-            position = position_jitterdodge(jitter.width = 0.00001, jitter.height = 0),
-            pch = 21,
-            color = 'black',
-            size = emmean_point_size
-        ) +
-        scale_color_manual(values = FERTILIZER_COLORS) +
-        scale_fill_manual(values = FERTILIZER_COLORS) +
-        scale_x_discrete(drop = FALSE) +
-        ylab('leaf damage proportion') +
-        labs(title = md) +
-        theme_pubr(legend = 'bottom') +
-        theme(
-            legend.title = element_blank(),
-            plot.title = element_text(hjust = 0.5),
-            axis.title.x = element_blank(),
-        )
-    }
+    mission_titles <- sub(" \\(.*\\)", "", MISSION_LABELS)
 
-    plots <- lapply(MISSION_LABELS, plot_mission)
+    plot_mission <- function(md, title) {
+            ggplot(
+                dplyr::filter(density_dat, mission_date == md),
+                aes(x = region, y = ose_damage_percent, color = fertilizer_treatment)
+            ) +
+            geom_jitter(position = position_jitterdodge(jitter.width = 0.2, jitter.height = 0),
+                pch = 21, alpha = 0.3) +
+            geom_jitter(
+                data = dplyr::filter(emmeans, mission_date == md),
+                aes(y = response, x = region, fill = fertilizer_treatment),
+                position = position_jitterdodge(jitter.width = 0.00001, jitter.height = 0),
+                pch = 21,
+                color = 'black',
+                size = emmean_point_size
+            ) +
+            scale_color_manual(values = FERTILIZER_COLORS) +
+            scale_fill_manual(values = FERTILIZER_COLORS) +
+            scale_x_discrete(drop = FALSE) +
+            ylab('leaf damage proportion') +
+            labs(title = title) +
+            theme_pubr(legend = 'bottom') +
+            theme(
+                legend.title = element_blank(),
+                plot.title = element_text(hjust = 0.5),
+                axis.title.x = element_blank(),
+            )
+        }
+
+    plots <- Map(plot_mission, MISSION_LABELS, mission_titles)
 
     combined_plot <- patchwork::wrap_plots(plots, ncol = ncol) +
         patchwork::plot_annotation(tag_levels = 'a') +
