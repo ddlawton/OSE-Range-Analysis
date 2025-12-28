@@ -142,6 +142,38 @@ def download_precipitation_tiff(image, senegal_boundary, output_filename, scale=
     
     return output_path
 
+def calculate_monthly_precipitation(year, month):
+    """
+    Calculate total precipitation for a specific month
+    
+    Parameters:
+    -----------
+    year : int
+        Year for analysis
+    month : int
+        Month for analysis (1-12)
+    
+    Returns:
+    --------
+    ee.Image
+        Total precipitation for the month in mm
+    """
+    # Load CHIRPS daily precipitation data
+    chirps = ee.ImageCollection('UCSB-CHG/CHIRPS/DAILY')
+    
+    # Determine the start and end dates for the month
+    start_date = ee.Date.fromYMD(year, month, 1)
+    # Get last day of month
+    end_date = start_date.advance(1, 'month')
+    
+    month_name = datetime.date(year, month, 1).strftime('%B')
+    print(f"Processing {month_name} {year} precipitation data")
+    
+    # Filter to the specific month and sum daily precipitation
+    monthly_precip = chirps.filterDate(start_date, end_date).sum().rename('precipitation_mm')
+    
+    return monthly_precip
+
 def get_precipitation_stats(image, senegal_boundary):
     """
     Calculate summary statistics for precipitation
@@ -171,8 +203,19 @@ def get_precipitation_stats(image, senegal_boundary):
 def main():
     """Main execution function"""
     print("=" * 70)
-    print("Senegal Mean Annual Precipitation Generator")
+    print("Senegal Precipitation Data Generator")
     print("Using Google Earth Engine and CHIRPS Data")
+    print("=" * 70)
+    
+    # Get Senegal boundary
+    print("\nLoading Senegal boundary...")
+    senegal = get_senegal_boundary()
+    
+    # ========================================================================
+    # Part 1: Generate 10-year mean annual precipitation
+    # ========================================================================
+    print("\n" + "=" * 70)
+    print("PART 1: 10-Year Mean Annual Precipitation")
     print("=" * 70)
     
     # Calculate date range (last 10 years)
@@ -181,10 +224,6 @@ def main():
     start_year = end_year - 9  # 10 years total
     
     print(f"\nAnalysis period: {start_year}-{end_year} (10 years)")
-    
-    # Get Senegal boundary
-    print("\nLoading Senegal boundary...")
-    senegal = get_senegal_boundary()
     
     # Calculate mean annual precipitation
     print("\nCalculating mean annual precipitation...")
@@ -203,7 +242,7 @@ def main():
     # Download TIFF locally
     output_filename = f'senegal_map_{start_year}_{end_year}_chirps'
     print("\n" + "=" * 70)
-    print("Downloading TIFF file...")
+    print("Downloading 10-year mean TIFF file...")
     print("=" * 70)
     
     output_path = download_precipitation_tiff(
@@ -213,11 +252,65 @@ def main():
         scale=5000  # CHIRPS native resolution (~5km)
     )
     
+    print(f"\n✓ 10-year mean file saved: {output_path}")
+    
+    # ========================================================================
+    # Part 2: Generate 2021 monthly precipitation (July-October)
+    # ========================================================================
+    print("\n" + "=" * 70)
+    print("PART 2: 2021 Monthly Precipitation (July-October)")
+    print("=" * 70)
+    
+    year = 2021
+    months = [
+        (7, 'July'),
+        (8, 'August'),
+        (9, 'September'),
+        (10, 'October')
+    ]
+    
+    monthly_output_paths = []
+    
+    for month_num, month_name in months:
+        print(f"\n--- Processing {month_name} {year} ---")
+        
+        # Calculate monthly precipitation
+        monthly_image = calculate_monthly_precipitation(year, month_num)
+        
+        # Get statistics
+        monthly_stats = get_precipitation_stats(monthly_image, senegal)
+        
+        print(f"\n{month_name} {year} Precipitation Statistics:")
+        print(f"  Mean: {monthly_stats.get('precipitation_mm_mean', 'N/A'):.2f} mm")
+        print(f"  Min:  {monthly_stats.get('precipitation_mm_min', 'N/A'):.2f} mm")
+        print(f"  Max:  {monthly_stats.get('precipitation_mm_max', 'N/A'):.2f} mm")
+        
+        # Download monthly TIFF
+        output_filename = f'senegal_precipitation_{year}_{month_name.lower()}_chirps'
+        
+        print(f"\nDownloading {month_name} {year} TIFF file...")
+        monthly_path = download_precipitation_tiff(
+            image=monthly_image,
+            senegal_boundary=senegal,
+            output_filename=output_filename,
+            scale=5000
+        )
+        
+        monthly_output_paths.append(monthly_path)
+        print(f"✓ {month_name} file saved: {monthly_path}")
+    
+    # ========================================================================
+    # Summary
+    # ========================================================================
     print("\n" + "=" * 70)
     print("Script completed successfully!")
     print("=" * 70)
-    print(f"\nOutput file: {output_path}")
-    print(f"You can now use this TIFF in your analysis!")
+    print(f"\nGenerated {len(monthly_output_paths) + 1} TIFF files:")
+    print(f"\n1. 10-year mean: {output_path}")
+    for i, path in enumerate(monthly_output_paths, start=2):
+        print(f"{i}. {path.name}: {path}")
+    print(f"\nAll files saved to: {OUTPUT_DIR}")
+    print("You can now use these TIFFs in your analysis!")
 
 if __name__ == "__main__":
     main()

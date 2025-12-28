@@ -66,6 +66,7 @@ plot_mission_density <- function(
         ) +
         scale_color_manual(values = FERTILIZER_COLORS) +
         scale_fill_manual(values = FERTILIZER_COLORS) +
+        scale_x_discrete(drop = FALSE) +
         ylab(bquote('individuals'~bold('•')~100~m^-2)) +
         labs(title = title) +
         theme_pubr(legend = 'bottom') +
@@ -75,7 +76,6 @@ plot_mission_density <- function(
             axis.title.x = element_blank(),
         )
     }
-
     plots <- Map(plot_mission, MISSION_LABELS, mission_titles)
 
     combined_plot <- patchwork::wrap_plots(plots, ncol = ncol) +
@@ -144,6 +144,7 @@ plot_mission_damage <- function(
         ) +
         scale_color_manual(values = FERTILIZER_COLORS) +
         scale_fill_manual(values = FERTILIZER_COLORS) +
+        scale_x_discrete(drop = FALSE) +
         ylab('leaf damage proportion') +
         labs(title = md) +
         theme_pubr(legend = 'bottom') +

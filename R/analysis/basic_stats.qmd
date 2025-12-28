@@ -220,3 +220,96 @@ ggplot() +
     panel.grid = element_blank()
   )
 ```
+
+# 2021 rainfall by month
+
+```{r setup-roi-union}
+
+months <- c("july", "august", "september", "october")
+raster_paths <- paste0("data/processed/maps/senegal_precipitation_2021_", months, "_chirps.tif")
+regions_of_interest <- c("Saint-Louis", "Thiès", "Fatick", "Kaffrine")
+roi_sf <- senegal %>% filter(name %in% regions_of_interest)
+other_sf <- senegal %>% filter(!name %in% regions_of_interest)
+roi_union <- st_union(roi_sf)
+```
+
+
+```{r}
+library(terra)
+
+# Calculate global min/max for all rasters
+rainfall_values <- lapply(raster_paths, function(path) {
+  r <- rast(path)
+  values(r)[!is.na(values(r))]
+})
+all_values <- unlist(rainfall_values)
+rainfall_min <- min(all_values)
+rainfall_max <- max(all_values)
+
+# Helper function for full Senegal plot
+plot_month_full <- function(month, raster_path, senegal, min_val, max_val) {
+  raster <- rast(raster_path)
+  raster_senegal <- crop(raster, vect(senegal)) |> mask(vect(senegal))
+  ggplot() +
+    geom_sf(data = senegal) +
+    geom_spatraster(data = raster_senegal, aes(fill = !!sym(paste0("senegal_precipitation_2021_", month, "_chirps"))), na.rm = TRUE) +
+    geom_sf(data = senegal, fill = NA, color = "grey", size = 0.6) +
+    scale_fill_viridis_c(
+      name = "Rainfall (mm)",
+      na.value = NA,
+      option = "C",
+      limits = c(min_val, max_val)
+    ) +
+    theme_minimal() +
+    labs(title = paste(month, "2021")) +
+    theme(axis.text = element_blank(), axis.ticks = element_blank(), panel.grid = element_blank())
+}
+
+plots_full <- mapply(
+  plot_month_full, months, raster_paths,
+  MoreArgs = list(senegal = senegal, min_val = rainfall_min, max_val = rainfall_max),
+  SIMPLIFY = FALSE
+)
+
+# Combine as 2x2
+(plots_full[[1]] | plots_full[[2]]) /
+(plots_full[[3]] | plots_full[[4]]) + plot_layout(guides = "collect") & theme(legend.position = 'bottom')
+
+# Helper function for regions plot
+plot_month_regions <- function(month, raster_path, senegal, roi_union, roi_sf, other_sf, min_val, max_val) {
+  raster <- rast(raster_path)
+  raster_senegal <- crop(raster, vect(senegal)) |> mask(vect(senegal))
+  raster_roi <- mask(raster_senegal, vect(roi_union))
+  ggplot() +
+    geom_sf(data = other_sf, fill = "grey90", color = "grey", size = 0.2) +
+    geom_spatraster(data = raster_roi, aes(fill = !!sym(paste0("senegal_precipitation_2021_", month, "_chirps"))), na.rm = TRUE) +
+    geom_sf(data = roi_sf, fill = NA, color = "grey", size = 0.6) +
+    # Optionally use geom_label_repel for better labels
+    scale_fill_viridis_c(
+      name = "Rainfall (mm)",
+      na.value = NA,
+      option = "C",
+      limits = c(min_val, max_val)
+    ) +
+    theme_minimal() +
+    labs(title = paste(month, "2021 (Regions)")) +
+    theme(axis.text = element_blank(), axis.ticks = element_blank(), panel.grid = element_blank())
+}
+
+plots_regions <- mapply(
+  plot_month_regions, months, raster_paths,
+  MoreArgs = list(
+    senegal = senegal,
+    roi_union = roi_union,
+    roi_sf = roi_sf,
+    other_sf = other_sf,
+    min_val = rainfall_min,
+    max_val = rainfall_max
+  ),
+  SIMPLIFY = FALSE
+)
+
+# Combine as 2x2
+(plots_regions[[1]] | plots_regions[[2]]) /
+(plots_regions[[3]] | plots_regions[[4]]) + plot_layout(guides = "collect") & theme(legend.position = 'bottom')
+```

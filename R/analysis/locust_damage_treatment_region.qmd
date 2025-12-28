@@ -35,7 +35,6 @@ data <- data |>
     mutate(ose_damage_percent = ose_damage_percent/100)
 ```
 
-
 # Locust density and region by treatment
 
 To assess how locust damage percent changes between treatment (fertilized and control) and region (four regions), I built a generalized linear mixed model (family: Poisson) per mission as follows:
@@ -125,7 +124,7 @@ count_plot_option_1 <- plot_mission_damage(
     data |> drop_na(ose_damage_percent, fertilizer_treatment),
     mission_emms,
     ncol = 1,
-    regions = ALT_STUDY_REGIONS,
+    regions = c("Kaffrine", "Thies", "Fatick", "Saint Louis"),
     legend_position = 'bottom'
 ) 
 
