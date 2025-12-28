@@ -14,18 +14,46 @@
     "text": "GAM model summary\n\n\n\n  \n  \n\n\n\nGAM model Summary: OSE Density x ground Cover\n\n\nTerm\nEstimated DF\nReference DF\nF Statistic\nP-value\n\n\n\n\nte(percent_ground_cover,region_treat)\n26.10\n39.00\n39.97\n0.00\n\n\ns(farmer)\n92.13\n237.00\n0.72\n0.00"
   },
   {
+    "objectID": "R/analysis/locust_density_ground_cover.html#ground-cover-by-mission",
+    "href": "R/analysis/locust_density_ground_cover.html#ground-cover-by-mission",
+    "title": "2021 Locust × Ground Cover",
+    "section": "ground cover by mission",
+    "text": "ground cover by mission\nin general, ground cover increased through the year. It does not really seem theres a big difference between regions."
+  },
+  {
+    "objectID": "R/analysis/locust_density_ground_cover.html#ground-cover-by-mission-and-fertilizer-treatment",
+    "href": "R/analysis/locust_density_ground_cover.html#ground-cover-by-mission-and-fertilizer-treatment",
+    "title": "2021 Locust × Ground Cover",
+    "section": "ground cover by mission and fertilizer treatment",
+    "text": "ground cover by mission and fertilizer treatment\n\n\n\n\n\n\n\n\n\n Family: gaussian  ( identity )\nFormula:          percent_ground_cover ~ fertilizer_treatment * mission_number\nData: data\n\n      AIC       BIC    logLik -2*log(L)  df.resid \n  11094.8   11130.9   -5540.4   11080.8      1277 \n\n\nDispersion estimate for gaussian family (sigma^2):  328 \n\nConditional model:\n                                               Estimate Std. Error z value\n(Intercept)                                      54.911      1.210   45.40\nfertilizer_treatmentfertilized                    2.733      1.694    1.61\nmission_number2                                  13.916      1.720    8.09\nmission_number3                                  23.039      1.815   12.70\nfertilizer_treatmentfertilized:mission_number2   -2.270      2.400   -0.95\nfertilizer_treatmentfertilized:mission_number3   -2.765      2.528   -1.09\n                                               Pr(&gt;|z|)    \n(Intercept)                                     &lt; 2e-16 ***\nfertilizer_treatmentfertilized                    0.107    \nmission_number2                                5.99e-16 ***\nmission_number3                                 &lt; 2e-16 ***\nfertilizer_treatmentfertilized:mission_number2    0.344    \nfertilizer_treatmentfertilized:mission_number3    0.274    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nGround cover wasnt different between fertilizer treatment, but it was between missions (makes sense). There was no interactive effect between fertilizer treatment and mission."
+  },
+  {
+    "objectID": "R/analysis/locust_density_ground_cover.html#ose-count-by-ground-cover-and-fertilizer-treatment",
+    "href": "R/analysis/locust_density_ground_cover.html#ose-count-by-ground-cover-and-fertilizer-treatment",
+    "title": "2021 Locust × Ground Cover",
+    "section": "OSE count by ground cover and fertilizer treatment",
+    "text": "OSE count by ground cover and fertilizer treatment\nSo agnostic to region, there are\n\n\n# A tibble: 4 × 3\n  model_name                        AIC delta_AIC\n  &lt;chr&gt;                           &lt;dbl&gt;     &lt;dbl&gt;\n1 Smooth by Fertilizer Treatment  9692.       0  \n2 Linear Interaction              9742.      49.9\n3 No Fertilizer Treatment Smooth  9777.      85.1\n4 Null Model                     10392.     700. \n\n\nSo the model with a smooth term for both fertilizer treatments was selected by AIC. This means that fertilizer treatment has an impact on the relationship between ose_count and ground_cover. lets plot out this relationship.\n\n\n\n\n\n\n\n\n\nOf all the models tested, the one allowing the effect of ground cover to vary by fertilizer treatment (“smooth by fertilizer treatment”) was the best based on AIC. This means the shape of the relationship between ground cover and OSE count depends on whether the field was fertilized or not.\nOSE counts in fertilized plots peak at around 40% ground cover, whereas in controls, the peak shifts to about 60–70%. That suggests fertilizer treatment modifies how OSE respond to ground cover levels perhaps through effects on crop vigor, species composition, or microclimate.\nModel selection supports including an interaction between fertilizer and ground cover, highlighting that fertilizer status doesn’t just change overall abundance but alters where OSE are most dense along the ground cover gradient. Simpler models (single smooth, linear interaction, or null) were much less supported. These results justify showing the separate smooths by fertilizer in the main text."
+  },
+  {
     "objectID": "R/analysis/basic_stats.html",
     "href": "R/analysis/basic_stats.html",
     "title": "Basic Statistics and Maps",
     "section": "",
-    "text": "The goal of this page is to provide the map and a basic understanding of the data I have. This is to ensure visuals for publication have the same themeing but also to ensure that my data management aligns well with expectations and that there are no errors. If you see errors, please let me know!\n\n\n# A tibble: 35 × 3\n   variable       statistic    value\n   &lt;chr&gt;          &lt;chr&gt;        &lt;dbl&gt;\n 1 year           min       2021    \n 2 year           max       2021    \n 3 year           mean      2021    \n 4 year           median    2021    \n 5 year           sd           0    \n 6 mission_number min          1    \n 7 mission_number max          3    \n 8 mission_number mean         2    \n 9 mission_number median       2    \n10 mission_number sd           0.817\n# ℹ 25 more rows\n\n\n\n\n\n\n\n\nSummary of Survey Data Variables\n\n\n\nType\nMin\nMax\nMean\nMedian\nSD\nMissing\nLevels\n\n\n\n\nyear\nnumeric\n2,021.00\n2,021.00\n2,021.00\n2,021.00\n0.00\n0\n-\n\n\nregion\ncharacter\n-\n-\n-\n-\n-\n0\n4\n\n\nfarmer\ncharacter\n-\n-\n-\n-\n-\n0\n250\n\n\nfarmer_gender\ncharacter\n-\n-\n-\n-\n-\n0\n2\n\n\nfertilizer_treatment\ncharacter\n-\n-\n-\n-\n-\n18\n2\n\n\ncode\ncharacter\n-\n-\n-\n-\n-\n18\n489\n\n\nmission_number\nnumeric\n1.00\n3.00\n2.00\n2.00\n0.82\n0\n-\n\n\ndate_surveyed\ncharacter\n-\n-\n-\n-\n-\n100\n8\n\n\nose_count\nnumeric\n0.00\n145.00\n20.99\n14.00\n20.06\n199\n-\n\n\ntemperature\nnumeric\n23.00\n41.00\n31.04\n31.00\n3.27\n199\n-\n\n\npercent_ground_cover\nnumeric\n10.00\n100.00\n67.23\n70.00\n20.12\n204\n-\n\n\nose_damage_percent\nnumeric\n0.00\n46.00\n1.92\n0.00\n4.32\n200\n-\n\n\nyield_date_havested\ncharacter\n-\n-\n-\n-\n-\n300\n2\n\n\nrendement_en_kg_ha\nnumeric\n20.00\n2,000.00\n637.24\n560.00\n412.74\n465\n-"
+    "text": "The goal of this page is to provide the map and a basic understanding of the data I have. This is to ensure visuals for publication have the same themeing but also to ensure that my data management aligns well with expectations and that there are no errors. If you see errors, please let me know!"
   },
   {
     "objectID": "R/analysis/basic_stats.html#summary",
     "href": "R/analysis/basic_stats.html#summary",
     "title": "Basic Statistics and Maps",
     "section": "",
-    "text": "The goal of this page is to provide the map and a basic understanding of the data I have. This is to ensure visuals for publication have the same themeing but also to ensure that my data management aligns well with expectations and that there are no errors. If you see errors, please let me know!\n\n\n# A tibble: 35 × 3\n   variable       statistic    value\n   &lt;chr&gt;          &lt;chr&gt;        &lt;dbl&gt;\n 1 year           min       2021    \n 2 year           max       2021    \n 3 year           mean      2021    \n 4 year           median    2021    \n 5 year           sd           0    \n 6 mission_number min          1    \n 7 mission_number max          3    \n 8 mission_number mean         2    \n 9 mission_number median       2    \n10 mission_number sd           0.817\n# ℹ 25 more rows\n\n\n\n\n\n\n\n\nSummary of Survey Data Variables\n\n\n\nType\nMin\nMax\nMean\nMedian\nSD\nMissing\nLevels\n\n\n\n\nyear\nnumeric\n2,021.00\n2,021.00\n2,021.00\n2,021.00\n0.00\n0\n-\n\n\nregion\ncharacter\n-\n-\n-\n-\n-\n0\n4\n\n\nfarmer\ncharacter\n-\n-\n-\n-\n-\n0\n250\n\n\nfarmer_gender\ncharacter\n-\n-\n-\n-\n-\n0\n2\n\n\nfertilizer_treatment\ncharacter\n-\n-\n-\n-\n-\n18\n2\n\n\ncode\ncharacter\n-\n-\n-\n-\n-\n18\n489\n\n\nmission_number\nnumeric\n1.00\n3.00\n2.00\n2.00\n0.82\n0\n-\n\n\ndate_surveyed\ncharacter\n-\n-\n-\n-\n-\n100\n8\n\n\nose_count\nnumeric\n0.00\n145.00\n20.99\n14.00\n20.06\n199\n-\n\n\ntemperature\nnumeric\n23.00\n41.00\n31.04\n31.00\n3.27\n199\n-\n\n\npercent_ground_cover\nnumeric\n10.00\n100.00\n67.23\n70.00\n20.12\n204\n-\n\n\nose_damage_percent\nnumeric\n0.00\n46.00\n1.92\n0.00\n4.32\n200\n-\n\n\nyield_date_havested\ncharacter\n-\n-\n-\n-\n-\n300\n2\n\n\nrendement_en_kg_ha\nnumeric\n20.00\n2,000.00\n637.24\n560.00\n412.74\n465\n-"
+    "text": "The goal of this page is to provide the map and a basic understanding of the data I have. This is to ensure visuals for publication have the same themeing but also to ensure that my data management aligns well with expectations and that there are no errors. If you see errors, please let me know!"
+  },
+  {
+    "objectID": "R/analysis/basic_stats.html#just-the-regions",
+    "href": "R/analysis/basic_stats.html#just-the-regions",
+    "title": "Basic Statistics and Maps",
+    "section": "Just the regions",
+    "text": "Just the regions"
   },
   {
     "objectID": "R/analysis/farmer_gender_analysis.html",
