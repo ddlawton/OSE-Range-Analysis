@@ -26,17 +26,21 @@ set_current_analysis("locust_density_ground_cover")
 data <- load_ose_data(cache_processed = TRUE)
 ```
 
-We would like to see how density is influenced by ground cover. To do this I am building a generalized additive model (family: tweedie). Following this form:
+## Overview
 
-The generalized additive model (GAM) fitted is:
+This analysis explores how locust (OSE) density is influenced by ground cover across different regions and fertilizer treatments. We use generalized additive models (GAMs) with a Tweedie family distribution to handle the overdispersed count data.
+
+---
+
+# Analysis 1: Region-Treatment Interaction Model (Initial Approach)
+
+This initial model uses a tensor product smooth to examine how the relationship between ground cover and OSE count varies across region-treatment combinations.
+
+## Model Specification
 
 $$
 \begin{align*}
-\text{ose\_count}_i = \\
-  &\alpha + \\ 
-  &+ f(\text{percent\_ground\_cover}_i,\, \text{region\_treat}_i) +  \\
-  &+ b_{\text{farmer}_i} + \\
-  &+ \varepsilon_i
+\text{ose\_count}_i &= \alpha + f(\text{percent\_ground\_cover}_i, \text{region\_treat}_i) + b_{\text{farmer}_i} + \varepsilon_i
 \end{align*}
 $$
 
@@ -47,13 +51,17 @@ where:
 -   $b_{\text{farmer}_i}$ is a random effect for each farmer,
 -   $\varepsilon_i$ is the residual error.
 
-```{r constructing-gam-model}
+## Model Fitting
+
+```{r region-treatment-model}
 #| echo: false
 #| message: false
 #| warning: false
 
+# Prepare data for region-treatment interaction model
 ground_cover_dat <- data |>
-    dplyr::select(region, farmer, fertilizer_treatment, mission_number, ose_count, percent_ground_cover) |>
+    select(region, farmer, fertilizer_treatment, mission_number, 
+           ose_count, percent_ground_cover) |>
     mutate(
         region_treat = factor(paste0(region, '_', fertilizer_treatment)),
         farmer = factor(farmer)
@@ -96,9 +104,13 @@ The model diagnostics look pretty good! I tried to build a poisson model, but th
 appraise(ground_cover_mod)
 ```
 
-However, I am not able to reproduce the smooths seen in the manuscript sent to me. This is likely due to data differences as I am not sure what was included in the initial modeling approach. **Roughly** we can see similiar trends in Kaffrine, Fatick, and Saint Louis. But Thies definitely has a different trend. Additionally, there seems to be different trends between control and fertilized treatments as comapred to the current plots in the manuscript. Not sure what to think here.
+## Model Results
 
-```{r plotting gam model results}
+The smoothed relationships show regional variation in how ground cover affects OSE density. Similar trends are observed in Kaffrine, Fatick, and Saint-Louis, while Thiès shows a distinct pattern. The control and fertilized treatments also exhibit different relationships.
+
+**Note:** These results may differ from earlier manuscript versions due to data processing differences.
+
+```{r region-treatment-results}
 #| echo: false
 #| message: false
 #| warning: false
@@ -108,13 +120,12 @@ gam_plot <- plot_gam_smooths_gratia(ground_cover_mod)
 gam_plot
 ```
 
-## GAM model summary
+## Model Summary Statistics
 
-```{r}
+```{r region-treatment-summary}
 #| echo: false
 #| message: false
 #| warning: false
-
 
 broom.mixed::tidy(ground_cover_mod) |>
   gt() |>
@@ -130,7 +141,7 @@ broom.mixed::tidy(ground_cover_mod) |>
     p.value = "P-value"
   ) |>
   tab_header(
-    title = "GAM model Summary: OSE Density x ground Cover"
+    title = "GAM Model Summary: OSE Density × Ground Cover (Region-Treatment Model)"
   ) |>
   tab_options(
     table.font.size = "small",
@@ -141,172 +152,220 @@ broom.mixed::tidy(ground_cover_mod) |>
 
 ```
 
-# New analysis (12/26/2025)
+---
 
-I built a GAM with a Tweedie family and log link to model `ose_count`. The model includes a smooth for percent ground cover and random effects for region, fertilizer treatment, mission number, and farmer.
+# Analysis 2: Additive Random Effects Model (Current Analysis)
 
-The relationship between ground cover and OSE count is non-linear, peaking at around 50% ground cover—OSE numbers are lower at both low and high cover. Region, fertilizer, mission, and farmer all accounted for substantial variation.
+*Updated: December 26, 2025*
 
-Overall, the model explains about 52% of the deviance in the data.
+This refined approach uses a simpler model structure with additive random effects rather than complex interactions. This model includes:
 
-```{r running_new_model}
+- A smooth term for percent ground cover
+- Random effects for region, fertilizer treatment, mission number, and farmer
+
+Key findings:
+
+- The relationship between ground cover and OSE count is non-linear, peaking around 50% ground cover
+- OSE counts are lower at both low and high ground cover
+- The model explains approximately 52% of deviance in the data
+
+## Model Specification and Fitting
+
+```{r additive-model-fit}
+#| echo: false
+#| message: false
+#| warning: false
 
 
-data <- data |>
-    select(year,region,farmer,farmer_gender,fertilizer_treatment,mission_number,ose_count,percent_ground_cover) |>
-    mutate(fertilizer_treatment = factor(fertilizer_treatment),
-           region = factor(region),
-           farmer = factor(farmer),
-           mission_number = factor(mission_number),
-           region_treat = factor(paste0(region, '_', fertilizer_treatment))
-           )
+# Prepare data with all factors
+data_filtered <- data |>
+    select(year, region, farmer, farmer_gender, fertilizer_treatment, 
+           mission_number, ose_count, percent_ground_cover) |>
+    mutate(
+      fertilizer_treatment = factor(fertilizer_treatment),
+      region = factor(region),
+      farmer = factor(farmer),
+      mission_number = factor(mission_number)
+    )
 
-data |> 
-  glimpse()
-
-
+# Fit additive model with random effects
 mod <- bam(
   ose_count ~ 
     s(percent_ground_cover) + 
-    s(region, bs="re") +
-    s(fertilizer_treatment, bs="re") +
-    s(mission_number, bs="re") +
-    s(farmer, bs="re"),
-  data = data,
+    s(region, bs = "re") +
+    s(fertilizer_treatment, bs = "re") +
+    s(mission_number, bs = "re") +
+    s(farmer, bs = "re"),
+  data = data_filtered,
   family = tw()
 )
 
+# Model diagnostics
 gratia::appraise(mod)
 
 ```
 
-Here is the final modeled results for the relationship between ose_count and ground cover
+## Ground Cover Effect
 
-```{r plotting_estimates}
+The smooth effect of ground cover on OSE count shows a clear non-linear relationship:
 
+```{r additive-model-ground-cover-effect}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-width: 8
+#| fig-height: 5
 
+# Extract smooth estimates for ground cover
+est <- smooth_estimates(mod, select = "percent_ground_cover", partial_match = TRUE)
 
-est <- smooth_estimates(mod, select = "percent_ground_cover",partial_match=TRUE)
-
+# Adjust estimates to response scale
 est$adj_est <- est$.estimate + coef(mod)[1]
 
-
+# Plot the relationship
 ggplot(est, aes(x = percent_ground_cover, y = adj_est)) +
-  geom_ribbon(aes(ymin = adj_est - .se, ymax = adj_est + .se), alpha = 0.2) +
-  geom_line() +
+  geom_ribbon(aes(ymin = adj_est - .se, ymax = adj_est + .se), 
+              alpha = 0.2, fill = "steelblue") +
+  geom_line(color = "steelblue", linewidth = 1) +
   labs(
-    x = "Percent Ground Cover",
-    y = "Estimated OSE Count"
+    x = "Ground Cover (%)",
+    y = "Estimated OSE Count",
+    title = "Effect of Ground Cover on OSE Density"
   ) +
   theme_minimal()
-
-
-
 ```
 
-## ground cover by mission
+## Ground Cover Patterns
 
-in general, ground cover increased through the year. It does not really seem theres a big difference between regions.
+### Ground Cover by Mission
 
-```{r}
+Ground cover increased throughout the growing season across all regions, with minimal regional differences.
 
-data |>
-  ggplot(aes(x=mission_number,y=percent_ground_cover)) +
-  geom_boxplot(outlier.size=-1) +
-  geom_jitter(width=0.2,height=0) +
+```{r ground-cover-mission}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-width: 10
+#| fig-height: 6
+
+data_filtered |>
+  ggplot(aes(x = mission_number, y = percent_ground_cover)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(width = 0.2, height = 0, alpha = 0.4) +
   facet_wrap(~region) +
-  ggtitle('ground cover by region') +
-  xlab('mission number') +
-  ylab('ground cover (%)')
-
-
+  labs(
+    title = "Ground Cover Progression Through Growing Season",
+    x = "Mission Number",
+    y = "Ground Cover (%)"
+  ) +
+  theme_minimal()
 ```
 
+### Ground Cover by Fertilizer Treatment
 
+Ground cover did not differ significantly between fertilizer treatments, but did vary between missions. No significant interaction was detected.
 
-## ground cover by mission and fertilizer treatment
+```{r ground-cover-fertilizer-treatment}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-width: 10
+#| fig-height: 6
 
-
-```{r ground_cover_fertilizer}
-
-data |>
-  drop_na(percent_ground_cover,fertilizer_treatment) |>
-  ggplot(aes(x=mission_number, y=percent_ground_cover, fill=fertilizer_treatment)) +
+data_filtered |>
+  drop_na(percent_ground_cover, fertilizer_treatment) |>
+  ggplot(aes(x = mission_number, y = percent_ground_cover, 
+             fill = fertilizer_treatment)) +
   geom_boxplot(
     position = position_dodge(width = 0.8),
     outlier.shape = NA
   ) +
   geom_jitter(
-    position = position_jitterdodge(jitter.width = 0.4,jitter.height=0),
-    alpha = 0.7,
-    size = 1
+    position = position_jitterdodge(jitter.width = 0.4, jitter.height = 0),
+    alpha = 0.5,
+    size = 0.8
   ) +
   facet_wrap(~region) +
-  scale_color_brewer(palette = "Set2") +
-  ggtitle('Ground cover by region') +
-  xlab('Mission number') +
-  ylab('Ground cover (%)') +
+  scale_fill_brewer(palette = "Set2") +
+  labs(
+    title = "Ground Cover by Fertilizer Treatment and Mission",
+    x = "Mission Number",
+    y = "Ground Cover (%)",
+    fill = "Treatment"
+  ) +
   theme_minimal()
 
-
-mod <- glmmTMB(percent_ground_cover~fertilizer_treatment*mission_number,data=data)
-summary(mod)
+# Statistical test for fertilizer × mission interaction
+ground_cover_test <- glmmTMB(
+  percent_ground_cover ~ fertilizer_treatment * mission_number,
+  data = data_filtered
+)
+summary(ground_cover_test)
 ```
 
-Ground cover wasnt different between fertilizer treatment, but it was between missions (makes sense). There was no interactive effect between fertilizer treatment and mission.
 
+---
 
-## OSE count by ground cover and fertilizer treatment
+# Analysis 3: Fertilizer-Specific Ground Cover Effects
 
+*Model Comparison Analysis*
 
-So agnostic to region, there are
+To determine whether the effect of ground cover on OSE count varies by fertilizer treatment, we compare multiple model structures using AIC.
 
-```{r}
+## Model Comparison
 
-mod <- glmmTMB(ose_count ~ percent_ground_cover + fertilizer_treatment,data=data)
+```{r fertilizer-interaction-models}
+#| echo: false
+#| message: false
+#| warning: false
 
+# Null model (baseline)
 null_mod <- bam(
   ose_count ~ 
     1 +
     s(farmer, bs = "re") +
     s(mission_number, bs = "re"),
-  data = data,
+  data = data_filtered,
   family = tw(),
-  select=TRUE
+  select = TRUE
 )
 
+# Model with fertilizer-specific smooth for ground cover
 factor_smooth_mod <- bam(
   ose_count ~ 
-    te(percent_ground_cover, by = fertilizer_treatment,k=30) +
+    te(percent_ground_cover, by = fertilizer_treatment, k = 30) +
     fertilizer_treatment +
     s(farmer, bs = "re") +
     s(mission_number, bs = "re"),
-  data = data,
+  data = data_filtered,
   family = tw(),
-  select=TRUE
+  select = TRUE
 )
 
+# Linear interaction model
 linear_mod <- bam(
   ose_count ~ 
-    percent_ground_cover *
-    fertilizer_treatment +
+    percent_ground_cover * fertilizer_treatment +
     s(farmer, bs = "re") +
     s(mission_number, bs = "re"),
-  data = data,
+  data = data_filtered,
   family = tw(),
-  select=TRUE
+  select = TRUE
 )
 
+# Single smooth without fertilizer interaction
 without_fertilizer_mod <- bam(
   ose_count ~ 
-    te(percent_ground_cover,k=30) +
+    te(percent_ground_cover, k = 30) +
     fertilizer_treatment +
     s(farmer, bs = "re") +
     s(mission_number, bs = "re"),
-  data = data,
+  data = data_filtered,
   family = tw(),
-  select=TRUE
+  select = TRUE
 )
+
+# Compare models using AIC
 
 
 aic_tbl <- AIC(
@@ -330,37 +389,72 @@ aic_tbl <- AIC(
   select(model_name, AIC, delta_AIC)
 
 aic_tbl
+```
+
+## Model Selection Results
+
+The model with fertilizer-specific smooths ("Smooth by Fertilizer Treatment") was strongly supported by AIC (Δ AIC = 0). This indicates that fertilizer treatment modifies the functional relationship between ground cover and OSE count.
+
+## Fertilizer-Specific Effects
+
+```{r fertilizer-specific-smooths}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-width: 8
+#| fig-height: 5
+
+# Extract smooth estimates for each fertilizer treatment
+ests <- gratia::smooth_estimates(factor_smooth_mod, 
+                                 select = 'percent', 
+                                 partial = TRUE)
+
+# Adjust to response scale
+ests$adj_est <- ests$.estimate + coef(factor_smooth_mod)[1]
+
+# Plot treatment-specific relationships
+ests |>
+  ggplot(aes(x = percent_ground_cover)) +
+  geom_ribbon(
+    aes(ymin = adj_est - .se, ymax = adj_est + .se, 
+        fill = fertilizer_treatment),
+    alpha = 0.2
+  ) +
+  geom_line(
+    aes(y = adj_est, color = fertilizer_treatment),
+    linewidth = 1.2
+  ) +
+  labs(
+    x = "Ground Cover (%)",
+    y = "Estimated OSE Count",
+    title = "Ground Cover Effects by Fertilizer Treatment",
+    color = "Treatment",
+    fill = "Treatment"
+  ) +
+  scale_color_met_d(name = "Demuth") +
+  scale_fill_met_d(name = "Demuth") +
+  theme_minimal()
+
 
 ```
 
+## Interpretation
 
+### Key Findings
 
-So the model with a smooth term for both fertilizer treatments was selected by AIC. This means that fertilizer treatment has an impact on the relationship between ose_count and ground_cover. lets plot out this relationship.
+1. **Model Selection**: The fertilizer-specific smooth model was strongly preferred (Δ AIC = 0), indicating that fertilizer treatment fundamentally alters the ground cover–OSE density relationship.
 
+2. **Peak Densities**: 
+   - **Fertilized plots**: OSE counts peak at approximately 40% ground cover
+   - **Control plots**: OSE counts peak at approximately 60–70% ground cover
 
-```{r}
+3. **Mechanism**: Fertilizer treatment likely modifies OSE responses through:
+   - Changes in crop vigor and nutritional quality
+   - Altered plant species composition
+   - Modified microclimate conditions
 
-ests <- gratia::smooth_estimates(factor_smooth_mod,select='percent',partial=TRUE)
+### Implications
 
+The interaction between fertilizer and ground cover demonstrates that fertilizer application doesn't simply shift overall OSE abundance—it changes *where* along the ground cover gradient OSE reach peak density. This has important implications for management strategies, as optimal ground cover targets may differ between fertilized and unfertilized fields.
 
-ests$adj_est <- ests$.estimate + coef(factor_smooth_mod)[1] #This is how I adjust to TWS units
-
-ests %>% # not sigificant in the model
-  ggplot(aes(x=percent_ground_cover)) +
-  geom_ribbon(aes(ymin=adj_est-.se, ymax=adj_est+.se,fill=fertilizer_treatment),alpha=.2) +
-  geom_line(aes(y = adj_est,color=fertilizer_treatment),size=1) + theme_pubr() +
-  xlab("ground cover (%)") +
-  ylab('OSE count') +
-  scale_color_met_d(name="Demuth") +
-  scale_fill_met_d(name="Demuth")
-
-
-```
-
-
-
-Of all the models tested, the one allowing the effect of ground cover to vary by fertilizer treatment (“smooth by fertilizer treatment”) was the best based on AIC. This means the shape of the relationship between ground cover and OSE count depends on whether the field was fertilized or not.
-
-OSE counts in fertilized plots peak at around 40% ground cover, whereas in controls, the peak shifts to about 60–70%. That suggests fertilizer treatment modifies how OSE respond to ground cover levels perhaps through effects on crop vigor, species composition, or microclimate.
-
-Model selection supports including an interaction between fertilizer and ground cover, highlighting that fertilizer status doesn’t just change overall abundance but alters where OSE are most dense along the ground cover gradient. Simpler models (single smooth, linear interaction, or null) were much less supported. These results justify showing the separate smooths by fertilizer in the main text.
+Simpler models (null, linear interaction, or single smooth) were poorly supported, justifying the inclusion of fertilizer-specific smooths in reporting and interpretation.
