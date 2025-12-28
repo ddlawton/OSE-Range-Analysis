@@ -141,16 +141,13 @@ broom.mixed::tidy(ground_cover_mod) |>
 
 ```
 
-
 # New analysis (12/26/2025)
 
-I built a GAM with a Tweedie family and log link to model `ose_count`. The model includes a smooth for percent ground cover and random effects for region, fertilizer treatment, mission number, and farmer. 
+I built a GAM with a Tweedie family and log link to model `ose_count`. The model includes a smooth for percent ground cover and random effects for region, fertilizer treatment, mission number, and farmer.
 
-The relationship between ground cover and OSE count is non-linear, peaking at around 50% ground cover—OSE numbers are lower at both low and high cover. Region, fertilizer, mission, and farmer all accounted for substantial variation. 
+The relationship between ground cover and OSE count is non-linear, peaking at around 50% ground cover—OSE numbers are lower at both low and high cover. Region, fertilizer, mission, and farmer all accounted for substantial variation.
 
-Overall, the model explains about 52% of the deviance in the data.  
-
-
+Overall, the model explains about 52% of the deviance in the data.
 
 ```{r running_new_model}
 
@@ -183,10 +180,7 @@ gratia::appraise(mod)
 
 ```
 
-
-
 Here is the final modeled results for the relationship between ose_count and ground cover
-
 
 ```{r plotting_estimates}
 
@@ -210,8 +204,7 @@ ggplot(est, aes(x = percent_ground_cover, y = adj_est)) +
 
 ```
 
-
-# ground cover by mission
+## ground cover by mission
 
 in general, ground cover increased through the year. It does not really seem theres a big difference between regions.
 
@@ -229,3 +222,145 @@ data |>
 
 ```
 
+
+
+## ground cover by mission and fertilizer treatment
+
+
+```{r ground_cover_fertilizer}
+
+data |>
+  drop_na(percent_ground_cover,fertilizer_treatment) |>
+  ggplot(aes(x=mission_number, y=percent_ground_cover, fill=fertilizer_treatment)) +
+  geom_boxplot(
+    position = position_dodge(width = 0.8),
+    outlier.shape = NA
+  ) +
+  geom_jitter(
+    position = position_jitterdodge(jitter.width = 0.4,jitter.height=0),
+    alpha = 0.7,
+    size = 1
+  ) +
+  facet_wrap(~region) +
+  scale_color_brewer(palette = "Set2") +
+  ggtitle('Ground cover by region') +
+  xlab('Mission number') +
+  ylab('Ground cover (%)') +
+  theme_minimal()
+
+
+mod <- glmmTMB(percent_ground_cover~fertilizer_treatment*mission_number,data=data)
+summary(mod)
+```
+
+Ground cover wasnt different between fertilizer treatment, but it was between missions (makes sense). There was no interactive effect between fertilizer treatment and mission.
+
+
+## OSE count by ground cover and fertilizer treatment
+
+
+So agnostic to region, there are
+
+```{r}
+
+mod <- glmmTMB(ose_count ~ percent_ground_cover + fertilizer_treatment,data=data)
+
+null_mod <- bam(
+  ose_count ~ 
+    1 +
+    s(farmer, bs = "re") +
+    s(mission_number, bs = "re"),
+  data = data,
+  family = tw(),
+  select=TRUE
+)
+
+factor_smooth_mod <- bam(
+  ose_count ~ 
+    te(percent_ground_cover, by = fertilizer_treatment,k=30) +
+    fertilizer_treatment +
+    s(farmer, bs = "re") +
+    s(mission_number, bs = "re"),
+  data = data,
+  family = tw(),
+  select=TRUE
+)
+
+linear_mod <- bam(
+  ose_count ~ 
+    percent_ground_cover *
+    fertilizer_treatment +
+    s(farmer, bs = "re") +
+    s(mission_number, bs = "re"),
+  data = data,
+  family = tw(),
+  select=TRUE
+)
+
+without_fertilizer_mod <- bam(
+  ose_count ~ 
+    te(percent_ground_cover,k=30) +
+    fertilizer_treatment +
+    s(farmer, bs = "re") +
+    s(mission_number, bs = "re"),
+  data = data,
+  family = tw(),
+  select=TRUE
+)
+
+
+aic_tbl <- AIC(
+  null_mod,
+  factor_smooth_mod,
+  without_fertilizer_mod,
+  linear_mod
+) |>
+  as_tibble(rownames = "model") |>
+  mutate(
+    model_name = case_when(
+      model == "null_mod" ~ "Null Model",
+      model == "factor_smooth_mod" ~ "Smooth by Fertilizer Treatment",
+      model == "without_fertilizer_mod" ~ "No Fertilizer Treatment Smooth",
+      model == "linear_mod" ~ "Linear Interaction",
+      TRUE ~ model
+    )
+  ) |>
+  mutate(delta_AIC = AIC - min(AIC)) |>
+  arrange(delta_AIC) |>
+  select(model_name, AIC, delta_AIC)
+
+aic_tbl
+
+```
+
+
+
+So the model with a smooth term for both fertilizer treatments was selected by AIC. This means that fertilizer treatment has an impact on the relationship between ose_count and ground_cover. lets plot out this relationship.
+
+
+```{r}
+
+ests <- gratia::smooth_estimates(factor_smooth_mod,select='percent',partial=TRUE)
+
+
+ests$adj_est <- ests$.estimate + coef(factor_smooth_mod)[1] #This is how I adjust to TWS units
+
+ests %>% # not sigificant in the model
+  ggplot(aes(x=percent_ground_cover)) +
+  geom_ribbon(aes(ymin=adj_est-.se, ymax=adj_est+.se,fill=fertilizer_treatment),alpha=.2) +
+  geom_line(aes(y = adj_est,color=fertilizer_treatment),size=1) + theme_pubr() +
+  xlab("ground cover (%)") +
+  ylab('OSE count') +
+  scale_color_met_d(name="Demuth") +
+  scale_fill_met_d(name="Demuth")
+
+
+```
+
+
+
+Of all the models tested, the one allowing the effect of ground cover to vary by fertilizer treatment (“smooth by fertilizer treatment”) was the best based on AIC. This means the shape of the relationship between ground cover and OSE count depends on whether the field was fertilized or not.
+
+OSE counts in fertilized plots peak at around 40% ground cover, whereas in controls, the peak shifts to about 60–70%. That suggests fertilizer treatment modifies how OSE respond to ground cover levels perhaps through effects on crop vigor, species composition, or microclimate.
+
+Model selection supports including an interaction between fertilizer and ground cover, highlighting that fertilizer status doesn’t just change overall abundance but alters where OSE are most dense along the ground cover gradient. Simpler models (single smooth, linear interaction, or null) were much less supported. These results justify showing the separate smooths by fertilizer in the main text.

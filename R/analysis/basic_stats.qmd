@@ -48,7 +48,6 @@ save_data_table(
 
 # Basic statistics around dataset
 
-```{r basic-statistics}
 #| echo: false
 #| message: false
 #| warning: false
@@ -101,4 +100,123 @@ senegal_map <- plot_senegal_map(
 
 # Display the map
 senegal_map
+```
+
+
+# Mean Annual precipitation 
+
+Mean annual precipitation (MAP) for Senegal was calculated using the CHIRPS dataset, which provides high-resolution (approximately 5 km) gridded precipitation estimates. We extracted CHIRPS daily precipitation data for Senegal for the most recent 10-year period (2015–2024). The data were spatially clipped to the national boundary, summed annually, and then averaged across years to produce a single raster layer representing mean annual precipitation.
+
+
+```{r}
+library(terra)
+library(tidyterra)
+library(sf)
+library(rnaturalearth)
+library(ggplot2)
+library(dplyr)
+
+# 1. Import the MAP TIFF
+map_raster <- rast("data/processed/maps/senegal_map_2015_2024_chirps.tif")
+
+# 2. Get Senegal boundary and regions
+senegal <- ne_states(country = "Senegal", returnclass = "sf")
+
+# 3. Select regions of interest
+regions_of_interest <- c("Saint-Louis", "Thiès", "Fatick", "Kaffrine")
+roi_sf <- senegal %>% filter(name %in% regions_of_interest)
+other_sf <- senegal %>% filter(!name %in% regions_of_interest)
+
+# 4. Crop and mask raster to Senegal
+map_raster_senegal <- crop(map_raster, vect(senegal))
+map_raster_senegal <- mask(map_raster_senegal, vect(senegal))
+
+# 5. Mask raster to only regions of interest for plotting
+roi_union <- st_union(roi_sf)
+map_raster_roi <- mask(map_raster_senegal, vect(roi_union))
+
+# 6. Plot
+ggplot() +
+  geom_sf(data=senegal) +
+  geom_spatraster(data = map_raster_senegal, aes(fill = senegal_map_2015_2024_chirps), na.rm = TRUE) +
+  geom_sf(data = senegal, fill = NA, color = "grey", size = 0.6) +
+  scale_fill_viridis_c(name = "MAP (mm)", na.value = NA,option="C") +
+  theme_minimal() +
+  labs(title = "Mean Annual Precipitation (2015–2024)",
+       subtitle = "Saint-Louis, Thiès, Fatick, and Kaffrine highlighted") +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid = element_blank())
+
+
+```
+
+
+## Just the regions
+
+
+```{r}
+
+ggplot() +
+  geom_sf(data = other_sf, fill = "grey90", color = "grey", size = 0.2) +
+  geom_spatraster(data = map_raster_roi, aes(fill = senegal_map_2015_2024_chirps), na.rm = TRUE) +
+  geom_sf(data = roi_sf, fill = NA, color = "grey", size = 0.6) +
+  geom_sf_text(data = roi_sf, aes(label = name), size = 4, fontface = "bold", color = "black") +
+  scale_fill_viridis_c(name = "MAP (mm)", na.value = NA, option = "C") +
+  theme_minimal() +
+  labs(title = "Mean Annual Precipitation (2015–2024)",
+       subtitle = "Saint-Louis, Thiès, Fatick, and Kaffrine highlighted") +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid = element_blank())
+
+```
+
+
+
+```{r}
+library(scales) # for comma formatting
+roi_sf$mean_map <- terra::extract(map_raster, vect(roi_sf), fun = mean, na.rm = TRUE)[,2]
+# 1. Create label with region name and mean MAP value
+roi_sf$label <- sprintf(
+  "%s\n(%s mm)",
+  roi_sf$name,
+  comma(round(roi_sf$mean_map, 0))
+)
+
+# 2. Choose a discrete color palette with good contrast
+region_palette <- c(
+  "Saint-Louis" = "#1b9e77",
+  "Thiès"       = "#d95f02",
+  "Fatick"      = "#7570b3",
+  "Kaffrine"    = "#e7298a"
+)
+
+# 3. Plot with labels and custom colors
+ggplot() +
+  geom_sf(data = other_sf, fill = "grey90", color = "grey", size = 0.2) +
+  geom_sf(data = roi_sf, aes(fill = name), color = "black", size = 0.6) +
+  geom_sf_text(
+    data = roi_sf,
+    aes(label = label),
+    size = 4.5, fontface = "bold",
+    color = "white", # white text for contrast
+    bg.color = "black", # if using ggtext or geom_sf_label, otherwise omit
+    bg.r = 0.15
+  ) +
+  scale_fill_manual(
+    name = NULL,
+    values = region_palette,
+    guide = "none"
+  ) +
+  theme_minimal() +
+  labs(
+    title = "Mean Annual Precipitation by Region (2015–2024)",
+    subtitle = "Saint-Louis, Thiès, Fatick, and Kaffrine"
+  ) +
+  theme(
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank()
+  )
 ```
