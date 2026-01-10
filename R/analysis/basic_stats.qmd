@@ -54,33 +54,8 @@ save_data_table(
 #| message: false
 #| warning: false
 
-# Basic statistics around dataset
+# Basic statistics around dataset 
 summary_table <- table_variable_summary(data)
-
-# Also save the detailed variable summary
-if (exists("summary_table")) {
-  # Extract the underlying data if it's a gt table
-  tryCatch({
-    if ("gt_tbl" %in% class(summary_table)) {
-      # For gt tables, we need to recreate the summary data
-      summary_data <- data |>
-        select(where(is.numeric)) |>
-        summarise(across(everything(), list(
-          min = ~min(.x, na.rm = TRUE),
-          max = ~max(.x, na.rm = TRUE), 
-          mean = ~mean(.x, na.rm = TRUE),
-          median = ~median(.x, na.rm = TRUE),
-          sd = ~sd(.x, na.rm = TRUE)
-        ))) |>
-        pivot_longer(everything(), names_to = "variable_stat", values_to = "value") |>
-        separate(variable_stat, into = c("variable", "statistic"), sep = "_(?=[^_]*$)")
-      
-      save_data_table(summary_data, "variable_summary_statistics")
-    }
-  }, error = function(e) {
-    message("Could not save summary table data: ", e$message)
-  })
-}
 
 # Display the summary table
 summary_table
@@ -104,7 +79,7 @@ senegal_map <- plot_senegal_map(
 senegal_map
 ```
 
-## Mean Annual Precipitation (MAP) 
+## Mean Annual Precipitation (MAP)
 
 Mean annual precipitation (MAP) for Senegal was calculated using the CHIRPS dataset, which provides high-resolution (approximately 5 km) gridded precipitation estimates. We extracted CHIRPS daily precipitation data for Senegal for the most recent 10-year period (2015–2024). The data were spatially clipped to the national boundary, summed annually, and then averaged across years to produce a single raster layer representing mean annual precipitation.
 
@@ -139,110 +114,45 @@ roi_union <- st_union(roi_sf)
 map_raster_roi <- mask(map_raster_senegal, vect(roi_union))
 ```
 
-### Option 1: Full Senegal Context
+### Full Senegal Context
 
-```{r map-full-senegal}
-#| echo: false
-#| message: false
-#| warning: false
-#| fig-width: 8
-#| fig-height: 6
+```{r}
+library(terra)
+library(sf)
+library(smoothr)
+library(ggplot2)
+
+map_raster_senegal <- terra::disagg(map_raster_senegal, fact=4)
+
+# 1. Smooth boundaries as usual
+roi_sf_smooth     <- smoothr::smooth(roi_sf, method = "ksmooth", smoothness = 2)
+senegal_sf_smooth <- smoothr::smooth(senegal, method = "ksmooth", smoothness = 2)
+
+# 2. Masked raster (as before)
+senegal_vect    <- vect(senegal)
+raster_cropped  <- crop(map_raster_senegal, senegal_vect)
+raster_masked   <- mask(raster_cropped, senegal_vect)
+raster_masked[raster_masked == 0] <- NA
+# 5. Plot (as polygons; use color=NA to avoid grid outlines; may try linetype=0)
 ggplot() +
-  geom_sf(data = senegal) +
-  geom_spatraster(data = map_raster_senegal, 
+  geom_spatraster(data = raster_masked, 
                   aes(fill = senegal_map_2015_2024_chirps), 
                   na.rm = TRUE) +
-  geom_sf(data = senegal, fill = NA, color = "grey", linewidth = 0.6) +
-  scale_fill_viridis_c(name = "MAP (mm)", na.value = NA, option = "C") +
-  theme_minimal() +
-  labs(title = "Mean Annual Precipitation (2015–2024)",
-       subtitle = "Full Senegal with study regions visible") +
-  theme(axis.text = element_blank(),
-        axis.ticks = element_blank(),
-        panel.grid = element_blank())
-```
-
-### Option 2: Study Regions Only
-
-```{r map-regions-only}
-#| echo: false
-#| message: false
-#| warning: false
-#| fig-width: 8
-#| fig-height: 6
-
-ggplot() +
-  geom_sf(data = other_sf, fill = "grey90", color = "grey", linewidth = 0.2) +
-  geom_spatraster(data = map_raster_roi, 
-                  aes(fill = senegal_map_2015_2024_chirps), 
-                  na.rm = TRUE) +
-  geom_sf(data = roi_sf, fill = NA, color = "grey", linewidth = 0.6) +
-  geom_sf_text(data = roi_sf, aes(label = name), 
-               size = 4, fontface = "bold", color = "black") +
-  scale_fill_viridis_c(name = "MAP (mm)", na.value = NA, option = "C") +
-  theme_minimal() +
-  labs(title = "Mean Annual Precipitation (2015–2024)",
-       subtitle = "Study regions with labels") +
-  theme(axis.text = element_blank(),
-        axis.ticks = element_blank(),
-        panel.grid = element_blank())
-```
-
-### Option 3: Study Regions with Mean Values
-
-```{r map-regions-with-values}
-#| echo: false
-#| message: false
-#| warning: false
-#| fig-width: 8
-#| fig-height: 6
-
-# Extract mean MAP values for each region
-roi_sf$mean_map <- terra::extract(map_raster, vect(roi_sf), 
-                                   fun = mean, na.rm = TRUE)[, 2]
-
-# Create label with region name and mean MAP value
-roi_sf$label <- sprintf(
-  "%s\n(%s mm)",
-  roi_sf$name,
-  comma(round(roi_sf$mean_map, 0))
-)
-
-# Define color palette for regions
-region_palette <- c(
-  "Saint-Louis" = "#1b9e77",
-  "Thiès"       = "#d95f02",
-  "Fatick"      = "#7570b3",
-  "Kaffrine"    = "#e7298a"
-)
-
-# Create map with colored regions and mean precipitation values
-ggplot() +
-  geom_sf(data = other_sf, fill = "grey90", color = "grey", linewidth = 0.2) +
-  geom_sf(data = roi_sf, aes(fill = name), color = "black", linewidth = 0.6) +
-  geom_sf_text(
-    data = roi_sf,
-    aes(label = label),
-    size = 4.5, 
-    fontface = "bold",
-    color = "white",
-    bg.color = "black",
-    bg.r = 0.15
-  ) +
-  scale_fill_manual(
-    name = NULL,
-    values = region_palette,
-    guide = "none"
+  geom_sf(data = senegal_sf_smooth, fill = NA, color = "grey80", linewidth = 1.5) +
+  geom_sf(data = roi_sf_smooth, fill = NA, color = 'gray85', linewidth = 2) +
+  geom_sf(data = roi_sf_smooth, fill = NA, color = 'black',  linewidth = 1) +
+  scale_fill_viridis_c(
+      name      = "MAP (mm)", 
+      na.value  = NA, 
+      option    = "D", 
+      direction = -1
   ) +
   theme_minimal() +
-  labs(
-    title = "Mean Annual Precipitation by Region (2015–2024)",
-    subtitle = "Study regions with mean precipitation values"
-  ) +
+  labs(title = "Mean Annual Precipitation (2015–2024 averaged)") +
   theme(
-    axis.text = element_blank(),
-    axis.ticks = element_blank(),
-    panel.grid = element_blank()
+    axis.text   = element_blank(),
+    axis.ticks  = element_blank(),
+    panel.grid  = element_blank()
   )
 ```
 
@@ -272,102 +182,155 @@ rainfall_max <- max(all_values)
 
 ### Full Senegal Monthly Maps
 
-```{r monthly-rainfall-full}
+
+```{r}
 #| echo: false
 #| message: false
 #| warning: false
 #| fig-width: 12
 #| fig-height: 10
+
+library(terra)
+library(sf)
+library(smoothr)
+library(ggplot2)
+library(patchwork)
+library(rlang)  # for !!sym() in aes
+
+# Define months and raster file paths
+months <- c("july", "august", "september", "october")
+raster_paths <- paste0("data/processed/maps/senegal_precipitation_2021_", 
+                       months, "_chirps.tif")
+
+# Calculate global min/max across all months for consistent color scale
+rainfall_values <- lapply(raster_paths, function(path) {
+  r <- rast(path)
+  values(r)[!is.na(values(r))]
+})
+all_values <- unlist(rainfall_values)
+rainfall_min <- min(all_values)
+rainfall_max <- max(all_values)
+
+# --- Smooth the outlines ONCE outside loop, for speed ---
+roi_sf_smooth      <- smoothr::smooth(roi_sf, method = "ksmooth", smoothness = 2)
+senegal_sf_smooth  <- smoothr::smooth(senegal, method = "ksmooth", smoothness = 2)
 
 # Helper function for full Senegal plot
-plot_month_full <- function(month, raster_path, senegal, min_val, max_val) {
+plot_month_full <- function(month, raster_path, senegal, roi_sf,
+                            senegal_sf_smooth, roi_sf_smooth, min_val, max_val) {
   raster <- rast(raster_path)
-  raster_senegal <- crop(raster, vect(senegal)) |> 
-    mask(vect(senegal))
-  
+  # 1. Upsample (smooth raster-edged look)
+  raster <- terra::disagg(raster, fact = 4)
+  # 2. Mask to Senegal boundary
+  senegal_vect <- vect(senegal)
+  raster_cropped <- crop(raster, senegal_vect)
+  raster_masked  <- mask(raster_cropped, senegal_vect)
+
+  # -- Layered ggplot: smoothed outlines, no ugly squares, constant scale! --
   ggplot() +
-    geom_sf(data = senegal) +
-    geom_spatraster(data = raster_senegal, 
-                    aes(fill = !!sym(paste0("senegal_precipitation_2021_", month, "_chirps"))), 
-                    na.rm = TRUE) +
-    geom_sf(data = senegal, fill = NA, color = "grey", linewidth = 0.6) +
+    stars::geom_stars(data = stars::st_as_stars(raster_masked)) +
+    geom_sf(data = senegal_sf_smooth, fill = NA, color = "grey80", linewidth = 1.5) +
+    geom_sf(data = roi_sf_smooth, fill = NA, color = 'gray85', linewidth = 2) +
+    geom_sf(data = roi_sf_smooth, fill = NA, color = 'black', linewidth = 1) +
     scale_fill_viridis_c(
       name = "Rainfall (mm)",
       na.value = NA,
-      option = "C",
-      limits = c(min_val, max_val)
+      limits = c(min_val, max_val), 
+      option = "D", 
+      direction = -1
     ) +
     theme_minimal() +
     labs(title = paste(tools::toTitleCase(month), "2021")) +
     theme(axis.text = element_blank(), 
           axis.ticks = element_blank(), 
-          panel.grid = element_blank())
+          panel.grid = element_blank()) +
+    xlab('') +
+    ylab('')
 }
 
+# Create plots
 plots_full <- mapply(
   plot_month_full, months, raster_paths,
-  MoreArgs = list(senegal = senegal, min_val = rainfall_min, max_val = rainfall_max),
-  SIMPLIFY = FALSE
-)
-
-# Combine plots in 2x2 grid
-(plots_full[[1]] | plots_full[[2]]) /
-(plots_full[[3]] | plots_full[[4]]) + 
-  plot_layout(guides = "collect") & 
-  theme(legend.position = "bottom")
-```
-
-### Study Regions Monthly Maps
-
-```{r monthly-rainfall-regions}
-#| echo: false
-#| message: false
-#| warning: false
-#| fig-width: 12
-#| fig-height: 10
-
-# Helper function for regions plot
-plot_month_regions <- function(month, raster_path, senegal, roi_union, roi_sf, other_sf, min_val, max_val) {
-  raster <- rast(raster_path)
-  raster_senegal <- crop(raster, vect(senegal)) |> 
-    mask(vect(senegal))
-  raster_roi <- mask(raster_senegal, vect(roi_union))
-  
-  ggplot() +
-    geom_sf(data = other_sf, fill = "grey90", color = "grey", linewidth = 0.2) +
-    geom_spatraster(data = raster_roi, 
-                    aes(fill = !!sym(paste0("senegal_precipitation_2021_", month, "_chirps"))), 
-                    na.rm = TRUE) +
-    geom_sf(data = roi_sf, fill = NA, color = "grey", linewidth = 0.6) +
-    scale_fill_viridis_c(
-      name = "Rainfall (mm)",
-      na.value = NA,
-      option = "C",
-      limits = c(min_val, max_val)
-    ) +
-    theme_minimal() +
-    labs(title = paste(tools::toTitleCase(month), "2021")) +
-    theme(axis.text = element_blank(), 
-          axis.ticks = element_blank(), 
-          panel.grid = element_blank())
-}
-
-plots_regions <- mapply(
-  plot_month_regions, months, raster_paths,
   MoreArgs = list(
-    senegal = senegal,
-    roi_union = roi_union,
-    roi_sf = roi_sf,
-    other_sf = other_sf,
-    min_val = rainfall_min,
+    senegal = senegal, 
+    roi_sf = roi_sf, 
+    senegal_sf_smooth = senegal_sf_smooth, 
+    roi_sf_smooth = roi_sf_smooth, 
+    min_val = rainfall_min, 
     max_val = rainfall_max
   ),
   SIMPLIFY = FALSE
 )
 
-# Combine plots in 2x2 grid
-(plots_regions[[1]] | plots_regions[[2]]) /
-(plots_regions[[3]] | plots_regions[[4]]) + 
-  plot_layout(guides = "collect") & 
-  theme(legend.position = "bottom")
+# Combine in 2x2 grid, grouped legend
+(final_plot <- (plots_full[[1]] | plots_full[[2]]) /
+  (plots_full[[3]] | plots_full[[4]]) + 
+  patchwork::plot_layout(guides = "collect") & 
+  theme(legend.position = "bottom"))
+```
+
+Below is the average monthly rainfall per region
+
+
+```{r}
+library(terra)
+library(sf)
+library(dplyr)
+
+# Ensure roi_sf is in the same CRS as the rasters
+roi_sf <- st_transform(roi_sf, crs(rast(raster_paths[1])))
+# Function to extract mean and sd rainfall for each region in roi_sf for a given raster
+extract_monthly_stats <- function(raster_path, polygons, month) {
+  r <- rast(raster_path)
+  # Extract mean
+  mean_df <- terra::extract(r, vect(polygons), fun = mean, na.rm = TRUE)
+  # Extract sd
+  sd_df <- terra::extract(r, vect(polygons), fun = sd, na.rm = TRUE)
+  # Combine and add region and month
+  out <- mean_df |>
+    rename(mean_rainfall = 2) |>
+    left_join(sd_df |> rename(sd_rainfall = 2), by = "ID") |>
+    mutate(region = polygons$name, month = month)
+  out
+}
+
+# Loop over months and get stats
+rainfall_stats <- lapply(seq_along(months), function(i) {
+  extract_monthly_stats(raster_paths[i], roi_sf, months[i])
+})
+
+# Combine into one data frame
+rainfall_stats_df <- bind_rows(rainfall_stats)
+
+# Clean up columns if needed
+rainfall_stats_df <- rainfall_stats_df |>
+  select(region, month, mean_rainfall, sd_rainfall)
+
+
+rainfall_stats_df |>
+  as_tibble() |>
+  drop_na(mean_rainfall) |>
+  select(region, month, mean_rainfall, sd_rainfall) |>
+  mutate(
+    mean_rainfall = round(mean_rainfall, 1),
+    sd_rainfall = round(sd_rainfall, 1)
+  ) |>
+  gt(rowname_col = "region") |>
+  tab_header(
+    title = "Average Monthly Rainfall by Region (2021)"
+  ) |>
+  cols_label(
+    region = "Region",
+    month = "Month",
+    mean_rainfall = "Mean Rainfall (mm)",
+    sd_rainfall = "SD (mm)"
+  ) |>
+  fmt_number(
+    columns = c(mean_rainfall, sd_rainfall),
+    decimals = 1
+  ) |>
+  tab_options(
+    table.font.size = "small"
+  )
+
 ```

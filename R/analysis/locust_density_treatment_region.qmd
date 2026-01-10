@@ -298,3 +298,66 @@ ose_dat |>
 
 
 ```
+
+
+# OSE count by treatment/region accounting for ground cover perent
+
+The first test is to compare a model with ground cover and a model without ground cover. We will build both models per mission and then compare the estimated marginal means.
+
+
+```{r}
+
+library(patchwork)
+plots <- list()
+aic_results <- data.frame(
+  mission_number = character(),
+  AIC_with_gc = numeric(),
+  AIC_without_gc = numeric(),
+  best_model = character()
+)
+
+for (mission in unique(data$mission_number)) {
+  dat_sub <- data |> dplyr::filter(mission_number == mission)
+  mod_w_gc <- glmmTMB(
+    ose_count ~ fertilizer_treatment * region + (1|farmer) + percent_ground_cover,
+    data = dat_sub,
+    family = tweedie()
+  )
+  mod2_wo_gc <- glmmTMB(
+    ose_count ~ fertilizer_treatment * region + (1|farmer),
+    data = dat_sub,
+    family = tweedie()
+  )
+  # AIC comparison
+  aic_with_gc <- AIC(mod_w_gc)
+  aic_without_gc <- AIC(mod2_wo_gc)
+  best <- ifelse(aic_with_gc < aic_without_gc, "with ground cover", "without ground cover")
+  aic_results <- rbind(aic_results, data.frame(
+    mission_number = mission,
+    AIC_with_gc = aic_with_gc,
+    AIC_without_gc = aic_without_gc,
+    best_model = best
+  ))
+  # emmeans and plot
+  mod_emms <- emmeans(mod_w_gc, ~ fertilizer_treatment * region, type = "response") |> 
+    as_tibble() |> mutate(name = 'with ground cover', mission_number = mission)
+  mod2_emms <- emmeans(mod2_wo_gc, ~ fertilizer_treatment * region, type = "response") |> 
+    as_tibble() |> mutate(name = 'without ground cover', mission_number = mission)
+  combined <- bind_rows(mod_emms, mod2_emms)
+  combined$region <- factor(combined$region, levels = c("Kaffrine", "Thies", "Fatick", "Saint Louis"))
+
+  p <- ggplot(combined, aes(x=region, y=response, color=fertilizer_treatment, shape=name)) +
+    geom_point(position=position_dodge(width=0.4), size=6) +
+    geom_errorbar(aes(ymin = asymp.LCL, ymax = asymp.UCL), position=position_dodge(width=0.4), width=0) +
+    scale_color_manual(values = c("control" = "black", "fertilized" = "#006400")) +
+    labs(title = paste("Mission", mission))
+  plots[[as.character(mission)]] <- p
+}
+
+# Combine plots in one column (three rows)
+(plots[[1]] / plots[[2]] / plots[[3]])
+
+# Show AIC results
+aic_results
+```
+

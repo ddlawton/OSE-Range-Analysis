@@ -24,13 +24,14 @@ set_current_analysis("locust_density_ground_cover")
 
 # Load processed data
 data <- load_ose_data(cache_processed = TRUE)
+
 ```
 
 ## Overview
 
 This analysis explores how locust (OSE) density is influenced by ground cover across different regions and fertilizer treatments. We use generalized additive models (GAMs) with a Tweedie family distribution to handle the overdispersed count data.
 
----
+------------------------------------------------------------------------
 
 # Analysis 1: Region-Treatment Interaction Model (Initial Approach)
 
@@ -152,7 +153,7 @@ broom.mixed::tidy(ground_cover_mod) |>
 
 ```
 
----
+------------------------------------------------------------------------
 
 # Analysis 2: Additive Random Effects Model (Current Analysis)
 
@@ -160,14 +161,14 @@ broom.mixed::tidy(ground_cover_mod) |>
 
 This refined approach uses a simpler model structure with additive random effects rather than complex interactions. This model includes:
 
-- A smooth term for percent ground cover
-- Random effects for region, fertilizer treatment, mission number, and farmer
+-   A smooth term for percent ground cover
+-   Random effects for region, fertilizer treatment, mission number, and farmer
 
 Key findings:
 
-- The relationship between ground cover and OSE count is non-linear, peaking around 50% ground cover
-- OSE counts are lower at both low and high ground cover
-- The model explains approximately 52% of deviance in the data
+-   The relationship between ground cover and OSE count is non-linear, peaking around 50% ground cover
+-   OSE counts are lower at both low and high ground cover
+-   The model explains approximately 52% of deviance in the data
 
 ## Model Specification and Fitting
 
@@ -303,8 +304,7 @@ ground_cover_test <- glmmTMB(
 summary(ground_cover_test)
 ```
 
-
----
+------------------------------------------------------------------------
 
 # Analysis 3: Fertilizer-Specific Ground Cover Effects
 
@@ -442,19 +442,291 @@ ests |>
 
 ### Key Findings
 
-1. **Model Selection**: The fertilizer-specific smooth model was strongly preferred (Δ AIC = 0), indicating that fertilizer treatment fundamentally alters the ground cover–OSE density relationship.
+1.  **Model Selection**: The fertilizer-specific smooth model was strongly preferred (Δ AIC = 0), indicating that fertilizer treatment fundamentally alters the ground cover–OSE density relationship.
 
-2. **Peak Densities**: 
-   - **Fertilized plots**: OSE counts peak at approximately 40% ground cover
-   - **Control plots**: OSE counts peak at approximately 60–70% ground cover
+2.  **Peak Densities**:
 
-3. **Mechanism**: Fertilizer treatment likely modifies OSE responses through:
-   - Changes in crop vigor and nutritional quality
-   - Altered plant species composition
-   - Modified microclimate conditions
+    -   **Fertilized plots**: OSE counts peak at approximately 40% ground cover
+    -   **Control plots**: OSE counts peak at approximately 60–70% ground cover
+
+3.  **Mechanism**: Fertilizer treatment likely modifies OSE responses through:
+
+    -   Changes in crop vigor and nutritional quality
+    -   Altered plant species composition
+    -   Modified microclimate conditions
 
 ### Implications
 
 The interaction between fertilizer and ground cover demonstrates that fertilizer application doesn't simply shift overall OSE abundance—it changes *where* along the ground cover gradient OSE reach peak density. This has important implications for management strategies, as optimal ground cover targets may differ between fertilized and unfertilized fields.
 
 Simpler models (null, linear interaction, or single smooth) were poorly supported, justifying the inclusion of fertilizer-specific smooths in reporting and interpretation.
+
+
+
+
+# Analysis 4: Deep dive into ground cover x fertilizer impact on OSE density
+
+Test the effect of fertilizer on OSE_count, and whether ground cover (as a smooth, nonlinear function) mediates the fertilizer effect, while controlling for repeated measures at the farmer level and nuisance effect of region.
+
+
+## Unified model
+
+$$
+\begin{align*}
+\text{OSE\_count}_i &= \beta_0 \\
+    &\quad + \beta_1\, \text{fertilizer\_treatment}_i \\
+    &\quad + \beta_2\, \text{mission\_number}_i \\
+    &\quad + \beta_3\, (\text{fertilizer\_treatment}_i \times \text{mission\_number}_i) \\
+    &\quad + \beta_4\, \text{region}_i \\
+    &\quad + f_{\text{fertilizer\_treatment}_i}(\text{percent\_ground\_cover}_i) \\
+    &\quad + b_{\text{farmer}_i} \\
+    &\quad + \varepsilon_i
+\end{align*}
+$$
+
+
+- fertilizer_treatment * mission_number:
+  - Captures difference before and after fertilizer application.
+  - Models differential effect of fertilizer after application (mission_number 2/3 vs 1).
+
+- region:
+  - Included as a fixed variable.
+
+- s(percent_ground_cover, by=fertilizer_treatment):
+  - Factor-smooth allows ground cover x OSE_count relationship to vary by treatment.
+  - Tests the “mediation" hypothesis.
+
+- (1|farmer):
+  - Random intercept for farmers, controls for repeated measures and paired plot structure.
+
+
+
+```{r}
+
+data <- data |>
+  mutate(
+    farmer = factor(farmer),
+    mission_number = factor(mission_number),
+    fertilizer_treatment = factor(fertilizer_treatment),
+    region = factor(region)
+  )
+
+mod <- gam(
+  ose_count ~ 
+    fertilizer_treatment * mission_number + 
+    region + 
+    s(percent_ground_cover, by=fertilizer_treatment) + 
+    s(farmer,bs='re'),
+  data = data,
+  family = tw(),
+  select = TRUE
+)
+
+dev_exp <- summary(mod)$dev.expl * 100
+```
+
+```{r}
+
+# Parametric terms (fixed effects)
+tidy_mod <- broom::tidy(mod)
+kable(tidy_mod, caption = "Parametric (Fixed) Effects from GAM Model")
+
+# Smooth terms
+smooth_mod <- broom::tidy(mod, parametric = FALSE)
+kable(smooth_mod, caption = "Smooth Terms from GAM Model")
+
+
+
+```
+
+This unified model explained `{r} round(dev_exp, 3)`% of the variation and was pretty well fit.
+
+
+### ground cover x fertilizer impact on OSE density
+
+```{r}
+# Extract smooth estimates for each fertilizer treatment
+ests <- gratia::smooth_estimates(mod, 
+                                 select = 'percent', 
+                                 partial = TRUE)
+
+# Adjust to response scale
+ests$adj_est <- ests$.estimate + coef(mod)[1]
+
+# Plot treatment-specific relationships
+ests |>
+  ggplot(aes(x = percent_ground_cover)) +
+  geom_ribbon(
+    aes(ymin = adj_est - .se, ymax = adj_est + .se, 
+        fill = fertilizer_treatment),
+    alpha = 0.2
+  ) +
+  geom_line(
+    aes(y = adj_est, color = fertilizer_treatment),
+    linewidth = 1.2
+  ) +
+  labs(
+    x = "Ground Cover (%)",
+    y = "Estimated OSE Count",
+    title = "Ground Cover Effects by Fertilizer Treatment",
+    color = "Treatment",
+    fill = "Treatment"
+  ) +
+  scale_color_met_d(name = "Demuth") +
+  scale_fill_met_d(name = "Demuth") +
+  theme_minimal()
+
+```
+
+
+### OSE density by treatment and mission number
+
+```{r treatment_mission_plot}
+treat_mission <- emmeans(mod,~'fertilizer_treatment * mission_number',type='response') |>
+  as_tibble()
+
+
+
+ggplot(treat_mission, 
+       aes(x=mission_number, y=response, 
+           color=fertilizer_treatment)) +
+  geom_point(position=position_dodge(width=0.3),size=3) +
+  geom_errorbar(aes(ymin=lower.CL, ymax=upper.CL), width=0,
+                position=position_dodge(width=0.3)) +
+  scale_color_manual(values = c("control" = "black", "fertilized" = "darkgreen")) +
+  labs(x="Mission Number", y="Estimated OSE Density", color="Fertilizer Treatment") +
+  theme_minimal()
+
+
+
+
+```
+
+
+### OSE density by region
+
+
+
+```{r unified_region_mod_plot}
+
+region <- emmeans(mod,~'region',type='response') |>
+  as_tibble()
+
+
+
+ggplot(region, 
+       aes(x=region, y=response)) +
+  geom_point(position=position_dodge(width=0.3), size=3) +
+  geom_errorbar(aes(ymin=lower.CL, ymax=upper.CL), width=0,
+                position=position_dodge(width=0.3)) +
+  labs(x="Region", y="Estimated OSE Density") +
+  theme_minimal()
+
+
+
+
+```
+
+
+## Sensitivity Model (Stratified by ground cover)
+
+W build two models for < 50% and >= 50% ground cover.
+
+
+```{r}
+
+below_dat <- data |>
+  filter(percent_ground_cover < 50)
+
+above_dat <- data |>
+  filter(percent_ground_cover >= 50)
+
+below_mod <- gam(ose_count ~ 
+    fertilizer_treatment * mission_number + 
+    region + 
+    s(farmer,bs='re'),
+    family=tw(),
+    data = below_dat)
+
+above_mod <- gam(ose_count ~ 
+    fertilizer_treatment * mission_number + 
+    region + 
+    s(farmer,bs='re'),
+    family=tw(),
+    data=above_dat)
+
+```
+
+
+Quick model summary information:
+
+```{r}
+
+
+
+# Parametric terms (fixed effects)
+below_mod_tidy <- broom::tidy(below_mod, parametric = TRUE)
+kable(below_mod_tidy, caption = "Fixed effects for < 50% ground cover GAM Model")
+
+# Smooth terms
+above_mod_tidy <- broom::tidy(above_mod, parametric = TRUE)
+kable(above_mod_tidy, caption = "Fixed effects for > 50% ground cover GAM Model")
+
+
+
+
+```
+
+
+Check the diagnostic plots:
+
+```{r}
+
+gratia::appraise(below_mod)
+gratia::appraise(above_mod)
+
+```
+
+
+Diagnostic plots look good enough. The below model fits poorer than the above mod, but thats likely because of the small sample size.
+
+```{r}
+
+library(emmeans)
+
+# Extract EMMs for below 50%
+below_emm <- emmeans(below_mod, ~ fertilizer_treatment * mission_number, type = "response")
+below_emm <- as.data.frame(below_emm)
+below_emm$split <- "<50% ground cover"
+
+# Extract EMMs for >=50%
+above_emm <- emmeans(above_mod, ~ fertilizer_treatment * mission_number, type = "response")
+above_emm <- as.data.frame(above_emm)
+above_emm$split <- "≥50% ground cover"
+
+# Combine
+emm_plot_data <- rbind(below_emm, above_emm)
+
+emm_plot_data$fertilizer_treatment <- factor(emm_plot_data$fertilizer_treatment, 
+                                             levels=c("control", "fertilized"))
+emm_plot_data$split <- factor(emm_plot_data$split, 
+                             levels=c("<50% ground cover", "≥50% ground cover"))
+
+ggplot(emm_plot_data, 
+       aes(x=mission_number, y=response, 
+           color=fertilizer_treatment, 
+           shape=split, 
+           group=interaction(fertilizer_treatment, split))) +
+  geom_point(position=position_dodge(width=0.3),size=5) +
+  geom_errorbar(aes(ymin=lower.CL, ymax=upper.CL), width=0,
+                position=position_dodge(width=0.3)) +
+  scale_color_manual(values = c("control" = "black", "fertilized" = "darkgreen")) +
+  labs(x="Mission Number", y="Estimated OSE Density", color="Fertilizer Treatment", 
+       shape="Ground Cover", linetype="Ground Cover") +
+  theme_minimal()
+
+
+```
+
+
+Mission 3 in the <50% ground cover has very wide CI bars likely do to low sample size. Plots with < 50% ground cover tend to have a lower OSE count than plots with >= 50% ground cover. With that said, the trend between missions and fertilizer treatments reflect what we see in the fertilizer_treatment x region plot in the unified model. I would propose given this trend, we should just stick with the unified model.  
