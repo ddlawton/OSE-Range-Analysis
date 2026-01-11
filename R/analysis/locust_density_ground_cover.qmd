@@ -528,7 +528,7 @@ dev_exp <- summary(mod)$dev.expl * 100
 ```{r}
 
 # Parametric terms (fixed effects)
-tidy_mod <- broom::tidy(mod)
+tidy_mod <- broom::tidy(mod, parametric = TRUE)
 kable(tidy_mod, caption = "Parametric (Fixed) Effects from GAM Model")
 
 # Smooth terms
