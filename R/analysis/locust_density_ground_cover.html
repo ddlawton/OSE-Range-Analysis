@@ -532,7 +532,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="model-summary-statistics">Model Summary Statistics</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div id="vlvouulois" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="tnebmdwrzl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false" data-bgcolor="#FFFFFF">
@@ -773,41 +773,83 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <table class="caption-top table table-sm table-striped small">
 <caption>Parametric (Fixed) Effects from GAM Model</caption>
 <colgroup>
-<col style="width: 59%">
+<col style="width: 52%">
+<col style="width: 12%">
 <col style="width: 11%">
-<col style="width: 7%">
-<col style="width: 10%">
-<col style="width: 10%">
+<col style="width: 12%">
+<col style="width: 11%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">term</th>
-<th style="text-align: right;">edf</th>
-<th style="text-align: right;">ref.df</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
 <th style="text-align: right;">statistic</th>
 <th style="text-align: right;">p.value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">s(percent_ground_cover):fertilizer_treatmentcontrol</td>
-<td style="text-align: right;">2.642169</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">2.7349295</td>
-<td style="text-align: right;">0.0003524</td>
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">3.1276297</td>
+<td style="text-align: right;">0.0544331</td>
+<td style="text-align: right;">57.458257</td>
+<td style="text-align: right;">0.0000000</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">s(percent_ground_cover):fertilizer_treatmentfertilized</td>
-<td style="text-align: right;">3.185180</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">3.0080960</td>
-<td style="text-align: right;">0.0001093</td>
+<td style="text-align: left;">fertilizer_treatmentfertilized</td>
+<td style="text-align: right;">-0.1404329</td>
+<td style="text-align: right;">0.0539619</td>
+<td style="text-align: right;">-2.602445</td>
+<td style="text-align: right;">0.0093753</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">s(farmer)</td>
-<td style="text-align: right;">104.633158</td>
-<td style="text-align: right;">234</td>
-<td style="text-align: right;">0.8892797</td>
+<td style="text-align: left;">mission_number2</td>
+<td style="text-align: right;">-0.3226009</td>
+<td style="text-align: right;">0.0563570</td>
+<td style="text-align: right;">-5.724241</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mission_number3</td>
+<td style="text-align: right;">0.1676941</td>
+<td style="text-align: right;">0.0580630</td>
+<td style="text-align: right;">2.888140</td>
+<td style="text-align: right;">0.0039480</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">regionKaffrine</td>
+<td style="text-align: right;">0.6492215</td>
+<td style="text-align: right;">0.0564978</td>
+<td style="text-align: right;">11.491084</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">regionSaint Louis</td>
+<td style="text-align: right;">-0.1805615</td>
+<td style="text-align: right;">0.0806640</td>
+<td style="text-align: right;">-2.238440</td>
+<td style="text-align: right;">0.0253834</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">regionThies</td>
+<td style="text-align: right;">-0.5666020</td>
+<td style="text-align: right;">0.0705588</td>
+<td style="text-align: right;">-8.030206</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fertilizer_treatmentfertilized:mission_number2</td>
+<td style="text-align: right;">-0.5245022</td>
+<td style="text-align: right;">0.0832311</td>
+<td style="text-align: right;">-6.301755</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fertilizer_treatmentfertilized:mission_number3</td>
+<td style="text-align: right;">-1.1168055</td>
+<td style="text-align: right;">0.0899504</td>
+<td style="text-align: right;">-12.415793</td>
 <td style="text-align: right;">0.0000000</td>
 </tr>
 </tbody>
@@ -2102,7 +2144,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <span id="cb3-528"><a href="#cb3-528" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-531"><a href="#cb3-531" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb3-532"><a href="#cb3-532" aria-hidden="true" tabindex="-1"></a><span class="co"># Parametric terms (fixed effects)</span></span>
-<span id="cb3-533"><a href="#cb3-533" aria-hidden="true" tabindex="-1"></a>tidy_mod <span class="ot">&lt;-</span> broom<span class="sc">::</span><span class="fu">tidy</span>(mod)</span>
+<span id="cb3-533"><a href="#cb3-533" aria-hidden="true" tabindex="-1"></a>tidy_mod <span class="ot">&lt;-</span> broom<span class="sc">::</span><span class="fu">tidy</span>(mod, <span class="at">parametric =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb3-534"><a href="#cb3-534" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tidy_mod, <span class="at">caption =</span> <span class="st">"Parametric (Fixed) Effects from GAM Model"</span>)</span>
 <span id="cb3-535"><a href="#cb3-535" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-536"><a href="#cb3-536" aria-hidden="true" tabindex="-1"></a><span class="co"># Smooth terms</span></span>
