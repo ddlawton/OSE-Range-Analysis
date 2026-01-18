@@ -4,6 +4,12 @@ format: html
 toc: true
 ---
 
+::: {.callout-note}
+## Exploratory Work
+
+This page contains exploratory analysis conducted during the development of the manuscript. These analyses informed our statistical approach and data management decisions. Not all content here appears in the final manuscript. For the final methods and results, see the [Methods and Results](manuscript_methods_results.qmd) page.
+:::
+
 ```{r setup}
 #| echo: false
 #| results: "hide"
@@ -461,13 +467,9 @@ The interaction between fertilizer and ground cover demonstrates that fertilizer
 
 Simpler models (null, linear interaction, or single smooth) were poorly supported, justifying the inclusion of fertilizer-specific smooths in reporting and interpretation.
 
-
-
-
 # Analysis 4: Deep dive into ground cover x fertilizer impact on OSE density
 
 Test the effect of fertilizer on OSE_count, and whether ground cover (as a smooth, nonlinear function) mediates the fertilizer effect, while controlling for repeated measures at the farmer level and nuisance effect of region.
-
 
 ## Unified model
 
@@ -484,22 +486,16 @@ $$
 \end{align*}
 $$
 
-
-- fertilizer_treatment * mission_number:
-  - Captures difference before and after fertilizer application.
-  - Models differential effect of fertilizer after application (mission_number 2/3 vs 1).
-
-- region:
-  - Included as a fixed variable.
-
-- s(percent_ground_cover, by=fertilizer_treatment):
-  - Factor-smooth allows ground cover x OSE_count relationship to vary by treatment.
-  - Tests the “mediation" hypothesis.
-
-- (1|farmer):
-  - Random intercept for farmers, controls for repeated measures and paired plot structure.
-
-
+-   fertilizer_treatment \* mission_number:
+    -   Captures difference before and after fertilizer application.
+    -   Models differential effect of fertilizer after application (mission_number 2/3 vs 1).
+-   region:
+    -   Included as a fixed variable.
+-   s(percent_ground_cover, by=fertilizer_treatment):
+    -   Factor-smooth allows ground cover x OSE_count relationship to vary by treatment.
+    -   Tests the “mediation" hypothesis.
+-   (1\|farmer):
+    -   Random intercept for farmers, controls for repeated measures and paired plot structure.
 
 ```{r}
 
@@ -541,7 +537,6 @@ kable(smooth_mod, caption = "Smooth Terms from GAM Model")
 
 This unified model explained `{r} round(dev_exp, 3)`% of the variation and was pretty well fit.
 
-
 ### ground cover x fertilizer impact on OSE density
 
 ```{r}
@@ -578,7 +573,6 @@ ests |>
 
 ```
 
-
 ### OSE density by treatment and mission number
 
 ```{r treatment_mission_plot}
@@ -602,10 +596,7 @@ ggplot(treat_mission,
 
 ```
 
-
 ### OSE density by region
-
-
 
 ```{r unified_region_mod_plot}
 
@@ -627,11 +618,9 @@ ggplot(region,
 
 ```
 
-
 ## Sensitivity Model (Stratified by ground cover)
 
-W build two models for < 50% and >= 50% ground cover.
-
+W build two models for \< 50% and \>= 50% ground cover.
 
 ```{r}
 
@@ -657,7 +646,6 @@ above_mod <- gam(ose_count ~
 
 ```
 
-
 Quick model summary information:
 
 ```{r}
@@ -677,7 +665,6 @@ kable(above_mod_tidy, caption = "Fixed effects for > 50% ground cover GAM Model"
 
 ```
 
-
 Check the diagnostic plots:
 
 ```{r}
@@ -686,7 +673,6 @@ gratia::appraise(below_mod)
 gratia::appraise(above_mod)
 
 ```
-
 
 Diagnostic plots look good enough. The below model fits poorer than the above mod, but thats likely because of the small sample size.
 
@@ -728,5 +714,4 @@ ggplot(emm_plot_data,
 
 ```
 
-
-Mission 3 in the <50% ground cover has very wide CI bars likely do to low sample size. Plots with < 50% ground cover tend to have a lower OSE count than plots with >= 50% ground cover. With that said, the trend between missions and fertilizer treatments reflect what we see in the fertilizer_treatment x region plot in the unified model. I would propose given this trend, we should just stick with the unified model.  
+Mission 3 in the \<50% ground cover has very wide CI bars likely do to low sample size. Plots with \< 50% ground cover tend to have a lower OSE count than plots with \>= 50% ground cover. With that said, the trend between missions and fertilizer treatments reflect what we see in the fertilizer_treatment x region plot in the unified model. I would propose given this trend, we should just stick with the unified model.

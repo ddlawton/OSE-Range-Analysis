@@ -1,69 +1,111 @@
 ---
-title: "Fertilization Effects on Oedaleus senegalensis and Millet Yield in Senegal"
-subtitle: "2021 Field Data Analysis and Visualization"
+title: "Managing the Senegalese Grasshopper Through Soil Fertility Enhancement"
+subtitle: "Reproducible Statistical Analysis and Data Processing"
 format: html
-toc: false
+toc: true
 ---
 
-## Overview
+## About This Site
 
-This site presents a reproducible analysis of the 2021 *Oedaleus senegalensis* (OSE) dataset, collected across four regions of Senegal: Fatick, Kaffrine, Thiès, and Saint-Louis. The study examined how fertilizer application influences grasshopper densities and millet yield, while also providing insights into OSE’s regional dynamics and distribution along a rainfall gradient.
+This website provides the complete computational framework supporting the manuscript:
 
-The analyses and figures here build on previous work from our *Scientific Reports* paper, applying similar statistical frameworks to an expanded dataset that includes additional regions and survey rounds. All scripts, data processing, and visualizations are documented in this Quarto project for transparency and reproducibility.
+**"Managing the Senegalese grasshopper *Oedaleus senegalensis* (Orthoptera: Acrididae) through soil fertility enhancement: Population dynamics and harvest outcomes across ecological zones of Senegal"**
+
+All data processing, statistical analyses, and visualizations presented here are fully reproducible. The site documents both the final methods and results used in the manuscript, as well as the exploratory analyses that informed our statistical approach.
 
 ------------------------------------------------------------------------
 
-## Study Background
+## Study Design
 
 During the 2021 growing season (July–October), 250 farmers participated in a paired-field experiment where each managed:
 
--   One fertilized field receiving 150 kg each of NPK and urea.
-
--   One non-fertilized control field.
+-   One fertilized field receiving 150 kg each of NPK and urea
+-   One non-fertilized control field
 
 Each field was surveyed three times to record:
 
 -   Grasshopper density and developmental stage
-
 -   Vegetation cover and temperature
-
 -   Millet yield at harvest
+-   OSE damage to millet leaves (percent leaf damage)
 
-In total, the survey covered 500 ha across 1,500 sampling points. The Saint-Louis region, which experienced extreme dryness that year, was only sampled twice due to field abandonment.
-
-------------------------------------------------------------------------
-
-# Analytical Goals
-
-Our analyses address several complementary objectives:
-
-**Locust Dynamics**
-
-This section presents results on locust density across treatments and regions, as well as relationships between locust abundance, plant cover, and temperature.
-
-**Yield Impact**
-
-Here, we examine how locust density influences yield, explore yield patterns across treatments and regions, and assess how temperature affects yield outcomes.
-
-**Regional Dynamics and Rainfall Gradients (page TBA)**
-
-This section will evaluate OSE abundance along gradients of mean annual rainfall and latitude to infer how climatic variation structures its range across Senegal.
-
-**Generational and Temporal Patterns (page TBA)**
-
-This section will visualize the timing of OSE developmental stages across regions to assess whether northern populations are locally derived or result from seasonal migration
+**Total Coverage:** 500 ha across 1,500 sampling points in four regions (Fatick, Kaffrine, Thiès, and Saint-Louis)
 
 ------------------------------------------------------------------------
 
-## Visual and Analytical Outputs
+## Computational Approach
 
-All figures are reproducible from R scripts stored in the `R/` folder and rendered through this Quarto project.
+### Statistical Framework
 
-## Citation and Acknowledgments
+All analyses were conducted in R using:
 
-This analysis was prepared by **Douglas Lawton** and collaborators. The work contributes to our understanding of pest dynamics and millet production systems in the Sahel and supports the forthcoming manuscript submission to the *Journal of Economic Entomology*.
+-   **Generalized Linear Mixed Models (GLMMs)** via `glmmTMB` for locust density, damage, and yield outcomes
+-   **Generalized Additive Mixed Models (GAMMs)** via `mgcv` for non-linear relationships with environmental covariates
+-   **Model validation** using `DHARMa` and `gratia`
+-   **Estimated marginal means** and pairwise comparisons via `emmeans`
 
-For full reproducibility, see the [GitHub repository](https://github.com/ddlawton/OSE-Range-Analysis) or cite the Zenodo archive:\
-**DOI:** [10.5281/zenodo.xxxxxx](https://doi.org/10.5281/zenodo.xxxxxx)
+### Code Organization
+
+The repository is structured for reproducibility:
+
+-   **`R/_common.R`**: Shared setup, packages, and configuration
+-   **`R/functions/`**: Modular functions for data processing, modeling, plotting, and mapping
+-   **`R/analysis/`**: Quarto documents for all analyses
+-   **`data/`**: Raw data and cached processed datasets
+-   **`outputs/`**: Generated figures and tables
+
+### Manuscript Methods and Results
+
+The [**Methods and Results**](R/analysis/manuscript_methods_results.qmd) page contains the final statistical models, results, and figures used in the manuscript submission.
+
+### Exploratory Work
+
+The **Exploratory Work** section provides detailed analyses that informed the manuscript, including:
+
+-   Data summaries and regional maps
+-   Individual analyses for locust density, damage, and yield
+-   Environmental covariate relationships
+-   Gender dynamics in farmer participation
+
+These exploratory pages document the full analytical process and provide transparency into our statistical decision-making. Not all exploratory analyses appear in the final manuscript.
 
 ------------------------------------------------------------------------
+
+## Reproducibility
+
+-   All analyses are fully reproducible from raw data
+-   R package versions locked with `renv`
+-   Automated testing and deployment via GitHub Actions
+-   Model caching for computational efficiency
+-   All figures generated programmatically
+
+**GitHub Repository:** [github.com/ddlawton/OSE-Range-Analysis](https://github.com/ddlawton/OSE-Range-Analysis)
+
+------------------------------------------------------------------------
+
+## Authors and Affiliations
+
+**Mamour Touré¹\*, Amadou Fall², Amsata Diop³, Esther Diouf⁴, Amadou Bocar Bal⁵, Mady Ndiaye⁶, Douglas Lawton⁷, Arianne Cease⁸\***
+
+1.  UFR EFSS, Gaston Berger University, Saint Louis, Senegal
+2.  Biology Animal Department, FST, Cheikh Anta Diop University, Dakar, Senegal
+3.  Laboratoire des Sciences Biologiques, Agronomiques, Alimentaires et de Modélisation des Systèmes Complexes, Université Gaston Berger de Saint Louis, Sénégal
+4.  Centre de Coopération Internationale en Recherche Agronomique pour le Développement, Unité Mixte de Recherche, Centre de Biologie pour la Gestion des Populations, Montpellier, France
+5.  Laboratoire des Sciences Biologiques, Agronomiques, Alimentaires et de Modélisation des Systèmes Complexes, Université Gaston Berger de Saint Louis, Sénégal
+6.  Laboratoire Biologie de la Reproduction, Département de Biologie Animale, Faculté des Sciences et Techniques, Université Cheikh Anta Diop de Dakar, Sénégal
+7.  Syngenta Seeds, Research Triangle Park, NC, USA
+8.  School of Sustainability and School of Life Sciences, Arizona State University, Tempe, AZ, USA
+
+*\*Corresponding authors:* mamour.toure\@ugb.edu.sn, acease\@asu.edu\
+*Code and statistical questions:* Douglas Lawton (ddlawton1\@gmail.com)
+
+------------------------------------------------------------------------
+
+## Citation
+
+**Manuscript:** Submitted to *Journal of Economic Entomology*
+
+**To cite this computational work:**
+
+-   GitHub repository: <https://github.com/ddlawton/OSE-Range-Analysis>
+-   Zenodo archive: DOI: [10.5281/zenodo.xxxxxx](https://doi.org/10.5281/zenodo.xxxxxx) *(coming soon)*

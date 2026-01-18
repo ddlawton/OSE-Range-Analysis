@@ -2,13 +2,23 @@
 
 [![Quarto Publish](https://github.com/ddlawton/OSE-Range-Analysis/actions/workflows/quarto-publish.yml/badge.svg)](https://github.com/ddlawton/OSE-Range-Analysis/actions/workflows/quarto-publish.yml)
 
-**Reproducible statistical analysis and visualizations for *Oedaleus senegalensis* (OSE) research in Senegal**
+**Reproducible statistical analysis and data processing for the manuscript:**
+
+**"Managing the Senegalese grasshopper *Oedaleus senegalensis* (Orthoptera: Acrididae) through soil fertility enhancement: Population dynamics and harvest outcomes across ecological zones of Senegal"**
 
 ## Overview
 
-This repository contains a reproducible analysis of the 2021 *Oedaleus senegalensis* (OSE) dataset, collected across four regions of Senegal: Fatick, Kaffrine, Thiès, and Saint-Louis. The study examined how fertilizer application influences grasshopper densities and millet yield, while also providing insights into OSE's regional dynamics and distribution along a rainfall gradient.
+This repository contains the complete computational framework supporting research on *Oedaleus senegalensis* (OSE) management in Senegal. The 2021 dataset covers 250 farmers across four regions (Fatick, Kaffrine, Thiès, and Saint-Louis) who each managed paired fertilized and unfertilized millet fields. The study examined how fertilizer application influences grasshopper densities, crop damage, and millet yield across ecological gradients.
 
 **🌐 Live Analysis Site:** [https://ddlawton.github.io/OSE-Range-Analysis](https://ddlawton.github.io/OSE-Range-Analysis)
+
+## Manuscript Abstract
+
+The Senegalese grasshopper, *Oedaleus senegalensis* (Krauss, 1877), is a major Sahelian pest of cereal crops, yet farmers often lack the resources needed to monitor and treat outbreaks. Soil amendments may be a promising tool. Senegalese grasshoppers are highly migratory and require a low protein, high carbohydrate diet to fuel flight. Previous work in central Senegal showed that fertilization suppresses grasshopper performance and damage by increasing millet protein-to-carbohydrate ratios. However, this approach has not been evaluated across broader ecological gradients.
+
+In this study, 250 farmers across four regions from central to northern Senegal each cultivated one fertilized and one unfertilized millet field (1 ha each). Grasshopper densities, developmental stages, and damage were monitored throughout the growing season. Across 1,500 field surveys (500 ha), fertilization consistently reduced grasshopper abundance and damage and nearly doubled average yield in the three regions harvested. In Saint Louis, the northernmost region, insufficient rainfall led to abandonment of millet fields before harvest.
+
+Spatiotemporal patterns of the three grasshopper generations indicate that diapausing egg beds were present throughout the study region because there were no observed adult migrants in Saint Louis by early August. Populations were elevated in the south-central regions, consistent with the reported optimal seasonal rainfall for this species averaging 50-100 mm monthly. Overall, the results indicate that increasing soil fertility can serve as a practical management strategy for Senegalese grasshoppers across semi-arid to arid zones, simultaneously reducing infestation and damage while increasing millet yield.
 
 ## Study Design
 
@@ -34,34 +44,42 @@ Additional metadata collected includes farmer gender for demographic analysis.
 │   ├── _common.R                 # Shared setup, packages, configuration
 │   ├── index.qmd                 # Main landing page
 │   ├── analysis/                 # Analysis files (.qmd)
-│   │   ├── basic_stats.qmd       # Dataset overview and maps
-│   │   ├── locust_*.qmd         # Locust density analyses  
-│   │   └── yield_*.qmd          # Yield outcome analyses
-│   └── functions/               # Modular R functions
+│   │   ├── manuscript_methods_results.qmd  # FINAL manuscript methods & results
+│   │   ├── basic_stats.qmd       # Dataset overview and maps (exploratory)
+│   │   ├── locust_*.qmd          # Locust density/damage analyses (exploratory)
+│   │   └── yield_*.qmd           # Yield outcome analyses (exploratory)
+│   └── functions/                # Modular R functions
 │       ├── data_preprocessing.R  # Data loading and cleaning
-│       ├── statistical_models.R # GLMM, GAM modeling
-│       ├── plotting_functions.R # Publication-ready plots
-│       ├── senegal_map.R        # Geographic mapping
+│       ├── statistical_models.R  # GLMM, GAM modeling
+│       ├── plotting_functions.R  # Publication-ready plots
+│       ├── senegal_map.R         # Geographic mapping
 │       └── table_variable_summary.R # Data summaries
 ├── data/
-│   ├── raw/                     # Original Excel data file
-│   └── processed/               # Cached processed data (auto-generated)
-├── outputs/figures/             # Generated figures
-├── _quarto.yml                  # Website configuration
-└── .github/workflows/           # Automated deployment
+│   ├── raw/                      # Original Excel data file
+│   └── processed/                # Cached processed data (auto-generated)
+├── outputs/figures/              # Generated figures
+├── _quarto.yml                   # Website configuration
+└── .github/workflows/            # Automated deployment
 ```
 
-## Key Analyses
+## Website Structure
 
-### Locust Dynamics
-- **Density × Treatment/Region:** Effects of fertilization across regions
-- **Locust × Ground Cover:** Relationship between vegetation and OSE abundance  
-- **Locust × Temperature:** Temperature effects on density patterns
+The analysis website is organized to prioritize the manuscript's final methods and results:
 
-### Yield Outcomes
-- **Yield × Locust Density:** Impact of OSE on millet production
-- **Yield × Fertilizer/Region:** Regional fertilization effects
-- **Yield × Temperature:** Environmental factors affecting yield
+### Manuscript Methods and Results
+The **[Methods and Results](https://ddlawton.github.io/OSE-Range-Analysis/R/analysis/manuscript_methods_results.html)** page contains:
+- Final statistical models used in the manuscript
+- Complete results with inline statistics
+- Publication-ready figures and tables
+
+### Exploratory Work
+Additional pages document the exploratory analyses that informed the manuscript:
+- Data summaries and regional maps
+- Individual analyses for locust density, damage, and yield
+- Environmental covariate relationships (ground cover, temperature)
+- Gender dynamics in farmer participation
+
+**Note:** Not all exploratory analyses appear in the final manuscript. These pages provide transparency into the analytical process and statistical decision-making.
 
 ## Getting Started
 
@@ -92,6 +110,22 @@ Additional metadata collected includes farmer gender for demographic analysis.
    ```bash
    quarto preview
    ```
+
+## Statistical Approach
+
+### Framework
+All analyses use:
+- **Generalized Linear Mixed Models (GLMMs)** via `glmmTMB` for locust density, damage, and yield
+- **Generalized Additive Mixed Models (GAMMs)** via `mgcv` for non-linear environmental relationships
+- **Model validation** using `DHARMa` and `gratia`
+- **Estimated marginal means** and pairwise comparisons via `emmeans`
+
+### Code Organization
+The analysis uses a modular approach:
+- **`R/_common.R`**: Loads all packages, functions, and configuration
+- **`R/functions/`**: Organized by purpose (data processing, modeling, plotting, mapping)
+- **`R/analysis/`**: Individual `.qmd` files for each analysis
+- **Model caching**: Computationally expensive models cached to `data/model_objects/`
 
 ### Figure Download Functionality
 
@@ -132,34 +166,37 @@ clear_model_cache()
 clear_model_cache("model_name")
 ```
 
-### Code Organization
-
-The analysis uses a modular approach:
-
-- **`R/_common.R`**: Loads all packages, functions, and configuration
-- **Functions**: Organized by purpose in `R/functions/`
-- **Analyses**: Individual `.qmd` files for each research question
-- **Caching**: Processed data cached automatically for faster loading
-
 ## Reproducibility
 
 - All analyses are fully reproducible from raw data
 - Package versions locked with `renv`
 - Automated testing and deployment via GitHub Actions
+- Model caching for computational efficiency
 - All figures generated programmatically from code
+
+## Authors and Affiliations
+
+**Mamour Touré¹\*, Amadou Fall², Amsata Diop³, Esther Diouf⁴, Amadou Bocar Bal⁵, Mady Ndiaye⁶, Douglas Lawton⁷, Arianne Cease⁸\***
+
+1. UFR EFSS, Gaston Berger University, Saint Louis, Senegal
+2. Biology Animal Department, FST, Cheikh Anta Diop University, Dakar, Senegal
+3. Laboratoire des Sciences Biologiques, Agronomiques, Alimentaires et de Modélisation des Systèmes Complexes, Université Gaston Berger de Saint Louis, Sénégal
+4. Centre de Coopération Internationale en Recherche Agronomique pour le Développement, Unité Mixte de Recherche, Centre de Biologie pour la Gestion des Populations, Montpellier, France
+5. Laboratoire des Sciences Biologiques, Agronomiques, Alimentaires et de Modélisation des Systèmes Complexes, Université Gaston Berger de Saint Louis, Sénégal
+6. Laboratoire Biologie de la Reproduction, Département de Biologie Animale, Faculté des Sciences et Techniques, Université Cheikh Anta Diop de Dakar, Sénégal
+7. Syngenta Seeds, Research Triangle Park, NC, USA
+8. School of Sustainability and School of Life Sciences, Arizona State University, Tempe, AZ, USA
+
+*\*Corresponding authors:* mamour.toure@ugb.edu.sn, acease@asu.edu  
+*Code and statistical questions:* Douglas Lawton (ddlawton1@gmail.com)
 
 ## Citation
 
-**Prepared by:** Douglas Lawton and collaborators  
 **Manuscript:** Submitted to *Journal of Economic Entomology*
 
 **For reproducibility, cite:**
 - GitHub repository: [https://github.com/ddlawton/OSE-Range-Analysis](https://github.com/ddlawton/OSE-Range-Analysis)
 - Zenodo archive: DOI: [10.5281/zenodo.xxxxxx](https://doi.org/10.5281/zenodo.xxxxxx) *(coming soon)*
-
-## Contributing
-
-This is primarily a research analysis repository. For questions about the methodology or data, please open an issue or contact the authors.
 
 ## License
 

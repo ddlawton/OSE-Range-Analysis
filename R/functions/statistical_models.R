@@ -26,7 +26,7 @@
 #' @export
 create_count_glmm_model <- function(df) {
   glmmTMB(
-    ose_count ~ fertilizer_treatment * region + percent_ground_cover + (1|farmer),
+    ose_count ~ fertilizer_treatment * region + (1|farmer),
     data = df,
     family = poisson()
   )

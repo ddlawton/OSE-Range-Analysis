@@ -5,6 +5,12 @@ format: html
 toc: true
 ---
 
+::: {.callout-note}
+## Exploratory Work
+
+This page contains exploratory analysis conducted during the development of the manuscript. These analyses informed our statistical approach and data management decisions. Not all content here appears in the final manuscript. For the final methods and results, see the [Methods and Results](manuscript_methods_results.qmd) page.
+:::
+
 # Goal
 
 This analysis examines how fertilization influences millet yield across different regions. We expect to see regional differences in fertilizer response.

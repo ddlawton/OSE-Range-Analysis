@@ -5,6 +5,12 @@ format: html
 toc: true
 ---
 
+::: callout-note
+## Exploratory Work
+
+This page contains exploratory analysis conducted during the development of the manuscript. These analyses informed our statistical approach and data management decisions. Not all content here appears in the final manuscript. For the final methods and results, see the [Methods and Results](manuscript_methods_results.qmd) page.
+:::
+
 ## Summary
 
 The goal of this page is to analyze locust density patterns across fertilizer treatments and regions. This analysis replicates key figures from the manuscript to ensure consistent theming and validates our data management approach. If you see errors, please let me know!
@@ -299,11 +305,9 @@ ose_dat |>
 
 ```
 
-
 # OSE count by treatment/region accounting for ground cover perent
 
 The first test is to compare a model with ground cover and a model without ground cover. We will build both models per mission and then compare the estimated marginal means.
-
 
 ```{r}
 
@@ -360,4 +364,3 @@ for (mission in unique(data$mission_number)) {
 # Show AIC results
 aic_results
 ```
-
