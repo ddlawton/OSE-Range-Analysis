@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Fertilization Effects on Oedaleus senegalensis and Millet Yield in Senegal – OSE Range Analysis</title>
+<title>Managing the Senegalese Grasshopper Through Soil Fertility Enhancement – OSE Range Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -72,9 +72,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-17d01b5babc88cbee53e37b4dd766b3a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -306,21 +306,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../R/analysis/basic_stats.html"> 
-<span class="menu-text">Map and Basic Stats</span></a>
+    <a class="nav-link" href="../R/analysis/manuscript_methods_results.html"> 
+<span class="menu-text">Methods and Results</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-locust-dynamics" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Locust Dynamics</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-exploratory-work" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Exploratory Work</span>
     </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-locust-dynamics">    
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-exploratory-work">    
+        <li>
+    <a class="dropdown-item" href="../R/analysis/basic_stats.html">
+ <span class="dropdown-text">Map and Basic Stats</span></a>
+  </li>  
         <li>
     <a class="dropdown-item" href="../R/analysis/locust_damage_treatment_region.html">
- <span class="dropdown-text">Damage × Treatment / Region</span></a>
+ <span class="dropdown-text">Locust Damage × Treatment / Region</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../R/analysis/locust_density_treatment_region.html">
- <span class="dropdown-text">Density × Treatment / Region</span></a>
+ <span class="dropdown-text">Locust Density × Treatment / Region</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../R/analysis/locust_density_ground_cover.html">
@@ -330,13 +334,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../R/analysis/locust_density_temperature.html">
  <span class="dropdown-text">Locust × Temperature</span></a>
   </li>  
-    </ul>
-  </li>
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-yield-outcomes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Yield Outcomes</span>
-    </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-yield-outcomes">    
         <li>
     <a class="dropdown-item" href="../R/analysis/yield_locust.html">
  <span class="dropdown-text">Yield × Locust Density</span></a>
@@ -349,16 +346,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../R/analysis/yield_environment.html">
  <span class="dropdown-text">Yield × Temperature</span></a>
   </li>  
-    </ul>
-  </li>
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-gender-dynamics" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Gender dynamics</span>
-    </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-gender-dynamics">    
         <li>
     <a class="dropdown-item" href="../R/analysis/farmer_gender_analysis.html">
- <span class="dropdown-text">gender dynamics</span></a>
+ <span class="dropdown-text">Farmer Gender Dynamics</span></a>
   </li>  
     </ul>
   </li>
@@ -379,20 +369,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#about-this-site" id="toc-about-this-site" class="nav-link active" data-scroll-target="#about-this-site">About This Site</a></li>
+  <li><a href="#study-design" id="toc-study-design" class="nav-link" data-scroll-target="#study-design">Study Design</a></li>
+  <li><a href="#computational-approach" id="toc-computational-approach" class="nav-link" data-scroll-target="#computational-approach">Computational Approach</a>
+  <ul class="collapse">
+  <li><a href="#statistical-framework" id="toc-statistical-framework" class="nav-link" data-scroll-target="#statistical-framework">Statistical Framework</a></li>
+  <li><a href="#code-organization" id="toc-code-organization" class="nav-link" data-scroll-target="#code-organization">Code Organization</a></li>
+  <li><a href="#manuscript-methods-and-results" id="toc-manuscript-methods-and-results" class="nav-link" data-scroll-target="#manuscript-methods-and-results">Manuscript Methods and Results</a></li>
+  <li><a href="#exploratory-work" id="toc-exploratory-work" class="nav-link" data-scroll-target="#exploratory-work">Exploratory Work</a></li>
+  </ul></li>
+  <li><a href="#reproducibility" id="toc-reproducibility" class="nav-link" data-scroll-target="#reproducibility">Reproducibility</a></li>
+  <li><a href="#authors-and-affiliations" id="toc-authors-and-affiliations" class="nav-link" data-scroll-target="#authors-and-affiliations">Authors and Affiliations</a></li>
+  <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation">Citation</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Fertilization Effects on Oedaleus senegalensis and Millet Yield in Senegal</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
-<p class="subtitle lead">2021 Field Data Analysis and Visualization</p>
+<div class="quarto-title-block"><div><h1 class="title">Managing the Senegalese Grasshopper Through Soil Fertility Enhancement</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<p class="subtitle lead">Reproducible Statistical Analysis and Data Processing</p>
 </div>
 
 
 
-<div class="quarto-title-meta column-page">
+<div class="quarto-title-meta column-page-left">
 
     
   
@@ -404,55 +413,111 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>This site presents a reproducible analysis of the 2021 <em>Oedaleus senegalensis</em> (OSE) dataset, collected across four regions of Senegal: Fatick, Kaffrine, Thiès, and Saint-Louis. The study examined how fertilizer application influences grasshopper densities and millet yield, while also providing insights into OSE’s regional dynamics and distribution along a rainfall gradient.</p>
-<p>The analyses and figures here build on previous work from our <em>Scientific Reports</em> paper, applying similar statistical frameworks to an expanded dataset that includes additional regions and survey rounds. All scripts, data processing, and visualizations are documented in this Quarto project for transparency and reproducibility.</p>
+<section id="about-this-site" class="level2">
+<h2 class="anchored" data-anchor-id="about-this-site">About This Site</h2>
+<p>This website provides the complete computational framework supporting the manuscript:</p>
+<p><strong>“Managing the Senegalese grasshopper <em>Oedaleus senegalensis</em> (Orthoptera: Acrididae) through soil fertility enhancement: Population dynamics and harvest outcomes across ecological zones of Senegal”</strong></p>
+<p>All data processing, statistical analyses, and visualizations presented here are fully reproducible. The site documents both the final methods and results used in the manuscript, as well as the exploratory analyses that informed our statistical approach.</p>
 <hr>
 </section>
-<section id="study-background" class="level2">
-<h2 class="anchored" data-anchor-id="study-background">Study Background</h2>
+<section id="study-design" class="level2">
+<h2 class="anchored" data-anchor-id="study-design">Study Design</h2>
 <p>During the 2021 growing season (July–October), 250 farmers participated in a paired-field experiment where each managed:</p>
 <ul>
-<li><p>One fertilized field receiving 150 kg each of NPK and urea.</p></li>
-<li><p>One non-fertilized control field.</p></li>
+<li>One fertilized field receiving 150 kg each of NPK and urea</li>
+<li>One non-fertilized control field</li>
 </ul>
 <p>Each field was surveyed three times to record:</p>
 <ul>
-<li><p>Grasshopper density and developmental stage</p></li>
-<li><p>Vegetation cover and temperature</p></li>
-<li><p>Millet yield at harvest</p></li>
+<li>Grasshopper density and developmental stage</li>
+<li>Vegetation cover and temperature</li>
+<li>Millet yield at harvest</li>
+<li>OSE damage to millet leaves (percent leaf damage)</li>
 </ul>
-<p>In total, the survey covered 500 ha across 1,500 sampling points. The Saint-Louis region, which experienced extreme dryness that year, was only sampled twice due to field abandonment.</p>
+<p><strong>Total Coverage:</strong> 500 ha across 1,500 sampling points in four regions (Fatick, Kaffrine, Thiès, and Saint-Louis)</p>
 <hr>
 </section>
-<section id="analytical-goals" class="level1">
-<h1>Analytical Goals</h1>
-<p>Our analyses address several complementary objectives:</p>
-<p><strong>Locust Dynamics</strong></p>
-<p>This section presents results on locust density across treatments and regions, as well as relationships between locust abundance, plant cover, and temperature.</p>
-<p><strong>Yield Impact</strong></p>
-<p>Here, we examine how locust density influences yield, explore yield patterns across treatments and regions, and assess how temperature affects yield outcomes.</p>
-<p><strong>Regional Dynamics and Rainfall Gradients (page TBA)</strong></p>
-<p>This section will evaluate OSE abundance along gradients of mean annual rainfall and latitude to infer how climatic variation structures its range across Senegal.</p>
-<p><strong>Generational and Temporal Patterns (page TBA)</strong></p>
-<p>This section will visualize the timing of OSE developmental stages across regions to assess whether northern populations are locally derived or result from seasonal migration</p>
-<hr>
-<section id="visual-and-analytical-outputs" class="level2">
-<h2 class="anchored" data-anchor-id="visual-and-analytical-outputs">Visual and Analytical Outputs</h2>
-<p>All figures are reproducible from R scripts stored in the <code>R/</code> folder and rendered through this Quarto project.</p>
+<section id="computational-approach" class="level2">
+<h2 class="anchored" data-anchor-id="computational-approach">Computational Approach</h2>
+<section id="statistical-framework" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-framework">Statistical Framework</h3>
+<p>All analyses were conducted in R using:</p>
+<ul>
+<li><strong>Generalized Linear Mixed Models (GLMMs)</strong> via <code>glmmTMB</code> for locust density, damage, and yield outcomes</li>
+<li><strong>Generalized Additive Mixed Models (GAMMs)</strong> via <code>mgcv</code> for non-linear relationships with environmental covariates</li>
+<li><strong>Model validation</strong> using <code>DHARMa</code> and <code>gratia</code></li>
+<li><strong>Estimated marginal means</strong> and pairwise comparisons via <code>emmeans</code></li>
+</ul>
 </section>
-<section id="citation-and-acknowledgments" class="level2">
-<h2 class="anchored" data-anchor-id="citation-and-acknowledgments">Citation and Acknowledgments</h2>
-<p>This analysis was prepared by <strong>Douglas Lawton</strong> and collaborators. The work contributes to our understanding of pest dynamics and millet production systems in the Sahel and supports the forthcoming manuscript submission to the <em>Journal of Economic Entomology</em>.</p>
-<p>For full reproducibility, see the <a href="https://github.com/ddlawton/OSE-Range-Analysis">GitHub repository</a> or cite the Zenodo archive:<br>
-<strong>DOI:</strong> <a href="https://doi.org/10.5281/zenodo.xxxxxx">10.5281/zenodo.xxxxxx</a></p>
+<section id="code-organization" class="level3">
+<h3 class="anchored" data-anchor-id="code-organization">Code Organization</h3>
+<p>The repository is structured for reproducibility:</p>
+<ul>
+<li><strong><code>R/_common.R</code></strong>: Shared setup, packages, and configuration</li>
+<li><strong><code>R/functions/</code></strong>: Modular functions for data processing, modeling, plotting, and mapping</li>
+<li><strong><code>R/analysis/</code></strong>: Quarto documents for all analyses</li>
+<li><strong><code>data/</code></strong>: Raw data and cached processed datasets</li>
+<li><strong><code>outputs/</code></strong>: Generated figures and tables</li>
+</ul>
+</section>
+<section id="manuscript-methods-and-results" class="level3">
+<h3 class="anchored" data-anchor-id="manuscript-methods-and-results">Manuscript Methods and Results</h3>
+<p>The <a href="R/analysis/manuscript_methods_results.qmd"><strong>Methods and Results</strong></a> page contains the final statistical models, results, and figures used in the manuscript submission.</p>
+</section>
+<section id="exploratory-work" class="level3">
+<h3 class="anchored" data-anchor-id="exploratory-work">Exploratory Work</h3>
+<p>The <strong>Exploratory Work</strong> section provides detailed analyses that informed the manuscript, including:</p>
+<ul>
+<li>Data summaries and regional maps</li>
+<li>Individual analyses for locust density, damage, and yield</li>
+<li>Environmental covariate relationships</li>
+<li>Gender dynamics in farmer participation</li>
+</ul>
+<p>These exploratory pages document the full analytical process and provide transparency into our statistical decision-making. Not all exploratory analyses appear in the final manuscript.</p>
 <hr>
+</section>
+</section>
+<section id="reproducibility" class="level2">
+<h2 class="anchored" data-anchor-id="reproducibility">Reproducibility</h2>
+<ul>
+<li>All analyses are fully reproducible from raw data</li>
+<li>R package versions locked with <code>renv</code></li>
+<li>Automated testing and deployment via GitHub Actions</li>
+<li>Model caching for computational efficiency</li>
+<li>All figures generated programmatically</li>
+</ul>
+<p><strong>GitHub Repository:</strong> <a href="https://github.com/ddlawton/OSE-Range-Analysis">github.com/ddlawton/OSE-Range-Analysis</a></p>
+<hr>
+</section>
+<section id="authors-and-affiliations" class="level2">
+<h2 class="anchored" data-anchor-id="authors-and-affiliations">Authors and Affiliations</h2>
+<p><strong>Mamour Touré¹*, Amadou Fall², Amsata Diop³, Esther Diouf⁴, Amadou Bocar Bal⁵, Mady Ndiaye⁶, Douglas Lawton⁷, Arianne Cease⁸*</strong></p>
+<ol type="1">
+<li>UFR EFSS, Gaston Berger University, Saint Louis, Senegal</li>
+<li>Biology Animal Department, FST, Cheikh Anta Diop University, Dakar, Senegal</li>
+<li>Laboratoire des Sciences Biologiques, Agronomiques, Alimentaires et de Modélisation des Systèmes Complexes, Université Gaston Berger de Saint Louis, Sénégal</li>
+<li>Centre de Coopération Internationale en Recherche Agronomique pour le Développement, Unité Mixte de Recherche, Centre de Biologie pour la Gestion des Populations, Montpellier, France</li>
+<li>Laboratoire des Sciences Biologiques, Agronomiques, Alimentaires et de Modélisation des Systèmes Complexes, Université Gaston Berger de Saint Louis, Sénégal</li>
+<li>Laboratoire Biologie de la Reproduction, Département de Biologie Animale, Faculté des Sciences et Techniques, Université Cheikh Anta Diop de Dakar, Sénégal</li>
+<li>Syngenta Seeds, Research Triangle Park, NC, USA</li>
+<li>School of Sustainability and School of Life Sciences, Arizona State University, Tempe, AZ, USA</li>
+</ol>
+<p><em>*Corresponding authors:</em> mamour.toure@ugb.edu.sn, acease@asu.edu<br>
+<em>Code and statistical questions:</em> Douglas Lawton (ddlawton1@gmail.com)</p>
+<hr>
+</section>
+<section id="citation" class="level2">
+<h2 class="anchored" data-anchor-id="citation">Citation</h2>
+<p><strong>Manuscript:</strong> Submitted to <em>Journal of Economic Entomology</em></p>
+<p><strong>To cite this computational work:</strong></p>
+<ul>
+<li>GitHub repository: <a href="https://github.com/ddlawton/OSE-Range-Analysis" class="uri">https://github.com/ddlawton/OSE-Range-Analysis</a></li>
+<li>Zenodo archive: DOI: <a href="https://doi.org/10.5281/zenodo.xxxxxx">10.5281/zenodo.xxxxxx</a> <em>(coming soon)</em></li>
+</ul>
 
 
 <!-- -->
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -921,74 +986,116 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Fertilization Effects on Oedaleus senegalensis and Millet Yield in Senegal"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "2021 Field Data Analysis and Visualization"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Managing the Senegalese Grasshopper Through Soil Fertility Enhancement"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Reproducible Statistical Analysis and Data Processing"</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> false</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## About This Site</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>This site presents a reproducible analysis of the 2021 *Oedaleus senegalensis* (OSE) dataset, collected across four regions of Senegal: Fatick, Kaffrine, Thiès, and Saint-Louis. The study examined how fertilizer application influences grasshopper densities and millet yield, while also providing insights into OSE’s regional dynamics and distribution along a rainfall gradient.</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>This website provides the complete computational framework supporting the manuscript:</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>The analyses and figures here build on previous work from our *Scientific Reports* paper, applying similar statistical frameworks to an expanded dataset that includes additional regions and survey rounds. All scripts, data processing, and visualizations are documented in this Quarto project for transparency and reproducibility.</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>**"Managing the Senegalese grasshopper *Oedaleus senegalensis* (Orthoptera: Acrididae) through soil fertility enhancement: Population dynamics and harvest outcomes across ecological zones of Senegal"**</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>All data processing, statistical analyses, and visualizations presented here are fully reproducible. The site documents both the final methods and results used in the manuscript, as well as the exploratory analyses that informed our statistical approach.</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## Study Background</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>During the 2021 growing season (July–October), 250 farmers participated in a paired-field experiment where each managed:</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## Study Design</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>One fertilized field receiving 150 kg each of NPK and urea.</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>During the 2021 growing season (July–October), 250 farmers participated in a paired-field experiment where each managed:</span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>One non-fertilized control field.</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>Each field was surveyed three times to record:</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Grasshopper density and developmental stage</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>One fertilized field receiving 150 kg each of NPK and urea</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>One non-fertilized control field</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>Each field was surveyed three times to record:</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Grasshopper density and developmental stage</span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Vegetation cover and temperature</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Millet yield at harvest</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Millet yield at harvest</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>OSE damage to millet leaves (percent leaf damage)</span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>In total, the survey covered 500 ha across 1,500 sampling points. The Saint-Louis region, which experienced extreme dryness that year, was only sampled twice due to field abandonment.</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>**Total Coverage:** 500 ha across 1,500 sampling points in four regions (Fatick, Kaffrine, Thiès, and Saint-Louis)</span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="fu"># Analytical Goals</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## Computational Approach</span></span>
 <span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>Our analyses address several complementary objectives:</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu">### Statistical Framework</span></span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>**Locust Dynamics**</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>All analyses were conducted in R using:</span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>This section presents results on locust density across treatments and regions, as well as relationships between locust abundance, plant cover, and temperature.</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>**Yield Impact**</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>Here, we examine how locust density influences yield, explore yield patterns across treatments and regions, and assess how temperature affects yield outcomes.</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>**Regional Dynamics and Rainfall Gradients (page TBA)**</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>This section will evaluate OSE abundance along gradients of mean annual rainfall and latitude to infer how climatic variation structures its range across Senegal.</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>**Generational and Temporal Patterns (page TBA)**</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>This section will visualize the timing of OSE developmental stages across regions to assess whether northern populations are locally derived or result from seasonal migration</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="fu">## Visual and Analytical Outputs</span></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>All figures are reproducible from R scripts stored in the <span class="in">`R/`</span> folder and rendered through this Quarto project.</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="fu">## Citation and Acknowledgments</span></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>This analysis was prepared by **Douglas Lawton** and collaborators. The work contributes to our understanding of pest dynamics and millet production systems in the Sahel and supports the forthcoming manuscript submission to the *Journal of Economic Entomology*.</span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>For full reproducibility, see the <span class="co">[</span><span class="ot">GitHub repository</span><span class="co">](https://github.com/ddlawton/OSE-Range-Analysis)</span> or cite the Zenodo archive:\</span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>**DOI:** <span class="co">[</span><span class="ot">10.5281/zenodo.xxxxxx</span><span class="co">](https://doi.org/10.5281/zenodo.xxxxxx)</span></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Generalized Linear Mixed Models (GLMMs)** via <span class="in">`glmmTMB`</span> for locust density, damage, and yield outcomes</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Generalized Additive Mixed Models (GAMMs)** via <span class="in">`mgcv`</span> for non-linear relationships with environmental covariates</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Model validation** using <span class="in">`DHARMa`</span> and <span class="in">`gratia`</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Estimated marginal means** and pairwise comparisons via <span class="in">`emmeans`</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="fu">### Code Organization</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>The repository is structured for reproducibility:</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`R/_common.R`**: Shared setup, packages, and configuration</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`R/functions/`**: Modular functions for data processing, modeling, plotting, and mapping</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`R/analysis/`**: Quarto documents for all analyses</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`data/`**: Raw data and cached processed datasets</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`outputs/`**: Generated figures and tables</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="fu">### Manuscript Methods and Results</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>The <span class="co">[</span><span class="ot">**Methods and Results**</span><span class="co">](R/analysis/manuscript_methods_results.qmd)</span> page contains the final statistical models, results, and figures used in the manuscript submission.</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="fu">### Exploratory Work</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>The **Exploratory Work** section provides detailed analyses that informed the manuscript, including:</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Data summaries and regional maps</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Individual analyses for locust density, damage, and yield</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Environmental covariate relationships</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Gender dynamics in farmer participation</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>These exploratory pages document the full analytical process and provide transparency into our statistical decision-making. Not all exploratory analyses appear in the final manuscript.</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reproducibility</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>All analyses are fully reproducible from raw data</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>R package versions locked with <span class="in">`renv`</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Automated testing and deployment via GitHub Actions</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Model caching for computational efficiency</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>All figures generated programmatically</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>**GitHub Repository:** <span class="co">[</span><span class="ot">github.com/ddlawton/OSE-Range-Analysis</span><span class="co">](https://github.com/ddlawton/OSE-Range-Analysis)</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="fu">## Authors and Affiliations</span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>**Mamour Touré¹\*, Amadou Fall², Amsata Diop³, Esther Diouf⁴, Amadou Bocar Bal⁵, Mady Ndiaye⁶, Douglas Lawton⁷, Arianne Cease⁸\***</span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>UFR EFSS, Gaston Berger University, Saint Louis, Senegal</span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Biology Animal Department, FST, Cheikh Anta Diop University, Dakar, Senegal</span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Laboratoire des Sciences Biologiques, Agronomiques, Alimentaires et de Modélisation des Systèmes Complexes, Université Gaston Berger de Saint Louis, Sénégal</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>Centre de Coopération Internationale en Recherche Agronomique pour le Développement, Unité Mixte de Recherche, Centre de Biologie pour la Gestion des Populations, Montpellier, France</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>Laboratoire des Sciences Biologiques, Agronomiques, Alimentaires et de Modélisation des Systèmes Complexes, Université Gaston Berger de Saint Louis, Sénégal</span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a><span class="ss">6.  </span>Laboratoire Biologie de la Reproduction, Département de Biologie Animale, Faculté des Sciences et Techniques, Université Cheikh Anta Diop de Dakar, Sénégal</span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a><span class="ss">7.  </span>Syngenta Seeds, Research Triangle Park, NC, USA</span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a><span class="ss">8.  </span>School of Sustainability and School of Life Sciences, Arizona State University, Tempe, AZ, USA</span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>*\*Corresponding authors:* mamour.toure\@ugb.edu.sn, acease\@asu.edu\</span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>*Code and statistical questions:* Douglas Lawton (ddlawton1\@gmail.com)</span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a><span class="fu">## Citation</span></span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>**Manuscript:** Submitted to *Journal of Economic Entomology*</span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>**To cite this computational work:**</span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>GitHub repository: <span class="ot">&lt;https://github.com/ddlawton/OSE-Range-Analysis&gt;</span></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Zenodo archive: DOI: <span class="co">[</span><span class="ot">10.5281/zenodo.xxxxxx</span><span class="co">](https://doi.org/10.5281/zenodo.xxxxxx)</span> *(coming soon)*</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
