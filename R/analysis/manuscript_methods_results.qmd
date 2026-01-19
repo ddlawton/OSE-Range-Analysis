@@ -249,7 +249,8 @@ kaffrine_ratio_max <- max(kaffrine_ratios_all) |> round(1)
 ```
 
 
-Fertilizer treatment progressively suppressed grasshopper density over the growing season, with effects intensifying from non-significant early in the season (Mission 1: p = `r round(m1_fert_p, 3)`) to highly significant by late season (Mission 3: estimate = `r round(m3_fert_est, 3)`, p `r format_p(m3_fert_p)`; @tbl-ose-density-models). This temporal pattern reflected both fertilize application and cumulative grasshopper population suppression. Regional responses varied significantly, with Kaffrine showing consistently elevated densities across all treatments and missions. By Mission 3, control fields supported `r m3_kaffrine_ratio`-fold higher densities than fertilized fields in Kaffrine and `r m3_thies_ratio`-fold higher in Thiès, while across all missions, the suppressive effect in Kaffrine ranged from `r kaffrine_ratio_min`–`r kaffrine_ratio_max`-fold (@tbl-ose-density-pairwise).
+Fertilizer treatment progressively suppressed grasshopper density over the growing season, with effects intensifying from non-significant early in the season (Mission 1: p = `r round(m1_fert_p, 3)`) to highly significant by late season (Mission 3: estimate = `r round(m3_fert_est, 3)`, p `r format_p(m3_fert_p)`; @tbl-ose-density-models). This temporal pattern reflected both fertilizer application and cumulative grasshopper population suppression. Regional responses varied significantly, with Kaffrine showing consistently elevated densities across all treatments and missions. By Mission 3, grasshopper densities in control fields were `r m3_kaffrine_ratio`-times higher than in fertilized fields in Kaffrine and `r m3_thies_ratio`-times higher in Thiès. Across all missions, the suppressive effect of fertilization in Kaffrine ranged from `r kaffrine_ratio_min`–`r kaffrine_ratio_max`-fold (@tbl-ose-density-pairwise).
+
 
 ### Grasshopper damage to millet
 
@@ -311,7 +312,7 @@ m3_damage_ratio_min <- min(m3_damage_ratios) |> round(0)
 m3_damage_ratio_max <- max(m3_damage_ratios) |> round(0)
 ```
 
-Crop damage mirrored density patterns, intensifying seasonally and showing strongest fertilizer suppression by Mission 3 (estimate = `r round(m3_damage_fert_est, 3)`, p `r format_p(m3_damage_fert_p)`; @tbl-ose-damage-models). Control fields sustained `r m3_damage_ratio_min`–`r m3_damage_ratio_max` times higher damage than fertilized fields by late season, with effects particularly pronounced in Fatick and Kaffrine (@tbl-ose-damage-pairwise).
+Crop damage mirrored grasshopper density patterns, intensifying throughout the missions and showing strongest fertilizer suppression by Mission 3 (estimate = `r round(m3_damage_fert_est, 3)`, p `r format_p(m3_damage_fert_p)`; @tbl-ose-damage-models). Control fields had `r m3_damage_ratio_min`–`r m3_damage_ratio_max` times higher damage than fertilized fields by the last mission, with effects particularly pronounced in Fatick and Kaffrine (@tbl-ose-damage-pairwise).
 
 ### Millet yield
 
@@ -379,9 +380,20 @@ fert_kaffrine_yield <- yield_emms_df |> filter(region == "Kaffrine", fertilizer_
 
 yield_thies_vs_fatick <- (fert_thies_yield / fert_fatick_yield * 100) |> round(0)
 yield_thies_vs_kaffrine <- (fert_thies_yield / fert_kaffrine_yield * 100) |> round(0)
+
+# Calculate mean yields for control and fertilized fields in Fatick and Kaffrine
+mean_yield_fert <- yield_emms_df |> 
+  filter(region %in% c("Fatick", "Kaffrine"), fertilizer_treatment == "fertilized") |> 
+  pull(response) |> mean()
+mean_yield_control <- yield_emms_df |> 
+  filter(region %in% c("Fatick", "Kaffrine"), fertilizer_treatment == "control") |> 
+  pull(response) |> mean()
+
+# Calculate fold-change
+yield_fold_change <- mean_yield_fert / mean_yield_control
 ```
 
-Fertilizer treatment significantly increased millet yield across all harvested regions (estimate = `r round(yield_fert_est, 3)`, p `r format_p(yield_fert_p)`), with the strongest effect in Thiès (p `r format_p(yield_thies_int_p)`; @tbl-yield-model, @tbl-yield-pairwise). Control fields produced only `r round(mean(c(yield_pct_fatick, yield_pct_kaffrine)), 0)`% of fertilized yields in Fatick and Kaffrine, representing an approximately two-fold increase from fertilization. Saint Louis was excluded from yield analysis due to insufficient rainfall for crop maturation.
+Fertilizer treatment significantly increased millet yield across all harvested regions (estimate = `r round(yield_fert_est, 3)`, p `r format_p(yield_fert_p)`), with the strongest effect in Thiès (p `r format_p(yield_thies_int_p)`; @tbl-yield-model, @tbl-yield-pairwise). Control fields had `r round(mean(c(yield_pct_fatick, yield_pct_kaffrine)), 0)`% lower yield than fertilized fields in Fatick and Kaffrine, representing an approximately `r round(yield_fold_change, 1)`-fold increase from fertilization. Saint Louis was excluded from yield analysis due to insufficient rainfall for crop maturation.
 
 ::: {#fig-locust-damage-example}
 ![OSE loust damage of millet leaves and ears](../../data/pictures/ose_damage_on_leaves.png)
