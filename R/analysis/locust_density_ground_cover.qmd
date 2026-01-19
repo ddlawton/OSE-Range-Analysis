@@ -21,6 +21,33 @@ source(here::here("R", "_common.R"))
 
 # Set the current analysis for organized output
 set_current_analysis("locust_density_ground_cover")
+
+# Load gt and webshot2 for table export
+library(gt)
+library(webshot2)
+
+# Helper function to save gt tables as PNG and CSV
+save_gt_png <- function(gt_obj, filename, subfolder = "locust_density_ground_cover") {
+  # Create output directories
+  png_dir <- here::here("outputs", "tables", subfolder, "png")
+  csv_dir <- here::here("outputs", "tables", subfolder, "csv")
+  dir.create(png_dir, recursive = TRUE, showWarnings = FALSE)
+  dir.create(csv_dir, recursive = TRUE, showWarnings = FALSE)
+  
+  # Save PNG
+  png_path <- file.path(png_dir, filename)
+  gtsave(gt_obj, png_path, vwidth = 3000)
+  
+  # Save CSV - extract the underlying data from the gt object
+  csv_filename <- sub("\\.png$", ".csv", filename)
+  csv_path <- file.path(csv_dir, csv_filename)
+  
+  # Extract data from gt object
+  gt_data <- gt_obj$`_data`
+  write_csv(gt_data, csv_path)
+  
+  return(invisible(list(png = png_path, csv = csv_path)))
+}
 ```
 
 ```{r data-loading}
@@ -134,7 +161,7 @@ gam_plot
 #| message: false
 #| warning: false
 
-broom.mixed::tidy(ground_cover_mod) |>
+tbl_gc_model <- broom.mixed::tidy(ground_cover_mod) |>
   gt() |>
   fmt_number(
     columns = c(edf, ref.df, statistic, p.value),
@@ -153,8 +180,10 @@ broom.mixed::tidy(ground_cover_mod) |>
   tab_options(
     table.font.size = "small",
     row.striping.background_color = "#F6F6EF"
-  ) |>
-  as_raw_html()
+  )
+
+save_gt_png(tbl_gc_model, "gam_ose_density_ground_cover_model_summary.png")
+tbl_gc_model |> as_raw_html()
 
 
 ```

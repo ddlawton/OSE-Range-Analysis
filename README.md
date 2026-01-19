@@ -10,7 +10,7 @@
 
 This repository contains the complete computational framework supporting research on *Oedaleus senegalensis* (OSE) management in Senegal. The 2021 dataset covers 250 farmers across four regions (Fatick, Kaffrine, Thiès, and Saint-Louis) who each managed paired fertilized and unfertilized millet fields. The study examined how fertilizer application influences grasshopper densities, crop damage, and millet yield across ecological gradients.
 
-**🌐 Live Analysis Site:** [https://ddlawton.github.io/OSE-Range-Analysis](https://ddlawton.github.io/OSE-Range-Analysis)
+**Live Analysis Site:** [https://ddlawton.github.io/OSE-Range-Analysis](https://ddlawton.github.io/OSE-Range-Analysis)
 
 ## Manuscript Abstract
 
@@ -41,7 +41,7 @@ Additional metadata collected includes farmer gender for demographic analysis.
 
 ```
 ├── R/
-│   ├── _common.R                 # Shared setup, packages, configuration
+│   ├── _common.R                 # Shared setup, packages, cthojonfiguration
 │   ├── index.qmd                 # Main landing page
 │   ├── analysis/                 # Analysis files (.qmd)
 │   │   ├── manuscript_methods_results.qmd  # FINAL manuscript methods & results
@@ -110,6 +110,61 @@ Additional pages document the exploratory analyses that informed the manuscript:
    ```bash
    quarto preview
    ```
+
+
+## Extracting Precipitation Data with Google Earth Engine (Python)
+
+This project includes a Python script to download high-resolution precipitation data for Senegal using Google Earth Engine (GEE) and the CHIRPS dataset. This is useful for generating rainfall maps for analysis or publication.
+
+### Prerequisites
+
+- **Python 3.9 or newer** (see [pyproject.toml](pyproject.toml) for details)
+- **Google Earth Engine account** ([Sign up here](https://signup.earthengine.google.com/))
+- **Earth Engine Python API** and dependencies (installed automatically below)
+
+### One-time Setup
+
+1. **Install Python dependencies:**
+   ```bash
+   # From the project root
+   uv pip install --upgrade pip
+   uv pip install .
+   ```
+   This will install the required packages listed in `pyproject.toml` (including `earthengine-api` and `requests`).
+
+   If you don’t have UV installed, you can add it with:
+
+   ```bash
+   pip install uv
+   ```
+
+   See the [UV documentation](https://github.com/astral-sh/uv) for more details.
+
+
+2. **Authenticate with Google Earth Engine:**
+   ```fish
+   earthengine authenticate
+   ```
+   Follow the link provided, sign in with your Google account, and paste the authentication code back into the terminal. This only needs to be done once per machine/account.
+
+### Running the Script
+
+To generate precipitation GeoTIFFs for Senegal (mean annual and monthly for 2021):
+
+```fish
+python3 scripts/generate_senegal_precipitation.py
+```
+
+Output files will be saved to `data/processed/maps/`.
+
+**Tip:** If you installed the project as a package, you can also run:
+```fish
+python3 -m scripts.generate_senegal_precipitation
+```
+
+**Troubleshooting:**
+- If you see an error about Earth Engine authentication, repeat the `earthengine authenticate` step.
+- Make sure your Python version is 3.9 or newer.
 
 ## Statistical Approach
 

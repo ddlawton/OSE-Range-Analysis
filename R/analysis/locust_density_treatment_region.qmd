@@ -26,6 +26,33 @@ source(here::here("R", "_common.R"))
 
 # Set the current analysis for organized output
 set_current_analysis("locust_density_treatment_region")
+
+# Load gt and webshot2 for table export
+library(gt)
+library(webshot2)
+
+# Helper function to save gt tables as PNG and CSV
+save_gt_png <- function(gt_obj, filename, subfolder = "locust_density_treatment_region") {
+  # Create output directories
+  png_dir <- here::here("outputs", "tables", subfolder, "png")
+  csv_dir <- here::here("outputs", "tables", subfolder, "csv")
+  dir.create(png_dir, recursive = TRUE, showWarnings = FALSE)
+  dir.create(csv_dir, recursive = TRUE, showWarnings = FALSE)
+  
+  # Save PNG
+  png_path <- file.path(png_dir, filename)
+  gtsave(gt_obj, png_path, vwidth = 3000)
+  
+  # Save CSV - extract the underlying data from the gt object
+  csv_filename <- sub("\\.png$", ".csv", filename)
+  csv_path <- file.path(csv_dir, csv_filename)
+  
+  # Extract data from gt object
+  gt_data <- gt_obj$`_data`
+  write_csv(gt_data, csv_path)
+  
+  return(invisible(list(png = png_path, csv = csv_path)))
+}
 ```
 
 ```{r data-loading}
@@ -219,7 +246,7 @@ mission_mod_summary <- mission_mod_summary |>
 
 
 
-mission_mod_summary |>
+tbl_density_models <- mission_mod_summary |>
   select(!source) |>
   gt(groupname_col = "mission_number") |>
   fmt_number(
@@ -239,6 +266,9 @@ mission_mod_summary |>
     title = "OSE density by treatment and region by mission"
   )
 
+save_gt_png(tbl_density_models, "ose_density_model_summaries_by_mission.png")
+tbl_density_models
+
 ```
 
 Here are the pairwise comparisons between region and treatment by mission number. Fair warning, its a large table since there are a lot of regions.
@@ -248,7 +278,7 @@ Here are the pairwise comparisons between region and treatment by mission number
 #| message: false
 #| warning: false
 #| 
-mission_pairs |>
+tbl_density_pairwise <- mission_pairs |>
   arrange(contrast) |>
   select(!source) |>
   gt(groupname_col = "mission_number") |>
@@ -258,7 +288,10 @@ mission_pairs |>
   ) |>
   tab_header(
     title = "OSE density model pairwise comparisons by mission"
-  ) 
+  )
+
+save_gt_png(tbl_density_pairwise, "ose_density_pairwise_comparisons_by_mission.png")
+tbl_density_pairwise 
 
 ```
 
@@ -281,7 +314,7 @@ ose_dat <- data |>
   pivot_wider(names_from = region, values_from = ose_mean)
 
 # Create the gt table
-ose_dat |>
+tbl_density_summary <- ose_dat |>
   gt(rowname_col = "fertilizer_treatment") |>
   tab_header(
     title = "Mean OSE Count by Region and Fertilizer Treatment"
@@ -301,6 +334,9 @@ ose_dat |>
     style = cell_text(weight = "bold"),
     locations = cells_column_labels(everything())
   )
+
+save_gt_png(tbl_density_summary, "mean_ose_count_by_region_treatment.png")
+tbl_density_summary
 
 
 ```

@@ -11,6 +11,11 @@ website:
   description: "Reproducible statistical analysis and visualizations for the manuscript"
   site-url: "https://ddlawton.github.io/OSE-Range-Analysis"
   repo-url: "https://github.com/ddlawton/OSE-Range-Analysis"
+  comments: 
+    hypothesis:
+      theme: clean
+      openSidebar: false
+      enableExperimentalNewNoteButton: true
   # favicon: "outputs/figures/favicon.png"  # TODO: Add project favicon
   navbar:
     logo: outputs/figures/gli_logo.jpg
@@ -47,8 +52,8 @@ website:
         href: outputs/figures/all_figures.zip
   page-footer:
     right: |
-      [View on GitHub](https://github.com/ddlawton/OSE-Range-Analysis) • [Zenodo DOI](https://doi.org/10.5281/zenodo.xxxxxx)
-
+      [View on GitHub](https://github.com/ddlawton/OSE-Range-Analysis) • [Zenodo DOI](https://doi.org/10.5281/zenodo.xxxxxx)  
+      [Download manuscript as DOCX](outputs/manuscript_methods_results.docx)
 format:
   html:
     theme:
@@ -62,5 +67,4 @@ format:
     number-sections: false
     anchor-sections: true
     page-layout: full
-
 editor: visual

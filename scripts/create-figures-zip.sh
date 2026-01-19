@@ -71,11 +71,12 @@ echo "Collecting figures from website output..."
 
 # List of all analysis pages
 analysis_pages=(
+    "manuscript_methods_results"
     "basic_stats"
+    "locust_damage_treatment_region"
     "locust_density_treatment_region"
     "locust_density_ground_cover"
     "locust_density_temperature"
-    "yield_environment"
     "yield_locust"
     "yield_treatment_region"
 )
@@ -122,16 +123,28 @@ if [ -d "outputs/tables" ]; then
     for analysis_dir in outputs/tables/*/; do
         if [ -d "$analysis_dir" ]; then
             analysis_name=$(basename "$analysis_dir")
-            dest_dir="$temp_dir/tables/$analysis_name"
             
-            # Copy CSV files
-            if [ $(find "$analysis_dir" -name "*.csv" | wc -l) -gt 0 ]; then
-                mkdir -p "$dest_dir"
-                cp "$analysis_dir"*.csv "$dest_dir/" 2>/dev/null || true
-                
-                local_count=$(find "$dest_dir" -name "*.csv" | wc -l)
-                total_tables=$((total_tables + local_count))
-                echo "  ✓ Copied $local_count tables from $analysis_name"
+            # Copy PNG files (table images) from png subdirectory
+            png_count=0
+            if [ -d "$analysis_dir/png" ] && [ $(find "$analysis_dir/png" -name "*.png" 2>/dev/null | wc -l) -gt 0 ]; then
+                png_dest="$temp_dir/tables/$analysis_name/png"
+                mkdir -p "$png_dest"
+                cp "$analysis_dir/png"/*.png "$png_dest/" 2>/dev/null || true
+                png_count=$(find "$png_dest" -name "*.png" 2>/dev/null | wc -l)
+            fi
+            
+            # Copy CSV files from csv subdirectory
+            csv_count=0
+            if [ -d "$analysis_dir/csv" ] && [ $(find "$analysis_dir/csv" -name "*.csv" 2>/dev/null | wc -l) -gt 0 ]; then
+                csv_dest="$temp_dir/tables/$analysis_name/csv"
+                mkdir -p "$csv_dest"
+                cp "$analysis_dir/csv"/*.csv "$csv_dest/" 2>/dev/null || true
+                csv_count=$(find "$csv_dest" -name "*.csv" 2>/dev/null | wc -l)
+            fi
+            
+            if [ $csv_count -gt 0 ] || [ $png_count -gt 0 ]; then
+                total_tables=$((total_tables + csv_count + png_count))
+                echo "  ✓ Copied $csv_count CSVs and $png_count PNGs from $analysis_name"
             fi
         fi
     done
@@ -154,31 +167,66 @@ matching exactly what appears on the published website.
 CONTENTS:
 
 FIGURES/ (organized by analysis section)
+  ├── manuscript_methods_results/     Main manuscript figures and visualizations
   ├── basic_stats/                    Study area maps and dataset summaries
-  ├── locust_density_treatment_region/   Treatment effects across regions
-  ├── locust_density_ground_cover/       Vegetation-locust relationships
-  ├── locust_density_temperature/        Temperature-locust dynamics
-  ├── yield_environment/             Environmental yield factors
-  ├── yield_locust/                  Locust impact on yield
-  └── yield_treatment_region/        Regional fertilizer effects
+  ├── locust_damage_treatment_region/ Damage analysis by treatment and region
+  ├── locust_density_treatment_region/ Density analysis by treatment and region
+  ├── locust_density_ground_cover/    Vegetation-locust relationships
+  ├── locust_density_temperature/     Temperature-locust dynamics
+  ├── yield_locust/                   Locust impact on yield
+  └── yield_treatment_region/         Regional fertilizer effects on yield
 
-TABLES/ (CSV format for analysis reuse)
-  └── [same structure as figures]/    Model summaries, statistics, comparisons
+TABLES/ (both CSV and PNG formats)
+  ├── manuscript_methods_results/     Main manuscript statistical tables
+  │   ├── csv/                        Raw data tables for reanalysis
+  │   └── png/                        Publication-ready table images
+  ├── basic_stats/                    Dataset summaries and rainfall data
+  │   ├── csv/                        
+  │   └── png/                        
+  ├── locust_damage_treatment_region/ Damage model summaries and comparisons
+  │   ├── csv/                        
+  │   └── png/                        
+  ├── locust_density_treatment_region/ Density model summaries and comparisons
+  │   ├── csv/                        
+  │   └── png/                        
+  ├── locust_density_ground_cover/    Ground cover mediation analysis
+  │   ├── csv/                        
+  │   └── png/                        
+  ├── yield_locust/                   Yield-locust relationship models
+  │   ├── csv/                        
+  │   └── png/                        
+  └── yield_treatment_region/         Yield analysis by treatment and region
+      ├── csv/                        
+      └── png/
+
+TABLE FORMATS:
+  - CSV files: Raw data tables for reanalysis and data reuse
+  - PNG files: Publication-ready table images (300 DPI, max 10" wide)
+               Ideal for copying into Word documents or presentations
+               Long tables saved as single tall images
 
 FIGURE DETAILS:
 - All figures match website display dimensions and quality
 - PNG format at publication resolution (300 DPI when applicable)
 - Meaningful filenames based on analysis content
 - Total figures: $total_figures
-- Total tables: $total_tables
+- Total tables (CSV + PNG): $total_tables
 
 REPRODUCIBILITY:
 All outputs generated from code at:
 https://github.com/ddlawton/OSE-Range-Analysis
 
+To regenerate all outputs:
+1. Clone the repository
+2. Install R and required packages (see README.md)
+3. Run: quarto render
+
 CITATION:
 Lawton, D. et al. (submitted) Journal of Economic Entomology
 Zenodo DOI: https://doi.org/10.5281/zenodo.xxxxxx
+
+For questions or issues, please open an issue on GitHub:
+https://github.com/ddlawton/OSE-Range-Analysis/issues
 EOF
 
 # === CREATE ZIP ===

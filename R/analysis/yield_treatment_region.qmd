@@ -26,6 +26,33 @@ source(here::here("R", "_common.R"))
 
 # Set the current analysis for organized output
 set_current_analysis("yield_treatment_region")
+
+# Load gt and webshot2 for table export
+library(gt)
+library(webshot2)
+
+# Helper function to save gt tables as PNG and CSV
+save_gt_png <- function(gt_obj, filename, subfolder = "yield_treatment_region") {
+  # Create output directories
+  png_dir <- here::here("outputs", "tables", subfolder, "png")
+  csv_dir <- here::here("outputs", "tables", subfolder, "csv")
+  dir.create(png_dir, recursive = TRUE, showWarnings = FALSE)
+  dir.create(csv_dir, recursive = TRUE, showWarnings = FALSE)
+  
+  # Save PNG
+  png_path <- file.path(png_dir, filename)
+  gtsave(gt_obj, png_path, vwidth = 3000)
+  
+  # Save CSV - extract the underlying data from the gt object
+  csv_filename <- sub("\\.png$", ".csv", filename)
+  csv_path <- file.path(csv_dir, csv_filename)
+  
+  # Extract data from gt object
+  gt_data <- gt_obj$`_data`
+  write_csv(gt_data, csv_path)
+  
+  return(invisible(list(png = png_path, csv = csv_path)))
+}
 ```
 
 ```{r data-loading}
@@ -223,6 +250,7 @@ gt_table <- tidy_prepped %>%
   )
 
 # Print or return the table
+save_gt_png(gt_table, "yield_fertilizer_region_model_summary.png")
 gt_table
 
 ```
@@ -278,6 +306,9 @@ emms_pairwise_gt <- emms_pw_prepped %>%
     columns = c("ratio", "SE", "z.ratio", "null", "df", "p_label")
   ) %>%
   opt_row_striping()
+
+save_gt_png(emms_pairwise_gt, "yield_fertilizer_region_pairwise_comparisons.png")
+emms_pairwise_gt
 
 # Print or return the table (Quarto HTML will render this table)
 emms_pairwise_gt

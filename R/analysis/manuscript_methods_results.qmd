@@ -1,6 +1,6 @@
 ---
-title: "Statistical Methods and Results for OSE Range Analysis"
-subtitle: "Effects of fertilizer treatment on Senegalese grasshopper (Oedaleus senegalensis) density, crop damage, and millet yield"
+title: "Statistical Methods and Results for grasshopper Range Analysis"
+subtitle: "Effects of fertilizer treatment on Senegalese grasshopper (*Oedaleus senegalensis*) density, crop damage, and millet yield"
 date: last-modified
 bibliography: references.bib
 format:
@@ -12,6 +12,10 @@ format:
     smooth-scroll: true
     number-sections: true
     anchor-sections: true
+  docx:
+    toc: true
+    toc-depth: 3
+    number-sections: true
 execute:
   echo: false
   warning: false
@@ -32,6 +36,8 @@ library(broom)
 library(broom.mixed)
 library(knitr)
 library(MetBrewer)
+library(gt)
+library(webshot2)
 
 # Load processed data
 data <- read_csv(here("data", "processed", "ose_data_processed.csv"))
@@ -55,6 +61,29 @@ format_p <- function(p, threshold = 0.001) {
   } else {
     return(paste0("= ", round(p, 3)))
   }
+}
+
+# Helper function to save gt tables as PNG and CSV
+save_gt_png <- function(gt_obj, filename, subfolder = "manuscript_methods_results") {
+  # Create output directories
+  png_dir <- here::here("outputs", "tables", subfolder, "png")
+  csv_dir <- here::here("outputs", "tables", subfolder, "csv")
+  dir.create(png_dir, recursive = TRUE, showWarnings = FALSE)
+  dir.create(csv_dir, recursive = TRUE, showWarnings = FALSE)
+  
+  # Save PNG
+  png_path <- file.path(png_dir, filename)
+  gtsave(gt_obj, png_path, vwidth = 3000)
+  
+  # Save CSV - extract the underlying data from the gt object
+  csv_filename <- sub("\\.png$", ".csv", filename)
+  csv_path <- file.path(csv_dir, csv_filename)
+  
+  # Extract data from gt object
+  gt_data <- gt_obj$`_data`
+  write_csv(gt_data, csv_path)
+  
+  return(invisible(list(png = png_path, csv = csv_path)))
 }
 ```
 
@@ -128,7 +157,7 @@ names(mission_emmeans_damage) <- c('m1', 'm2', 'm3')
 
 All statistics were conducted in `{r} R.version.string` (R Core Team, 2024) using generalized additive mixed models (GAMMs) and generalized linear mixed models (GLMMs) implemented with `mgcv` [@wood2017generalized; @wood2011fast; @wood2004stable] and `glmmTMB` [@brooks2017glmmtmb; @mcgillycuddy2025parsimoniously] packages, respectively. Models were appriased/validated using `DHARMa` [@hartig2024dharma] and `gratia` [@simpson2024gratia]. Model selection when needed was done using AIC. Estimated marginal means and pairwise comparisons were calculated using the `emmeans` package [@lenth2025emmeans]. Data visualization was performed using the `ggplot2` package [@wickham2016ggplot2] along with extensions from the `tidyverse` suite of packages [@wickham2019tidyverse]. All code and data are versioned on github at: [github.com/ddlawton/OSE-Range-Analysis](https://github.com/ddlawton/OSE-Range-Analysis). Upon publication a github archive snapshot will be created and stored in Zenodo for reproducibility with a DOI and citation.
 
-## Overall and mean monthly maps generation
+## Overall and mean monthly map generation
 
 Maps of mean annual precipitation (MAP) and monthly rainfall patterns were generated using Climate Hazards Center Infrared Precipitation with Stations (CHIRPS) data [@funk2015climate] processed in Google Earth Engine [@gorelick2017google] and imported into `R` for visualization with the `terra` [@hijmans2025terra] and `tidyterra` [@hernangomez2023tidyterra] packages. Senegal administrative boundaries were obtained from the `Natural Earth` public domain map dataset using the `rnaturalearth` package [@massicotte2025rnaturalearth].
 
@@ -140,13 +169,56 @@ For both density and damage, separate models were created for each of the three 
 
 For millet yield, we specified a GLMM with a tweedie family to account for the continuous, positive, and right-skewed nature of yield data. Like the locust density and damage models, we included fertilizer treatment, region, and their interaction as fixed effects, and farmer as a random effect to account for repeated measures.
 
-## Ground cover × fertilizer mediation of OSE density
+## Ground cover × fertilizer mediation of grasshopper density
 
-To test whether the effect of fertilizer on grasshopper density is mediated by ground cover, we fit a unified generalized additive model (GAM) with a Tweedie family to account for overdispersed count data. The model included fertilizer treatment, mission number, their interaction, and region as fixed effects, a random effect for farmer, and, critically, a by-variable smooth term allowing the relationship between ground cover and OSE density to vary by fertilizer treatment. Constructing a unified model allowed as to look directly at the mediation effect of ground cover on the fertilizer treatment effect on OSE density while accounting for the main effects of fertilizer treamtment and mission number.
+To test whether the effect of fertilizer on grasshopper density is mediated by ground cover, we fit a unified generalized additive model (GAM) with a Tweedie family to account for overdispersed count data. The model included fertilizer treatment, mission number, their interaction, and region as fixed effects, a random effect for farmer, and, critically, a by-variable smooth term allowing the relationship between ground cover and grasshopper density to vary by fertilizer treatment. Constructing a unified model allowed as to look directly at the mediation effect of ground cover on the fertilizer treatment effect on grasshopper density while accounting for the main effects of fertilizer treamtment and mission.
 
 # Results
 
-## Population dynamics
+## Locust density through space and time
+
+```{r extract-temperature-stats}
+#| echo: false
+#| message: false
+#| warning: false
+
+# Need to fit temperature model early to extract p-value for Results section
+temp_mod_early <- cache_model(
+  model_name = "locust_temperature_gam",
+  data = data |>
+    filter(fertilizer_treatment == 'control') |>
+    select(year, region, farmer, mission_number, ose_count, temperature) |>
+    mutate(
+      region = factor(region),
+      farmer = factor(farmer),
+      mission_number = factor(mission_number)
+    ) |>
+    drop_na(temperature, mission_number, region, ose_count),
+  fit_function = function(data) {
+    mgcv::gam(
+      ose_count ~
+        s(temperature, k = 10) +
+        s(region, bs='re') +
+        s(farmer, bs = 're') +
+        s(mission_number, bs = 're'),
+      data = data,
+      family = mgcv::tw(),
+      select = TRUE
+    )
+  }
+)
+
+# Extract temperature smooth term p-value
+temp_p <- broom::tidy(temp_mod_early, parametric = FALSE) |>
+  filter(term == "s(temperature)") |>
+  pull(p.value)
+```
+
+Temperature at the time of the survey did not affect *O. senegalensis* density after accounting for region, mission, and farmer (p = `r round(temp_p, 2)`). The full temperature statistical model is in @tbl-temperature-model and raw data are shown in @fig-supp-temperature-mission.
+
+## Locust developmental stages and generations through space and time
+
+The locust surveys enabled us to identify the developmental stages and likely generations of Oedaleus senegalensis present during each mission (@tbl-dev-stages). We identified three generations (G1, originating from the eggs of the previous season’s last generation, and G2 and G3) in the Thies, Fatick, and Kaffrine regions. In Saint Louis, only the G1 and G2 generations were observed. All developmental stages were identified, from eggs, through nymphal instars (1-5), to adults.
 
 ::: {tbl-dev-stages}
 
@@ -249,7 +321,7 @@ kaffrine_ratio_max <- max(kaffrine_ratios_all) |> round(1)
 ```
 
 
-Fertilizer treatment progressively suppressed grasshopper density over the growing season, with effects intensifying from non-significant early in the season (Mission 1: p = `r round(m1_fert_p, 3)`) to highly significant by late season (Mission 3: estimate = `r round(m3_fert_est, 3)`, p `r format_p(m3_fert_p)`; @tbl-ose-density-models). This temporal pattern reflected both fertilizer application and cumulative grasshopper population suppression. Regional responses varied significantly, with Kaffrine showing consistently elevated densities across all treatments and missions. By Mission 3, grasshopper densities in control fields were `r m3_kaffrine_ratio`-times higher than in fertilized fields in Kaffrine and `r m3_thies_ratio`-times higher in Thiès. Across all missions, the suppressive effect of fertilization in Kaffrine ranged from `r kaffrine_ratio_min`–`r kaffrine_ratio_max`-fold (@tbl-ose-density-pairwise).
+Fertilizer treatment progressively suppressed grasshopper density over the growing season, with effects intensifying from non-significant early in the season (Mission 1: p = `r round(m1_fert_p, 3)`) to highly significant by late season (Mission 3: estimate = `r round(m3_fert_est, 3)`, p `r format_p(m3_fert_p)`; @tbl-ose-density-models). This temporal pattern reflected both fertilizer application and cumulative grasshopper population suppression. Regional responses varied significantly, with Kaffrine showing consistently elevated densities across all treatments and missions. By mission 3, grasshopper densities in control fields were `r m3_kaffrine_ratio`-times higher than in fertilized fields in Kaffrine and `r m3_thies_ratio`-times higher in Thiès. Across all missions, the suppressive effect of fertilization in Kaffrine ranged from `r kaffrine_ratio_min`–`r kaffrine_ratio_max`-fold (@tbl-ose-density-pairwise).
 
 
 ### Grasshopper damage to millet
@@ -312,7 +384,7 @@ m3_damage_ratio_min <- min(m3_damage_ratios) |> round(0)
 m3_damage_ratio_max <- max(m3_damage_ratios) |> round(0)
 ```
 
-Crop damage mirrored grasshopper density patterns, intensifying throughout the missions and showing strongest fertilizer suppression by Mission 3 (estimate = `r round(m3_damage_fert_est, 3)`, p `r format_p(m3_damage_fert_p)`; @tbl-ose-damage-models). Control fields had `r m3_damage_ratio_min`–`r m3_damage_ratio_max` times higher damage than fertilized fields by the last mission, with effects particularly pronounced in Fatick and Kaffrine (@tbl-ose-damage-pairwise).
+Crop damage mirrored grasshopper density patterns, intensifying throughout the missions and showing strongest fertilizer suppression by mission 3 (estimate = `r round(m3_damage_fert_est, 3)`, p `r format_p(m3_damage_fert_p)`; @tbl-ose-damage-models). Control fields had `r m3_damage_ratio_min`–`r m3_damage_ratio_max` times higher damage than fertilized fields by the last mission, with effects particularly pronounced in Fatick and Kaffrine (@tbl-ose-damage-pairwise).
 
 ### Millet yield
 
@@ -396,7 +468,7 @@ yield_fold_change <- mean_yield_fert / mean_yield_control
 Fertilizer treatment significantly increased millet yield across all harvested regions (estimate = `r round(yield_fert_est, 3)`, p `r format_p(yield_fert_p)`), with the strongest effect in Thiès (p `r format_p(yield_thies_int_p)`; @tbl-yield-model, @tbl-yield-pairwise). Control fields had `r round(mean(c(yield_pct_fatick, yield_pct_kaffrine)), 0)`% lower yield than fertilized fields in Fatick and Kaffrine, representing an approximately `r round(yield_fold_change, 1)`-fold increase from fertilization. Saint Louis was excluded from yield analysis due to insufficient rainfall for crop maturation.
 
 ::: {#fig-locust-damage-example}
-![OSE loust damage of millet leaves and ears](../../data/pictures/ose_damage_on_leaves.png)
+![Grasshopper damage of millet leaves and ears](../../data/pictures/ose_damage_on_leaves.png)
 
 Senegalese grasshopper damage on millet leaves (a) and ears (b). Photo credit XXX.
 :::
@@ -561,7 +633,7 @@ plots_full <- mapply(
   theme(legend.position = "bottom")
 ```
 
-## OSE Density Analysis
+## grasshopper Density Analysis
 
 ```{r fig-ose-density}
 #| label: fig-ose-density
@@ -626,7 +698,7 @@ plot_mission_damage(
 ```{r fig-yield-raw}
 #| label: fig-yield-raw
 #| fig-cap: "Millet yield was highest in fertilized fields across the three regions where there was sufficient rainfall to support millet to harvest (Fatick, Kaffrine, and Thies). See the supplementary material Supp. Table SX for full statistical analysis."
-#| fig-width: 8
+#| fig-width: 6
 #| fig-height: 6
 #| echo: false
 #| message: false
@@ -666,7 +738,7 @@ data_yield |>
         )
 ```
 
-## Ground Cover Mediation of Fertilizer Effects on OSE Density
+## Ground Cover Mediation of Fertilizer Effects on grasshopper Density
 
 ```{r extract-gc-stats}
 #| echo: false
@@ -704,7 +776,7 @@ gc_dev_exp_early <- summary(gc_mod_early)$dev.expl * 100
 
 ```
 
-Ground cover mediated fertilizer effects on OSE density differently between treatments (deviance explained: `r round(gc_dev_exp_early, 0)`%; @tbl-ground-cover-unified). In fertilized fields, density peaked at ~40% ground cover and declined at higher and lower values, whereas control fields showed low densities until 60–70% cover, after which densities increased substantially.
+Ground cover mediated fertilizer effects on grasshopper density differently between treatments (deviance explained: `r round(gc_dev_exp_early, 0)`%; @tbl-ground-cover-unified). In fertilized fields, density peaked at ~40% ground cover and declined at higher and lower values, whereas control fields showed low densities until 60–70% cover, after which densities increased substantially.
 
 ```{r ground-cover-model}
 #| echo: false
@@ -719,7 +791,7 @@ gc_dev_exp <- gc_dev_exp_early
 ```{r fig-ground-cover}
 #| label: fig-ground-cover
 #| fig-cap: "Senegalese grasshopper density peaked at around 40% ground cover in fertilized fields and around 60-70% in control fields. However, ground cover did not differ significantly between fertilizer treatments. See Supp. Tables SX and SX for full statistical analysis and Supp. Fig. SX for raw data points."
-#| fig-width: 8
+#| fig-width: 6
 #| fig-height: 6
 #| echo: false
 #| message: false
@@ -747,7 +819,7 @@ ests |>
   ) +
   labs(
     x = "Ground Cover (%)",
-    y = "Estimated OSE Count",
+    y = expression("Estimated individuals"~bold("\u2022")~"100 m"^{-2}),
     title = "Ground Cover Effects by Fertilizer Treatment",
     color = "Treatment",
     fill = "Treatment"
@@ -761,18 +833,215 @@ ests |>
   )
 ```
 
+# Supplementary Figures
+
+## Raw grasshopper count by treatment, mission, and region
+
+
+```{r fig-supp-raw-count-treatment-mission-region}
+#| label: fig-supp-raw-count-treatment-mission-region
+#| fig-cap: "Ground cover by fertilizer treatment and mission across regions. Ground cover increased throughout the growing season across all regions, with minimal differences between control and fertilized treatments. No significant fertilizer × mission interaction was detected."
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-width: 8
+#| fig-height: 8
+
+
+
+# Get unique fertilizer treatments and farmers (if needed)
+fertilizer_levels <- levels(data$fertilizer_treatment)
+farmers <- unique(data$farmer)
+
+# Expand grid for all combinations you want (here: both treatments, all farmers)
+# This is just to 
+null_rows <- expand_grid(
+  region = "Saint Louis",
+  fertilizer_treatment = fertilizer_levels,
+  mission_number = factor("3", levels = levels(data$mission_number)),
+  ose_count = NA_real_,
+  farmer = farmers
+)
+
+village_count_data <- data |>
+  select(region,fertilizer_treatment,mission_number,ose_count,farmer) 
+
+village_count_data <- bind_rows(village_count_data, null_rows)
+
+
+# Helper function to plot by mission with optional legend
+plot_mission_counts <- function(data, mission, show_legend = TRUE) {
+  dat <- data |> filter(mission_number == mission)
+  line_dat <- dat |> drop_na(ose_count)
+  p <- ggplot(dat, aes(x = fertilizer_treatment, y = ose_count, color = region)) +
+    geom_point(size = 2) +
+    geom_line(data = line_dat, aes(group = farmer)) +
+    MetBrewer::scale_color_met_d(name = "Degas", drop = FALSE) +
+    labs(
+      title = paste0("Mission ", mission),
+      x = "",
+      y = bquote('individuals'~bold('•')~100~m^-2),
+      color = "Treatment"
+    ) +
+    ylim(0,150) +
+    theme_pubr()
+  if (!show_legend) {
+    p <- p + theme(legend.position = "none")
+  }
+  return(p)
+}
+
+
+m1_raw_plot <- plot_mission_counts(village_count_data, mission = 1, show_legend = TRUE)
+
+
+m2_raw_plot <- plot_mission_counts(village_count_data, mission = 2, show_legend = TRUE)
+
+
+m3_raw_plot <- plot_mission_counts(village_count_data, mission = 3, show_legend = FALSE)
+
+
+
+(m1_raw_plot + m2_raw_plot) / ( m3_raw_plot + plot_spacer()) + 
+  patchwork::plot_layout(guides = "collect",axis_titles = "collect")
+
+
+```
+
+## Ground Cover by Fertilizer Treatment
+
+```{r fig-supp-ground-cover-treatment}
+#| label: fig-supp-ground-cover-treatment
+#| fig-cap: "Ground cover by fertilizer treatment and mission across regions. Ground cover increased throughout the growing season across all regions, with minimal differences between control and fertilized treatments. No significant fertilizer × mission interaction was detected."
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-width: 8
+#| fig-height: 8
+
+# Ensure mission_number is a factor with all levels
+
+# Ensure mission_number is a factor with all levels
+mission_levels <- c("1", "2", "3")
+regions <- unique(data$region)
+ground_cover_data <- data |>
+  mutate(mission_number = factor(mission_number, levels = mission_levels))
+
+# Create a named list of plots, one per region
+region_plots <- lapply(regions, function(reg) {
+  ground_cover_data |>
+    filter(region == reg) |>
+    ggplot(aes(
+      x = mission_number, 
+      y = percent_ground_cover, 
+      color = fertilizer_treatment,
+      fill = fertilizer_treatment
+    )) +
+    geom_boxplot(
+      position = position_dodge(width = 0.8),
+      outlier.shape = NA,
+      alpha = 0.7
+    ) +
+    geom_jitter(
+      position = position_jitterdodge(jitter.width = 0.4, jitter.height = 0),
+      alpha = 0.5,
+      size = 0.8
+    ) +
+    scale_x_discrete(drop = FALSE, limits = mission_levels) +  # <-- Ensures all ticks
+    scale_color_manual(
+      values = c('black', 'darkgreen'),
+      labels = c('Control', 'Fertilized')
+    ) +
+    scale_fill_manual(
+      values = c('#cccccc', '#a6dba0'),
+      labels = c('Control', 'Fertilized')
+    ) +
+    labs(
+      title = paste(reg),
+      x = "Mission Number",
+      y = "Ground Cover (%)",
+      fill = "Treatment",
+      color = "Treatment"
+    ) +
+    theme_pubr()
+})
+names(region_plots) <- regions
+
+# Combine plots with patchwork (2 columns as an example)
+wrap_plots(region_plots, ncol = 2) + 
+  plot_layout(guides = "collect", axis_titles = "collect") & 
+  theme(legend.position = "bottom")
+```
+
+
+## Temperature Variation Across Missions and Regions
+
+```{r fig-supp-temperature-mission}
+#| label: fig-supp-temperature-mission
+#| fig-cap: "Temperature variation across missions and regions. Fatick showed increasing temperature through the sampling period, while Kaffrine, Thiès, and Saint-Louis remained more stable. Saint-Louis was generally cooler than the other regions. These patterns suggest that temperature at the time of survey is not a primary driver of grasshopper counts once region and mission timing are accounted for."
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-width: 6
+#| fig-height: 6
+
+# Ensure mission_number is a factor with all levels
+mission_levels <- c("1", "2", "3")
+data_temp_supp <- data |>
+  filter(fertilizer_treatment == 'control') |>
+  select(year, region, farmer, mission_number, ose_count, temperature) |>
+  drop_na(temperature, mission_number, region) |>
+  mutate(mission_number = factor(mission_number, levels = mission_levels))
+
+# Add null rows for missing missions in each region
+regions <- unique(data_temp_supp$region)
+null_rows <- expand_grid(
+  region = regions,
+  mission_number = mission_levels
+) |>
+  anti_join(data_temp_supp, by = c("region", "mission_number")) |>
+  mutate(year = NA, farmer = NA, ose_count = NA, temperature = NA)
+
+data_temp_supp_full <- bind_rows(data_temp_supp, null_rows)
+
+# Create a plot for each region
+region_temp_plots <- lapply(regions, function(reg) {
+  data_temp_supp_full |>
+    filter(region == reg) |>
+    ggplot(aes(x = mission_number, y = temperature)) +
+    geom_jitter(width = 0.2, height = 0, alpha = 0.6, na.rm = TRUE) +
+    labs(
+      title = reg,
+      x = "Mission Number",
+      y = "Temperature (°C)"
+    ) +
+    theme_pubr() +
+    theme(
+      plot.title = element_text(size = 14, face = "bold"),
+      axis.title = element_text(size = 12)
+    )
+})
+names(region_temp_plots) <- regions
+
+# Combine plots with patchwork (2 columns as an example)
+wrap_plots(region_temp_plots, ncol = 2) + 
+  plot_layout(guides = "collect", axis_titles = "collect")
+```
+
 # Supplementary Tables
 
-## OSE Density Analysis Tables
+## grasshopper Density Analysis Tables
 
 ### Model Summaries by Mission
 
 ```{r tbl-ose-density-models}
 #| label: tbl-ose-density-models
-#| tbl-cap: "Model summaries for OSE density by treatment and region across three survey missions. Each mission was modeled separately using generalized linear mixed models (GLMMs) with Tweedie family distribution. Fixed effects include fertilizer treatment, region, and their interaction. Random effects account for farmer-level variation."
+#| tbl-cap: "Model summaries for grasshopper density by treatment and region across three survey missions. Each mission was modeled separately using generalized linear mixed models (GLMMs) with Tweedie family distribution. Fixed effects include fertilizer treatment, region, and their interaction. Random effects account for farmer-level variation."
 #| echo: false
 #| message: false
 #| warning: false
+#| fig-width: 10
+#| fig-height: 10
 
 # Prepare model summaries from density models
 mission_mod_summary_density <- bind_rows(
@@ -795,7 +1064,7 @@ mission_mod_summary_density <- mission_mod_summary_density |>
   select(!c(component, group, source))
 
 # Create the gt table
-mission_mod_summary_density |>
+tbl_density_models <- mission_mod_summary_density |>
   gt(groupname_col = "mission_number") |>
   fmt_number(
     columns = c(estimate, std.error, statistic, p.value),
@@ -811,18 +1080,24 @@ mission_mod_summary_density |>
     p.value = "P-value"
   ) |>
   tab_header(
-    title = "OSE Density Model Summaries by Mission"
+    title = "Grasshopper Density Model Summaries by Mission"
   ) |>
   tab_source_note(
     source_note = "Note: Models fit separately for each mission. Random effect shown as standard deviation."
   )
+
+# Save as PNG
+save_gt_png(tbl_density_models, "grasshopper_density_model_summaries_by_mission.png")
+
+# Display table
+tbl_density_models
 ```
 
 ### Pairwise Comparisons by Mission
 
 ```{r tbl-ose-density-pairwise}
 #| label: tbl-ose-density-pairwise
-#| tbl-cap: "Pairwise comparisons of estimated marginal means for OSE density across treatment × region combinations within each mission. Ratios indicate the multiplicative difference between groups. Tukey adjustment applied for multiple comparisons."
+#| tbl-cap: "Pairwise comparisons of estimated marginal means for grasshopper density across treatment × region combinations within each mission. Ratios indicate the multiplicative difference between groups. Tukey adjustment applied for multiple comparisons."
 #| echo: false
 #| message: false
 #| warning: false
@@ -838,7 +1113,7 @@ mission_pairs_density <- bind_rows(
 )
 
 # Create the gt table
-mission_pairs_density |>
+tbl_density_pairwise <- mission_pairs_density |>
   arrange(contrast) |>
   select(!source) |>
   gt(groupname_col = "mission_number") |>
@@ -855,20 +1130,26 @@ mission_pairs_density |>
     p.value = "P-value"
   ) |>
   tab_header(
-    title = "OSE Density Pairwise Comparisons by Mission"
+    title = "Grasshoppe Density Pairwise Comparisons by Mission"
   ) |>
   tab_source_note(
     source_note = "Note: Pairwise comparisons conducted within each mission separately."
   )
+
+# Save as PNG
+save_gt_png(tbl_density_pairwise, "grasshopper_density_pairwise_comparisons.png")
+
+# Display table
+tbl_density_pairwise
 ```
 
-## OSE Damage Analysis Tables
+## Grasshopper Damage Analysis Tables
 
 ### Model Summaries by Mission
 
 ```{r tbl-ose-damage-models}
 #| label: tbl-ose-damage-models
-#| tbl-cap: "Model summaries for OSE damage by treatment and region across three survey missions. Each mission was modeled separately using generalized linear mixed models (GLMMs) with Tweedie family distribution. Fixed effects include fertilizer treatment, region, and their interaction. Random effects account for farmer-level variation."
+#| tbl-cap: "Model summaries for grasshopper damage by treatment and region across three survey missions. Each mission was modeled separately using generalized linear mixed models (GLMMs) with Tweedie family distribution. Fixed effects include fertilizer treatment, region, and their interaction. Random effects account for farmer-level variation."
 #| echo: false
 #| message: false
 #| warning: false
@@ -894,7 +1175,7 @@ mission_mod_summary_damage <- mission_mod_summary_damage |>
   select(!c(component, group, source))
 
 # Create the gt table
-mission_mod_summary_damage |>
+tbl_damage_models <- mission_mod_summary_damage |>
   gt(groupname_col = "mission_number") |>
   fmt_number(
     columns = c(estimate, std.error, statistic, p.value),
@@ -910,18 +1191,24 @@ mission_mod_summary_damage |>
     p.value = "P-value"
   ) |>
   tab_header(
-    title = "OSE Damage Model Summaries by Mission"
+    title = "Grasshopper Damage Model Summaries by Mission"
   ) |>
   tab_source_note(
     source_note = "Note: Models fit separately for each mission. Random effect shown as standard deviation."
   )
+
+# Save as PNG
+save_gt_png(tbl_damage_models, "grasshopper_damage_model_summaries_by_mission.png")
+
+# Display table
+tbl_damage_models
 ```
 
 ### Pairwise Comparisons by Mission
 
 ```{r tbl-ose-damage-pairwise}
 #| label: tbl-ose-damage-pairwise
-#| tbl-cap: "Pairwise comparisons of estimated marginal means for OSE damage across treatment × region combinations within each mission. Ratios indicate the multiplicative difference between groups. Tukey adjustment applied for multiple comparisons."
+#| tbl-cap: "Pairwise comparisons of estimated marginal means for grasshopper damage across treatment × region combinations within each mission. Ratios indicate the multiplicative difference between groups. Tukey adjustment applied for multiple comparisons."
 #| echo: false
 #| message: false
 #| warning: false
@@ -937,7 +1224,7 @@ mission_pairs_damage <- bind_rows(
 )
 
 # Create the gt table
-mission_pairs_damage |>
+tbl_damage_pairwise <- mission_pairs_damage |>
   arrange(contrast) |>
   select(!source) |>
   gt(groupname_col = "mission_number") |>
@@ -954,11 +1241,17 @@ mission_pairs_damage |>
     p.value = "P-value"
   ) |>
   tab_header(
-    title = "OSE Damage Pairwise Comparisons by Mission"
+    title = "Grasshopper Damage Pairwise Comparisons by Mission"
   ) |>
   tab_source_note(
     source_note = "Note: Pairwise comparisons conducted within each mission separately."
   )
+
+# Save as PNG
+save_gt_png(tbl_damage_pairwise, "grasshopper_damage_pairwise_comparisons.png")
+
+# Display table
+tbl_damage_pairwise
 ```
 
 ## Millet Yield Analysis Tables
@@ -1001,7 +1294,7 @@ tidy_prepped <- broom.mixed::tidy(yield_mod) %>%
   select(effect, component, term, estimate, std.error, statistic, p_value, p_label)
 
 # Build the gt table
-tidy_prepped %>%
+tbl_yield_model <- tidy_prepped %>%
   gt(rowname_col = "term") %>%
   tab_row_group(
     group = "Fixed effects",
@@ -1043,6 +1336,12 @@ tidy_prepped %>%
     align = "center",
     columns = vars(estimate, std.error, statistic, p_label)
   )
+
+# Save as PNG
+save_gt_png(tbl_yield_model, "millet_yield_model_summary.png")
+
+# Display table
+tbl_yield_model
 ```
 
 ### Pairwise Comparisons
@@ -1096,7 +1395,7 @@ col_labels <- c(
 )
 
 # Create gt table
-emms_pw_prepped %>%
+tbl_yield_pairwise <- emms_pw_prepped %>%
   select(contrast, ratio, SE, df, null, z.ratio, p_label) %>%
   gt(rowname_col = "contrast") %>%
   cols_label(!!!col_labels) %>%
@@ -1117,13 +1416,19 @@ emms_pw_prepped %>%
     columns = c("ratio", "SE", "z.ratio", "null", "df", "p_label")
   ) %>%
   opt_row_striping()
+
+# Save as PNG
+save_gt_png(tbl_yield_pairwise, "millet_yield_pairwise_comparisons.png")
+
+# Display table
+tbl_yield_pairwise
 ```
 
 ## Ground Cover Mediation Analysis Tables
 
 ```{r tbl-ground-cover-unified}
 #| label: tbl-ground-cover-unified
-#| tbl-cap: "Model summary for the unified ground cover mediation analysis. Generalized additive model (GAM) with Tweedie family distribution examining how ground cover mediates the effect of fertilizer treatment on OSE density. The model includes parametric terms for fertilizer treatment, mission number, and region, plus smooth terms for ground cover (varying by fertilizer treatment) and farmer random effects."
+#| tbl-cap: "Model summary for the unified ground cover mediation analysis. Generalized additive model (GAM) with Tweedie family distribution examining how ground cover mediates the effect of fertilizer treatment on grasshopper density. The model includes parametric terms for fertilizer treatment, mission number, and region, plus smooth terms for ground cover (varying by fertilizer treatment) and farmer random effects."
 #| echo: false
 #| message: false
 #| warning: false
@@ -1166,7 +1471,7 @@ smooth_mod <- broom::tidy(gc_mod, parametric = FALSE) %>%
 combined_mod <- bind_rows(tidy_mod, smooth_mod)
 
 # Create a unified gt table
-combined_mod %>%
+tbl_ground_cover <- combined_mod %>%
   gt(groupname_col = "term_type") %>%
   fmt_number(
     columns = c(estimate, std.error, statistic, p.value),
@@ -1196,4 +1501,96 @@ combined_mod %>%
     style = cell_text(weight = "bold"),
     locations = cells_row_groups()
   )
+
+# Save as PNG
+save_gt_png(tbl_ground_cover, "ground_cover_fertilizer_mediation_model.png")
+
+# Display table
+tbl_ground_cover
+```
+
+## Temperature Analysis Table
+
+```{r}
+#| label: tbl-temperature-model
+#| tbl-cap: "Model summary for temperature effects on grasshopper density. Generalized additive model (GAM) with Tweedie family distribution examining whether temperature influences grasshopper density while accounting for region, mission, and farmer as random effects.  Temperature was not significant, indicating that temperature does not meaningfully explain grasshopper density once region and mission timing are accounted for."
+#| echo: false
+#| message: false
+#| warning: false
+
+# Load the cached temperature model
+temp_mod <- cache_model(
+  model_name = "locust_temperature_gam",
+  data = data |>
+    filter(fertilizer_treatment == 'control') |>
+    select(year, region, farmer, mission_number, ose_count, temperature) |>
+    mutate(
+      region = factor(region),
+      farmer = factor(farmer),
+      mission_number = factor(mission_number)
+    ) |>
+    drop_na(temperature, mission_number, region, ose_count),
+  fit_function = function(data) {
+    mgcv::gam(
+      ose_count ~
+        s(temperature, k = 10) +
+        s(region, bs='re') +
+        s(farmer, bs = 're') +
+        s(mission_number, bs = 're'),
+      data = data,
+      family = mgcv::tw(),
+      select = TRUE
+    )
+  }
+)
+
+# Extract smooth terms
+temp_summary <- broom::tidy(temp_mod, parametric = FALSE) %>%
+  mutate(term = case_when(
+    term == "s(temperature)" ~ "Temperature (smooth)",
+    term == "s(region)" ~ "Region (random effect)",
+    term == "s(farmer)" ~ "Farmer (random effect)",
+    term == "s(mission_number)" ~ "Mission (random effect)",
+    TRUE ~ term
+  ))
+
+# Create gt table with consistent style
+tbl_temperature <- temp_summary %>%
+  gt(rowname_col = "term") %>%
+  cols_label(
+    term = "Term",
+    edf = "EDF",
+    ref.df = "Ref. DF",
+    statistic = "F-statistic",
+    p.value = "P-value"
+  ) %>%
+  fmt_number(
+    columns = c(edf, ref.df, statistic, p.value),
+    decimals = 3
+  ) %>%
+  fmt_missing(
+    columns = everything(),
+    missing_text = "-"
+  ) %>%
+  tab_header(
+    title = "Temperature Effects on Grasshopper Density",
+    subtitle = "Smooth terms from GAM"
+  ) %>%
+  tab_source_note(
+    source_note = md(paste0(
+      "Model deviance explained: ", 
+      round(summary(temp_mod)$dev.expl * 100, 1), 
+      "%. Analysis restricted to control plots only."
+    ))
+  ) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  )
+
+# Save as PNG
+save_gt_png(tbl_temperature, "temperature_effects_grasshopper_density.png")
+
+# Display table
+tbl_temperature 
 ```
