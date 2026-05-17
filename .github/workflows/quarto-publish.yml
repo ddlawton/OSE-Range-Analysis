@@ -47,7 +47,6 @@ jobs:
             libgdal-dev \
             libnode-dev \
             pandoc \
-            chromium \
             cmake \
             libabsl-dev 
 
