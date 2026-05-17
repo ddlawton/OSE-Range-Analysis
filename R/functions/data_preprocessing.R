@@ -86,6 +86,9 @@ pivot_missions_long <- function(df) {
 
 #' Further clean and correct mission columns data types
 #'
+#' Note: OSE count (ose_count) represents OSE density that has already been 
+#' adjusted for the proportion of OSE in the grasshopper population by Mamour.
+#'
 #' @param df Tibble, pivoted long format
 #' @return Tibble with mission_number as factor, percent_ground_cover and ose_damage_percent numeric
 clean_mission_cols <- function(df) {
@@ -214,6 +217,46 @@ finalize_datatypes <- function(df) {
     )
 }
 
+#' Adjust OSE damage to represent total grasshopper damage
+#'
+#' The raw data contains OSE-specific damage values that were already adjusted
+#' for the proportion of OSE in the total grasshopper population. To get total
+#' grasshopper damage, we divide by the OSE proportion for each region.
+#' 
+#' OSE proportions by region (averaged across missions):
+#' - Kaffrine: 0.93
+#' - Fatick: 0.91
+#' - Thies: 0.79
+#' - Saint Louis: 0.65
+#'
+#' @param df Tibble with ose_damage_percent column
+#' @return Tibble with adjusted ose_damage_percent representing total grasshopper damage
+adjust_damage_for_total_grasshoppers <- function(df) {
+  # Define OSE proportions by region
+  ose_proportions <- c(
+    "Kaffrine" = 0.93,
+    "Fatick" = 0.91,
+    "Thies" = 0.79,
+    "Saint Louis" = 0.65
+  )
+  
+  # Only adjust if ose_damage_percent column exists
+  if ("ose_damage_percent" %in% names(df) && "region" %in% names(df)) {
+    df <- df |>
+      mutate(
+        ose_damage_percent = case_when(
+          region == "Kaffrine" ~ ose_damage_percent / ose_proportions["Kaffrine"],
+          region == "Fatick" ~ ose_damage_percent / ose_proportions["Fatick"],
+          region == "Thies" ~ ose_damage_percent / ose_proportions["Thies"],
+          region == "Saint Louis" ~ ose_damage_percent / ose_proportions["Saint Louis"],
+          TRUE ~ ose_damage_percent
+        )
+      )
+  }
+  
+  return(df)
+}
+
 
 #' Convenience pipeline to fully process raw Senegal migration data to long analytic format
 #'
@@ -256,7 +299,8 @@ process_senegal_data <- function(path, verbose = FALSE) {
     clean_mission_cols()  |>
     fix_fertilizer_treatment() |>
     select_final_columns() |>
-    finalize_datatypes()
+    finalize_datatypes() |>
+    adjust_damage_for_total_grasshoppers()
   
   return(long)
 }

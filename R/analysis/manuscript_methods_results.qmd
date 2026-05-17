@@ -87,8 +87,6 @@ save_gt_png <- function(gt_obj, filename, subfolder = "manuscript_methods_result
 }
 ```
 
-
-
 ```{r ose-density-models}
 #| echo: false
 #| message: false
@@ -123,9 +121,10 @@ names(mission_emmeans_density) <- c('m1', 'm2', 'm3')
 #| message: false
 #| warning: false
 
-# Prepare data with scaled damage
+# Prepare data for damage models
+# Note: Keep damage as percentage (not proportion) for better interpretation
 data_damage <- data |>
-  mutate(ose_damage_percent = ose_damage_percent / 100)
+  mutate(ose_damage_percent = ose_damage_percent * 100)
 
 # Split data into a list of data based on mission date
 model_data_damage <- data_damage |>
@@ -163,7 +162,9 @@ Maps of mean annual precipitation (MAP) and monthly rainfall patterns were gener
 
 ## Locust density and damage models
 
-For both density and damage, separate models were created for each of the three survey missions to assess how effects changed over time relative to the timing of fertilizer application. We specified the models as generalized linear mixed models (GLMMs) with a Poisson family for density and a tweedie family for damage percent (scaled to proportion). In both cases, we included fertilizer treatment, region, and their interaction as fixed effects, and farmer as a random effect to account for repeated measures since each farmer has a control and fertilized field.
+For both density and damage, separate models were created for each of the three survey missions to assess how effects changed over time relative to the timing of fertilizer application. We specified the models as generalized linear mixed models (GLMMs) with a Poisson family for density and a tweedie family for damage percent. In both cases, we included fertilizer treatment, region, and their interaction as fixed effects, and farmer as a random effect to account for repeated measures since each farmer has a control and fertilized field.
+
+**Data adjustments:** The OSE density data (ose_count) received from collaborators had already been adjusted for the proportion of OSE in the total grasshopper population, which is appropriate for density analysis. For damage analysis, we reversed this adjustment to represent total grasshopper damage rather than OSE-specific damage, maintaining consistency with our previous publications. The adjustment used region-specific OSE proportions averaged across missions: Kaffrine = 0.93, Fatick = 0.91, Thies = 0.79, Saint Louis = 0.65.
 
 ## Millet yield model
 
@@ -221,15 +222,14 @@ Temperature at the time of the survey did not affect *O. senegalensis* density a
 The locust surveys enabled us to identify the developmental stages and likely generations of Oedaleus senegalensis present during each mission (@tbl-dev-stages). We identified three generations (G1, originating from the eggs of the previous season’s last generation, and G2 and G3) in the Thies, Fatick, and Kaffrine regions. In Saint Louis, only the G1 and G2 generations were observed. All developmental stages were identified, from eggs, through nymphal instars (1-5), to adults.
 
 ::: {tbl-dev-stages}
-
-|            | Kaffrine                        | Thies                        | Fatick                       | Saint - Louis                |
-|------------|---------------------------------|------------------------------|------------------------------|------------------------------|
-| **Mission 1** | Jul. 27 - Aug. 3               |                              | Aug. 13 - 18                 | Aug. 15 - 20                 |
-|            | G1 - 4th instar<br>G1 - 5th instar<br>G1 - Adult<br>Eggs laid by G1 | G1 - Adult<br>Eggs laid by G1<br>G2 - 1st instar | G1 - 4th instar<br>G1 - 5th instar<br>G1 - Adult<br>Eggs laid by G1 | G1 - 1st instar<br>G1 - 2nd instar |
-| **Mission 2** | Aug. 30 - Sep. 4                |                              | Sep. 6 - 10                  | Sep. 20 - 25                 |
-|            | G1 - Adult<br>G2 - 1st instar<br>G2 - 2nd instar | G1 - Adult<br>Eggs laid by G1<br>G2 - 1st instar | G2 - 4th instar<br>G2 - 5th instar<br>G2 - Adult | G1 - Adult<br>Eggs laid by G1<br>G2 - 1st instar |
-| **Mission 3** | Sep. 28 - Oct. 5                |                              | Oct. 4 - 9                   | Oct. 19                      |
-|            | G2 - 4th instar<br>G2 - 5th instar<br>G2 - Adult<br>G3 - 1st instar | G2 - Adult<br>Eggs laid by G2<br>G3 - 1st instar<br>G3 - 2nd instar | G2 - Adult<br>Eggs laid by G2<br>G3 - 1st instar<br>G3 - 2nd instar | G2 - Adult<br>Eggs laid by G2 |
+|   | Kaffrine | Thies | Fatick | Saint - Louis |
+|---------------|---------------|---------------|---------------|---------------|
+| **Mission 1** | Jul. 27 - Aug. 3 |  | Aug. 13 - 18 | Aug. 15 - 20 |
+|  | G1 - 4th instar<br>G1 - 5th instar<br>G1 - Adult<br>Eggs laid by G1 | G1 - Adult<br>Eggs laid by G1<br>G2 - 1st instar | G1 - 4th instar<br>G1 - 5th instar<br>G1 - Adult<br>Eggs laid by G1 | G1 - 1st instar<br>G1 - 2nd instar |
+| **Mission 2** | Aug. 30 - Sep. 4 |  | Sep. 6 - 10 | Sep. 20 - 25 |
+|  | G1 - Adult<br>G2 - 1st instar<br>G2 - 2nd instar | G1 - Adult<br>Eggs laid by G1<br>G2 - 1st instar | G2 - 4th instar<br>G2 - 5th instar<br>G2 - Adult | G1 - Adult<br>Eggs laid by G1<br>G2 - 1st instar |
+| **Mission 3** | Sep. 28 - Oct. 5 |  | Oct. 4 - 9 | Oct. 19 |
+|  | G2 - 4th instar<br>G2 - 5th instar<br>G2 - Adult<br>G3 - 1st instar | G2 - Adult<br>Eggs laid by G2<br>G3 - 1st instar<br>G3 - 2nd instar | G2 - Adult<br>Eggs laid by G2<br>G3 - 1st instar<br>G3 - 2nd instar | G2 - Adult<br>Eggs laid by G2 |
 
 Developmental stages and generations present during each of the missions across the four regions. The mission dates for each region are noted above the list of stages and generations present. The generations are noted by G followed by the generation number; Senegalese grasshoppers typically have three generations each year, as rains allow.
 :::
@@ -320,9 +320,7 @@ kaffrine_ratio_min <- min(kaffrine_ratios_all) |> round(1)
 kaffrine_ratio_max <- max(kaffrine_ratios_all) |> round(1)
 ```
 
-
 Fertilizer treatment progressively suppressed grasshopper density over the growing season, with effects intensifying from non-significant early in the season (Mission 1: p = `r round(m1_fert_p, 3)`) to highly significant by late season (Mission 3: estimate = `r round(m3_fert_est, 3)`, p `r format_p(m3_fert_p)`; @tbl-ose-density-models). This temporal pattern reflected both fertilizer application and cumulative grasshopper population suppression. Regional responses varied significantly, with Kaffrine showing consistently elevated densities across all treatments and missions. By mission 3, grasshopper densities in control fields were `r m3_kaffrine_ratio`-times higher than in fertilized fields in Kaffrine and `r m3_thies_ratio`-times higher in Thiès. Across all missions, the suppressive effect of fertilization in Kaffrine ranged from `r kaffrine_ratio_min`–`r kaffrine_ratio_max`-fold (@tbl-ose-density-pairwise).
-
 
 ### Grasshopper damage to millet
 
@@ -546,7 +544,6 @@ ggplot() +
       direction = -1
   ) +
   theme_minimal() +
-  labs(title = "Mean Annual Precipitation (2015–2024)") +
   theme(
     axis.text   = element_blank(),
     axis.ticks  = element_blank(),
@@ -597,7 +594,7 @@ plot_month_full <- function(month, raster_path, senegal, roi_sf,
     geom_sf(data = roi_sf_smooth, fill = NA, color = 'gray85', linewidth = 2) +
     geom_sf(data = roi_sf_smooth, fill = NA, color = 'black', linewidth = 1) +
     scale_fill_viridis_c(
-      name = "Rainfall (mm)",
+      name = "rainfall (mm)",
       na.value = NA,
       limits = c(min_val, max_val), 
       option = "D", 
@@ -660,14 +657,14 @@ plot_mission_density(
     ncol = 1,
     regions = c("Kaffrine", "Thies", "Fatick", "Saint Louis"),
     legend_position = 'bottom'
-)
+  )
 ```
 
 ## OSE Damage Analysis
 
 ```{r fig-ose-damage}
 #| label: fig-ose-damage
-#| fig-cap: "Millet damage from grasshoppers across the study regions and missions remained low in the fertilized fields but was elevated in the control fields during the second and third missions after the fertilizer application was complete. See the supplementary material Supp. Table SX for full statistical analysis."
+#| fig-cap: "Millet leaf damage (%) from grasshoppers across the study regions and missions remained low in the fertilized fields but was elevated in the control fields during the second and third missions after the fertilizer application was complete. See the supplementary material Supp. Table SX for full statistical analysis."
 #| fig-width: 5
 #| fig-height: 10
 #| echo: false
@@ -724,12 +721,11 @@ data_yield |>
         geom_jitter(data = avg_yield, aes(y=mean_yield), size=8, 
                     position=position_jitterdodge(jitter.width=0, jitter.height=0)) +
         scale_color_manual(values = c('black','dark green'), 
-                          labels = c('Control', 'Fertilized')) +
+                          labels = c('control', 'fertilized')) +
         labs(
-          x = "Region",
-          y = "Yield (kg/ha)",
-          color = "Treatment",
-          title = "Millet Yield by Region and Treatment"
+          x = "region",
+          y =expression("yield kg"~bold("\u2022")~"ha"^{-1}),
+          color = "",
         ) +
         theme_pubr() +
         theme(
@@ -776,7 +772,7 @@ gc_dev_exp_early <- summary(gc_mod_early)$dev.expl * 100
 
 ```
 
-Ground cover mediated fertilizer effects on grasshopper density differently between treatments (deviance explained: `r round(gc_dev_exp_early, 0)`%; @tbl-ground-cover-unified). In fertilized fields, density peaked at ~40% ground cover and declined at higher and lower values, whereas control fields showed low densities until 60–70% cover, after which densities increased substantially.
+Ground cover mediated fertilizer effects on grasshopper density differently between treatments (deviance explained: `r round(gc_dev_exp_early, 0)`%; @tbl-ground-cover-unified). In fertilized fields, density peaked at \~40% ground cover and declined at higher and lower values, whereas control fields showed low densities until 60–70% cover, after which densities increased substantially.
 
 ```{r ground-cover-model}
 #| echo: false
@@ -818,14 +814,15 @@ ests |>
     linewidth = 1.2
   ) +
   labs(
-    x = "Ground Cover (%)",
-    y = expression("Estimated individuals"~bold("\u2022")~"100 m"^{-2}),
-    title = "Ground Cover Effects by Fertilizer Treatment",
-    color = "Treatment",
-    fill = "Treatment"
+    x = "ground cover (%)",
+    y = expression("estimated individuals"~bold("\u2022")~"100 m"^{-2}), 
+    title = "ground cover effects by fertilizer treatment",
+    color = NULL,
+    fill = NULL
   ) +
   scale_color_met_d(name = "Demuth") +
   scale_fill_met_d(name = "Demuth") +
+  ylim(0,5) +
   theme_pubr() +
   theme(
     legend.position = "top",
@@ -837,17 +834,14 @@ ests |>
 
 ## Raw grasshopper count by treatment, mission, and region
 
-
 ```{r fig-supp-raw-count-treatment-mission-region}
 #| label: fig-supp-raw-count-treatment-mission-region
 #| fig-cap: "Ground cover by fertilizer treatment and mission across regions. Ground cover increased throughout the growing season across all regions, with minimal differences between control and fertilized treatments. No significant fertilizer × mission interaction was detected."
 #| echo: false
 #| message: false
 #| warning: false
-#| fig-width: 8
-#| fig-height: 8
-
-
+#| fig-width: 6
+#| fig-height: 12
 
 # Get unique fertilizer treatments and farmers (if needed)
 fertilizer_levels <- levels(data$fertilizer_treatment)
@@ -869,6 +863,7 @@ village_count_data <- data |>
 village_count_data <- bind_rows(village_count_data, null_rows)
 
 
+
 # Helper function to plot by mission with optional legend
 plot_mission_counts <- function(data, mission, show_legend = TRUE) {
   dat <- data |> filter(mission_number == mission)
@@ -878,13 +873,15 @@ plot_mission_counts <- function(data, mission, show_legend = TRUE) {
     geom_line(data = line_dat, aes(group = farmer)) +
     MetBrewer::scale_color_met_d(name = "Degas", drop = FALSE) +
     labs(
-      title = paste0("Mission ", mission),
+      title = paste0("mission ", mission),
       x = "",
       y = bquote('individuals'~bold('•')~100~m^-2),
-      color = "Treatment"
+      color = "",
+      color = ""
     ) +
     ylim(0,150) +
-    theme_pubr()
+    theme_pubr() +
+    theme(plot.title = element_text(hjust = 0.5))
   if (!show_legend) {
     p <- p + theme(legend.position = "none")
   }
@@ -893,19 +890,12 @@ plot_mission_counts <- function(data, mission, show_legend = TRUE) {
 
 
 m1_raw_plot <- plot_mission_counts(village_count_data, mission = 1, show_legend = TRUE)
-
-
 m2_raw_plot <- plot_mission_counts(village_count_data, mission = 2, show_legend = TRUE)
+m3_raw_plot <- plot_mission_counts(village_count_data, mission = 3, show_legend = TRUE)
 
-
-m3_raw_plot <- plot_mission_counts(village_count_data, mission = 3, show_legend = FALSE)
-
-
-
-(m1_raw_plot + m2_raw_plot) / ( m3_raw_plot + plot_spacer()) + 
-  patchwork::plot_layout(guides = "collect",axis_titles = "collect")
-
-
+(m1_raw_plot / m2_raw_plot / m3_raw_plot) + 
+  patchwork::plot_layout(guides = "collect", axis_titles = "collect") & 
+  theme(legend.position = "bottom")
 ```
 
 ## Ground Cover by Fertilizer Treatment
@@ -958,21 +948,20 @@ region_plots <- lapply(regions, function(reg) {
     ) +
     labs(
       title = paste(reg),
-      x = "Mission Number",
-      y = "Ground Cover (%)",
-      fill = "Treatment",
-      color = "Treatment"
+      x = "mission number",
+      y = "ground cover (%)",
+      fill = "treatment",
+      color = "treatment"
     ) +
     theme_pubr()
 })
 names(region_plots) <- regions
 
-# Combine plots with patchwork (2 columns as an example)
+# Combine plots with patchwork 
 wrap_plots(region_plots, ncol = 2) + 
   plot_layout(guides = "collect", axis_titles = "collect") & 
   theme(legend.position = "bottom")
 ```
-
 
 ## Temperature Variation Across Missions and Regions
 
@@ -1012,8 +1001,8 @@ region_temp_plots <- lapply(regions, function(reg) {
     geom_jitter(width = 0.2, height = 0, alpha = 0.6, na.rm = TRUE) +
     labs(
       title = reg,
-      x = "Mission Number",
-      y = "Temperature (°C)"
+      x = "mission number",
+      y = "temperature (°c)"
     ) +
     theme_pubr() +
     theme(

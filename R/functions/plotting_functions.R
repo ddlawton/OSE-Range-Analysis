@@ -147,7 +147,7 @@ plot_mission_damage <- function(
             scale_color_manual(values = FERTILIZER_COLORS) +
             scale_fill_manual(values = FERTILIZER_COLORS) +
             scale_x_discrete(drop = FALSE) +
-            ylab('leaf damage proportion') +
+            ylab('Leaf damage (%)') +
             labs(title = title) +
             theme_pubr(legend = 'bottom') +
             theme(
