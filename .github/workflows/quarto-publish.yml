@@ -52,7 +52,7 @@ jobs:
             pandoc \
             cmake \
             libabsl-dev \
-            chromium-browser
+            chromium
 
       # (Removed duplicate unpinned R setup step)
       - name: Query R version

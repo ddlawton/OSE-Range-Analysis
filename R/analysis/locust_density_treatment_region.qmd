@@ -239,11 +239,12 @@ library(dplyr)
 
 mission_mod_summary <- mission_mod_summary |>
   arrange(mission_number) |>
-  mutate(effect = ifelse(effect == 'ran_pars', 'random', 'fixed'),
-    term = ifelse(term == 'sd__(Intercept)','farmer',term),
-    term = gsub('fertilizer_treatment|region','',term)) |>
-  select(!c(component,group))
-
+  mutate(
+    effect = ifelse(effect == "ran_pars", "random", "fixed"),
+    term = ifelse(term == "sd__(Intercept)", "farmer", term),
+    term = gsub("fertilizer_treatment|region", "", term)
+  ) |>
+  select(-any_of(c("component", "group")))
 
 
 tbl_density_models <- mission_mod_summary |>
