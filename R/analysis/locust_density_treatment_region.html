@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>2021 Locust Density Analysis – OSE Range Analysis</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -67,19 +70,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-17d01b5babc88cbee53e37b4dd766b3a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-7f54657f98cfd61baa5fc740dde4b5a5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-17d01b5babc88cbee53e37b4dd766b3a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-b41724e58f79c1b7773766b10b517708.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-1a081a750f1ddb3367c3896ea17eb885.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-b41724e58f79c1b7773766b10b517708.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -123,7 +125,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -542,23 +544,23 @@ window.Quarto = {
 <p>Here are the model summaries and pairwise comparisons. This will be <em>across</em> missions, but please keep in mind each mission had it’s own model. So we cant make across-mission comparions just yet.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="ycfzbhqqir" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ycfzbhqqir table {
+<div id="bybwktydzy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bybwktydzy table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ycfzbhqqir thead, #ycfzbhqqir tbody, #ycfzbhqqir tfoot, #ycfzbhqqir tr, #ycfzbhqqir td, #ycfzbhqqir th {
+#bybwktydzy thead, #bybwktydzy tbody, #bybwktydzy tfoot, #bybwktydzy tr, #bybwktydzy td, #bybwktydzy th {
   border-style: none;
 }
 
-#ycfzbhqqir p {
+#bybwktydzy p {
   margin: 0;
   padding: 0;
 }
 
-#ycfzbhqqir .gt_table {
+#bybwktydzy .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -584,12 +586,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#ycfzbhqqir .gt_caption {
+#bybwktydzy .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ycfzbhqqir .gt_title {
+#bybwktydzy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -601,7 +603,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#ycfzbhqqir .gt_subtitle {
+#bybwktydzy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -613,7 +615,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#ycfzbhqqir .gt_heading {
+#bybwktydzy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -625,13 +627,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ycfzbhqqir .gt_bottom_border {
+#bybwktydzy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ycfzbhqqir .gt_col_headings {
+#bybwktydzy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -646,7 +648,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ycfzbhqqir .gt_col_heading {
+#bybwktydzy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -666,7 +668,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ycfzbhqqir .gt_column_spanner_outer {
+#bybwktydzy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -678,15 +680,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#ycfzbhqqir .gt_column_spanner_outer:first-child {
+#bybwktydzy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ycfzbhqqir .gt_column_spanner_outer:last-child {
+#bybwktydzy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ycfzbhqqir .gt_column_spanner {
+#bybwktydzy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -698,11 +700,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#ycfzbhqqir .gt_spanner_row {
+#bybwktydzy .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ycfzbhqqir .gt_group_heading {
+#bybwktydzy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -728,7 +730,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#ycfzbhqqir .gt_empty_group_heading {
+#bybwktydzy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -743,15 +745,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#ycfzbhqqir .gt_from_md > :first-child {
+#bybwktydzy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ycfzbhqqir .gt_from_md > :last-child {
+#bybwktydzy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ycfzbhqqir .gt_row {
+#bybwktydzy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -770,7 +772,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ycfzbhqqir .gt_stub {
+#bybwktydzy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -783,7 +785,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ycfzbhqqir .gt_stub_row_group {
+#bybwktydzy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -797,15 +799,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#ycfzbhqqir .gt_row_group_first td {
+#bybwktydzy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ycfzbhqqir .gt_row_group_first th {
+#bybwktydzy .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ycfzbhqqir .gt_summary_row {
+#bybwktydzy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -815,16 +817,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ycfzbhqqir .gt_first_summary_row {
+#bybwktydzy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ycfzbhqqir .gt_first_summary_row.thick {
+#bybwktydzy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ycfzbhqqir .gt_last_summary_row {
+#bybwktydzy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -834,7 +836,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ycfzbhqqir .gt_grand_summary_row {
+#bybwktydzy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -844,7 +846,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ycfzbhqqir .gt_first_grand_summary_row {
+#bybwktydzy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -854,7 +856,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#ycfzbhqqir .gt_last_grand_summary_row_top {
+#bybwktydzy .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -864,11 +866,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ycfzbhqqir .gt_striped {
+#bybwktydzy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ycfzbhqqir .gt_table_body {
+#bybwktydzy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -877,7 +879,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ycfzbhqqir .gt_footnotes {
+#bybwktydzy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -891,7 +893,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ycfzbhqqir .gt_footnote {
+#bybwktydzy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -900,7 +902,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ycfzbhqqir .gt_sourcenotes {
+#bybwktydzy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -914,7 +916,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ycfzbhqqir .gt_sourcenote {
+#bybwktydzy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -922,72 +924,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ycfzbhqqir .gt_left {
+#bybwktydzy .gt_left {
   text-align: left;
 }
 
-#ycfzbhqqir .gt_center {
+#bybwktydzy .gt_center {
   text-align: center;
 }
 
-#ycfzbhqqir .gt_right {
+#bybwktydzy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ycfzbhqqir .gt_font_normal {
+#bybwktydzy .gt_font_normal {
   font-weight: normal;
 }
 
-#ycfzbhqqir .gt_font_bold {
+#bybwktydzy .gt_font_bold {
   font-weight: bold;
 }
 
-#ycfzbhqqir .gt_font_italic {
+#bybwktydzy .gt_font_italic {
   font-style: italic;
 }
 
-#ycfzbhqqir .gt_super {
+#bybwktydzy .gt_super {
   font-size: 65%;
 }
 
-#ycfzbhqqir .gt_footnote_marks {
+#bybwktydzy .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ycfzbhqqir .gt_asterisk {
+#bybwktydzy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ycfzbhqqir .gt_indent_1 {
+#bybwktydzy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ycfzbhqqir .gt_indent_2 {
+#bybwktydzy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ycfzbhqqir .gt_indent_3 {
+#bybwktydzy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ycfzbhqqir .gt_indent_4 {
+#bybwktydzy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ycfzbhqqir .gt_indent_5 {
+#bybwktydzy .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ycfzbhqqir .katex-display {
+#bybwktydzy .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ycfzbhqqir div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#bybwktydzy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1225,23 +1227,23 @@ window.Quarto = {
 <p>Here are the pairwise comparisons between region and treatment by mission number. Fair warning, its a large table since there are a lot of regions.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="rvmqvuiibe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rvmqvuiibe table {
+<div id="gvfdsxvxrz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gvfdsxvxrz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rvmqvuiibe thead, #rvmqvuiibe tbody, #rvmqvuiibe tfoot, #rvmqvuiibe tr, #rvmqvuiibe td, #rvmqvuiibe th {
+#gvfdsxvxrz thead, #gvfdsxvxrz tbody, #gvfdsxvxrz tfoot, #gvfdsxvxrz tr, #gvfdsxvxrz td, #gvfdsxvxrz th {
   border-style: none;
 }
 
-#rvmqvuiibe p {
+#gvfdsxvxrz p {
   margin: 0;
   padding: 0;
 }
 
-#rvmqvuiibe .gt_table {
+#gvfdsxvxrz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1267,12 +1269,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#rvmqvuiibe .gt_caption {
+#gvfdsxvxrz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rvmqvuiibe .gt_title {
+#gvfdsxvxrz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1284,7 +1286,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#rvmqvuiibe .gt_subtitle {
+#gvfdsxvxrz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1296,7 +1298,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#rvmqvuiibe .gt_heading {
+#gvfdsxvxrz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1308,13 +1310,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rvmqvuiibe .gt_bottom_border {
+#gvfdsxvxrz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rvmqvuiibe .gt_col_headings {
+#gvfdsxvxrz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1329,7 +1331,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rvmqvuiibe .gt_col_heading {
+#gvfdsxvxrz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1349,7 +1351,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#rvmqvuiibe .gt_column_spanner_outer {
+#gvfdsxvxrz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1361,15 +1363,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#rvmqvuiibe .gt_column_spanner_outer:first-child {
+#gvfdsxvxrz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rvmqvuiibe .gt_column_spanner_outer:last-child {
+#gvfdsxvxrz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rvmqvuiibe .gt_column_spanner {
+#gvfdsxvxrz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1381,11 +1383,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#rvmqvuiibe .gt_spanner_row {
+#gvfdsxvxrz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rvmqvuiibe .gt_group_heading {
+#gvfdsxvxrz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1411,7 +1413,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#rvmqvuiibe .gt_empty_group_heading {
+#gvfdsxvxrz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1426,15 +1428,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#rvmqvuiibe .gt_from_md > :first-child {
+#gvfdsxvxrz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rvmqvuiibe .gt_from_md > :last-child {
+#gvfdsxvxrz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rvmqvuiibe .gt_row {
+#gvfdsxvxrz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1453,7 +1455,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#rvmqvuiibe .gt_stub {
+#gvfdsxvxrz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1466,7 +1468,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rvmqvuiibe .gt_stub_row_group {
+#gvfdsxvxrz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1480,15 +1482,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#rvmqvuiibe .gt_row_group_first td {
+#gvfdsxvxrz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rvmqvuiibe .gt_row_group_first th {
+#gvfdsxvxrz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rvmqvuiibe .gt_summary_row {
+#gvfdsxvxrz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1498,16 +1500,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rvmqvuiibe .gt_first_summary_row {
+#gvfdsxvxrz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rvmqvuiibe .gt_first_summary_row.thick {
+#gvfdsxvxrz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rvmqvuiibe .gt_last_summary_row {
+#gvfdsxvxrz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1517,7 +1519,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#rvmqvuiibe .gt_grand_summary_row {
+#gvfdsxvxrz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1527,7 +1529,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rvmqvuiibe .gt_first_grand_summary_row {
+#gvfdsxvxrz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1537,7 +1539,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#rvmqvuiibe .gt_last_grand_summary_row_top {
+#gvfdsxvxrz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1547,11 +1549,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#rvmqvuiibe .gt_striped {
+#gvfdsxvxrz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rvmqvuiibe .gt_table_body {
+#gvfdsxvxrz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1560,7 +1562,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#rvmqvuiibe .gt_footnotes {
+#gvfdsxvxrz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1574,7 +1576,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rvmqvuiibe .gt_footnote {
+#gvfdsxvxrz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1583,7 +1585,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rvmqvuiibe .gt_sourcenotes {
+#gvfdsxvxrz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1597,7 +1599,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rvmqvuiibe .gt_sourcenote {
+#gvfdsxvxrz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1605,72 +1607,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rvmqvuiibe .gt_left {
+#gvfdsxvxrz .gt_left {
   text-align: left;
 }
 
-#rvmqvuiibe .gt_center {
+#gvfdsxvxrz .gt_center {
   text-align: center;
 }
 
-#rvmqvuiibe .gt_right {
+#gvfdsxvxrz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rvmqvuiibe .gt_font_normal {
+#gvfdsxvxrz .gt_font_normal {
   font-weight: normal;
 }
 
-#rvmqvuiibe .gt_font_bold {
+#gvfdsxvxrz .gt_font_bold {
   font-weight: bold;
 }
 
-#rvmqvuiibe .gt_font_italic {
+#gvfdsxvxrz .gt_font_italic {
   font-style: italic;
 }
 
-#rvmqvuiibe .gt_super {
+#gvfdsxvxrz .gt_super {
   font-size: 65%;
 }
 
-#rvmqvuiibe .gt_footnote_marks {
+#gvfdsxvxrz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rvmqvuiibe .gt_asterisk {
+#gvfdsxvxrz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rvmqvuiibe .gt_indent_1 {
+#gvfdsxvxrz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rvmqvuiibe .gt_indent_2 {
+#gvfdsxvxrz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rvmqvuiibe .gt_indent_3 {
+#gvfdsxvxrz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rvmqvuiibe .gt_indent_4 {
+#gvfdsxvxrz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rvmqvuiibe .gt_indent_5 {
+#gvfdsxvxrz .gt_indent_5 {
   text-indent: 25px;
 }
 
-#rvmqvuiibe .katex-display {
+#gvfdsxvxrz .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#rvmqvuiibe div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#gvfdsxvxrz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2352,23 +2354,23 @@ window.Quarto = {
 <p>The data discrepancies seen the the OSE count x ground cover are really shown in this table as well. We can see that the trends are the same (e.g.&nbsp;fertilized plots have less than control), but the actual averages are totally different.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="pjpuxqzmct" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#pjpuxqzmct table {
+<div id="ybaffmvado" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ybaffmvado table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pjpuxqzmct thead, #pjpuxqzmct tbody, #pjpuxqzmct tfoot, #pjpuxqzmct tr, #pjpuxqzmct td, #pjpuxqzmct th {
+#ybaffmvado thead, #ybaffmvado tbody, #ybaffmvado tfoot, #ybaffmvado tr, #ybaffmvado td, #ybaffmvado th {
   border-style: none;
 }
 
-#pjpuxqzmct p {
+#ybaffmvado p {
   margin: 0;
   padding: 0;
 }
 
-#pjpuxqzmct .gt_table {
+#ybaffmvado .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2394,12 +2396,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#pjpuxqzmct .gt_caption {
+#ybaffmvado .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pjpuxqzmct .gt_title {
+#ybaffmvado .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2411,7 +2413,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#pjpuxqzmct .gt_subtitle {
+#ybaffmvado .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2423,7 +2425,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#pjpuxqzmct .gt_heading {
+#ybaffmvado .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2435,13 +2437,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#pjpuxqzmct .gt_bottom_border {
+#ybaffmvado .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pjpuxqzmct .gt_col_headings {
+#ybaffmvado .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2456,7 +2458,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#pjpuxqzmct .gt_col_heading {
+#ybaffmvado .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2476,7 +2478,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#pjpuxqzmct .gt_column_spanner_outer {
+#ybaffmvado .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2488,15 +2490,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#pjpuxqzmct .gt_column_spanner_outer:first-child {
+#ybaffmvado .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pjpuxqzmct .gt_column_spanner_outer:last-child {
+#ybaffmvado .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pjpuxqzmct .gt_column_spanner {
+#ybaffmvado .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2508,11 +2510,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#pjpuxqzmct .gt_spanner_row {
+#ybaffmvado .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pjpuxqzmct .gt_group_heading {
+#ybaffmvado .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2538,7 +2540,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#pjpuxqzmct .gt_empty_group_heading {
+#ybaffmvado .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2553,15 +2555,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#pjpuxqzmct .gt_from_md > :first-child {
+#ybaffmvado .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pjpuxqzmct .gt_from_md > :last-child {
+#ybaffmvado .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pjpuxqzmct .gt_row {
+#ybaffmvado .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2580,7 +2582,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#pjpuxqzmct .gt_stub {
+#ybaffmvado .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2593,7 +2595,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pjpuxqzmct .gt_stub_row_group {
+#ybaffmvado .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2607,15 +2609,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#pjpuxqzmct .gt_row_group_first td {
+#ybaffmvado .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pjpuxqzmct .gt_row_group_first th {
+#ybaffmvado .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pjpuxqzmct .gt_summary_row {
+#ybaffmvado .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2625,16 +2627,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pjpuxqzmct .gt_first_summary_row {
+#ybaffmvado .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pjpuxqzmct .gt_first_summary_row.thick {
+#ybaffmvado .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pjpuxqzmct .gt_last_summary_row {
+#ybaffmvado .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2644,7 +2646,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#pjpuxqzmct .gt_grand_summary_row {
+#ybaffmvado .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2654,7 +2656,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pjpuxqzmct .gt_first_grand_summary_row {
+#ybaffmvado .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2664,7 +2666,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#pjpuxqzmct .gt_last_grand_summary_row_top {
+#ybaffmvado .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2674,11 +2676,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#pjpuxqzmct .gt_striped {
+#ybaffmvado .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pjpuxqzmct .gt_table_body {
+#ybaffmvado .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2687,7 +2689,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#pjpuxqzmct .gt_footnotes {
+#ybaffmvado .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2701,7 +2703,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#pjpuxqzmct .gt_footnote {
+#ybaffmvado .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2710,7 +2712,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pjpuxqzmct .gt_sourcenotes {
+#ybaffmvado .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2724,7 +2726,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#pjpuxqzmct .gt_sourcenote {
+#ybaffmvado .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2732,72 +2734,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pjpuxqzmct .gt_left {
+#ybaffmvado .gt_left {
   text-align: left;
 }
 
-#pjpuxqzmct .gt_center {
+#ybaffmvado .gt_center {
   text-align: center;
 }
 
-#pjpuxqzmct .gt_right {
+#ybaffmvado .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pjpuxqzmct .gt_font_normal {
+#ybaffmvado .gt_font_normal {
   font-weight: normal;
 }
 
-#pjpuxqzmct .gt_font_bold {
+#ybaffmvado .gt_font_bold {
   font-weight: bold;
 }
 
-#pjpuxqzmct .gt_font_italic {
+#ybaffmvado .gt_font_italic {
   font-style: italic;
 }
 
-#pjpuxqzmct .gt_super {
+#ybaffmvado .gt_super {
   font-size: 65%;
 }
 
-#pjpuxqzmct .gt_footnote_marks {
+#ybaffmvado .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pjpuxqzmct .gt_asterisk {
+#ybaffmvado .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pjpuxqzmct .gt_indent_1 {
+#ybaffmvado .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pjpuxqzmct .gt_indent_2 {
+#ybaffmvado .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pjpuxqzmct .gt_indent_3 {
+#ybaffmvado .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pjpuxqzmct .gt_indent_4 {
+#ybaffmvado .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pjpuxqzmct .gt_indent_5 {
+#ybaffmvado .gt_indent_5 {
   text-indent: 25px;
 }
 
-#pjpuxqzmct .katex-display {
+#ybaffmvado .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#pjpuxqzmct div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ybaffmvado div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3567,166 +3569,167 @@ window.Quarto = {
 <span id="cb3-241"><a href="#cb3-241" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-242"><a href="#cb3-242" aria-hidden="true" tabindex="-1"></a>mission_mod_summary <span class="ot">&lt;-</span> mission_mod_summary <span class="sc">|&gt;</span></span>
 <span id="cb3-243"><a href="#cb3-243" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(mission_number) <span class="sc">|&gt;</span></span>
-<span id="cb3-244"><a href="#cb3-244" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">effect =</span> <span class="fu">ifelse</span>(effect <span class="sc">==</span> <span class="st">'ran_pars'</span>, <span class="st">'random'</span>, <span class="st">'fixed'</span>),</span>
-<span id="cb3-245"><a href="#cb3-245" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> <span class="fu">ifelse</span>(term <span class="sc">==</span> <span class="st">'sd__(Intercept)'</span>,<span class="st">'farmer'</span>,term),</span>
-<span id="cb3-246"><a href="#cb3-246" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> <span class="fu">gsub</span>(<span class="st">'fertilizer_treatment|region'</span>,<span class="st">''</span>,term)) <span class="sc">|&gt;</span></span>
-<span id="cb3-247"><a href="#cb3-247" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">c</span>(component,group))</span>
-<span id="cb3-248"><a href="#cb3-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-249"><a href="#cb3-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-244"><a href="#cb3-244" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-245"><a href="#cb3-245" aria-hidden="true" tabindex="-1"></a>    <span class="at">effect =</span> <span class="fu">ifelse</span>(effect <span class="sc">==</span> <span class="st">"ran_pars"</span>, <span class="st">"random"</span>, <span class="st">"fixed"</span>),</span>
+<span id="cb3-246"><a href="#cb3-246" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> <span class="fu">ifelse</span>(term <span class="sc">==</span> <span class="st">"sd__(Intercept)"</span>, <span class="st">"farmer"</span>, term),</span>
+<span id="cb3-247"><a href="#cb3-247" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> <span class="fu">gsub</span>(<span class="st">"fertilizer_treatment|region"</span>, <span class="st">""</span>, term)</span>
+<span id="cb3-248"><a href="#cb3-248" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb3-249"><a href="#cb3-249" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">any_of</span>(<span class="fu">c</span>(<span class="st">"component"</span>, <span class="st">"group"</span>)))</span>
 <span id="cb3-250"><a href="#cb3-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-251"><a href="#cb3-251" aria-hidden="true" tabindex="-1"></a>tbl_density_models <span class="ot">&lt;-</span> mission_mod_summary <span class="sc">|&gt;</span></span>
-<span id="cb3-252"><a href="#cb3-252" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>source) <span class="sc">|&gt;</span></span>
-<span id="cb3-253"><a href="#cb3-253" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(<span class="at">groupname_col =</span> <span class="st">"mission_number"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-254"><a href="#cb3-254" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
-<span id="cb3-255"><a href="#cb3-255" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(estimate, std.error, statistic, p.value),</span>
-<span id="cb3-256"><a href="#cb3-256" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">3</span></span>
-<span id="cb3-257"><a href="#cb3-257" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb3-258"><a href="#cb3-258" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb3-259"><a href="#cb3-259" aria-hidden="true" tabindex="-1"></a>    <span class="at">mission_number =</span> <span class="st">"Mission"</span>,</span>
-<span id="cb3-260"><a href="#cb3-260" aria-hidden="true" tabindex="-1"></a>    <span class="at">effect =</span> <span class="st">"Effect"</span>,</span>
-<span id="cb3-261"><a href="#cb3-261" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> <span class="st">"Term"</span>,</span>
-<span id="cb3-262"><a href="#cb3-262" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimate =</span> <span class="st">"Estimate"</span>,</span>
-<span id="cb3-263"><a href="#cb3-263" aria-hidden="true" tabindex="-1"></a>    <span class="at">std.error =</span> <span class="st">"Std. Error"</span>,</span>
-<span id="cb3-264"><a href="#cb3-264" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="st">"Statistic"</span>,</span>
-<span id="cb3-265"><a href="#cb3-265" aria-hidden="true" tabindex="-1"></a>    <span class="at">p.value =</span> <span class="st">"P-value"</span></span>
-<span id="cb3-266"><a href="#cb3-266" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb3-267"><a href="#cb3-267" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb3-268"><a href="#cb3-268" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"OSE density by treatment and region by mission"</span></span>
-<span id="cb3-269"><a href="#cb3-269" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb3-270"><a href="#cb3-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-271"><a href="#cb3-271" aria-hidden="true" tabindex="-1"></a><span class="fu">save_gt_png</span>(tbl_density_models, <span class="st">"ose_density_model_summaries_by_mission.png"</span>)</span>
-<span id="cb3-272"><a href="#cb3-272" aria-hidden="true" tabindex="-1"></a>tbl_density_models</span>
-<span id="cb3-273"><a href="#cb3-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-274"><a href="#cb3-274" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-275"><a href="#cb3-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-276"><a href="#cb3-276" aria-hidden="true" tabindex="-1"></a>Here are the pairwise comparisons between region and treatment by mission number. Fair warning, its a large table since there are a lot of regions.</span>
-<span id="cb3-277"><a href="#cb3-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-280"><a href="#cb3-280" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb3-281"><a href="#cb3-281" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb3-282"><a href="#cb3-282" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb3-283"><a href="#cb3-283" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb3-284"><a href="#cb3-284" aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
-<span id="cb3-285"><a href="#cb3-285" aria-hidden="true" tabindex="-1"></a>tbl_density_pairwise <span class="ot">&lt;-</span> mission_pairs <span class="sc">|&gt;</span></span>
-<span id="cb3-286"><a href="#cb3-286" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(contrast) <span class="sc">|&gt;</span></span>
-<span id="cb3-287"><a href="#cb3-287" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>source) <span class="sc">|&gt;</span></span>
-<span id="cb3-288"><a href="#cb3-288" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(<span class="at">groupname_col =</span> <span class="st">"mission_number"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-289"><a href="#cb3-289" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
-<span id="cb3-290"><a href="#cb3-290" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(ratio, SE, z.ratio, p.value),</span>
-<span id="cb3-291"><a href="#cb3-291" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">3</span></span>
-<span id="cb3-292"><a href="#cb3-292" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb3-293"><a href="#cb3-293" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb3-294"><a href="#cb3-294" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"OSE density model pairwise comparisons by mission"</span></span>
-<span id="cb3-295"><a href="#cb3-295" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb3-296"><a href="#cb3-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-297"><a href="#cb3-297" aria-hidden="true" tabindex="-1"></a><span class="fu">save_gt_png</span>(tbl_density_pairwise, <span class="st">"ose_density_pairwise_comparisons_by_mission.png"</span>)</span>
-<span id="cb3-298"><a href="#cb3-298" aria-hidden="true" tabindex="-1"></a>tbl_density_pairwise </span>
-<span id="cb3-299"><a href="#cb3-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-300"><a href="#cb3-300" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-301"><a href="#cb3-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-302"><a href="#cb3-302" aria-hidden="true" tabindex="-1"></a><span class="fu"># Table: annual OSE density by region and field type</span></span>
-<span id="cb3-303"><a href="#cb3-303" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-304"><a href="#cb3-304" aria-hidden="true" tabindex="-1"></a>The data discrepancies seen the the OSE count x ground cover are really shown in this table as well. We can see that the trends are the same (e.g. fertilized plots have less than control), but the actual averages are totally different.</span>
-<span id="cb3-305"><a href="#cb3-305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-308"><a href="#cb3-308" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb3-309"><a href="#cb3-309" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb3-310"><a href="#cb3-310" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb3-311"><a href="#cb3-311" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb3-312"><a href="#cb3-312" aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
-<span id="cb3-313"><a href="#cb3-313" aria-hidden="true" tabindex="-1"></a>ose_dat <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
-<span id="cb3-314"><a href="#cb3-314" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(region, fertilizer_treatment, ose_count) <span class="sc">|&gt;</span></span>
-<span id="cb3-315"><a href="#cb3-315" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">region =</span> <span class="fu">factor</span>(region, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">'Saint Louis'</span>, <span class="st">'Thies'</span>, <span class="st">'Fatick'</span>, <span class="st">'Kaffrine'</span>)),</span>
-<span id="cb3-316"><a href="#cb3-316" aria-hidden="true" tabindex="-1"></a>         <span class="at">fertilizer_treatment =</span> <span class="fu">factor</span>(fertilizer_treatment, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">'fertilized'</span>, <span class="st">'control'</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb3-317"><a href="#cb3-317" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(ose_count, fertilizer_treatment) <span class="sc">|&gt;</span></span>
-<span id="cb3-318"><a href="#cb3-318" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region, fertilizer_treatment) <span class="sc">|&gt;</span></span>
-<span id="cb3-319"><a href="#cb3-319" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">ose_mean =</span> <span class="fu">mean</span>(ose_count, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-320"><a href="#cb3-320" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> region, <span class="at">values_from =</span> ose_mean)</span>
-<span id="cb3-321"><a href="#cb3-321" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-322"><a href="#cb3-322" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the gt table</span></span>
-<span id="cb3-323"><a href="#cb3-323" aria-hidden="true" tabindex="-1"></a>tbl_density_summary <span class="ot">&lt;-</span> ose_dat <span class="sc">|&gt;</span></span>
-<span id="cb3-324"><a href="#cb3-324" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(<span class="at">rowname_col =</span> <span class="st">"fertilizer_treatment"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-325"><a href="#cb3-325" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb3-326"><a href="#cb3-326" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Mean OSE Count by Region and Fertilizer Treatment"</span></span>
-<span id="cb3-327"><a href="#cb3-327" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb3-328"><a href="#cb3-328" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
-<span id="cb3-329"><a href="#cb3-329" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">everything</span>(),</span>
-<span id="cb3-330"><a href="#cb3-330" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">2</span></span>
-<span id="cb3-331"><a href="#cb3-331" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb3-332"><a href="#cb3-332" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb3-333"><a href="#cb3-333" aria-hidden="true" tabindex="-1"></a>    <span class="at">fertilizer_treatment =</span> <span class="st">"Treatment"</span>,</span>
-<span id="cb3-334"><a href="#cb3-334" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Saint Louis</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Saint Louis"</span>,</span>
-<span id="cb3-335"><a href="#cb3-335" aria-hidden="true" tabindex="-1"></a>    <span class="at">Thies =</span> <span class="st">"Thies"</span>,</span>
-<span id="cb3-336"><a href="#cb3-336" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fatick =</span> <span class="st">"Fatick"</span>,</span>
-<span id="cb3-337"><a href="#cb3-337" aria-hidden="true" tabindex="-1"></a>    <span class="at">Kaffrine =</span> <span class="st">"Kaffrine"</span></span>
-<span id="cb3-338"><a href="#cb3-338" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb3-339"><a href="#cb3-339" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb3-340"><a href="#cb3-340" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
-<span id="cb3-341"><a href="#cb3-341" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="fu">everything</span>())</span>
-<span id="cb3-342"><a href="#cb3-342" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb3-343"><a href="#cb3-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-344"><a href="#cb3-344" aria-hidden="true" tabindex="-1"></a><span class="fu">save_gt_png</span>(tbl_density_summary, <span class="st">"mean_ose_count_by_region_treatment.png"</span>)</span>
-<span id="cb3-345"><a href="#cb3-345" aria-hidden="true" tabindex="-1"></a>tbl_density_summary</span>
-<span id="cb3-346"><a href="#cb3-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-251"><a href="#cb3-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-252"><a href="#cb3-252" aria-hidden="true" tabindex="-1"></a>tbl_density_models <span class="ot">&lt;-</span> mission_mod_summary <span class="sc">|&gt;</span></span>
+<span id="cb3-253"><a href="#cb3-253" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>source) <span class="sc">|&gt;</span></span>
+<span id="cb3-254"><a href="#cb3-254" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(<span class="at">groupname_col =</span> <span class="st">"mission_number"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-255"><a href="#cb3-255" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
+<span id="cb3-256"><a href="#cb3-256" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(estimate, std.error, statistic, p.value),</span>
+<span id="cb3-257"><a href="#cb3-257" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">3</span></span>
+<span id="cb3-258"><a href="#cb3-258" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb3-259"><a href="#cb3-259" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb3-260"><a href="#cb3-260" aria-hidden="true" tabindex="-1"></a>    <span class="at">mission_number =</span> <span class="st">"Mission"</span>,</span>
+<span id="cb3-261"><a href="#cb3-261" aria-hidden="true" tabindex="-1"></a>    <span class="at">effect =</span> <span class="st">"Effect"</span>,</span>
+<span id="cb3-262"><a href="#cb3-262" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> <span class="st">"Term"</span>,</span>
+<span id="cb3-263"><a href="#cb3-263" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimate =</span> <span class="st">"Estimate"</span>,</span>
+<span id="cb3-264"><a href="#cb3-264" aria-hidden="true" tabindex="-1"></a>    <span class="at">std.error =</span> <span class="st">"Std. Error"</span>,</span>
+<span id="cb3-265"><a href="#cb3-265" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="st">"Statistic"</span>,</span>
+<span id="cb3-266"><a href="#cb3-266" aria-hidden="true" tabindex="-1"></a>    <span class="at">p.value =</span> <span class="st">"P-value"</span></span>
+<span id="cb3-267"><a href="#cb3-267" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb3-268"><a href="#cb3-268" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb3-269"><a href="#cb3-269" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"OSE density by treatment and region by mission"</span></span>
+<span id="cb3-270"><a href="#cb3-270" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-271"><a href="#cb3-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-272"><a href="#cb3-272" aria-hidden="true" tabindex="-1"></a><span class="fu">save_gt_png</span>(tbl_density_models, <span class="st">"ose_density_model_summaries_by_mission.png"</span>)</span>
+<span id="cb3-273"><a href="#cb3-273" aria-hidden="true" tabindex="-1"></a>tbl_density_models</span>
+<span id="cb3-274"><a href="#cb3-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-275"><a href="#cb3-275" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-276"><a href="#cb3-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-277"><a href="#cb3-277" aria-hidden="true" tabindex="-1"></a>Here are the pairwise comparisons between region and treatment by mission number. Fair warning, its a large table since there are a lot of regions.</span>
+<span id="cb3-278"><a href="#cb3-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-281"><a href="#cb3-281" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-282"><a href="#cb3-282" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-283"><a href="#cb3-283" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb3-284"><a href="#cb3-284" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb3-285"><a href="#cb3-285" aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
+<span id="cb3-286"><a href="#cb3-286" aria-hidden="true" tabindex="-1"></a>tbl_density_pairwise <span class="ot">&lt;-</span> mission_pairs <span class="sc">|&gt;</span></span>
+<span id="cb3-287"><a href="#cb3-287" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(contrast) <span class="sc">|&gt;</span></span>
+<span id="cb3-288"><a href="#cb3-288" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>source) <span class="sc">|&gt;</span></span>
+<span id="cb3-289"><a href="#cb3-289" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(<span class="at">groupname_col =</span> <span class="st">"mission_number"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-290"><a href="#cb3-290" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
+<span id="cb3-291"><a href="#cb3-291" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(ratio, SE, z.ratio, p.value),</span>
+<span id="cb3-292"><a href="#cb3-292" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">3</span></span>
+<span id="cb3-293"><a href="#cb3-293" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb3-294"><a href="#cb3-294" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb3-295"><a href="#cb3-295" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"OSE density model pairwise comparisons by mission"</span></span>
+<span id="cb3-296"><a href="#cb3-296" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-297"><a href="#cb3-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-298"><a href="#cb3-298" aria-hidden="true" tabindex="-1"></a><span class="fu">save_gt_png</span>(tbl_density_pairwise, <span class="st">"ose_density_pairwise_comparisons_by_mission.png"</span>)</span>
+<span id="cb3-299"><a href="#cb3-299" aria-hidden="true" tabindex="-1"></a>tbl_density_pairwise </span>
+<span id="cb3-300"><a href="#cb3-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-301"><a href="#cb3-301" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-302"><a href="#cb3-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-303"><a href="#cb3-303" aria-hidden="true" tabindex="-1"></a><span class="fu"># Table: annual OSE density by region and field type</span></span>
+<span id="cb3-304"><a href="#cb3-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-305"><a href="#cb3-305" aria-hidden="true" tabindex="-1"></a>The data discrepancies seen the the OSE count x ground cover are really shown in this table as well. We can see that the trends are the same (e.g. fertilized plots have less than control), but the actual averages are totally different.</span>
+<span id="cb3-306"><a href="#cb3-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-309"><a href="#cb3-309" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-310"><a href="#cb3-310" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-311"><a href="#cb3-311" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb3-312"><a href="#cb3-312" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb3-313"><a href="#cb3-313" aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
+<span id="cb3-314"><a href="#cb3-314" aria-hidden="true" tabindex="-1"></a>ose_dat <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb3-315"><a href="#cb3-315" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(region, fertilizer_treatment, ose_count) <span class="sc">|&gt;</span></span>
+<span id="cb3-316"><a href="#cb3-316" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">region =</span> <span class="fu">factor</span>(region, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">'Saint Louis'</span>, <span class="st">'Thies'</span>, <span class="st">'Fatick'</span>, <span class="st">'Kaffrine'</span>)),</span>
+<span id="cb3-317"><a href="#cb3-317" aria-hidden="true" tabindex="-1"></a>         <span class="at">fertilizer_treatment =</span> <span class="fu">factor</span>(fertilizer_treatment, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">'fertilized'</span>, <span class="st">'control'</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb3-318"><a href="#cb3-318" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(ose_count, fertilizer_treatment) <span class="sc">|&gt;</span></span>
+<span id="cb3-319"><a href="#cb3-319" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region, fertilizer_treatment) <span class="sc">|&gt;</span></span>
+<span id="cb3-320"><a href="#cb3-320" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">ose_mean =</span> <span class="fu">mean</span>(ose_count, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-321"><a href="#cb3-321" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> region, <span class="at">values_from =</span> ose_mean)</span>
+<span id="cb3-322"><a href="#cb3-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-323"><a href="#cb3-323" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the gt table</span></span>
+<span id="cb3-324"><a href="#cb3-324" aria-hidden="true" tabindex="-1"></a>tbl_density_summary <span class="ot">&lt;-</span> ose_dat <span class="sc">|&gt;</span></span>
+<span id="cb3-325"><a href="#cb3-325" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(<span class="at">rowname_col =</span> <span class="st">"fertilizer_treatment"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-326"><a href="#cb3-326" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb3-327"><a href="#cb3-327" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Mean OSE Count by Region and Fertilizer Treatment"</span></span>
+<span id="cb3-328"><a href="#cb3-328" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb3-329"><a href="#cb3-329" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
+<span id="cb3-330"><a href="#cb3-330" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">everything</span>(),</span>
+<span id="cb3-331"><a href="#cb3-331" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">2</span></span>
+<span id="cb3-332"><a href="#cb3-332" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb3-333"><a href="#cb3-333" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb3-334"><a href="#cb3-334" aria-hidden="true" tabindex="-1"></a>    <span class="at">fertilizer_treatment =</span> <span class="st">"Treatment"</span>,</span>
+<span id="cb3-335"><a href="#cb3-335" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Saint Louis</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Saint Louis"</span>,</span>
+<span id="cb3-336"><a href="#cb3-336" aria-hidden="true" tabindex="-1"></a>    <span class="at">Thies =</span> <span class="st">"Thies"</span>,</span>
+<span id="cb3-337"><a href="#cb3-337" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fatick =</span> <span class="st">"Fatick"</span>,</span>
+<span id="cb3-338"><a href="#cb3-338" aria-hidden="true" tabindex="-1"></a>    <span class="at">Kaffrine =</span> <span class="st">"Kaffrine"</span></span>
+<span id="cb3-339"><a href="#cb3-339" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb3-340"><a href="#cb3-340" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb3-341"><a href="#cb3-341" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
+<span id="cb3-342"><a href="#cb3-342" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="fu">everything</span>())</span>
+<span id="cb3-343"><a href="#cb3-343" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-344"><a href="#cb3-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-345"><a href="#cb3-345" aria-hidden="true" tabindex="-1"></a><span class="fu">save_gt_png</span>(tbl_density_summary, <span class="st">"mean_ose_count_by_region_treatment.png"</span>)</span>
+<span id="cb3-346"><a href="#cb3-346" aria-hidden="true" tabindex="-1"></a>tbl_density_summary</span>
 <span id="cb3-347"><a href="#cb3-347" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-348"><a href="#cb3-348" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-349"><a href="#cb3-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-350"><a href="#cb3-350" aria-hidden="true" tabindex="-1"></a><span class="fu"># OSE count by treatment/region accounting for ground cover perent</span></span>
-<span id="cb3-351"><a href="#cb3-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-352"><a href="#cb3-352" aria-hidden="true" tabindex="-1"></a>The first test is to compare a model with ground cover and a model without ground cover. We will build both models per mission and then compare the estimated marginal means.</span>
-<span id="cb3-353"><a href="#cb3-353" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-356"><a href="#cb3-356" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb3-357"><a href="#cb3-357" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb3-358"><a href="#cb3-358" aria-hidden="true" tabindex="-1"></a>plots <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb3-359"><a href="#cb3-359" aria-hidden="true" tabindex="-1"></a>aic_results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb3-360"><a href="#cb3-360" aria-hidden="true" tabindex="-1"></a>  <span class="at">mission_number =</span> <span class="fu">character</span>(),</span>
-<span id="cb3-361"><a href="#cb3-361" aria-hidden="true" tabindex="-1"></a>  <span class="at">AIC_with_gc =</span> <span class="fu">numeric</span>(),</span>
-<span id="cb3-362"><a href="#cb3-362" aria-hidden="true" tabindex="-1"></a>  <span class="at">AIC_without_gc =</span> <span class="fu">numeric</span>(),</span>
-<span id="cb3-363"><a href="#cb3-363" aria-hidden="true" tabindex="-1"></a>  <span class="at">best_model =</span> <span class="fu">character</span>()</span>
-<span id="cb3-364"><a href="#cb3-364" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-365"><a href="#cb3-365" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-366"><a href="#cb3-366" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (mission <span class="cf">in</span> <span class="fu">unique</span>(data<span class="sc">$</span>mission_number)) {</span>
-<span id="cb3-367"><a href="#cb3-367" aria-hidden="true" tabindex="-1"></a>  dat_sub <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(mission_number <span class="sc">==</span> mission)</span>
-<span id="cb3-368"><a href="#cb3-368" aria-hidden="true" tabindex="-1"></a>  mod_w_gc <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(</span>
-<span id="cb3-369"><a href="#cb3-369" aria-hidden="true" tabindex="-1"></a>    ose_count <span class="sc">~</span> fertilizer_treatment <span class="sc">*</span> region <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>farmer) <span class="sc">+</span> percent_ground_cover,</span>
-<span id="cb3-370"><a href="#cb3-370" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat_sub,</span>
-<span id="cb3-371"><a href="#cb3-371" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">tweedie</span>()</span>
-<span id="cb3-372"><a href="#cb3-372" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb3-373"><a href="#cb3-373" aria-hidden="true" tabindex="-1"></a>  mod2_wo_gc <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(</span>
-<span id="cb3-374"><a href="#cb3-374" aria-hidden="true" tabindex="-1"></a>    ose_count <span class="sc">~</span> fertilizer_treatment <span class="sc">*</span> region <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>farmer),</span>
-<span id="cb3-375"><a href="#cb3-375" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat_sub,</span>
-<span id="cb3-376"><a href="#cb3-376" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">tweedie</span>()</span>
-<span id="cb3-377"><a href="#cb3-377" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb3-378"><a href="#cb3-378" aria-hidden="true" tabindex="-1"></a>  <span class="co"># AIC comparison</span></span>
-<span id="cb3-379"><a href="#cb3-379" aria-hidden="true" tabindex="-1"></a>  aic_with_gc <span class="ot">&lt;-</span> <span class="fu">AIC</span>(mod_w_gc)</span>
-<span id="cb3-380"><a href="#cb3-380" aria-hidden="true" tabindex="-1"></a>  aic_without_gc <span class="ot">&lt;-</span> <span class="fu">AIC</span>(mod2_wo_gc)</span>
-<span id="cb3-381"><a href="#cb3-381" aria-hidden="true" tabindex="-1"></a>  best <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(aic_with_gc <span class="sc">&lt;</span> aic_without_gc, <span class="st">"with ground cover"</span>, <span class="st">"without ground cover"</span>)</span>
-<span id="cb3-382"><a href="#cb3-382" aria-hidden="true" tabindex="-1"></a>  aic_results <span class="ot">&lt;-</span> <span class="fu">rbind</span>(aic_results, <span class="fu">data.frame</span>(</span>
-<span id="cb3-383"><a href="#cb3-383" aria-hidden="true" tabindex="-1"></a>    <span class="at">mission_number =</span> mission,</span>
-<span id="cb3-384"><a href="#cb3-384" aria-hidden="true" tabindex="-1"></a>    <span class="at">AIC_with_gc =</span> aic_with_gc,</span>
-<span id="cb3-385"><a href="#cb3-385" aria-hidden="true" tabindex="-1"></a>    <span class="at">AIC_without_gc =</span> aic_without_gc,</span>
-<span id="cb3-386"><a href="#cb3-386" aria-hidden="true" tabindex="-1"></a>    <span class="at">best_model =</span> best</span>
-<span id="cb3-387"><a href="#cb3-387" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb3-388"><a href="#cb3-388" aria-hidden="true" tabindex="-1"></a>  <span class="co"># emmeans and plot</span></span>
-<span id="cb3-389"><a href="#cb3-389" aria-hidden="true" tabindex="-1"></a>  mod_emms <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod_w_gc, <span class="sc">~</span> fertilizer_treatment <span class="sc">*</span> region, <span class="at">type =</span> <span class="st">"response"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb3-390"><a href="#cb3-390" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">name =</span> <span class="st">'with ground cover'</span>, <span class="at">mission_number =</span> mission)</span>
-<span id="cb3-391"><a href="#cb3-391" aria-hidden="true" tabindex="-1"></a>  mod2_emms <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod2_wo_gc, <span class="sc">~</span> fertilizer_treatment <span class="sc">*</span> region, <span class="at">type =</span> <span class="st">"response"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb3-392"><a href="#cb3-392" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">name =</span> <span class="st">'without ground cover'</span>, <span class="at">mission_number =</span> mission)</span>
-<span id="cb3-393"><a href="#cb3-393" aria-hidden="true" tabindex="-1"></a>  combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(mod_emms, mod2_emms)</span>
-<span id="cb3-394"><a href="#cb3-394" aria-hidden="true" tabindex="-1"></a>  combined<span class="sc">$</span>region <span class="ot">&lt;-</span> <span class="fu">factor</span>(combined<span class="sc">$</span>region, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Kaffrine"</span>, <span class="st">"Thies"</span>, <span class="st">"Fatick"</span>, <span class="st">"Saint Louis"</span>))</span>
-<span id="cb3-395"><a href="#cb3-395" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-396"><a href="#cb3-396" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(combined, <span class="fu">aes</span>(<span class="at">x=</span>region, <span class="at">y=</span>response, <span class="at">color=</span>fertilizer_treatment, <span class="at">shape=</span>name)) <span class="sc">+</span></span>
-<span id="cb3-397"><a href="#cb3-397" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">position=</span><span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.4</span>), <span class="at">size=</span><span class="dv">6</span>) <span class="sc">+</span></span>
-<span id="cb3-398"><a href="#cb3-398" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> asymp.LCL, <span class="at">ymax =</span> asymp.UCL), <span class="at">position=</span><span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.4</span>), <span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb3-399"><a href="#cb3-399" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"control"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"fertilized"</span> <span class="ot">=</span> <span class="st">"#006400"</span>)) <span class="sc">+</span></span>
-<span id="cb3-400"><a href="#cb3-400" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Mission"</span>, mission))</span>
-<span id="cb3-401"><a href="#cb3-401" aria-hidden="true" tabindex="-1"></a>  plots[[<span class="fu">as.character</span>(mission)]] <span class="ot">&lt;-</span> p</span>
-<span id="cb3-402"><a href="#cb3-402" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-403"><a href="#cb3-403" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-404"><a href="#cb3-404" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine plots in one column (three rows)</span></span>
-<span id="cb3-405"><a href="#cb3-405" aria-hidden="true" tabindex="-1"></a>(plots[[<span class="dv">1</span>]] <span class="sc">/</span> plots[[<span class="dv">2</span>]] <span class="sc">/</span> plots[[<span class="dv">3</span>]])</span>
-<span id="cb3-406"><a href="#cb3-406" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-407"><a href="#cb3-407" aria-hidden="true" tabindex="-1"></a><span class="co"># Show AIC results</span></span>
-<span id="cb3-408"><a href="#cb3-408" aria-hidden="true" tabindex="-1"></a>aic_results</span>
-<span id="cb3-409"><a href="#cb3-409" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-348"><a href="#cb3-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-349"><a href="#cb3-349" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-350"><a href="#cb3-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-351"><a href="#cb3-351" aria-hidden="true" tabindex="-1"></a><span class="fu"># OSE count by treatment/region accounting for ground cover perent</span></span>
+<span id="cb3-352"><a href="#cb3-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-353"><a href="#cb3-353" aria-hidden="true" tabindex="-1"></a>The first test is to compare a model with ground cover and a model without ground cover. We will build both models per mission and then compare the estimated marginal means.</span>
+<span id="cb3-354"><a href="#cb3-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-357"><a href="#cb3-357" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-358"><a href="#cb3-358" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb3-359"><a href="#cb3-359" aria-hidden="true" tabindex="-1"></a>plots <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb3-360"><a href="#cb3-360" aria-hidden="true" tabindex="-1"></a>aic_results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb3-361"><a href="#cb3-361" aria-hidden="true" tabindex="-1"></a>  <span class="at">mission_number =</span> <span class="fu">character</span>(),</span>
+<span id="cb3-362"><a href="#cb3-362" aria-hidden="true" tabindex="-1"></a>  <span class="at">AIC_with_gc =</span> <span class="fu">numeric</span>(),</span>
+<span id="cb3-363"><a href="#cb3-363" aria-hidden="true" tabindex="-1"></a>  <span class="at">AIC_without_gc =</span> <span class="fu">numeric</span>(),</span>
+<span id="cb3-364"><a href="#cb3-364" aria-hidden="true" tabindex="-1"></a>  <span class="at">best_model =</span> <span class="fu">character</span>()</span>
+<span id="cb3-365"><a href="#cb3-365" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-366"><a href="#cb3-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-367"><a href="#cb3-367" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (mission <span class="cf">in</span> <span class="fu">unique</span>(data<span class="sc">$</span>mission_number)) {</span>
+<span id="cb3-368"><a href="#cb3-368" aria-hidden="true" tabindex="-1"></a>  dat_sub <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(mission_number <span class="sc">==</span> mission)</span>
+<span id="cb3-369"><a href="#cb3-369" aria-hidden="true" tabindex="-1"></a>  mod_w_gc <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(</span>
+<span id="cb3-370"><a href="#cb3-370" aria-hidden="true" tabindex="-1"></a>    ose_count <span class="sc">~</span> fertilizer_treatment <span class="sc">*</span> region <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>farmer) <span class="sc">+</span> percent_ground_cover,</span>
+<span id="cb3-371"><a href="#cb3-371" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat_sub,</span>
+<span id="cb3-372"><a href="#cb3-372" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">tweedie</span>()</span>
+<span id="cb3-373"><a href="#cb3-373" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-374"><a href="#cb3-374" aria-hidden="true" tabindex="-1"></a>  mod2_wo_gc <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(</span>
+<span id="cb3-375"><a href="#cb3-375" aria-hidden="true" tabindex="-1"></a>    ose_count <span class="sc">~</span> fertilizer_treatment <span class="sc">*</span> region <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>farmer),</span>
+<span id="cb3-376"><a href="#cb3-376" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat_sub,</span>
+<span id="cb3-377"><a href="#cb3-377" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">tweedie</span>()</span>
+<span id="cb3-378"><a href="#cb3-378" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-379"><a href="#cb3-379" aria-hidden="true" tabindex="-1"></a>  <span class="co"># AIC comparison</span></span>
+<span id="cb3-380"><a href="#cb3-380" aria-hidden="true" tabindex="-1"></a>  aic_with_gc <span class="ot">&lt;-</span> <span class="fu">AIC</span>(mod_w_gc)</span>
+<span id="cb3-381"><a href="#cb3-381" aria-hidden="true" tabindex="-1"></a>  aic_without_gc <span class="ot">&lt;-</span> <span class="fu">AIC</span>(mod2_wo_gc)</span>
+<span id="cb3-382"><a href="#cb3-382" aria-hidden="true" tabindex="-1"></a>  best <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(aic_with_gc <span class="sc">&lt;</span> aic_without_gc, <span class="st">"with ground cover"</span>, <span class="st">"without ground cover"</span>)</span>
+<span id="cb3-383"><a href="#cb3-383" aria-hidden="true" tabindex="-1"></a>  aic_results <span class="ot">&lt;-</span> <span class="fu">rbind</span>(aic_results, <span class="fu">data.frame</span>(</span>
+<span id="cb3-384"><a href="#cb3-384" aria-hidden="true" tabindex="-1"></a>    <span class="at">mission_number =</span> mission,</span>
+<span id="cb3-385"><a href="#cb3-385" aria-hidden="true" tabindex="-1"></a>    <span class="at">AIC_with_gc =</span> aic_with_gc,</span>
+<span id="cb3-386"><a href="#cb3-386" aria-hidden="true" tabindex="-1"></a>    <span class="at">AIC_without_gc =</span> aic_without_gc,</span>
+<span id="cb3-387"><a href="#cb3-387" aria-hidden="true" tabindex="-1"></a>    <span class="at">best_model =</span> best</span>
+<span id="cb3-388"><a href="#cb3-388" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb3-389"><a href="#cb3-389" aria-hidden="true" tabindex="-1"></a>  <span class="co"># emmeans and plot</span></span>
+<span id="cb3-390"><a href="#cb3-390" aria-hidden="true" tabindex="-1"></a>  mod_emms <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod_w_gc, <span class="sc">~</span> fertilizer_treatment <span class="sc">*</span> region, <span class="at">type =</span> <span class="st">"response"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb3-391"><a href="#cb3-391" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">name =</span> <span class="st">'with ground cover'</span>, <span class="at">mission_number =</span> mission)</span>
+<span id="cb3-392"><a href="#cb3-392" aria-hidden="true" tabindex="-1"></a>  mod2_emms <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod2_wo_gc, <span class="sc">~</span> fertilizer_treatment <span class="sc">*</span> region, <span class="at">type =</span> <span class="st">"response"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb3-393"><a href="#cb3-393" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">name =</span> <span class="st">'without ground cover'</span>, <span class="at">mission_number =</span> mission)</span>
+<span id="cb3-394"><a href="#cb3-394" aria-hidden="true" tabindex="-1"></a>  combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(mod_emms, mod2_emms)</span>
+<span id="cb3-395"><a href="#cb3-395" aria-hidden="true" tabindex="-1"></a>  combined<span class="sc">$</span>region <span class="ot">&lt;-</span> <span class="fu">factor</span>(combined<span class="sc">$</span>region, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Kaffrine"</span>, <span class="st">"Thies"</span>, <span class="st">"Fatick"</span>, <span class="st">"Saint Louis"</span>))</span>
+<span id="cb3-396"><a href="#cb3-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-397"><a href="#cb3-397" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(combined, <span class="fu">aes</span>(<span class="at">x=</span>region, <span class="at">y=</span>response, <span class="at">color=</span>fertilizer_treatment, <span class="at">shape=</span>name)) <span class="sc">+</span></span>
+<span id="cb3-398"><a href="#cb3-398" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">position=</span><span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.4</span>), <span class="at">size=</span><span class="dv">6</span>) <span class="sc">+</span></span>
+<span id="cb3-399"><a href="#cb3-399" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> asymp.LCL, <span class="at">ymax =</span> asymp.UCL), <span class="at">position=</span><span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.4</span>), <span class="at">width=</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb3-400"><a href="#cb3-400" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"control"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"fertilized"</span> <span class="ot">=</span> <span class="st">"#006400"</span>)) <span class="sc">+</span></span>
+<span id="cb3-401"><a href="#cb3-401" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Mission"</span>, mission))</span>
+<span id="cb3-402"><a href="#cb3-402" aria-hidden="true" tabindex="-1"></a>  plots[[<span class="fu">as.character</span>(mission)]] <span class="ot">&lt;-</span> p</span>
+<span id="cb3-403"><a href="#cb3-403" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-404"><a href="#cb3-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-405"><a href="#cb3-405" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine plots in one column (three rows)</span></span>
+<span id="cb3-406"><a href="#cb3-406" aria-hidden="true" tabindex="-1"></a>(plots[[<span class="dv">1</span>]] <span class="sc">/</span> plots[[<span class="dv">2</span>]] <span class="sc">/</span> plots[[<span class="dv">3</span>]])</span>
+<span id="cb3-407"><a href="#cb3-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-408"><a href="#cb3-408" aria-hidden="true" tabindex="-1"></a><span class="co"># Show AIC results</span></span>
+<span id="cb3-409"><a href="#cb3-409" aria-hidden="true" tabindex="-1"></a>aic_results</span>
+<span id="cb3-410"><a href="#cb3-410" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

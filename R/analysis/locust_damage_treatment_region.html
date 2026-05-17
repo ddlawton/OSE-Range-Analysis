@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>2021 Locust Damage Analysis – OSE Range Analysis</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -67,19 +70,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-17d01b5babc88cbee53e37b4dd766b3a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-7f54657f98cfd61baa5fc740dde4b5a5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-17d01b5babc88cbee53e37b4dd766b3a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-b41724e58f79c1b7773766b10b517708.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-1a081a750f1ddb3367c3896ea17eb885.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-b41724e58f79c1b7773766b10b517708.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -467,16 +469,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 22 × 10
    mission_numer fertilizer_treatment region    response      SE    df asymp.LCL
    &lt;chr&gt;         &lt;fct&gt;                &lt;fct&gt;        &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
- 1 1             control              Fatick     0.0148  0.00292   Inf   0.0100 
- 2 1             fertilized           Fatick     0.0206  0.00372   Inf   0.0145 
- 3 1             control              Kaffrine   0.0517  0.00742   Inf   0.0391 
- 4 1             fertilized           Kaffrine   0.0439  0.00637   Inf   0.0330 
- 5 1             control              Saint Lo…  0.00635 0.00199   Inf   0.00344
- 6 1             fertilized           Saint Lo…  0.00405 0.00143   Inf   0.00202
- 7 1             control              Thies      0.00684 0.00190   Inf   0.00398
- 8 1             fertilized           Thies      0.00560 0.00164   Inf   0.00315
- 9 2             control              Fatick     0.00675 0.00216   Inf   0.00360
-10 2             fertilized           Fatick     0.00264 0.00112   Inf   0.00115
+ 1 1             control              Fatick     0.0161  0.00328   Inf   0.0108 
+ 2 1             fertilized           Fatick     0.0224  0.00417   Inf   0.0156 
+ 3 1             control              Kaffrine   0.0554  0.00823   Inf   0.0414 
+ 4 1             fertilized           Kaffrine   0.0470  0.00707   Inf   0.0350 
+ 5 1             control              Saint Lo…  0.00890 0.00271   Inf   0.00490
+ 6 1             fertilized           Saint Lo…  0.00565 0.00191   Inf   0.00291
+ 7 1             control              Thies      0.00831 0.00231   Inf   0.00482
+ 8 1             fertilized           Thies      0.00679 0.00199   Inf   0.00382
+ 9 2             control              Fatick     0.00744 0.00244   Inf   0.00391
+10 2             fertilized           Fatick     0.00291 0.00126   Inf   0.00124
 # ℹ 12 more rows
 # ℹ 3 more variables: asymp.UCL &lt;dbl&gt;, mission &lt;int&gt;, source &lt;chr&gt;</code></pre>
 </div>
@@ -487,23 +489,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Here are the model summaries and pairwise comparisons. This will be <em>across</em> missions, but please keep in mind each mission had it’s own model. So we cant make across-mission comparions just yet.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="lonpdmckxp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lonpdmckxp table {
+<div id="cevgpuslsw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cevgpuslsw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lonpdmckxp thead, #lonpdmckxp tbody, #lonpdmckxp tfoot, #lonpdmckxp tr, #lonpdmckxp td, #lonpdmckxp th {
+#cevgpuslsw thead, #cevgpuslsw tbody, #cevgpuslsw tfoot, #cevgpuslsw tr, #cevgpuslsw td, #cevgpuslsw th {
   border-style: none;
 }
 
-#lonpdmckxp p {
+#cevgpuslsw p {
   margin: 0;
   padding: 0;
 }
 
-#lonpdmckxp .gt_table {
+#cevgpuslsw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -529,12 +531,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#lonpdmckxp .gt_caption {
+#cevgpuslsw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lonpdmckxp .gt_title {
+#cevgpuslsw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -546,7 +548,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#lonpdmckxp .gt_subtitle {
+#cevgpuslsw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -558,7 +560,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#lonpdmckxp .gt_heading {
+#cevgpuslsw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -570,13 +572,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#lonpdmckxp .gt_bottom_border {
+#cevgpuslsw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lonpdmckxp .gt_col_headings {
+#cevgpuslsw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -591,7 +593,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#lonpdmckxp .gt_col_heading {
+#cevgpuslsw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -611,7 +613,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#lonpdmckxp .gt_column_spanner_outer {
+#cevgpuslsw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -623,15 +625,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#lonpdmckxp .gt_column_spanner_outer:first-child {
+#cevgpuslsw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lonpdmckxp .gt_column_spanner_outer:last-child {
+#cevgpuslsw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lonpdmckxp .gt_column_spanner {
+#cevgpuslsw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -643,11 +645,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#lonpdmckxp .gt_spanner_row {
+#cevgpuslsw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lonpdmckxp .gt_group_heading {
+#cevgpuslsw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -673,7 +675,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#lonpdmckxp .gt_empty_group_heading {
+#cevgpuslsw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -688,15 +690,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#lonpdmckxp .gt_from_md > :first-child {
+#cevgpuslsw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lonpdmckxp .gt_from_md > :last-child {
+#cevgpuslsw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lonpdmckxp .gt_row {
+#cevgpuslsw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -715,7 +717,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#lonpdmckxp .gt_stub {
+#cevgpuslsw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -728,7 +730,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lonpdmckxp .gt_stub_row_group {
+#cevgpuslsw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -742,15 +744,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#lonpdmckxp .gt_row_group_first td {
+#cevgpuslsw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lonpdmckxp .gt_row_group_first th {
+#cevgpuslsw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lonpdmckxp .gt_summary_row {
+#cevgpuslsw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -760,16 +762,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lonpdmckxp .gt_first_summary_row {
+#cevgpuslsw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lonpdmckxp .gt_first_summary_row.thick {
+#cevgpuslsw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lonpdmckxp .gt_last_summary_row {
+#cevgpuslsw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -779,7 +781,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#lonpdmckxp .gt_grand_summary_row {
+#cevgpuslsw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -789,7 +791,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lonpdmckxp .gt_first_grand_summary_row {
+#cevgpuslsw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -799,7 +801,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#lonpdmckxp .gt_last_grand_summary_row_top {
+#cevgpuslsw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -809,11 +811,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#lonpdmckxp .gt_striped {
+#cevgpuslsw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lonpdmckxp .gt_table_body {
+#cevgpuslsw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -822,7 +824,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#lonpdmckxp .gt_footnotes {
+#cevgpuslsw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -836,7 +838,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#lonpdmckxp .gt_footnote {
+#cevgpuslsw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -845,7 +847,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lonpdmckxp .gt_sourcenotes {
+#cevgpuslsw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -859,7 +861,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#lonpdmckxp .gt_sourcenote {
+#cevgpuslsw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -867,72 +869,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#lonpdmckxp .gt_left {
+#cevgpuslsw .gt_left {
   text-align: left;
 }
 
-#lonpdmckxp .gt_center {
+#cevgpuslsw .gt_center {
   text-align: center;
 }
 
-#lonpdmckxp .gt_right {
+#cevgpuslsw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lonpdmckxp .gt_font_normal {
+#cevgpuslsw .gt_font_normal {
   font-weight: normal;
 }
 
-#lonpdmckxp .gt_font_bold {
+#cevgpuslsw .gt_font_bold {
   font-weight: bold;
 }
 
-#lonpdmckxp .gt_font_italic {
+#cevgpuslsw .gt_font_italic {
   font-style: italic;
 }
 
-#lonpdmckxp .gt_super {
+#cevgpuslsw .gt_super {
   font-size: 65%;
 }
 
-#lonpdmckxp .gt_footnote_marks {
+#cevgpuslsw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lonpdmckxp .gt_asterisk {
+#cevgpuslsw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lonpdmckxp .gt_indent_1 {
+#cevgpuslsw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lonpdmckxp .gt_indent_2 {
+#cevgpuslsw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lonpdmckxp .gt_indent_3 {
+#cevgpuslsw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lonpdmckxp .gt_indent_4 {
+#cevgpuslsw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lonpdmckxp .gt_indent_5 {
+#cevgpuslsw .gt_indent_5 {
   text-indent: 25px;
 }
 
-#lonpdmckxp .katex-display {
+#cevgpuslsw .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#lonpdmckxp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#cevgpuslsw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -958,71 +960,71 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="gt_row_group_first even">
 <td class="gt_row gt_left" headers="1  effect">fixed</td>
 <td class="gt_row gt_left" headers="1  term">(Intercept)</td>
-<td class="gt_row gt_right" headers="1  estimate">−4.216</td>
-<td class="gt_row gt_right" headers="1  std.error">0.198</td>
-<td class="gt_row gt_right" headers="1  statistic">−21.290</td>
+<td class="gt_row gt_right" headers="1  estimate">−4.130</td>
+<td class="gt_row gt_right" headers="1  std.error">0.204</td>
+<td class="gt_row gt_right" headers="1  statistic">−20.241</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="1  effect">fixed</td>
 <td class="gt_row gt_left" headers="1  term">fertilized</td>
-<td class="gt_row gt_right" headers="1  estimate">0.335</td>
-<td class="gt_row gt_right" headers="1  std.error">0.184</td>
-<td class="gt_row gt_right" headers="1  statistic">1.816</td>
-<td class="gt_row gt_right" headers="1  p.value">0.069</td>
+<td class="gt_row gt_right" headers="1  estimate">0.332</td>
+<td class="gt_row gt_right" headers="1  std.error">0.190</td>
+<td class="gt_row gt_right" headers="1  statistic">1.749</td>
+<td class="gt_row gt_right" headers="1  p.value">0.080</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="1  effect">fixed</td>
 <td class="gt_row gt_left" headers="1  term">Kaffrine</td>
-<td class="gt_row gt_right" headers="1  estimate">1.254</td>
-<td class="gt_row gt_right" headers="1  std.error">0.240</td>
-<td class="gt_row gt_right" headers="1  statistic">5.234</td>
+<td class="gt_row gt_right" headers="1  estimate">1.237</td>
+<td class="gt_row gt_right" headers="1  std.error">0.247</td>
+<td class="gt_row gt_right" headers="1  statistic">4.997</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="1  effect">fixed</td>
 <td class="gt_row gt_left" headers="1  term">Saint Louis</td>
-<td class="gt_row gt_right" headers="1  estimate">−0.844</td>
-<td class="gt_row gt_right" headers="1  std.error">0.358</td>
-<td class="gt_row gt_right" headers="1  statistic">−2.353</td>
-<td class="gt_row gt_right" headers="1  p.value">0.019</td>
+<td class="gt_row gt_right" headers="1  estimate">−0.592</td>
+<td class="gt_row gt_right" headers="1  std.error">0.352</td>
+<td class="gt_row gt_right" headers="1  statistic">−1.680</td>
+<td class="gt_row gt_right" headers="1  p.value">0.093</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="1  effect">fixed</td>
 <td class="gt_row gt_left" headers="1  term">Thies</td>
-<td class="gt_row gt_right" headers="1  estimate">−0.769</td>
-<td class="gt_row gt_right" headers="1  std.error">0.329</td>
-<td class="gt_row gt_right" headers="1  statistic">−2.337</td>
-<td class="gt_row gt_right" headers="1  p.value">0.019</td>
+<td class="gt_row gt_right" headers="1  estimate">−0.661</td>
+<td class="gt_row gt_right" headers="1  std.error">0.332</td>
+<td class="gt_row gt_right" headers="1  statistic">−1.989</td>
+<td class="gt_row gt_right" headers="1  p.value">0.047</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="1  effect">fixed</td>
 <td class="gt_row gt_left" headers="1  term">fertilized:Kaffrine</td>
-<td class="gt_row gt_right" headers="1  estimate">−0.499</td>
-<td class="gt_row gt_right" headers="1  std.error">0.217</td>
-<td class="gt_row gt_right" headers="1  statistic">−2.306</td>
-<td class="gt_row gt_right" headers="1  p.value">0.021</td>
+<td class="gt_row gt_right" headers="1  estimate">−0.497</td>
+<td class="gt_row gt_right" headers="1  std.error">0.224</td>
+<td class="gt_row gt_right" headers="1  statistic">−2.218</td>
+<td class="gt_row gt_right" headers="1  p.value">0.027</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="1  effect">fixed</td>
 <td class="gt_row gt_left" headers="1  term">fertilized:Saint Louis</td>
-<td class="gt_row gt_right" headers="1  estimate">−0.785</td>
-<td class="gt_row gt_right" headers="1  std.error">0.418</td>
-<td class="gt_row gt_right" headers="1  statistic">−1.880</td>
-<td class="gt_row gt_right" headers="1  p.value">0.060</td>
+<td class="gt_row gt_right" headers="1  estimate">−0.786</td>
+<td class="gt_row gt_right" headers="1  std.error">0.388</td>
+<td class="gt_row gt_right" headers="1  statistic">−2.026</td>
+<td class="gt_row gt_right" headers="1  p.value">0.043</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="1  effect">fixed</td>
 <td class="gt_row gt_left" headers="1  term">fertilized:Thies</td>
-<td class="gt_row gt_right" headers="1  estimate">−0.536</td>
-<td class="gt_row gt_right" headers="1  std.error">0.363</td>
-<td class="gt_row gt_right" headers="1  statistic">−1.477</td>
-<td class="gt_row gt_right" headers="1  p.value">0.140</td>
+<td class="gt_row gt_right" headers="1  estimate">−0.535</td>
+<td class="gt_row gt_right" headers="1  std.error">0.359</td>
+<td class="gt_row gt_right" headers="1  statistic">−1.491</td>
+<td class="gt_row gt_right" headers="1  p.value">0.136</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="1  effect">random</td>
 <td class="gt_row gt_left" headers="1  term">farmer</td>
-<td class="gt_row gt_right" headers="1  estimate">0.977</td>
+<td class="gt_row gt_right" headers="1  estimate">1.009</td>
 <td class="gt_row gt_right" headers="1  std.error">NA</td>
 <td class="gt_row gt_right" headers="1  statistic">NA</td>
 <td class="gt_row gt_right" headers="1  p.value">NA</td>
@@ -1033,71 +1035,71 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="gt_row_group_first even">
 <td class="gt_row gt_left" headers="2  effect">fixed</td>
 <td class="gt_row gt_left" headers="2  term">(Intercept)</td>
-<td class="gt_row gt_right" headers="2  estimate">−4.999</td>
-<td class="gt_row gt_right" headers="2  std.error">0.320</td>
-<td class="gt_row gt_right" headers="2  statistic">−15.631</td>
+<td class="gt_row gt_right" headers="2  estimate">−4.900</td>
+<td class="gt_row gt_right" headers="2  std.error">0.328</td>
+<td class="gt_row gt_right" headers="2  statistic">−14.926</td>
 <td class="gt_row gt_right" headers="2  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="2  effect">fixed</td>
 <td class="gt_row gt_left" headers="2  term">fertilized</td>
-<td class="gt_row gt_right" headers="2  estimate">−0.940</td>
-<td class="gt_row gt_right" headers="2  std.error">0.486</td>
-<td class="gt_row gt_right" headers="2  statistic">−1.934</td>
-<td class="gt_row gt_right" headers="2  p.value">0.053</td>
+<td class="gt_row gt_right" headers="2  estimate">−0.941</td>
+<td class="gt_row gt_right" headers="2  std.error">0.501</td>
+<td class="gt_row gt_right" headers="2  statistic">−1.879</td>
+<td class="gt_row gt_right" headers="2  p.value">0.060</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="2  effect">fixed</td>
 <td class="gt_row gt_left" headers="2  term">Kaffrine</td>
-<td class="gt_row gt_right" headers="2  estimate">0.977</td>
-<td class="gt_row gt_right" headers="2  std.error">0.363</td>
-<td class="gt_row gt_right" headers="2  statistic">2.692</td>
-<td class="gt_row gt_right" headers="2  p.value">0.007</td>
+<td class="gt_row gt_right" headers="2  estimate">0.960</td>
+<td class="gt_row gt_right" headers="2  std.error">0.374</td>
+<td class="gt_row gt_right" headers="2  statistic">2.566</td>
+<td class="gt_row gt_right" headers="2  p.value">0.010</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="2  effect">fixed</td>
 <td class="gt_row gt_left" headers="2  term">Saint Louis</td>
-<td class="gt_row gt_right" headers="2  estimate">1.617</td>
-<td class="gt_row gt_right" headers="2  std.error">0.380</td>
-<td class="gt_row gt_right" headers="2  statistic">4.259</td>
+<td class="gt_row gt_right" headers="2  estimate">1.940</td>
+<td class="gt_row gt_right" headers="2  std.error">0.379</td>
+<td class="gt_row gt_right" headers="2  statistic">5.116</td>
 <td class="gt_row gt_right" headers="2  p.value">0.000</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="2  effect">fixed</td>
 <td class="gt_row gt_left" headers="2  term">Thies</td>
-<td class="gt_row gt_right" headers="2  estimate">0.325</td>
-<td class="gt_row gt_right" headers="2  std.error">0.436</td>
-<td class="gt_row gt_right" headers="2  statistic">0.744</td>
-<td class="gt_row gt_right" headers="2  p.value">0.457</td>
+<td class="gt_row gt_right" headers="2  estimate">0.453</td>
+<td class="gt_row gt_right" headers="2  std.error">0.439</td>
+<td class="gt_row gt_right" headers="2  statistic">1.032</td>
+<td class="gt_row gt_right" headers="2  p.value">0.302</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="2  effect">fixed</td>
 <td class="gt_row gt_left" headers="2  term">fertilized:Kaffrine</td>
 <td class="gt_row gt_right" headers="2  estimate">0.606</td>
-<td class="gt_row gt_right" headers="2  std.error">0.553</td>
-<td class="gt_row gt_right" headers="2  statistic">1.096</td>
-<td class="gt_row gt_right" headers="2  p.value">0.273</td>
+<td class="gt_row gt_right" headers="2  std.error">0.571</td>
+<td class="gt_row gt_right" headers="2  statistic">1.062</td>
+<td class="gt_row gt_right" headers="2  p.value">0.288</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="2  effect">fixed</td>
 <td class="gt_row gt_left" headers="2  term">fertilized:Saint Louis</td>
-<td class="gt_row gt_right" headers="2  estimate">−1.186</td>
-<td class="gt_row gt_right" headers="2  std.error">0.681</td>
-<td class="gt_row gt_right" headers="2  statistic">−1.742</td>
-<td class="gt_row gt_right" headers="2  p.value">0.081</td>
+<td class="gt_row gt_right" headers="2  estimate">−1.212</td>
+<td class="gt_row gt_right" headers="2  std.error">0.665</td>
+<td class="gt_row gt_right" headers="2  statistic">−1.822</td>
+<td class="gt_row gt_right" headers="2  p.value">0.068</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="2  effect">fixed</td>
 <td class="gt_row gt_left" headers="2  term">fertilized:Thies</td>
-<td class="gt_row gt_right" headers="2  estimate">−1.324</td>
-<td class="gt_row gt_right" headers="2  std.error">0.896</td>
-<td class="gt_row gt_right" headers="2  statistic">−1.478</td>
-<td class="gt_row gt_right" headers="2  p.value">0.139</td>
+<td class="gt_row gt_right" headers="2  estimate">−1.329</td>
+<td class="gt_row gt_right" headers="2  std.error">0.888</td>
+<td class="gt_row gt_right" headers="2  statistic">−1.496</td>
+<td class="gt_row gt_right" headers="2  p.value">0.135</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="2  effect">random</td>
 <td class="gt_row gt_left" headers="2  term">farmer</td>
-<td class="gt_row gt_right" headers="2  estimate">0.787</td>
+<td class="gt_row gt_right" headers="2  estimate">0.791</td>
 <td class="gt_row gt_right" headers="2  std.error">NA</td>
 <td class="gt_row gt_right" headers="2  statistic">NA</td>
 <td class="gt_row gt_right" headers="2  p.value">NA</td>
@@ -1108,50 +1110,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="gt_row_group_first even">
 <td class="gt_row gt_left" headers="3  effect">fixed</td>
 <td class="gt_row gt_left" headers="3  term">(Intercept)</td>
-<td class="gt_row gt_right" headers="3  estimate">−4.376</td>
-<td class="gt_row gt_right" headers="3  std.error">0.293</td>
-<td class="gt_row gt_right" headers="3  statistic">−14.942</td>
+<td class="gt_row gt_right" headers="3  estimate">−4.282</td>
+<td class="gt_row gt_right" headers="3  std.error">0.296</td>
+<td class="gt_row gt_right" headers="3  statistic">−14.458</td>
 <td class="gt_row gt_right" headers="3  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="3  effect">fixed</td>
 <td class="gt_row gt_left" headers="3  term">fertilized</td>
 <td class="gt_row gt_right" headers="3  estimate">−2.384</td>
-<td class="gt_row gt_right" headers="3  std.error">0.698</td>
-<td class="gt_row gt_right" headers="3  statistic">−3.417</td>
+<td class="gt_row gt_right" headers="3  std.error">0.705</td>
+<td class="gt_row gt_right" headers="3  statistic">−3.382</td>
 <td class="gt_row gt_right" headers="3  p.value">0.001</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="3  effect">fixed</td>
 <td class="gt_row gt_left" headers="3  term">Kaffrine</td>
-<td class="gt_row gt_right" headers="3  estimate">−0.123</td>
-<td class="gt_row gt_right" headers="3  std.error">0.409</td>
-<td class="gt_row gt_right" headers="3  statistic">−0.302</td>
-<td class="gt_row gt_right" headers="3  p.value">0.763</td>
+<td class="gt_row gt_right" headers="3  estimate">−0.145</td>
+<td class="gt_row gt_right" headers="3  std.error">0.415</td>
+<td class="gt_row gt_right" headers="3  statistic">−0.350</td>
+<td class="gt_row gt_right" headers="3  p.value">0.727</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="3  effect">fixed</td>
 <td class="gt_row gt_left" headers="3  term">Thies</td>
-<td class="gt_row gt_right" headers="3  estimate">0.003</td>
-<td class="gt_row gt_right" headers="3  std.error">0.451</td>
-<td class="gt_row gt_right" headers="3  statistic">0.007</td>
-<td class="gt_row gt_right" headers="3  p.value">0.995</td>
+<td class="gt_row gt_right" headers="3  estimate">0.144</td>
+<td class="gt_row gt_right" headers="3  std.error">0.443</td>
+<td class="gt_row gt_right" headers="3  statistic">0.326</td>
+<td class="gt_row gt_right" headers="3  p.value">0.745</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="3  effect">fixed</td>
 <td class="gt_row gt_left" headers="3  term">fertilized:Kaffrine</td>
 <td class="gt_row gt_right" headers="3  estimate">1.280</td>
-<td class="gt_row gt_right" headers="3  std.error">0.856</td>
-<td class="gt_row gt_right" headers="3  statistic">1.495</td>
-<td class="gt_row gt_right" headers="3  p.value">0.135</td>
+<td class="gt_row gt_right" headers="3  std.error">0.867</td>
+<td class="gt_row gt_right" headers="3  statistic">1.475</td>
+<td class="gt_row gt_right" headers="3  p.value">0.140</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="3  effect">fixed</td>
 <td class="gt_row gt_left" headers="3  term">fertilized:Thies</td>
 <td class="gt_row gt_right" headers="3  estimate">1.032</td>
-<td class="gt_row gt_right" headers="3  std.error">0.939</td>
-<td class="gt_row gt_right" headers="3  statistic">1.100</td>
-<td class="gt_row gt_right" headers="3  p.value">0.271</td>
+<td class="gt_row gt_right" headers="3  std.error">0.929</td>
+<td class="gt_row gt_right" headers="3  statistic">1.111</td>
+<td class="gt_row gt_right" headers="3  p.value">0.266</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="3  effect">random</td>
@@ -1170,23 +1172,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Here are the pairwise comparisons between region and treatment by mission number. Fair warning, its a large table since there are a lot of regions.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="feiguhckzq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#feiguhckzq table {
+<div id="tlsqdwzoup" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tlsqdwzoup table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#feiguhckzq thead, #feiguhckzq tbody, #feiguhckzq tfoot, #feiguhckzq tr, #feiguhckzq td, #feiguhckzq th {
+#tlsqdwzoup thead, #tlsqdwzoup tbody, #tlsqdwzoup tfoot, #tlsqdwzoup tr, #tlsqdwzoup td, #tlsqdwzoup th {
   border-style: none;
 }
 
-#feiguhckzq p {
+#tlsqdwzoup p {
   margin: 0;
   padding: 0;
 }
 
-#feiguhckzq .gt_table {
+#tlsqdwzoup .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1212,12 +1214,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#feiguhckzq .gt_caption {
+#tlsqdwzoup .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#feiguhckzq .gt_title {
+#tlsqdwzoup .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1229,7 +1231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#feiguhckzq .gt_subtitle {
+#tlsqdwzoup .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1241,7 +1243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#feiguhckzq .gt_heading {
+#tlsqdwzoup .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1253,13 +1255,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#feiguhckzq .gt_bottom_border {
+#tlsqdwzoup .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#feiguhckzq .gt_col_headings {
+#tlsqdwzoup .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1274,7 +1276,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#feiguhckzq .gt_col_heading {
+#tlsqdwzoup .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1294,7 +1296,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#feiguhckzq .gt_column_spanner_outer {
+#tlsqdwzoup .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1306,15 +1308,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#feiguhckzq .gt_column_spanner_outer:first-child {
+#tlsqdwzoup .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#feiguhckzq .gt_column_spanner_outer:last-child {
+#tlsqdwzoup .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#feiguhckzq .gt_column_spanner {
+#tlsqdwzoup .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1326,11 +1328,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#feiguhckzq .gt_spanner_row {
+#tlsqdwzoup .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#feiguhckzq .gt_group_heading {
+#tlsqdwzoup .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1356,7 +1358,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#feiguhckzq .gt_empty_group_heading {
+#tlsqdwzoup .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1371,15 +1373,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#feiguhckzq .gt_from_md > :first-child {
+#tlsqdwzoup .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#feiguhckzq .gt_from_md > :last-child {
+#tlsqdwzoup .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#feiguhckzq .gt_row {
+#tlsqdwzoup .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1398,7 +1400,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#feiguhckzq .gt_stub {
+#tlsqdwzoup .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1411,7 +1413,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#feiguhckzq .gt_stub_row_group {
+#tlsqdwzoup .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1425,15 +1427,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#feiguhckzq .gt_row_group_first td {
+#tlsqdwzoup .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#feiguhckzq .gt_row_group_first th {
+#tlsqdwzoup .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#feiguhckzq .gt_summary_row {
+#tlsqdwzoup .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1443,16 +1445,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#feiguhckzq .gt_first_summary_row {
+#tlsqdwzoup .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#feiguhckzq .gt_first_summary_row.thick {
+#tlsqdwzoup .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#feiguhckzq .gt_last_summary_row {
+#tlsqdwzoup .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1462,7 +1464,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#feiguhckzq .gt_grand_summary_row {
+#tlsqdwzoup .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1472,7 +1474,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#feiguhckzq .gt_first_grand_summary_row {
+#tlsqdwzoup .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1482,7 +1484,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#feiguhckzq .gt_last_grand_summary_row_top {
+#tlsqdwzoup .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1492,11 +1494,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#feiguhckzq .gt_striped {
+#tlsqdwzoup .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#feiguhckzq .gt_table_body {
+#tlsqdwzoup .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1505,7 +1507,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#feiguhckzq .gt_footnotes {
+#tlsqdwzoup .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1519,7 +1521,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#feiguhckzq .gt_footnote {
+#tlsqdwzoup .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1528,7 +1530,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#feiguhckzq .gt_sourcenotes {
+#tlsqdwzoup .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1542,7 +1544,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#feiguhckzq .gt_sourcenote {
+#tlsqdwzoup .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1550,72 +1552,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#feiguhckzq .gt_left {
+#tlsqdwzoup .gt_left {
   text-align: left;
 }
 
-#feiguhckzq .gt_center {
+#tlsqdwzoup .gt_center {
   text-align: center;
 }
 
-#feiguhckzq .gt_right {
+#tlsqdwzoup .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#feiguhckzq .gt_font_normal {
+#tlsqdwzoup .gt_font_normal {
   font-weight: normal;
 }
 
-#feiguhckzq .gt_font_bold {
+#tlsqdwzoup .gt_font_bold {
   font-weight: bold;
 }
 
-#feiguhckzq .gt_font_italic {
+#tlsqdwzoup .gt_font_italic {
   font-style: italic;
 }
 
-#feiguhckzq .gt_super {
+#tlsqdwzoup .gt_super {
   font-size: 65%;
 }
 
-#feiguhckzq .gt_footnote_marks {
+#tlsqdwzoup .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#feiguhckzq .gt_asterisk {
+#tlsqdwzoup .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#feiguhckzq .gt_indent_1 {
+#tlsqdwzoup .gt_indent_1 {
   text-indent: 5px;
 }
 
-#feiguhckzq .gt_indent_2 {
+#tlsqdwzoup .gt_indent_2 {
   text-indent: 10px;
 }
 
-#feiguhckzq .gt_indent_3 {
+#tlsqdwzoup .gt_indent_3 {
   text-indent: 15px;
 }
 
-#feiguhckzq .gt_indent_4 {
+#tlsqdwzoup .gt_indent_4 {
   text-indent: 20px;
 }
 
-#feiguhckzq .gt_indent_5 {
+#tlsqdwzoup .gt_indent_5 {
   text-indent: 25px;
 }
 
-#feiguhckzq .katex-display {
+#tlsqdwzoup .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#feiguhckzq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tlsqdwzoup div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1641,647 +1643,647 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="gt_row_group_first even">
 <td class="gt_row gt_center" headers="1  contrast">control Fatick / control Kaffrine</td>
-<td class="gt_row gt_right" headers="1  ratio">0.285</td>
-<td class="gt_row gt_right" headers="1  SE">0.068</td>
+<td class="gt_row gt_right" headers="1  ratio">0.290</td>
+<td class="gt_row gt_right" headers="1  SE">0.072</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">−5.234</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−4.997</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">control Fatick / control Saint Louis</td>
-<td class="gt_row gt_right" headers="1  ratio">2.325</td>
-<td class="gt_row gt_right" headers="1  SE">0.833</td>
+<td class="gt_row gt_right" headers="1  ratio">1.808</td>
+<td class="gt_row gt_right" headers="1  SE">0.637</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">2.353</td>
-<td class="gt_row gt_right" headers="1  p.value">0.265</td>
+<td class="gt_row gt_right" headers="1  z.ratio">1.680</td>
+<td class="gt_row gt_right" headers="1  p.value">0.700</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">control Fatick / control Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">2.157</td>
-<td class="gt_row gt_right" headers="1  SE">0.710</td>
+<td class="gt_row gt_right" headers="1  ratio">1.936</td>
+<td class="gt_row gt_right" headers="1  SE">0.643</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">2.337</td>
-<td class="gt_row gt_right" headers="1  p.value">0.274</td>
+<td class="gt_row gt_right" headers="1  z.ratio">1.989</td>
+<td class="gt_row gt_right" headers="1  p.value">0.489</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">control Fatick / fertilized Fatick</td>
-<td class="gt_row gt_right" headers="1  ratio">0.716</td>
-<td class="gt_row gt_right" headers="1  SE">0.132</td>
+<td class="gt_row gt_right" headers="1  ratio">0.717</td>
+<td class="gt_row gt_right" headers="1  SE">0.136</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">−1.816</td>
-<td class="gt_row gt_right" headers="1  p.value">0.609</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−1.749</td>
+<td class="gt_row gt_right" headers="1  p.value">0.655</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">control Fatick / fertilized Kaffrine</td>
-<td class="gt_row gt_right" headers="1  ratio">0.336</td>
-<td class="gt_row gt_right" headers="1  SE">0.081</td>
+<td class="gt_row gt_right" headers="1  ratio">0.342</td>
+<td class="gt_row gt_right" headers="1  SE">0.085</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">−4.537</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−4.324</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">control Fatick / fertilized Saint Louis</td>
-<td class="gt_row gt_right" headers="1  ratio">3.648</td>
-<td class="gt_row gt_right" headers="1  SE">1.439</td>
+<td class="gt_row gt_right" headers="1  ratio">2.846</td>
+<td class="gt_row gt_right" headers="1  SE">1.088</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">3.281</td>
-<td class="gt_row gt_right" headers="1  p.value">0.023</td>
+<td class="gt_row gt_right" headers="1  z.ratio">2.735</td>
+<td class="gt_row gt_right" headers="1  p.value">0.112</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">control Fatick / fertilized Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">2.638</td>
-<td class="gt_row gt_right" headers="1  SE">0.905</td>
+<td class="gt_row gt_right" headers="1  ratio">2.370</td>
+<td class="gt_row gt_right" headers="1  SE">0.818</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">2.829</td>
-<td class="gt_row gt_right" headers="1  p.value">0.088</td>
+<td class="gt_row gt_right" headers="1  z.ratio">2.499</td>
+<td class="gt_row gt_right" headers="1  p.value">0.195</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">control Kaffrine / control Saint Louis</td>
-<td class="gt_row gt_right" headers="1  ratio">8.147</td>
-<td class="gt_row gt_right" headers="1  SE">2.755</td>
+<td class="gt_row gt_right" headers="1  ratio">6.227</td>
+<td class="gt_row gt_right" headers="1  SE">2.064</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">6.203</td>
+<td class="gt_row gt_right" headers="1  z.ratio">5.517</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">control Kaffrine / control Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">7.560</td>
-<td class="gt_row gt_right" headers="1  SE">2.313</td>
+<td class="gt_row gt_right" headers="1  ratio">6.668</td>
+<td class="gt_row gt_right" headers="1  SE">2.057</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">6.610</td>
+<td class="gt_row gt_right" headers="1  z.ratio">6.150</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">control Kaffrine / fertilized Kaffrine</td>
 <td class="gt_row gt_right" headers="1  ratio">1.179</td>
-<td class="gt_row gt_right" headers="1  SE">0.134</td>
+<td class="gt_row gt_right" headers="1  SE">0.140</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">1.449</td>
-<td class="gt_row gt_right" headers="1  p.value">0.834</td>
+<td class="gt_row gt_right" headers="1  z.ratio">1.386</td>
+<td class="gt_row gt_right" headers="1  p.value">0.864</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">control Kaffrine / fertilized Saint Louis</td>
-<td class="gt_row gt_right" headers="1  ratio">12.784</td>
-<td class="gt_row gt_right" headers="1  SE">4.807</td>
+<td class="gt_row gt_right" headers="1  ratio">9.803</td>
+<td class="gt_row gt_right" headers="1  SE">3.559</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">6.778</td>
+<td class="gt_row gt_right" headers="1  z.ratio">6.287</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">control Kaffrine / fertilized Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">9.246</td>
-<td class="gt_row gt_right" headers="1  SE">2.968</td>
+<td class="gt_row gt_right" headers="1  ratio">8.163</td>
+<td class="gt_row gt_right" headers="1  SE">2.634</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">6.928</td>
+<td class="gt_row gt_right" headers="1  z.ratio">6.508</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">control Saint Louis / control Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">0.928</td>
-<td class="gt_row gt_right" headers="1  SE">0.372</td>
+<td class="gt_row gt_right" headers="1  ratio">1.071</td>
+<td class="gt_row gt_right" headers="1  SE">0.419</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">−0.186</td>
+<td class="gt_row gt_right" headers="1  z.ratio">0.175</td>
 <td class="gt_row gt_right" headers="1  p.value">1.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">control Saint Louis / fertilized Saint Louis</td>
-<td class="gt_row gt_right" headers="1  ratio">1.569</td>
-<td class="gt_row gt_right" headers="1  SE">0.588</td>
+<td class="gt_row gt_right" headers="1  ratio">1.574</td>
+<td class="gt_row gt_right" headers="1  SE">0.533</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">1.202</td>
-<td class="gt_row gt_right" headers="1  p.value">0.932</td>
+<td class="gt_row gt_right" headers="1  z.ratio">1.341</td>
+<td class="gt_row gt_right" headers="1  p.value">0.883</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">control Saint Louis / fertilized Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">1.135</td>
-<td class="gt_row gt_right" headers="1  SE">0.468</td>
+<td class="gt_row gt_right" headers="1  ratio">1.311</td>
+<td class="gt_row gt_right" headers="1  SE">0.527</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">0.307</td>
-<td class="gt_row gt_right" headers="1  p.value">1.000</td>
+<td class="gt_row gt_right" headers="1  z.ratio">0.673</td>
+<td class="gt_row gt_right" headers="1  p.value">0.998</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">control Thies / fertilized Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">1.223</td>
-<td class="gt_row gt_right" headers="1  SE">0.382</td>
+<td class="gt_row gt_right" headers="1  ratio">1.224</td>
+<td class="gt_row gt_right" headers="1  SE">0.372</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">0.644</td>
+<td class="gt_row gt_right" headers="1  z.ratio">0.665</td>
 <td class="gt_row gt_right" headers="1  p.value">0.998</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Fatick / control Kaffrine</td>
-<td class="gt_row gt_right" headers="1  ratio">0.399</td>
-<td class="gt_row gt_right" headers="1  SE">0.090</td>
+<td class="gt_row gt_right" headers="1  ratio">0.405</td>
+<td class="gt_row gt_right" headers="1  SE">0.094</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">−4.086</td>
-<td class="gt_row gt_right" headers="1  p.value">0.001</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−3.888</td>
+<td class="gt_row gt_right" headers="1  p.value">0.003</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Fatick / control Saint Louis</td>
-<td class="gt_row gt_right" headers="1  ratio">3.249</td>
-<td class="gt_row gt_right" headers="1  SE">1.131</td>
+<td class="gt_row gt_right" headers="1  ratio">2.520</td>
+<td class="gt_row gt_right" headers="1  SE">0.860</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">3.385</td>
-<td class="gt_row gt_right" headers="1  p.value">0.016</td>
+<td class="gt_row gt_right" headers="1  z.ratio">2.709</td>
+<td class="gt_row gt_right" headers="1  p.value">0.120</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Fatick / control Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">3.015</td>
-<td class="gt_row gt_right" headers="1  SE">0.958</td>
+<td class="gt_row gt_right" headers="1  ratio">2.699</td>
+<td class="gt_row gt_right" headers="1  SE">0.865</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">3.472</td>
-<td class="gt_row gt_right" headers="1  p.value">0.012</td>
+<td class="gt_row gt_right" headers="1  z.ratio">3.098</td>
+<td class="gt_row gt_right" headers="1  p.value">0.041</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Fatick / fertilized Kaffrine</td>
-<td class="gt_row gt_right" headers="1  ratio">0.470</td>
-<td class="gt_row gt_right" headers="1  SE">0.106</td>
+<td class="gt_row gt_right" headers="1  ratio">0.477</td>
+<td class="gt_row gt_right" headers="1  SE">0.111</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">−3.347</td>
-<td class="gt_row gt_right" headers="1  p.value">0.019</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−3.174</td>
+<td class="gt_row gt_right" headers="1  p.value">0.032</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Fatick / fertilized Saint Louis</td>
-<td class="gt_row gt_right" headers="1  ratio">5.098</td>
-<td class="gt_row gt_right" headers="1  SE">1.962</td>
+<td class="gt_row gt_right" headers="1  ratio">3.968</td>
+<td class="gt_row gt_right" headers="1  SE">1.477</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">4.232</td>
-<td class="gt_row gt_right" headers="1  p.value">0.001</td>
+<td class="gt_row gt_right" headers="1  z.ratio">3.704</td>
+<td class="gt_row gt_right" headers="1  p.value">0.005</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Fatick / fertilized Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">3.687</td>
-<td class="gt_row gt_right" headers="1  SE">1.225</td>
+<td class="gt_row gt_right" headers="1  ratio">3.304</td>
+<td class="gt_row gt_right" headers="1  SE">1.104</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">3.928</td>
-<td class="gt_row gt_right" headers="1  p.value">0.002</td>
+<td class="gt_row gt_right" headers="1  z.ratio">3.578</td>
+<td class="gt_row gt_right" headers="1  p.value">0.008</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Kaffrine / control Saint Louis</td>
-<td class="gt_row gt_right" headers="1  ratio">6.909</td>
-<td class="gt_row gt_right" headers="1  SE">2.336</td>
+<td class="gt_row gt_right" headers="1  ratio">5.282</td>
+<td class="gt_row gt_right" headers="1  SE">1.751</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">5.716</td>
+<td class="gt_row gt_right" headers="1  z.ratio">5.023</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Kaffrine / control Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">6.412</td>
-<td class="gt_row gt_right" headers="1  SE">1.963</td>
+<td class="gt_row gt_right" headers="1  ratio">5.657</td>
+<td class="gt_row gt_right" headers="1  SE">1.746</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">6.070</td>
+<td class="gt_row gt_right" headers="1  z.ratio">5.615</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Kaffrine / fertilized Saint Louis</td>
-<td class="gt_row gt_right" headers="1  ratio">10.843</td>
-<td class="gt_row gt_right" headers="1  SE">4.077</td>
+<td class="gt_row gt_right" headers="1  ratio">8.316</td>
+<td class="gt_row gt_right" headers="1  SE">3.019</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">6.339</td>
+<td class="gt_row gt_right" headers="1  z.ratio">5.835</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Kaffrine / fertilized Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">7.842</td>
-<td class="gt_row gt_right" headers="1  SE">2.518</td>
+<td class="gt_row gt_right" headers="1  ratio">6.925</td>
+<td class="gt_row gt_right" headers="1  SE">2.235</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">6.414</td>
+<td class="gt_row gt_right" headers="1  z.ratio">5.997</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Saint Louis / control Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">0.591</td>
-<td class="gt_row gt_right" headers="1  SE">0.256</td>
+<td class="gt_row gt_right" headers="1  ratio">0.680</td>
+<td class="gt_row gt_right" headers="1  SE">0.285</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">−1.212</td>
-<td class="gt_row gt_right" headers="1  p.value">0.929</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−0.921</td>
+<td class="gt_row gt_right" headers="1  p.value">0.984</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Saint Louis / fertilized Thies</td>
-<td class="gt_row gt_right" headers="1  ratio">0.723</td>
-<td class="gt_row gt_right" headers="1  SE">0.321</td>
+<td class="gt_row gt_right" headers="1  ratio">0.833</td>
+<td class="gt_row gt_right" headers="1  SE">0.357</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">−0.730</td>
-<td class="gt_row gt_right" headers="1  p.value">0.996</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−0.427</td>
+<td class="gt_row gt_right" headers="1  p.value">1.000</td>
 </tr>
 <tr class="gt_group_heading_row even">
 <th colspan="7" id="2" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">2</th>
 </tr>
 <tr class="gt_row_group_first odd">
 <td class="gt_row gt_center" headers="2  contrast">control Fatick / control Kaffrine</td>
-<td class="gt_row gt_right" headers="2  ratio">0.376</td>
-<td class="gt_row gt_right" headers="2  SE">0.137</td>
+<td class="gt_row gt_right" headers="2  ratio">0.383</td>
+<td class="gt_row gt_right" headers="2  SE">0.143</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−2.692</td>
-<td class="gt_row gt_right" headers="2  p.value">0.125</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−2.566</td>
+<td class="gt_row gt_right" headers="2  p.value">0.169</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">control Fatick / control Saint Louis</td>
-<td class="gt_row gt_right" headers="2  ratio">0.198</td>
-<td class="gt_row gt_right" headers="2  SE">0.075</td>
+<td class="gt_row gt_right" headers="2  ratio">0.144</td>
+<td class="gt_row gt_right" headers="2  SE">0.054</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−4.259</td>
-<td class="gt_row gt_right" headers="2  p.value">0.001</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−5.116</td>
+<td class="gt_row gt_right" headers="2  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="2  contrast">control Fatick / control Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">0.723</td>
-<td class="gt_row gt_right" headers="2  SE">0.315</td>
+<td class="gt_row gt_right" headers="2  ratio">0.636</td>
+<td class="gt_row gt_right" headers="2  SE">0.279</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−0.744</td>
-<td class="gt_row gt_right" headers="2  p.value">0.996</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−1.032</td>
+<td class="gt_row gt_right" headers="2  p.value">0.970</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">control Fatick / fertilized Fatick</td>
-<td class="gt_row gt_right" headers="2  ratio">2.559</td>
-<td class="gt_row gt_right" headers="2  SE">1.243</td>
+<td class="gt_row gt_right" headers="2  ratio">2.562</td>
+<td class="gt_row gt_right" headers="2  SE">1.282</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">1.934</td>
-<td class="gt_row gt_right" headers="2  p.value">0.528</td>
+<td class="gt_row gt_right" headers="2  z.ratio">1.879</td>
+<td class="gt_row gt_right" headers="2  p.value">0.565</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="2  contrast">control Fatick / fertilized Kaffrine</td>
-<td class="gt_row gt_right" headers="2  ratio">0.526</td>
-<td class="gt_row gt_right" headers="2  SE">0.196</td>
+<td class="gt_row gt_right" headers="2  ratio">0.535</td>
+<td class="gt_row gt_right" headers="2  SE">0.206</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−1.722</td>
-<td class="gt_row gt_right" headers="2  p.value">0.673</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−1.623</td>
+<td class="gt_row gt_right" headers="2  p.value">0.736</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">control Fatick / fertilized Saint Louis</td>
-<td class="gt_row gt_right" headers="2  ratio">1.663</td>
-<td class="gt_row gt_right" headers="2  SE">0.905</td>
+<td class="gt_row gt_right" headers="2  ratio">1.237</td>
+<td class="gt_row gt_right" headers="2  SE">0.645</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">0.934</td>
-<td class="gt_row gt_right" headers="2  p.value">0.983</td>
+<td class="gt_row gt_right" headers="2  z.ratio">0.408</td>
+<td class="gt_row gt_right" headers="2  p.value">1.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="2  contrast">control Fatick / fertilized Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">6.952</td>
-<td class="gt_row gt_right" headers="2  SE">5.356</td>
+<td class="gt_row gt_right" headers="2  ratio">6.150</td>
+<td class="gt_row gt_right" headers="2  SE">4.665</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">2.517</td>
-<td class="gt_row gt_right" headers="2  p.value">0.188</td>
+<td class="gt_row gt_right" headers="2  z.ratio">2.395</td>
+<td class="gt_row gt_right" headers="2  p.value">0.244</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">control Kaffrine / control Saint Louis</td>
-<td class="gt_row gt_right" headers="2  ratio">0.527</td>
-<td class="gt_row gt_right" headers="2  SE">0.163</td>
+<td class="gt_row gt_right" headers="2  ratio">0.375</td>
+<td class="gt_row gt_right" headers="2  SE">0.114</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−2.076</td>
-<td class="gt_row gt_right" headers="2  p.value">0.430</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−3.229</td>
+<td class="gt_row gt_right" headers="2  p.value">0.027</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="2  contrast">control Kaffrine / control Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">1.921</td>
-<td class="gt_row gt_right" headers="2  SE">0.720</td>
+<td class="gt_row gt_right" headers="2  ratio">1.660</td>
+<td class="gt_row gt_right" headers="2  SE">0.622</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">1.742</td>
-<td class="gt_row gt_right" headers="2  p.value">0.659</td>
+<td class="gt_row gt_right" headers="2  z.ratio">1.351</td>
+<td class="gt_row gt_right" headers="2  p.value">0.879</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">control Kaffrine / fertilized Kaffrine</td>
-<td class="gt_row gt_right" headers="2  ratio">1.396</td>
-<td class="gt_row gt_right" headers="2  SE">0.368</td>
+<td class="gt_row gt_right" headers="2  ratio">1.397</td>
+<td class="gt_row gt_right" headers="2  SE">0.384</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">1.268</td>
-<td class="gt_row gt_right" headers="2  p.value">0.911</td>
+<td class="gt_row gt_right" headers="2  z.ratio">1.215</td>
+<td class="gt_row gt_right" headers="2  p.value">0.928</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="2  contrast">control Kaffrine / fertilized Saint Louis</td>
-<td class="gt_row gt_right" headers="2  ratio">4.418</td>
-<td class="gt_row gt_right" headers="2  SE">2.193</td>
+<td class="gt_row gt_right" headers="2  ratio">3.230</td>
+<td class="gt_row gt_right" headers="2  SE">1.512</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">2.993</td>
-<td class="gt_row gt_right" headers="2  p.value">0.056</td>
+<td class="gt_row gt_right" headers="2  z.ratio">2.504</td>
+<td class="gt_row gt_right" headers="2  p.value">0.194</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">control Kaffrine / fertilized Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">18.471</td>
-<td class="gt_row gt_right" headers="2  SE">13.620</td>
+<td class="gt_row gt_right" headers="2  ratio">16.060</td>
+<td class="gt_row gt_right" headers="2  SE">11.612</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">3.955</td>
-<td class="gt_row gt_right" headers="2  p.value">0.002</td>
+<td class="gt_row gt_right" headers="2  z.ratio">3.840</td>
+<td class="gt_row gt_right" headers="2  p.value">0.003</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="2  contrast">control Saint Louis / control Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">3.643</td>
-<td class="gt_row gt_right" headers="2  SE">1.430</td>
+<td class="gt_row gt_right" headers="2  ratio">4.422</td>
+<td class="gt_row gt_right" headers="2  SE">1.688</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">3.294</td>
-<td class="gt_row gt_right" headers="2  p.value">0.022</td>
+<td class="gt_row gt_right" headers="2  z.ratio">3.894</td>
+<td class="gt_row gt_right" headers="2  p.value">0.002</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">control Saint Louis / fertilized Saint Louis</td>
-<td class="gt_row gt_right" headers="2  ratio">8.380</td>
-<td class="gt_row gt_right" headers="2  SE">4.001</td>
+<td class="gt_row gt_right" headers="2  ratio">8.606</td>
+<td class="gt_row gt_right" headers="2  SE">3.774</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">4.453</td>
+<td class="gt_row gt_right" headers="2  z.ratio">4.908</td>
 <td class="gt_row gt_right" headers="2  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="2  contrast">control Saint Louis / fertilized Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">35.033</td>
-<td class="gt_row gt_right" headers="2  SE">26.183</td>
+<td class="gt_row gt_right" headers="2  ratio">42.790</td>
+<td class="gt_row gt_right" headers="2  SE">31.127</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">4.758</td>
+<td class="gt_row gt_right" headers="2  z.ratio">5.164</td>
 <td class="gt_row gt_right" headers="2  p.value">0.000</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">control Thies / fertilized Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">9.617</td>
-<td class="gt_row gt_right" headers="2  SE">7.236</td>
+<td class="gt_row gt_right" headers="2  ratio">9.677</td>
+<td class="gt_row gt_right" headers="2  SE">7.101</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">3.008</td>
-<td class="gt_row gt_right" headers="2  p.value">0.053</td>
+<td class="gt_row gt_right" headers="2  z.ratio">3.093</td>
+<td class="gt_row gt_right" headers="2  p.value">0.042</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="2  contrast">fertilized Fatick / control Kaffrine</td>
-<td class="gt_row gt_right" headers="2  ratio">0.147</td>
-<td class="gt_row gt_right" headers="2  SE">0.067</td>
+<td class="gt_row gt_right" headers="2  ratio">0.149</td>
+<td class="gt_row gt_right" headers="2  SE">0.070</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−4.204</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−4.051</td>
 <td class="gt_row gt_right" headers="2  p.value">0.001</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">fertilized Fatick / control Saint Louis</td>
-<td class="gt_row gt_right" headers="2  ratio">0.078</td>
-<td class="gt_row gt_right" headers="2  SE">0.036</td>
+<td class="gt_row gt_right" headers="2  ratio">0.056</td>
+<td class="gt_row gt_right" headers="2  SE">0.027</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−5.442</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−6.083</td>
 <td class="gt_row gt_right" headers="2  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="2  contrast">fertilized Fatick / control Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">0.282</td>
-<td class="gt_row gt_right" headers="2  SE">0.146</td>
+<td class="gt_row gt_right" headers="2  ratio">0.248</td>
+<td class="gt_row gt_right" headers="2  SE">0.130</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−2.450</td>
-<td class="gt_row gt_right" headers="2  p.value">0.217</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−2.669</td>
+<td class="gt_row gt_right" headers="2  p.value">0.132</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">fertilized Fatick / fertilized Kaffrine</td>
-<td class="gt_row gt_right" headers="2  ratio">0.205</td>
-<td class="gt_row gt_right" headers="2  SE">0.095</td>
+<td class="gt_row gt_right" headers="2  ratio">0.209</td>
+<td class="gt_row gt_right" headers="2  SE">0.100</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−3.409</td>
-<td class="gt_row gt_right" headers="2  p.value">0.015</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−3.277</td>
+<td class="gt_row gt_right" headers="2  p.value">0.023</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="2  contrast">fertilized Fatick / fertilized Saint Louis</td>
-<td class="gt_row gt_right" headers="2  ratio">0.650</td>
-<td class="gt_row gt_right" headers="2  SE">0.396</td>
+<td class="gt_row gt_right" headers="2  ratio">0.483</td>
+<td class="gt_row gt_right" headers="2  SE">0.286</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−0.707</td>
-<td class="gt_row gt_right" headers="2  p.value">0.997</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−1.228</td>
+<td class="gt_row gt_right" headers="2  p.value">0.924</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">fertilized Fatick / fertilized Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">2.717</td>
-<td class="gt_row gt_right" headers="2  SE">2.223</td>
+<td class="gt_row gt_right" headers="2  ratio">2.401</td>
+<td class="gt_row gt_right" headers="2  SE">1.943</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">1.221</td>
-<td class="gt_row gt_right" headers="2  p.value">0.926</td>
+<td class="gt_row gt_right" headers="2  z.ratio">1.082</td>
+<td class="gt_row gt_right" headers="2  p.value">0.961</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="2  contrast">fertilized Kaffrine / control Saint Louis</td>
-<td class="gt_row gt_right" headers="2  ratio">0.378</td>
-<td class="gt_row gt_right" headers="2  SE">0.121</td>
+<td class="gt_row gt_right" headers="2  ratio">0.269</td>
+<td class="gt_row gt_right" headers="2  SE">0.085</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−3.027</td>
-<td class="gt_row gt_right" headers="2  p.value">0.051</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−4.130</td>
+<td class="gt_row gt_right" headers="2  p.value">0.001</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">fertilized Kaffrine / control Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">1.376</td>
-<td class="gt_row gt_right" headers="2  SE">0.529</td>
+<td class="gt_row gt_right" headers="2  ratio">1.188</td>
+<td class="gt_row gt_right" headers="2  SE">0.458</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">0.829</td>
-<td class="gt_row gt_right" headers="2  p.value">0.992</td>
+<td class="gt_row gt_right" headers="2  z.ratio">0.447</td>
+<td class="gt_row gt_right" headers="2  p.value">1.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="2  contrast">fertilized Kaffrine / fertilized Saint Louis</td>
-<td class="gt_row gt_right" headers="2  ratio">3.164</td>
-<td class="gt_row gt_right" headers="2  SE">1.594</td>
+<td class="gt_row gt_right" headers="2  ratio">2.312</td>
+<td class="gt_row gt_right" headers="2  SE">1.102</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">2.286</td>
-<td class="gt_row gt_right" headers="2  p.value">0.301</td>
+<td class="gt_row gt_right" headers="2  z.ratio">1.759</td>
+<td class="gt_row gt_right" headers="2  p.value">0.648</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">fertilized Kaffrine / fertilized Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">13.228</td>
-<td class="gt_row gt_right" headers="2  SE">9.817</td>
+<td class="gt_row gt_right" headers="2  ratio">11.496</td>
+<td class="gt_row gt_right" headers="2  SE">8.372</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">3.479</td>
-<td class="gt_row gt_right" headers="2  p.value">0.012</td>
+<td class="gt_row gt_right" headers="2  z.ratio">3.353</td>
+<td class="gt_row gt_right" headers="2  p.value">0.018</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="2  contrast">fertilized Saint Louis / control Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">0.435</td>
-<td class="gt_row gt_right" headers="2  SE">0.240</td>
+<td class="gt_row gt_right" headers="2  ratio">0.514</td>
+<td class="gt_row gt_right" headers="2  SE">0.268</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−1.509</td>
-<td class="gt_row gt_right" headers="2  p.value">0.803</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−1.278</td>
+<td class="gt_row gt_right" headers="2  p.value">0.907</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">fertilized Saint Louis / fertilized Thies</td>
-<td class="gt_row gt_right" headers="2  ratio">4.181</td>
-<td class="gt_row gt_right" headers="2  SE">3.516</td>
+<td class="gt_row gt_right" headers="2  ratio">4.972</td>
+<td class="gt_row gt_right" headers="2  SE">4.017</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">1.701</td>
-<td class="gt_row gt_right" headers="2  p.value">0.687</td>
+<td class="gt_row gt_right" headers="2  z.ratio">1.985</td>
+<td class="gt_row gt_right" headers="2  p.value">0.492</td>
 </tr>
 <tr class="gt_group_heading_row odd">
 <th colspan="7" id="3" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">3</th>
 </tr>
 <tr class="gt_row_group_first even">
 <td class="gt_row gt_center" headers="3  contrast">control Fatick / control Kaffrine</td>
-<td class="gt_row gt_right" headers="3  ratio">1.131</td>
-<td class="gt_row gt_right" headers="3  SE">0.463</td>
+<td class="gt_row gt_right" headers="3  ratio">1.156</td>
+<td class="gt_row gt_right" headers="3  SE">0.480</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">0.302</td>
-<td class="gt_row gt_right" headers="3  p.value">1.000</td>
+<td class="gt_row gt_right" headers="3  z.ratio">0.350</td>
+<td class="gt_row gt_right" headers="3  p.value">0.999</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="3  contrast">control Fatick / control Thies</td>
-<td class="gt_row gt_right" headers="3  ratio">0.997</td>
-<td class="gt_row gt_right" headers="3  SE">0.449</td>
+<td class="gt_row gt_right" headers="3  ratio">0.866</td>
+<td class="gt_row gt_right" headers="3  SE">0.384</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">−0.007</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−0.326</td>
 <td class="gt_row gt_right" headers="3  p.value">1.000</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="3  contrast">control Fatick / fertilized Fatick</td>
 <td class="gt_row gt_right" headers="3  ratio">10.843</td>
-<td class="gt_row gt_right" headers="3  SE">7.563</td>
+<td class="gt_row gt_right" headers="3  SE">7.642</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">3.417</td>
-<td class="gt_row gt_right" headers="3  p.value">0.008</td>
+<td class="gt_row gt_right" headers="3  z.ratio">3.382</td>
+<td class="gt_row gt_right" headers="3  p.value">0.009</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="3  contrast">control Fatick / fertilized Kaffrine</td>
-<td class="gt_row gt_right" headers="3  ratio">3.412</td>
-<td class="gt_row gt_right" headers="3  SE">1.708</td>
+<td class="gt_row gt_right" headers="3  ratio">3.487</td>
+<td class="gt_row gt_right" headers="3  SE">1.773</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">2.452</td>
-<td class="gt_row gt_right" headers="3  p.value">0.139</td>
+<td class="gt_row gt_right" headers="3  z.ratio">2.456</td>
+<td class="gt_row gt_right" headers="3  p.value">0.137</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="3  contrast">control Fatick / fertilized Thies</td>
-<td class="gt_row gt_right" headers="3  ratio">3.850</td>
-<td class="gt_row gt_right" headers="3  SE">2.321</td>
+<td class="gt_row gt_right" headers="3  ratio">3.342</td>
+<td class="gt_row gt_right" headers="3  SE">1.964</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">2.236</td>
-<td class="gt_row gt_right" headers="3  p.value">0.221</td>
+<td class="gt_row gt_right" headers="3  z.ratio">2.054</td>
+<td class="gt_row gt_right" headers="3  p.value">0.312</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="3  contrast">control Kaffrine / control Thies</td>
-<td class="gt_row gt_right" headers="3  ratio">0.881</td>
-<td class="gt_row gt_right" headers="3  SE">0.393</td>
+<td class="gt_row gt_right" headers="3  ratio">0.749</td>
+<td class="gt_row gt_right" headers="3  SE">0.329</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">−0.283</td>
-<td class="gt_row gt_right" headers="3  p.value">1.000</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−0.658</td>
+<td class="gt_row gt_right" headers="3  p.value">0.986</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="3  contrast">control Kaffrine / fertilized Kaffrine</td>
 <td class="gt_row gt_right" headers="3  ratio">3.016</td>
-<td class="gt_row gt_right" headers="3  SE">1.497</td>
+<td class="gt_row gt_right" headers="3  SE">1.525</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">2.223</td>
-<td class="gt_row gt_right" headers="3  p.value">0.227</td>
+<td class="gt_row gt_right" headers="3  z.ratio">2.183</td>
+<td class="gt_row gt_right" headers="3  p.value">0.246</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="3  contrast">control Kaffrine / fertilized Thies</td>
-<td class="gt_row gt_right" headers="3  ratio">3.403</td>
-<td class="gt_row gt_right" headers="3  SE">2.040</td>
+<td class="gt_row gt_right" headers="3  ratio">2.891</td>
+<td class="gt_row gt_right" headers="3  SE">1.691</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">2.043</td>
-<td class="gt_row gt_right" headers="3  p.value">0.318</td>
+<td class="gt_row gt_right" headers="3  z.ratio">1.814</td>
+<td class="gt_row gt_right" headers="3  p.value">0.456</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="3  contrast">control Thies / fertilized Thies</td>
 <td class="gt_row gt_right" headers="3  ratio">3.861</td>
-<td class="gt_row gt_right" headers="3  SE">2.427</td>
+<td class="gt_row gt_right" headers="3  SE">2.337</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">2.150</td>
-<td class="gt_row gt_right" headers="3  p.value">0.262</td>
+<td class="gt_row gt_right" headers="3  z.ratio">2.232</td>
+<td class="gt_row gt_right" headers="3  p.value">0.223</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="3  contrast">fertilized Fatick / control Kaffrine</td>
-<td class="gt_row gt_right" headers="3  ratio">0.104</td>
-<td class="gt_row gt_right" headers="3  SE">0.072</td>
+<td class="gt_row gt_right" headers="3  ratio">0.107</td>
+<td class="gt_row gt_right" headers="3  SE">0.075</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">−3.254</td>
-<td class="gt_row gt_right" headers="3  p.value">0.014</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−3.185</td>
+<td class="gt_row gt_right" headers="3  p.value">0.018</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="3  contrast">fertilized Fatick / control Thies</td>
-<td class="gt_row gt_right" headers="3  ratio">0.092</td>
-<td class="gt_row gt_right" headers="3  SE">0.066</td>
+<td class="gt_row gt_right" headers="3  ratio">0.080</td>
+<td class="gt_row gt_right" headers="3  SE">0.057</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">−3.316</td>
-<td class="gt_row gt_right" headers="3  p.value">0.012</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−3.513</td>
+<td class="gt_row gt_right" headers="3  p.value">0.006</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="3  contrast">fertilized Fatick / fertilized Kaffrine</td>
-<td class="gt_row gt_right" headers="3  ratio">0.315</td>
-<td class="gt_row gt_right" headers="3  SE">0.237</td>
+<td class="gt_row gt_right" headers="3  ratio">0.322</td>
+<td class="gt_row gt_right" headers="3  SE">0.245</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">−1.537</td>
-<td class="gt_row gt_right" headers="3  p.value">0.640</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−1.490</td>
+<td class="gt_row gt_right" headers="3  p.value">0.671</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="3  contrast">fertilized Fatick / fertilized Thies</td>
-<td class="gt_row gt_right" headers="3  ratio">0.355</td>
-<td class="gt_row gt_right" headers="3  SE">0.292</td>
+<td class="gt_row gt_right" headers="3  ratio">0.308</td>
+<td class="gt_row gt_right" headers="3  SE">0.252</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">−1.257</td>
-<td class="gt_row gt_right" headers="3  p.value">0.808</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−1.442</td>
+<td class="gt_row gt_right" headers="3  p.value">0.702</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="3  contrast">fertilized Kaffrine / control Thies</td>
-<td class="gt_row gt_right" headers="3  ratio">0.292</td>
-<td class="gt_row gt_right" headers="3  SE">0.155</td>
+<td class="gt_row gt_right" headers="3  ratio">0.248</td>
+<td class="gt_row gt_right" headers="3  SE">0.131</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">−2.317</td>
-<td class="gt_row gt_right" headers="3  p.value">0.187</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−2.635</td>
+<td class="gt_row gt_right" headers="3  p.value">0.089</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="3  contrast">fertilized Kaffrine / fertilized Thies</td>
-<td class="gt_row gt_right" headers="3  ratio">1.128</td>
-<td class="gt_row gt_right" headers="3  SE">0.751</td>
+<td class="gt_row gt_right" headers="3  ratio">0.958</td>
+<td class="gt_row gt_right" headers="3  SE">0.627</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">0.181</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−0.065</td>
 <td class="gt_row gt_right" headers="3  p.value">1.000</td>
 </tr>
 </tbody>
@@ -2297,23 +2299,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The data discrepancies seen the the OSE count x ground cover are really shown in this table as well. We can see that the trends are the same (e.g.&nbsp;fertilized plots have less than control), but the actual averages are totally different.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="icsbubqjqe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#icsbubqjqe table {
+<div id="pzvsiwosgi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pzvsiwosgi table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#icsbubqjqe thead, #icsbubqjqe tbody, #icsbubqjqe tfoot, #icsbubqjqe tr, #icsbubqjqe td, #icsbubqjqe th {
+#pzvsiwosgi thead, #pzvsiwosgi tbody, #pzvsiwosgi tfoot, #pzvsiwosgi tr, #pzvsiwosgi td, #pzvsiwosgi th {
   border-style: none;
 }
 
-#icsbubqjqe p {
+#pzvsiwosgi p {
   margin: 0;
   padding: 0;
 }
 
-#icsbubqjqe .gt_table {
+#pzvsiwosgi .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2339,12 +2341,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#icsbubqjqe .gt_caption {
+#pzvsiwosgi .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#icsbubqjqe .gt_title {
+#pzvsiwosgi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2356,7 +2358,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#icsbubqjqe .gt_subtitle {
+#pzvsiwosgi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2368,7 +2370,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#icsbubqjqe .gt_heading {
+#pzvsiwosgi .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2380,13 +2382,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#icsbubqjqe .gt_bottom_border {
+#pzvsiwosgi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#icsbubqjqe .gt_col_headings {
+#pzvsiwosgi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2401,7 +2403,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#icsbubqjqe .gt_col_heading {
+#pzvsiwosgi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2421,7 +2423,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#icsbubqjqe .gt_column_spanner_outer {
+#pzvsiwosgi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2433,15 +2435,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#icsbubqjqe .gt_column_spanner_outer:first-child {
+#pzvsiwosgi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#icsbubqjqe .gt_column_spanner_outer:last-child {
+#pzvsiwosgi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#icsbubqjqe .gt_column_spanner {
+#pzvsiwosgi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2453,11 +2455,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#icsbubqjqe .gt_spanner_row {
+#pzvsiwosgi .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#icsbubqjqe .gt_group_heading {
+#pzvsiwosgi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2483,7 +2485,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#icsbubqjqe .gt_empty_group_heading {
+#pzvsiwosgi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2498,15 +2500,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#icsbubqjqe .gt_from_md > :first-child {
+#pzvsiwosgi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#icsbubqjqe .gt_from_md > :last-child {
+#pzvsiwosgi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#icsbubqjqe .gt_row {
+#pzvsiwosgi .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2525,7 +2527,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#icsbubqjqe .gt_stub {
+#pzvsiwosgi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2538,7 +2540,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#icsbubqjqe .gt_stub_row_group {
+#pzvsiwosgi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2552,15 +2554,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#icsbubqjqe .gt_row_group_first td {
+#pzvsiwosgi .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#icsbubqjqe .gt_row_group_first th {
+#pzvsiwosgi .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#icsbubqjqe .gt_summary_row {
+#pzvsiwosgi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2570,16 +2572,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#icsbubqjqe .gt_first_summary_row {
+#pzvsiwosgi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#icsbubqjqe .gt_first_summary_row.thick {
+#pzvsiwosgi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#icsbubqjqe .gt_last_summary_row {
+#pzvsiwosgi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2589,7 +2591,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#icsbubqjqe .gt_grand_summary_row {
+#pzvsiwosgi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2599,7 +2601,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#icsbubqjqe .gt_first_grand_summary_row {
+#pzvsiwosgi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2609,7 +2611,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#icsbubqjqe .gt_last_grand_summary_row_top {
+#pzvsiwosgi .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2619,11 +2621,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#icsbubqjqe .gt_striped {
+#pzvsiwosgi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#icsbubqjqe .gt_table_body {
+#pzvsiwosgi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2632,7 +2634,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#icsbubqjqe .gt_footnotes {
+#pzvsiwosgi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2646,7 +2648,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#icsbubqjqe .gt_footnote {
+#pzvsiwosgi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2655,7 +2657,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#icsbubqjqe .gt_sourcenotes {
+#pzvsiwosgi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2669,7 +2671,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#icsbubqjqe .gt_sourcenote {
+#pzvsiwosgi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2677,72 +2679,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#icsbubqjqe .gt_left {
+#pzvsiwosgi .gt_left {
   text-align: left;
 }
 
-#icsbubqjqe .gt_center {
+#pzvsiwosgi .gt_center {
   text-align: center;
 }
 
-#icsbubqjqe .gt_right {
+#pzvsiwosgi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#icsbubqjqe .gt_font_normal {
+#pzvsiwosgi .gt_font_normal {
   font-weight: normal;
 }
 
-#icsbubqjqe .gt_font_bold {
+#pzvsiwosgi .gt_font_bold {
   font-weight: bold;
 }
 
-#icsbubqjqe .gt_font_italic {
+#pzvsiwosgi .gt_font_italic {
   font-style: italic;
 }
 
-#icsbubqjqe .gt_super {
+#pzvsiwosgi .gt_super {
   font-size: 65%;
 }
 
-#icsbubqjqe .gt_footnote_marks {
+#pzvsiwosgi .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#icsbubqjqe .gt_asterisk {
+#pzvsiwosgi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#icsbubqjqe .gt_indent_1 {
+#pzvsiwosgi .gt_indent_1 {
   text-indent: 5px;
 }
 
-#icsbubqjqe .gt_indent_2 {
+#pzvsiwosgi .gt_indent_2 {
   text-indent: 10px;
 }
 
-#icsbubqjqe .gt_indent_3 {
+#pzvsiwosgi .gt_indent_3 {
   text-indent: 15px;
 }
 
-#icsbubqjqe .gt_indent_4 {
+#pzvsiwosgi .gt_indent_4 {
   text-indent: 20px;
 }
 
-#icsbubqjqe .gt_indent_5 {
+#pzvsiwosgi .gt_indent_5 {
   text-indent: 25px;
 }
 
-#icsbubqjqe .katex-display {
+#pzvsiwosgi .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#icsbubqjqe div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#pzvsiwosgi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2763,17 +2765,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody class="gt_table_body">
 <tr class="odd">
 <th id="stub_1_1" class="gt_row gt_center gt_stub" data-quarto-table-cell-role="th" scope="row">fertilized</th>
-<td class="gt_row gt_right" headers="stub_1_1 Saint Louis">0.0064</td>
-<td class="gt_row gt_right" headers="stub_1_1 Thies">0.0047</td>
-<td class="gt_row gt_right" headers="stub_1_1 Fatick">0.0125</td>
-<td class="gt_row gt_right" headers="stub_1_1 Kaffrine">0.0296</td>
+<td class="gt_row gt_right" headers="stub_1_1 Saint Louis">0.0099</td>
+<td class="gt_row gt_right" headers="stub_1_1 Thies">0.0060</td>
+<td class="gt_row gt_right" headers="stub_1_1 Fatick">0.0137</td>
+<td class="gt_row gt_right" headers="stub_1_1 Kaffrine">0.0318</td>
 </tr>
 <tr class="even">
 <th id="stub_1_2" class="gt_row gt_center gt_stub" data-quarto-table-cell-role="th" scope="row">control</th>
-<td class="gt_row gt_right" headers="stub_1_2 Saint Louis">0.0264</td>
-<td class="gt_row gt_right" headers="stub_1_2 Thies">0.0123</td>
-<td class="gt_row gt_right" headers="stub_1_2 Fatick">0.0143</td>
-<td class="gt_row gt_right" headers="stub_1_2 Kaffrine">0.0366</td>
+<td class="gt_row gt_right" headers="stub_1_2 Saint Louis">0.0406</td>
+<td class="gt_row gt_right" headers="stub_1_2 Thies">0.0155</td>
+<td class="gt_row gt_right" headers="stub_1_2 Fatick">0.0157</td>
+<td class="gt_row gt_right" headers="stub_1_2 Kaffrine">0.0394</td>
 </tr>
 </tbody>
 </table>
@@ -3466,109 +3468,111 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-214"><a href="#cb2-214" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb2-215"><a href="#cb2-215" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-216"><a href="#cb2-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-217"><a href="#cb2-217" aria-hidden="true" tabindex="-1"></a>mission_mod_summary <span class="ot">&lt;-</span> mission_mod_summary <span class="sc">|&gt;</span></span>
-<span id="cb2-218"><a href="#cb2-218" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(mission_number) <span class="sc">|&gt;</span></span>
-<span id="cb2-219"><a href="#cb2-219" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">effect =</span> <span class="fu">ifelse</span>(effect <span class="sc">==</span> <span class="st">'ran_pars'</span>, <span class="st">'random'</span>, <span class="st">'fixed'</span>),</span>
-<span id="cb2-220"><a href="#cb2-220" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> <span class="fu">ifelse</span>(term <span class="sc">==</span> <span class="st">'sd__(Intercept)'</span>,<span class="st">'farmer'</span>,term),</span>
-<span id="cb2-221"><a href="#cb2-221" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> <span class="fu">gsub</span>(<span class="st">'fertilizer_treatment|region'</span>,<span class="st">''</span>,term)) <span class="sc">|&gt;</span></span>
-<span id="cb2-222"><a href="#cb2-222" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">c</span>(component,group))</span>
-<span id="cb2-223"><a href="#cb2-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-224"><a href="#cb2-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-225"><a href="#cb2-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-226"><a href="#cb2-226" aria-hidden="true" tabindex="-1"></a>tbl_damage_models <span class="ot">&lt;-</span> mission_mod_summary <span class="sc">|&gt;</span></span>
-<span id="cb2-227"><a href="#cb2-227" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>source) <span class="sc">|&gt;</span></span>
-<span id="cb2-228"><a href="#cb2-228" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(<span class="at">groupname_col =</span> <span class="st">"mission_number"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-229"><a href="#cb2-229" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
-<span id="cb2-230"><a href="#cb2-230" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(estimate, std.error, statistic, p.value),</span>
-<span id="cb2-231"><a href="#cb2-231" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">3</span></span>
-<span id="cb2-232"><a href="#cb2-232" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb2-233"><a href="#cb2-233" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb2-234"><a href="#cb2-234" aria-hidden="true" tabindex="-1"></a>    <span class="at">mission_number =</span> <span class="st">"Mission"</span>,</span>
-<span id="cb2-235"><a href="#cb2-235" aria-hidden="true" tabindex="-1"></a>    <span class="at">effect =</span> <span class="st">"Effect"</span>,</span>
-<span id="cb2-236"><a href="#cb2-236" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> <span class="st">"Term"</span>,</span>
-<span id="cb2-237"><a href="#cb2-237" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimate =</span> <span class="st">"Estimate"</span>,</span>
-<span id="cb2-238"><a href="#cb2-238" aria-hidden="true" tabindex="-1"></a>    <span class="at">std.error =</span> <span class="st">"Std. Error"</span>,</span>
-<span id="cb2-239"><a href="#cb2-239" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="st">"Statistic"</span>,</span>
-<span id="cb2-240"><a href="#cb2-240" aria-hidden="true" tabindex="-1"></a>    <span class="at">p.value =</span> <span class="st">"P-value"</span></span>
-<span id="cb2-241"><a href="#cb2-241" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb2-242"><a href="#cb2-242" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb2-243"><a href="#cb2-243" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"OSE density by treatment and region by mission"</span></span>
-<span id="cb2-244"><a href="#cb2-244" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb2-245"><a href="#cb2-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-246"><a href="#cb2-246" aria-hidden="true" tabindex="-1"></a><span class="fu">save_gt_png</span>(tbl_damage_models, <span class="st">"ose_damage_model_summaries_by_mission.png"</span>)</span>
-<span id="cb2-247"><a href="#cb2-247" aria-hidden="true" tabindex="-1"></a>tbl_damage_models</span>
-<span id="cb2-248"><a href="#cb2-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-249"><a href="#cb2-249" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-217"><a href="#cb2-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-218"><a href="#cb2-218" aria-hidden="true" tabindex="-1"></a>mission_mod_summary <span class="ot">&lt;-</span> mission_mod_summary <span class="sc">|&gt;</span></span>
+<span id="cb2-219"><a href="#cb2-219" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(mission_number) <span class="sc">|&gt;</span></span>
+<span id="cb2-220"><a href="#cb2-220" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb2-221"><a href="#cb2-221" aria-hidden="true" tabindex="-1"></a>    <span class="at">effect =</span> <span class="fu">ifelse</span>(effect <span class="sc">==</span> <span class="st">"ran_pars"</span>, <span class="st">"random"</span>, <span class="st">"fixed"</span>),</span>
+<span id="cb2-222"><a href="#cb2-222" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> <span class="fu">ifelse</span>(term <span class="sc">==</span> <span class="st">"sd__(Intercept)"</span>, <span class="st">"farmer"</span>, term),</span>
+<span id="cb2-223"><a href="#cb2-223" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> <span class="fu">gsub</span>(<span class="st">"fertilizer_treatment|region"</span>, <span class="st">""</span>, term)</span>
+<span id="cb2-224"><a href="#cb2-224" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-225"><a href="#cb2-225" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">any_of</span>(<span class="fu">c</span>(<span class="st">"component"</span>, <span class="st">"group"</span>)))</span>
+<span id="cb2-226"><a href="#cb2-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-227"><a href="#cb2-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-228"><a href="#cb2-228" aria-hidden="true" tabindex="-1"></a>tbl_damage_models <span class="ot">&lt;-</span> mission_mod_summary <span class="sc">|&gt;</span></span>
+<span id="cb2-229"><a href="#cb2-229" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>source) <span class="sc">|&gt;</span></span>
+<span id="cb2-230"><a href="#cb2-230" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(<span class="at">groupname_col =</span> <span class="st">"mission_number"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-231"><a href="#cb2-231" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
+<span id="cb2-232"><a href="#cb2-232" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(estimate, std.error, statistic, p.value),</span>
+<span id="cb2-233"><a href="#cb2-233" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">3</span></span>
+<span id="cb2-234"><a href="#cb2-234" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-235"><a href="#cb2-235" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb2-236"><a href="#cb2-236" aria-hidden="true" tabindex="-1"></a>    <span class="at">mission_number =</span> <span class="st">"Mission"</span>,</span>
+<span id="cb2-237"><a href="#cb2-237" aria-hidden="true" tabindex="-1"></a>    <span class="at">effect =</span> <span class="st">"Effect"</span>,</span>
+<span id="cb2-238"><a href="#cb2-238" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> <span class="st">"Term"</span>,</span>
+<span id="cb2-239"><a href="#cb2-239" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimate =</span> <span class="st">"Estimate"</span>,</span>
+<span id="cb2-240"><a href="#cb2-240" aria-hidden="true" tabindex="-1"></a>    <span class="at">std.error =</span> <span class="st">"Std. Error"</span>,</span>
+<span id="cb2-241"><a href="#cb2-241" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="st">"Statistic"</span>,</span>
+<span id="cb2-242"><a href="#cb2-242" aria-hidden="true" tabindex="-1"></a>    <span class="at">p.value =</span> <span class="st">"P-value"</span></span>
+<span id="cb2-243"><a href="#cb2-243" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-244"><a href="#cb2-244" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb2-245"><a href="#cb2-245" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"OSE density by treatment and region by mission"</span></span>
+<span id="cb2-246"><a href="#cb2-246" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-247"><a href="#cb2-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-248"><a href="#cb2-248" aria-hidden="true" tabindex="-1"></a><span class="fu">save_gt_png</span>(tbl_damage_models, <span class="st">"ose_damage_model_summaries_by_mission.png"</span>)</span>
+<span id="cb2-249"><a href="#cb2-249" aria-hidden="true" tabindex="-1"></a>tbl_damage_models</span>
 <span id="cb2-250"><a href="#cb2-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-251"><a href="#cb2-251" aria-hidden="true" tabindex="-1"></a>Here are the pairwise comparisons between region and treatment by mission number. Fair warning, its a large table since there are a lot of regions.</span>
+<span id="cb2-251"><a href="#cb2-251" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb2-252"><a href="#cb2-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-255"><a href="#cb2-255" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-256"><a href="#cb2-256" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-257"><a href="#cb2-257" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb2-258"><a href="#cb2-258" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb2-259"><a href="#cb2-259" aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
-<span id="cb2-260"><a href="#cb2-260" aria-hidden="true" tabindex="-1"></a>tbl_damage_pairwise <span class="ot">&lt;-</span> mission_pairs <span class="sc">|&gt;</span></span>
-<span id="cb2-261"><a href="#cb2-261" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(contrast) <span class="sc">|&gt;</span></span>
-<span id="cb2-262"><a href="#cb2-262" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>source) <span class="sc">|&gt;</span></span>
-<span id="cb2-263"><a href="#cb2-263" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(<span class="at">groupname_col =</span> <span class="st">"mission_number"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-264"><a href="#cb2-264" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
-<span id="cb2-265"><a href="#cb2-265" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(ratio, SE, z.ratio, p.value),</span>
-<span id="cb2-266"><a href="#cb2-266" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">3</span></span>
-<span id="cb2-267"><a href="#cb2-267" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb2-268"><a href="#cb2-268" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb2-269"><a href="#cb2-269" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"OSE density model pairwise comparisons by mission"</span></span>
-<span id="cb2-270"><a href="#cb2-270" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb2-271"><a href="#cb2-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-272"><a href="#cb2-272" aria-hidden="true" tabindex="-1"></a><span class="fu">save_gt_png</span>(tbl_damage_pairwise, <span class="st">"ose_damage_pairwise_comparisons_by_mission.png"</span>)</span>
-<span id="cb2-273"><a href="#cb2-273" aria-hidden="true" tabindex="-1"></a>tbl_damage_pairwise </span>
-<span id="cb2-274"><a href="#cb2-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-275"><a href="#cb2-275" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-253"><a href="#cb2-253" aria-hidden="true" tabindex="-1"></a>Here are the pairwise comparisons between region and treatment by mission number. Fair warning, its a large table since there are a lot of regions.</span>
+<span id="cb2-254"><a href="#cb2-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-257"><a href="#cb2-257" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb2-258"><a href="#cb2-258" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb2-259"><a href="#cb2-259" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb2-260"><a href="#cb2-260" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb2-261"><a href="#cb2-261" aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
+<span id="cb2-262"><a href="#cb2-262" aria-hidden="true" tabindex="-1"></a>tbl_damage_pairwise <span class="ot">&lt;-</span> mission_pairs <span class="sc">|&gt;</span></span>
+<span id="cb2-263"><a href="#cb2-263" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(contrast) <span class="sc">|&gt;</span></span>
+<span id="cb2-264"><a href="#cb2-264" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>source) <span class="sc">|&gt;</span></span>
+<span id="cb2-265"><a href="#cb2-265" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(<span class="at">groupname_col =</span> <span class="st">"mission_number"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-266"><a href="#cb2-266" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
+<span id="cb2-267"><a href="#cb2-267" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(ratio, SE, z.ratio, p.value),</span>
+<span id="cb2-268"><a href="#cb2-268" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">3</span></span>
+<span id="cb2-269"><a href="#cb2-269" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-270"><a href="#cb2-270" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb2-271"><a href="#cb2-271" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"OSE density model pairwise comparisons by mission"</span></span>
+<span id="cb2-272"><a href="#cb2-272" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-273"><a href="#cb2-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-274"><a href="#cb2-274" aria-hidden="true" tabindex="-1"></a><span class="fu">save_gt_png</span>(tbl_damage_pairwise, <span class="st">"ose_damage_pairwise_comparisons_by_mission.png"</span>)</span>
+<span id="cb2-275"><a href="#cb2-275" aria-hidden="true" tabindex="-1"></a>tbl_damage_pairwise </span>
 <span id="cb2-276"><a href="#cb2-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-277"><a href="#cb2-277" aria-hidden="true" tabindex="-1"></a><span class="fu"># Table: annual OSE damage by region and field type</span></span>
+<span id="cb2-277"><a href="#cb2-277" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb2-278"><a href="#cb2-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-279"><a href="#cb2-279" aria-hidden="true" tabindex="-1"></a>The data discrepancies seen the the OSE count x ground cover are really shown in this table as well. We can see that the trends are the same (e.g. fertilized plots have less than control), but the actual averages are totally different.</span>
+<span id="cb2-279"><a href="#cb2-279" aria-hidden="true" tabindex="-1"></a><span class="fu"># Table: annual OSE damage by region and field type</span></span>
 <span id="cb2-280"><a href="#cb2-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-283"><a href="#cb2-283" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-284"><a href="#cb2-284" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-285"><a href="#cb2-285" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb2-286"><a href="#cb2-286" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb2-287"><a href="#cb2-287" aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
-<span id="cb2-288"><a href="#cb2-288" aria-hidden="true" tabindex="-1"></a>ose_dat <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
-<span id="cb2-289"><a href="#cb2-289" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(region, fertilizer_treatment, ose_damage_percent) <span class="sc">|&gt;</span></span>
-<span id="cb2-290"><a href="#cb2-290" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">region =</span> <span class="fu">factor</span>(region, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">'Saint Louis'</span>, <span class="st">'Thies'</span>, <span class="st">'Fatick'</span>, <span class="st">'Kaffrine'</span>)),</span>
-<span id="cb2-291"><a href="#cb2-291" aria-hidden="true" tabindex="-1"></a>         <span class="at">fertilizer_treatment =</span> <span class="fu">factor</span>(fertilizer_treatment, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">'fertilized'</span>, <span class="st">'control'</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb2-292"><a href="#cb2-292" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(ose_damage_percent, fertilizer_treatment) <span class="sc">|&gt;</span></span>
-<span id="cb2-293"><a href="#cb2-293" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region, fertilizer_treatment) <span class="sc">|&gt;</span></span>
-<span id="cb2-294"><a href="#cb2-294" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">ose_mean =</span> <span class="fu">mean</span>(ose_damage_percent, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-295"><a href="#cb2-295" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> region, <span class="at">values_from =</span> ose_mean)</span>
-<span id="cb2-296"><a href="#cb2-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-297"><a href="#cb2-297" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the gt table</span></span>
-<span id="cb2-298"><a href="#cb2-298" aria-hidden="true" tabindex="-1"></a>tbl_damage_summary <span class="ot">&lt;-</span> ose_dat <span class="sc">|&gt;</span></span>
-<span id="cb2-299"><a href="#cb2-299" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(<span class="at">rowname_col =</span> <span class="st">"fertilizer_treatment"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-300"><a href="#cb2-300" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb2-301"><a href="#cb2-301" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Mean OSE damage by Region and Fertilizer Treatment"</span></span>
-<span id="cb2-302"><a href="#cb2-302" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb2-303"><a href="#cb2-303" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
-<span id="cb2-304"><a href="#cb2-304" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">everything</span>(),</span>
-<span id="cb2-305"><a href="#cb2-305" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">4</span></span>
-<span id="cb2-306"><a href="#cb2-306" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb2-307"><a href="#cb2-307" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb2-308"><a href="#cb2-308" aria-hidden="true" tabindex="-1"></a>    <span class="at">fertilizer_treatment =</span> <span class="st">"Treatment"</span>,</span>
-<span id="cb2-309"><a href="#cb2-309" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Saint Louis</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Saint Louis"</span>,</span>
-<span id="cb2-310"><a href="#cb2-310" aria-hidden="true" tabindex="-1"></a>    <span class="at">Thies =</span> <span class="st">"Thies"</span>,</span>
-<span id="cb2-311"><a href="#cb2-311" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fatick =</span> <span class="st">"Fatick"</span>,</span>
-<span id="cb2-312"><a href="#cb2-312" aria-hidden="true" tabindex="-1"></a>    <span class="at">Kaffrine =</span> <span class="st">"Kaffrine"</span></span>
-<span id="cb2-313"><a href="#cb2-313" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb2-314"><a href="#cb2-314" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb2-315"><a href="#cb2-315" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
-<span id="cb2-316"><a href="#cb2-316" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="fu">everything</span>())</span>
-<span id="cb2-317"><a href="#cb2-317" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb2-318"><a href="#cb2-318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-319"><a href="#cb2-319" aria-hidden="true" tabindex="-1"></a><span class="fu">save_gt_png</span>(tbl_damage_summary, <span class="st">"mean_ose_damage_by_region_treatment.png"</span>)</span>
-<span id="cb2-320"><a href="#cb2-320" aria-hidden="true" tabindex="-1"></a>tbl_damage_summary</span>
-<span id="cb2-321"><a href="#cb2-321" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-322"><a href="#cb2-322" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-323"><a href="#cb2-323" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-281"><a href="#cb2-281" aria-hidden="true" tabindex="-1"></a>The data discrepancies seen the the OSE count x ground cover are really shown in this table as well. We can see that the trends are the same (e.g. fertilized plots have less than control), but the actual averages are totally different.</span>
+<span id="cb2-282"><a href="#cb2-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-285"><a href="#cb2-285" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb2-286"><a href="#cb2-286" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb2-287"><a href="#cb2-287" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb2-288"><a href="#cb2-288" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb2-289"><a href="#cb2-289" aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
+<span id="cb2-290"><a href="#cb2-290" aria-hidden="true" tabindex="-1"></a>ose_dat <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb2-291"><a href="#cb2-291" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(region, fertilizer_treatment, ose_damage_percent) <span class="sc">|&gt;</span></span>
+<span id="cb2-292"><a href="#cb2-292" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">region =</span> <span class="fu">factor</span>(region, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">'Saint Louis'</span>, <span class="st">'Thies'</span>, <span class="st">'Fatick'</span>, <span class="st">'Kaffrine'</span>)),</span>
+<span id="cb2-293"><a href="#cb2-293" aria-hidden="true" tabindex="-1"></a>         <span class="at">fertilizer_treatment =</span> <span class="fu">factor</span>(fertilizer_treatment, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">'fertilized'</span>, <span class="st">'control'</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb2-294"><a href="#cb2-294" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(ose_damage_percent, fertilizer_treatment) <span class="sc">|&gt;</span></span>
+<span id="cb2-295"><a href="#cb2-295" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region, fertilizer_treatment) <span class="sc">|&gt;</span></span>
+<span id="cb2-296"><a href="#cb2-296" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">ose_mean =</span> <span class="fu">mean</span>(ose_damage_percent, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-297"><a href="#cb2-297" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> region, <span class="at">values_from =</span> ose_mean)</span>
+<span id="cb2-298"><a href="#cb2-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-299"><a href="#cb2-299" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the gt table</span></span>
+<span id="cb2-300"><a href="#cb2-300" aria-hidden="true" tabindex="-1"></a>tbl_damage_summary <span class="ot">&lt;-</span> ose_dat <span class="sc">|&gt;</span></span>
+<span id="cb2-301"><a href="#cb2-301" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(<span class="at">rowname_col =</span> <span class="st">"fertilizer_treatment"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-302"><a href="#cb2-302" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb2-303"><a href="#cb2-303" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Mean OSE damage by Region and Fertilizer Treatment"</span></span>
+<span id="cb2-304"><a href="#cb2-304" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-305"><a href="#cb2-305" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
+<span id="cb2-306"><a href="#cb2-306" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">everything</span>(),</span>
+<span id="cb2-307"><a href="#cb2-307" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">4</span></span>
+<span id="cb2-308"><a href="#cb2-308" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-309"><a href="#cb2-309" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb2-310"><a href="#cb2-310" aria-hidden="true" tabindex="-1"></a>    <span class="at">fertilizer_treatment =</span> <span class="st">"Treatment"</span>,</span>
+<span id="cb2-311"><a href="#cb2-311" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Saint Louis</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Saint Louis"</span>,</span>
+<span id="cb2-312"><a href="#cb2-312" aria-hidden="true" tabindex="-1"></a>    <span class="at">Thies =</span> <span class="st">"Thies"</span>,</span>
+<span id="cb2-313"><a href="#cb2-313" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fatick =</span> <span class="st">"Fatick"</span>,</span>
+<span id="cb2-314"><a href="#cb2-314" aria-hidden="true" tabindex="-1"></a>    <span class="at">Kaffrine =</span> <span class="st">"Kaffrine"</span></span>
+<span id="cb2-315"><a href="#cb2-315" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-316"><a href="#cb2-316" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb2-317"><a href="#cb2-317" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
+<span id="cb2-318"><a href="#cb2-318" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="fu">everything</span>())</span>
+<span id="cb2-319"><a href="#cb2-319" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-320"><a href="#cb2-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-321"><a href="#cb2-321" aria-hidden="true" tabindex="-1"></a><span class="fu">save_gt_png</span>(tbl_damage_summary, <span class="st">"mean_ose_damage_by_region_treatment.png"</span>)</span>
+<span id="cb2-322"><a href="#cb2-322" aria-hidden="true" tabindex="-1"></a>tbl_damage_summary</span>
+<span id="cb2-323"><a href="#cb2-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-324"><a href="#cb2-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-325"><a href="#cb2-325" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
