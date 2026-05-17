@@ -51,8 +51,9 @@ jobs:
             libnode-dev \
             pandoc \
             cmake \
-            libabsl-dev \
-            chromium
+            libabsl-dev
+
+          sudo apt-get install -y chromium-browser || true
 
       # (Removed duplicate unpinned R setup step)
       - name: Query R version
