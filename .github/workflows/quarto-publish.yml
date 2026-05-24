@@ -51,9 +51,29 @@ jobs:
             libnode-dev \
             pandoc \
             cmake \
-            libabsl-dev
+            libabsl-dev \
+            fonts-dejavu-core \
+            fonts-liberation \
+            fonts-noto-core
 
           sudo apt-get install -y chromium-browser || true
+
+      - name: Install Google Chrome
+        run: |
+          # Add Google signing key and repo
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add - || true
+          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
+          sudo apt-get update
+          # Try to install Google Chrome stable, fall back to Chromium if not available
+          sudo apt-get install -y google-chrome-stable || sudo apt-get install -y chromium-browser || true
+
+      - name: Configure Chrome for headless use
+        run: |
+          # Locate a chrome binary and expose it to the environment for R packages
+          CHROME_BIN=$(which google-chrome-stable || which chromium || which chromium-browser || true)
+          echo "CHROME_BIN=${CHROME_BIN}" >> $GITHUB_ENV
+          # Recommended args for chromote/webshot2 in CI
+          echo 'CHROMOTE_CHROME_ARGS=--headless=new --no-sandbox --disable-dev-shm-usage --disable-gpu --remote-debugging-port=0' >> $GITHUB_ENV
 
       # (Removed duplicate unpinned R setup step)
       - name: Query R version
