@@ -5,7 +5,7 @@ format: html
 toc: true
 ---
 
-::: {.callout-note}
+::: callout-note
 ## Exploratory Work
 
 This page contains exploratory analysis conducted during the development of the manuscript. These analyses informed our statistical approach and data management decisions. Not all content here appears in the final manuscript. For the final methods and results, see the [Methods and Results](manuscript_methods_results.qmd) page.
@@ -126,13 +126,12 @@ yield_mod <- cache_model(
 )
 
 # Define emmeans function locally (could be moved to statistical_models.R)
-get_emmeans_and_pairs <- function(glmm_mod) {
-  emmeans_obj <- emmeans(glmm_mod, ~ fertilizer_treatment * region, type = "response")
-  
-  emmeans_tbl <- as_tibble(emmeans_obj) 
-  
+get_emmeans_and_pairs <- function(model) {
+  emmeans_obj <- emmeans::emmeans(model, ~ fertilizer_treatment * region, type = "response")
+  emmeans_tbl <- as_tibble(emmeans_obj)
+
   pairs_tbl <- as_tibble(pairs(emmeans_obj, adjust = "tukey"))
-  
+
   list(
     emmeans = emmeans_tbl,
     pairwise = pairs_tbl
@@ -240,9 +239,6 @@ gt_table <- tidy_prepped %>%
     title = md("Model estimates for yield ~ fertilizer x region model"),
     subtitle = md("Fixed effects and random parameter SDs")
   ) %>%
-  tab_source_note(
-    source_note = md("Significance: *** p < 0.001, ** p < 0.01, * p < 0.05")
-  ) %>%
   # Accessibility / alignment tweaks
   cols_align(
     align = "center",
@@ -297,9 +293,6 @@ emms_pairwise_gt <- emms_pw_prepped %>%
   tab_header(
     title = md("Estimated Marginal Means Pairwise Contrasts"),
     subtitle = md("Table of pairwise ratios, z statistics, and p-values")
-  ) %>%
-  tab_source_note(
-    source_note = md("Significance: *** p < 0.001, ** p < 0.01, * p < 0.05")
   ) %>%
   cols_align(
     align = "center",

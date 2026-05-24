@@ -25,7 +25,7 @@ execute:
 ```{r setup}
 #| include: false
 source(here::here("R", "_common.R"))
-
+ 
 # Load required libraries
 library(tidyverse)
 library(mgcv)
@@ -155,6 +155,8 @@ names(mission_emmeans_damage) <- c('m1', 'm2', 'm3')
 ## General statistical and programatic approach
 
 All statistics were conducted in `{r} R.version.string` (R Core Team, 2024) using generalized additive mixed models (GAMMs) and generalized linear mixed models (GLMMs) implemented with `mgcv` [@wood2017generalized; @wood2011fast; @wood2004stable] and `glmmTMB` [@brooks2017glmmtmb; @mcgillycuddy2025parsimoniously] packages, respectively. Models were appriased/validated using `DHARMa` [@hartig2024dharma] and `gratia` [@simpson2024gratia]. Model selection when needed was done using AIC. Estimated marginal means and pairwise comparisons were calculated using the `emmeans` package [@lenth2025emmeans]. Data visualization was performed using the `ggplot2` package [@wickham2016ggplot2] along with extensions from the `tidyverse` suite of packages [@wickham2019tidyverse]. All code and data are versioned on github at: [github.com/ddlawton/OSE-Range-Analysis](https://github.com/ddlawton/OSE-Range-Analysis). Upon publication a github archive snapshot will be created and stored in Zenodo for reproducibility with a DOI and citation.
+
+Throughout this manuscript, significance is denoted using asterisks: \*\*\* p \< 0.001, \*\* p \< 0.01, \* p \< 0.05.
 
 ## Overall and mean monthly map generation
 
@@ -478,8 +480,10 @@ Senegalese grasshopper damage on millet leaves (a) and ears (b). Photo credit XX
 #| message: false
 #| warning: false
 
+library(ggplot2)
 library(terra)
 library(tidyterra)
+library(dplyr)
 library(sf)
 library(rnaturalearth)
 library(smoothr)
@@ -497,13 +501,39 @@ regions_of_interest <- c("Saint-Louis", "Thiès", "Fatick", "Kaffrine")
 roi_sf <- senegal |> filter(name %in% regions_of_interest)
 other_sf <- senegal |> filter(!name %in% regions_of_interest)
 
+# Making Fatick one region
+fatick_orig <- roi_sf |> filter(name == "Fatick")
+proj_crs <- 32628L
+
+fatick_fixed <- fatick_orig |>
+  st_transform(crs = proj_crs) |>
+  st_buffer(10000) |>    # 10 km buffer (adjust if you need a larger/smaller closing)
+  st_union() |>
+  st_buffer(-10000) |>
+  st_make_valid() |>
+  st_as_sf() |>
+  st_transform(st_crs(roi_sf)) |>
+  mutate(name = "Fatick") |>
+  rename(geometry = x)
+
+roi_sf_fixed <- bind_rows(
+  roi_sf |> filter(name != "Fatick") |> select(name, geometry),
+  fatick_fixed |> select(name, geometry)
+)
+
+senegal_fixed <- bind_rows(
+  senegal |> filter(name != "Fatick") |> select(name, geometry),
+  fatick_fixed |> select(name, geometry)
+)
+
 # Crop and mask raster to Senegal boundary
 map_raster_senegal <- crop(map_raster, vect(senegal)) |>
   mask(vect(senegal))
 
 # Create union of study regions for masking
-roi_union <- st_union(roi_sf)
+roi_union <- st_union(roi_sf_fixed)
 map_raster_roi <- mask(map_raster_senegal, vect(roi_union))
+
 ```
 
 ### Mean Annual Precipitation
@@ -520,11 +550,11 @@ map_raster_roi <- mask(map_raster_senegal, vect(roi_union))
 map_raster_senegal_smooth <- terra::disagg(map_raster_senegal, fact=4)
 
 # Smooth boundaries
-roi_sf_smooth     <- smoothr::smooth(roi_sf, method = "ksmooth", smoothness = 2)
+roi_sf_smooth     <- smoothr::smooth(roi_sf_fixed, method = "ksmooth", smoothness = 2)
 senegal_sf_smooth <- smoothr::smooth(senegal, method = "ksmooth", smoothness = 2)
 
 # Masked raster
-senegal_vect    <- vect(senegal)
+senegal_vect    <- vect(senegal_fixed)
 raster_cropped  <- crop(map_raster_senegal_smooth, senegal_vect)
 raster_masked   <- mask(raster_cropped, senegal_vect)
 raster_masked[raster_masked == 0] <- NA
@@ -534,9 +564,12 @@ ggplot() +
   geom_spatraster(data = raster_masked, 
                   aes(fill = senegal_map_2015_2024_chirps), 
                   na.rm = TRUE) +
-  geom_sf(data = senegal_sf_smooth, fill = NA, color = "grey80", linewidth = 1.5) +
+  geom_sf(data = senegal_sf_smooth, fill = NA, color = "grey80", linewidth = 0.75) +
   geom_sf(data = roi_sf_smooth, fill = NA, color = 'gray85', linewidth = 2) +
   geom_sf(data = roi_sf_smooth, fill = NA, color = 'black',  linewidth = 1) +
+  geom_label(data = st_centroid(roi_sf_fixed) |> st_coordinates() |> as.data.frame() |> bind_cols(roi_sf_fixed), 
+             aes(X, Y, label = name), 
+             size = 4, fontface = "bold", color = "black") +
   scale_fill_viridis_c(
       name      = "MAP (mm)", 
       na.value  = NA, 
@@ -550,8 +583,6 @@ ggplot() +
     panel.grid  = element_blank()
   )
 ```
-
-### Monthly Rainfall Patterns (2021)
 
 ```{r fig-monthly-rainfall}
 #| label: fig-monthly-rainfall
@@ -577,7 +608,7 @@ rainfall_min <- min(all_values)
 rainfall_max <- max(all_values)
 
 # Helper function for full Senegal plot
-plot_month_full <- function(month, raster_path, senegal, roi_sf,
+plot_month_full <- function(month, raster_path, senegal, roi_sf_fixed,
                             senegal_sf_smooth, roi_sf_smooth, min_val, max_val) {
   raster <- rast(raster_path)
   # Upsample (smooth raster-edged look)
@@ -590,9 +621,12 @@ plot_month_full <- function(month, raster_path, senegal, roi_sf,
   # Layered ggplot: smoothed outlines
   ggplot() +
     stars::geom_stars(data = stars::st_as_stars(raster_masked)) +
-    geom_sf(data = senegal_sf_smooth, fill = NA, color = "grey80", linewidth = 1.5) +
+    geom_sf(data = senegal_sf_smooth, fill = NA, color = "grey80", linewidth = 0.75) +
     geom_sf(data = roi_sf_smooth, fill = NA, color = 'gray85', linewidth = 2) +
-    geom_sf(data = roi_sf_smooth, fill = NA, color = 'black', linewidth = 1) +
+    geom_sf(data = roi_sf_smooth, fill = NA, color = 'black', linewidth = 1)  +
+  geom_label(data = st_centroid(roi_sf_fixed) |> st_coordinates() |> as.data.frame() |> bind_cols(roi_sf_fixed), 
+             aes(X, Y, label = name), 
+             size = 4, fontface = "bold", color = "black") +
     scale_fill_viridis_c(
       name = "rainfall (mm)",
       na.value = NA,
@@ -836,7 +870,7 @@ ests |>
 
 ```{r fig-supp-raw-count-treatment-mission-region}
 #| label: fig-supp-raw-count-treatment-mission-region
-#| fig-cap: "Ground cover by fertilizer treatment and mission across regions. Ground cover increased throughout the growing season across all regions, with minimal differences between control and fertilized treatments. No significant fertilizer × mission interaction was detected."
+#| fig-cap: "Raw Senegalese grasshopper density by fertilizer treatment and mission across regions. Individual farmer observations (points) are connected by lines to show within-farm changes across missions. Density patterns varied substantially by region and mission, with no consistent fertilizer treatment effect."
 #| echo: false
 #| message: false
 #| warning: false
@@ -881,7 +915,7 @@ plot_mission_counts <- function(data, mission, show_legend = TRUE) {
     ) +
     ylim(0,150) +
     theme_pubr() +
-    theme(plot.title = element_text(hjust = 0.5))
+    theme(plot.title = element_text(hjust = 0.5), legend.position = "bottom")
   if (!show_legend) {
     p <- p + theme(legend.position = "none")
   }
@@ -889,27 +923,79 @@ plot_mission_counts <- function(data, mission, show_legend = TRUE) {
 }
 
 
-m1_raw_plot <- plot_mission_counts(village_count_data, mission = 1, show_legend = TRUE)
-m2_raw_plot <- plot_mission_counts(village_count_data, mission = 2, show_legend = TRUE)
+m2_raw_plot <- plot_mission_counts(village_count_data, mission = 2, show_legend = FALSE)
 m3_raw_plot <- plot_mission_counts(village_count_data, mission = 3, show_legend = TRUE)
 
-(m1_raw_plot / m2_raw_plot / m3_raw_plot) + 
-  patchwork::plot_layout(guides = "collect", axis_titles = "collect") & 
-  theme(legend.position = "bottom")
+(m2_raw_plot / m3_raw_plot)
 ```
 
-## Ground Cover by Fertilizer Treatment
+## Ground Cover by Fertilizer Treatment 
+
+```{r fig-supp-ground-cover-prep, echo=FALSE}
+#| message: false
+#| warning: false
+# Prepare model and tidy table (used for caption and later table rendering)
+data_gc_test <- data |>
+  select(region, farmer, fertilizer_treatment, mission_number, percent_ground_cover) |>
+  drop_na() |>
+  mutate(
+    farmer = factor(farmer),
+    mission_number = factor(mission_number),
+    fertilizer_treatment = factor(fertilizer_treatment),
+    region = factor(region)
+  )
+
+gc_lmm <- glmmTMB::glmmTMB(
+  percent_ground_cover ~ fertilizer_treatment * mission_number + region + (1|farmer),
+  data = data_gc_test,
+  family = gaussian()
+)
+
+# Tidy output (this is the table source)
+tidy_prepped <- broom.mixed::tidy(gc_lmm) %>%
+  mutate(
+    term = term %>%
+      str_replace_all("^\\(Intercept\\)$", "Intercept") %>%
+      str_replace_all("fertilizer_treatmentfertilized", "Fertilized") %>%
+      str_replace_all("mission_number2", "Mission 2") %>%
+      str_replace_all("mission_number3", "Mission 3") %>%
+      str_replace_all("regionKaffrine", "Kaffrine") %>%
+      str_replace_all("regionSaint Louis", "Saint Louis") %>%
+      str_replace_all("regionThies", "Thies") %>%
+      str_replace_all("fertilizer_treatmentfertilized:mission_number2", "Fertilized × Mission 2") %>%
+      str_replace_all("fertilizer_treatmentfertilized:mission_number3", "Fertilized × Mission 3"),
+    p_value = p.value
+  )
+
+# Extract p-values for caption from the tidy table
+gc_fert_p <- tidy_prepped %>% filter(term == "Fertilized") %>% pull(p_value)
+
+# Joint test for the fertilizer:mission interaction using LRT
+gc_lmm_no_inter <- update(gc_lmm, . ~ . - fertilizer_treatment:mission_number)
+gc_int_lrt <- anova(gc_lmm_no_inter, gc_lmm)
+gc_int_p <- NA_real_
+if ("Pr(>Chisq)" %in% colnames(gc_int_lrt)) {
+  gc_int_p <- gc_int_lrt$`Pr(>Chisq)`[2]
+} else if ("p.value" %in% colnames(gc_int_lrt)) {
+  gc_int_p <- gc_int_lrt$p.value[2]
+}
+
+gc_caption <- paste0(
+  "Ground cover by fertilizer treatment and mission across regions. Ground cover increased throughout the growing season across all regions, with minimal differences between control and fertilized treatments. Statistical analysis (",
+  "@tbl-ground-cover-fertilizer-effects",
+  ") confirmed no significant main effect of fertilizer (p ", format_p(gc_fert_p), ") or fertilizer × mission interaction (p ", format_p(gc_int_p), ")."
+)
+
+```
 
 ```{r fig-supp-ground-cover-treatment}
 #| label: fig-supp-ground-cover-treatment
-#| fig-cap: "Ground cover by fertilizer treatment and mission across regions. Ground cover increased throughout the growing season across all regions, with minimal differences between control and fertilized treatments. No significant fertilizer × mission interaction was detected."
+#| fig-cap: "Ground cover by fertilizer treatment and mission across regions. Ground cover increased throughout the growing season across all regions, with minimal differences between control and fertilized treatments. Statistical analysis (@tbl-ground-cover-fertilizer-effects) confirmed no significant main effect of fertilizer or fertilizer × mission interaction."
 #| echo: false
 #| message: false
 #| warning: false
 #| fig-width: 8
 #| fig-height: 8
-
-# Ensure mission_number is a factor with all levels
 
 # Ensure mission_number is a factor with all levels
 mission_levels <- c("1", "2", "3")
@@ -1018,6 +1104,115 @@ wrap_plots(region_temp_plots, ncol = 2) +
 ```
 
 # Supplementary Tables
+
+## ground cover model summary by fertilizer treatment, mission, and region
+
+```{r tbl-ground-cover-fertilizer-effects, echo=FALSE}
+#| label: tbl-ground-cover-fertilizer-effects
+#| tbl-cap: "Model summary for ground cover by fertilizer treatment, mission, and region. Generalized linear mixed model (GLMM) with Gaussian family distribution. Fixed effects include fertilizer treatment, mission, region, and the fertilizer × mission interaction. Random effects account for farmer-level variation."
+#| message: false
+#| warning: false
+
+# If tidy_prepped wasn't created earlier (safety), compute it now
+if (!exists("tidy_prepped") || !exists("gc_lmm")) {
+  data_gc_test <- data |>
+    select(region, farmer, fertilizer_treatment, mission_number, percent_ground_cover) |>
+    drop_na() |>
+    mutate(
+      farmer = factor(farmer),
+      mission_number = factor(mission_number),
+      fertilizer_treatment = factor(fertilizer_treatment),
+      region = factor(region)
+    )
+
+  gc_lmm <- glmmTMB::glmmTMB(
+    percent_ground_cover ~ fertilizer_treatment * mission_number + region + (1|farmer),
+    data = data_gc_test,
+    family = gaussian()
+  )
+
+  tidy_prepped <- broom.mixed::tidy(gc_lmm) %>%
+    mutate(
+      term = term %>%
+        str_replace_all("^\\(Intercept\\)$", "Intercept") %>%
+        str_replace_all("fertilizer_treatmentfertilized", "Fertilized") %>%
+        str_replace_all("mission_number2", "Mission 2") %>%
+        str_replace_all("mission_number3", "Mission 3") %>%
+        str_replace_all("regionKaffrine", "Kaffrine") %>%
+        str_replace_all("regionSaint Louis", "Saint Louis") %>%
+        str_replace_all("regionThies", "Thies") %>%
+        str_replace_all("fertilizer_treatmentfertilized:mission_number2", "Fertilized × Mission 2") %>%
+        str_replace_all("fertilizer_treatmentfertilized:mission_number3", "Fertilized × Mission 3"),
+      p_value = p.value
+    )
+}
+
+# Prepare p_label and sig columns like other tables
+tidy_table_for_gt <- tidy_prepped %>%
+  mutate(
+    p_label = case_when(
+      is.na(p_value) ~ NA_character_,
+      p_value < 0.001 ~ "<0.001",
+      TRUE ~ formatC(p_value, digits = 3, format = "f")
+    ),
+    sig = case_when(
+      is.na(p_value) ~ "",
+      p_value < 0.001 ~ "***",
+      p_value < 0.01  ~ "**",
+      p_value < 0.05  ~ "*",
+      TRUE ~ ""
+    ),
+    p_label = if_else(is.na(p_label), NA_character_, paste0(p_label, sig))
+  ) %>%
+  select(effect, component, term, estimate, std.error, statistic, p_value, p_label)
+
+# Build and save the gt table
+tbl_gc_effects <- tidy_table_for_gt %>%
+  gt(rowname_col = "term") %>%
+  tab_row_group(
+    group = "Fixed effects",
+    rows = tidy_table_for_gt$effect == "fixed"
+  ) %>%
+  tab_row_group(
+    group = "Random parameters",
+    rows = tidy_table_for_gt$effect == "ran_pars"
+  ) %>%
+  cols_label(
+    term = "Term",
+    estimate = "Estimate",
+    std.error = "Std. error",
+    statistic = "z",
+    p_label = "p-value",
+    component = "Component"
+  ) %>%
+  fmt_number(
+    columns = vars(estimate, std.error, statistic, p_value),
+    decimals = 3
+  ) %>%
+  fmt_missing(
+    columns = everything(),
+    missing_text = "-"
+  ) %>%
+  cols_move_to_end(columns = vars(p_label)) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_row_groups()
+  ) %>%
+  tab_header(
+    title = "Model Estimates for Ground Cover ~ Fertilizer × Mission + Region",
+    subtitle = "Fixed effects and random parameter SDs"
+  ) %>%
+  cols_align(
+    align = "center",
+    columns = vars(estimate, std.error, statistic, p_label)
+  )
+
+save_gt_png(tbl_gc_effects, "ground_cover_fertilizer_effects.png")
+
+# Display table
+tbl_gc_effects
+```
+
 
 ## grasshopper Density Analysis Tables
 
@@ -1318,9 +1513,6 @@ tbl_yield_model <- tidy_prepped %>%
     title = "Model Estimates for Yield ~ Fertilizer × Region",
     subtitle = "Fixed effects and random parameter SDs"
   ) %>%
-  tab_source_note(
-    source_note = md("Significance: *** p < 0.001, ** p < 0.01, * p < 0.05")
-  ) %>%
   cols_align(
     align = "center",
     columns = vars(estimate, std.error, statistic, p_label)
@@ -1396,9 +1588,6 @@ tbl_yield_pairwise <- emms_pw_prepped %>%
   tab_header(
     title = "Estimated Marginal Means Pairwise Contrasts",
     subtitle = "Table of pairwise ratios, z statistics, and p-values"
-  ) %>%
-  tab_source_note(
-    source_note = md("Significance: *** p < 0.001, ** p < 0.01, * p < 0.05")
   ) %>%
   cols_align(
     align = "center",
