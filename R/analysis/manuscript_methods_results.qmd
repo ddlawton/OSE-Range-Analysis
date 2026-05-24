@@ -1772,3 +1772,97 @@ save_gt_png(tbl_temperature, "temperature_effects_grasshopper_density.png")
 # Display table
 tbl_temperature 
 ```
+
+## Model Summary Table
+
+```{r tbl-model-summary}
+#| label: tbl-model-summary
+#| tbl-cap: "Summary of all statistical models used in the analysis. For each model, the table shows the response variable, statistical family, random effects structure, and sample size (number of observations)."
+#| echo: false
+#| message: false
+#| warning: false
+
+# Create a comprehensive model summary table
+model_summary_data <- tibble::tribble(
+  ~Model, ~Response, ~Family, ~Random_Effects, ~Sample_Size,
+  
+  # Density models (3 missions)
+  "Density Mission 1", "Grasshopper count", "Poisson", "Farmer (1|farmer)", nrow(model_data[[1]]),
+  "Density Mission 2", "Grasshopper count", "Poisson", "Farmer (1|farmer)", nrow(model_data[[2]]),
+  "Density Mission 3", "Grasshopper count", "Poisson", "Farmer (1|farmer)", nrow(model_data[[3]]),
+  
+  # Damage models (3 missions)
+  "Damage Mission 1", "Damage percent", "Tweedie", "Farmer (1|farmer)", nrow(model_data_damage[[1]]),
+  "Damage Mission 2", "Damage percent", "Tweedie", "Farmer (1|farmer)", nrow(model_data_damage[[2]]),
+  "Damage Mission 3", "Damage percent", "Tweedie", "Farmer (1|farmer)", nrow(model_data_damage[[3]]),
+  
+  # Yield model
+  "Millet Yield", "Yield (kg/ha)", "Tweedie", "Farmer (1|farmer)", nrow(data_yield_early),
+  
+  # Ground cover mediation GAM
+  "Ground Cover Mediation", "Grasshopper count", "Tweedie", "Farmer s(farmer, bs='re')", nrow(data_gc_early),
+  
+  # Ground cover by fertilizer GLMM
+  "Ground Cover × Fertilizer", "Ground cover percent", "Gaussian", "Farmer (1|farmer)", 
+    nrow(data |> 
+      select(region, farmer, fertilizer_treatment, mission_number, percent_ground_cover) |> 
+      drop_na()),
+  
+  # Temperature GAM
+  "Temperature Effects", "Grasshopper count", "Tweedie", 
+    "Region s(region, bs='re'); Farmer s(farmer, bs='re'); Mission s(mission_number, bs='re')",
+    nrow(data |>
+      filter(fertilizer_treatment == 'control') |>
+      select(year, region, farmer, mission_number, ose_count, temperature) |>
+      drop_na(temperature, mission_number, region, ose_count))
+)
+
+# Create the gt table with consistent formatting
+tbl_model_summary <- model_summary_data |>
+  gt() |>
+  cols_label(
+    Model = "Model",
+    Response = "Response Variable",
+    Family = "Statistical Family",
+    Random_Effects = "Random Effects",
+    Sample_Size = "Sample Size (n)"
+  ) |>
+  fmt_number(
+    columns = Sample_Size,
+    decimals = 0
+  ) |>
+  tab_header(
+    title = "Summary of All Statistical Models"
+  ) |>
+  tab_source_note(
+    source_note = md("**Note:** All models include fixed effects for fertilizer treatment and region (and their interaction where applicable). Density models used separate analyses for each mission. GAM models used smooth terms s() with re (random effect) basis for random effects; GLMM models used standard random intercept notation (1|farmer).")
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  ) |>
+  cols_align(
+    align = "center",
+    columns = c(Family, Sample_Size)
+  ) |>
+  cols_align(
+    align = "left",
+    columns = c(Model, Response, Random_Effects)
+  ) |>
+  tab_style(
+    style = cell_borders(
+      sides = "top",
+      weight = px(2),
+      color = "black"
+    ),
+    locations = cells_body(
+      rows = c(4, 7, 8, 9, 10)
+    )
+  )
+
+# Save as PNG
+save_gt_png(tbl_model_summary, "model_summary_all_models.png")
+
+# Display table
+tbl_model_summary
+```
