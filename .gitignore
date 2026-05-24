@@ -4,3 +4,7 @@
 _site/*
 outputs/*
 !data/processed/.gitkeep
+# Ignore generated Quarto/R Markdown artifacts
+**/*.rmarkdown
+**/*_files/
+**/*.knit.md
