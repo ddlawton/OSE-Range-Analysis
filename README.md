@@ -54,11 +54,16 @@ flowchart TD
     G --> H
     H --> I[Website<br/>_site/]
     I --> J[GitHub Pages<br/>Published Site]
-    
-    style B fill:#e1f5ff
-    style D fill:#fff4e1
-    style H fill:#f0ffe1
-    style J fill:#ffe1f5
+
+    classDef pipeline fill:#0B3954,stroke:#07263A,stroke-width:2px,color:#FFFFFF,font-weight:600;
+    classDef processing fill:#0F5132,stroke:#0A3925,stroke-width:2px,color:#FFFFFF,font-weight:600;
+    classDef models fill:#8A4B00,stroke:#5B2F00,stroke-width:2px,color:#FFFFFF,font-weight:600;
+    classDef docs fill:#4C1D95,stroke:#2E0F57,stroke-width:2px,color:#FFFFFF,font-weight:600;
+    class B pipeline;
+    class C processing;
+    class D models;
+    class H docs;
+    linkStyle default stroke:#bbb, stroke-width:1.5px;
 ```
 
 ### Key Principles
