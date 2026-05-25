@@ -595,7 +595,7 @@ list(
       df <- processed_ose_data_clean |>
         dplyr::mutate(ose_damage_percent = .data$ose_damage_percent) |> # ensure column exists
         dplyr::filter(!is.na(farmer_gender))
-      model_obj <- glmmTMB::glmmTMB(ose_count ~ farmer_gender + (1 | region) + (1 | mission_number), data = df, family = mgcv::tw())
+      model_obj <- glmmTMB::glmmTMB(ose_count ~ farmer_gender + (1 | region) + (1 | mission_number), data = df, family = tweedie())
       out <- here::here("data", "model_objects", "farmer_gender_density.rds")
       ensure_dir(dirname(out))
       saveRDS(model_obj, out)
@@ -609,7 +609,7 @@ list(
     {
       df <- processed_ose_data_clean |>
         dplyr::mutate(ose_damage_percent = .data$ose_damage_percent) |> dplyr::filter(!is.na(farmer_gender))
-      model_obj <- glmmTMB::glmmTMB(ose_damage_percent ~ farmer_gender + (1 | region) + (1 | mission_number), data = df, family = mgcv::tw())
+      model_obj <- glmmTMB::glmmTMB(ose_damage_percent ~ farmer_gender + (1 | region) + (1 | mission_number), data = df, family = tweedie())
       out <- here::here("data", "model_objects", "farmer_gender_damage.rds")
       ensure_dir(dirname(out))
       saveRDS(model_obj, out)
