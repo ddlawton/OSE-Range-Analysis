@@ -48,6 +48,7 @@ jobs:
             ghostscript \
             gdal-bin \
             libgdal-dev \
+            libglpk-dev \
             libnode-dev \
             pandoc \
             cmake \
