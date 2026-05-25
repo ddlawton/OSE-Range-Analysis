@@ -16,11 +16,39 @@ This page contains exploratory analysis conducted during the development of the 
 #| message: false
 #| warning: false
 
-# Load common setup (packages, functions, configuration)
-source(here::here("R", "_common.R"))
+# Core packages for visualization
+suppressPackageStartupMessages({
+  library(tidyverse)
+  library(here)
+  library(ggpubr)
+  library(mgcv)
+  library(gratia)
+  library(MetBrewer)
+  library(gt)
+})
 
-# Set the current analysis for organized output
-set_current_analysis("locust_density_temperature")
+# Plot defaults
+theme_set(theme_pubr())
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  fig.retina = 2
+)
+
+# Source project functions
+function_files <- list.files(here("R", "functions"), pattern = "\\.R$", full.names = TRUE)
+for (f in function_files) source(f, local = TRUE)
+
+# Project configuration constants (from _targets.R)
+STUDY_REGIONS <- c('Saint-Louis', 'Thiès', 'Fatick', 'Kaffrine')
+ALT_STUDY_REGIONS <- c('Saint Louis', 'Thies', 'Fatick', 'Kaffrine')
+MISSION_LABELS <- c('Mission 1 (July)', 'Mission 2 (September)', 'Mission 3 (October)')
+DEFAULT_PALETTE <- "Degas"
+FERTILIZER_COLORS <- c('control' = 'black', 'fertilized' = 'dark green')
+DEFAULT_POINT_SIZE <- 5
+DEFAULT_EMMEAN_POINT_SIZE <- 8
+DEFAULT_FIGURE_DPI <- 2
 ```
 
 ```{r data-loading}
@@ -28,8 +56,8 @@ set_current_analysis("locust_density_temperature")
 #| message: false
 #| warning: false
 
-# Load processed data and filter for control plots only
-data <- load_ose_data(cache_processed = TRUE) |>
+# Load processed data from targets pipeline and filter for control plots only
+data <- read_csv(here("data", "processed", "ose_data_processed.csv"), show_col_types = FALSE) |>
     filter(fertilizer_treatment == 'control') |>
     select(year, region, farmer, mission_number, ose_count, temperature) |>
     mutate(
@@ -67,32 +95,8 @@ The raw plots do not look very compelling, but let's construct a generalized add
 #| message: false
 #| warning: false
 
-# Use model caching for the temperature GAM
-mod <- cache_model(
-    model_name = "locust_temperature_gam",
-    data = data,
-    fit_function = function(data) {
-        mgcv::gam(
-            ose_count ~
-                s(temperature, region, bs = 'fs', k = 10) +
-                s(farmer, bs = 're'),
-            data = data,
-            family = mgcv::tw(),
-            select = TRUE
-        )
-    },
-    # Simpler model for CI (reduced complexity)
-    fit_function_simple = function(data) {
-        mgcv::gam(
-            ose_count ~
-                s(temperature, region, bs = 'fs', k = 5) +
-                s(farmer, bs = 're'),
-            data = data,
-            family = mgcv::tw(),
-            select = TRUE
-        )
-    }
-)
+# Load temperature GAM from targets pipeline
+mod <- readRDS(here::here("data", "model_objects", "locust_temperature_gam.rds"))
 ```
 
 ```{r}
@@ -100,33 +104,23 @@ mod <- cache_model(
 #| message: false
 #| warning: false
 
-temp_smooth_plot <- plot_temperature_smooth(mod,
-    smooth = "s(temperature,region)",
-    xvar = "temperature",
-    group = "region",
-    xlab = NULL,
-    ylab = NULL,
-    title = "locust density x temperature",
-    palette = "Degas",
-    ribbon_fill = "grey70",
-    ribbon_alpha = 0.3) 
+# Extract smooth estimates for temperature by region
+est <- gratia::smooth_estimates(mod, select = 'temperature', partial_match = TRUE)
 
-# Display and save the temperature smooth plot
+# Create temperature smooth plot
+temp_smooth_plot <- ggplot(est, aes(x = temperature, y = .estimate)) +
+  geom_ribbon(aes(ymin = .estimate - .se, ymax = .estimate + .se, fill = region), alpha = 0.3) +
+  geom_line(aes(color = region)) +
+  scale_fill_met_d(name = 'Degas') +
+  scale_color_met_d(name = 'Degas') +
+  labs(
+    x = "Temperature (°C)",
+    y = "Estimated OSE Count (Partial effects)",
+    title = "Locust density × temperature"
+  ) +
+  theme_pubr()
+
 temp_smooth_plot
-save_temperature_smooth(mod,
-    smooth = "s(temperature,region)",
-    xvar = "temperature",
-    group = "region",
-    xlab = NULL,
-    ylab = NULL,
-    title = "locust density x temperature",
-    palette = "Degas",
-    ribbon_fill = "grey70",
-    ribbon_alpha = 0.3,
-    filename = "temperature_gam_smooths")
-
-# Save model summary
-save_model_summary(mod, "temperature_gam_summary")
 ```
 
 There seems to be some positive realationship between temperature and locust denisty for Fatick, Saint Louis, and Thies. Kaffrine is a different relationship, however I wonder if this is partially still driven by the high densities in the first mission.
@@ -174,6 +168,7 @@ It looks like Fatick became hotter through the sampling period. Kaffrine, Thies,
 Lets create the same model above with mission number included:
 
 ```{r new model}
+#| eval: false
 
 
 model_with_mission_number <- mgcv::gam(
@@ -209,6 +204,7 @@ Seems like very similiar trends to the original model with the exception of more
 Lets try one more model where we do not try to look at the relationship between ose_count and region separately, but rather hold temperature as a random effect and look solely at temperature
 
 ```{r}
+#| eval: false
 
 temp_model <- mgcv::gam(
             ose_count ~

@@ -21,15 +21,41 @@ This analysis examines how fertilization influences millet yield across differen
 #| message: false
 #| warning: false
 
-# Load common setup (packages, functions, configuration)
-source(here::here("R", "_common.R"))
+# Core packages for visualization
+suppressPackageStartupMessages({
+  library(tidyverse)
+  library(here)
+  library(ggpubr)
+  library(glmmTMB)
+  library(emmeans)
+  library(DHARMa)
+  library(broom.mixed)
+  library(gt)
+  library(webshot2)
+})
 
-# Set the current analysis for organized output
-set_current_analysis("yield_treatment_region")
+# Plot defaults
+theme_set(theme_pubr())
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  fig.retina = 2
+)
 
-# Load gt and webshot2 for table export
-library(gt)
-library(webshot2)
+# Source project functions
+function_files <- list.files(here("R", "functions"), pattern = "\\.R$", full.names = TRUE)
+for (f in function_files) source(f, local = TRUE)
+
+# Project configuration constants (from _targets.R)
+STUDY_REGIONS <- c('Saint-Louis', 'Thiès', 'Fatick', 'Kaffrine')
+ALT_STUDY_REGIONS <- c('Saint Louis', 'Thies', 'Fatick', 'Kaffrine')
+MISSION_LABELS <- c('Mission 1 (July)', 'Mission 2 (September)', 'Mission 3 (October)')
+DEFAULT_PALETTE <- "Degas"
+FERTILIZER_COLORS <- c('control' = 'black', 'fertilized' = 'dark green')
+DEFAULT_POINT_SIZE <- 5
+DEFAULT_EMMEAN_POINT_SIZE <- 8
+DEFAULT_FIGURE_DPI <- 2
 
 # Helper function to save gt tables as PNG and CSV
 save_gt_png <- function(gt_obj, filename, subfolder = "yield_treatment_region") {
@@ -60,8 +86,8 @@ save_gt_png <- function(gt_obj, filename, subfolder = "yield_treatment_region") 
 #| message: false
 #| warning: false
 
-# Load processed data and filter for yield analysis
-data <- load_ose_data(cache_processed = TRUE) |>
+# Load processed data from targets pipeline and filter for yield analysis
+data <- read_csv(here("data", "processed", "ose_data_processed.csv"), show_col_types = FALSE) |>
     select(year, region, farmer, fertilizer_treatment, rendement_en_kg_ha) |>
     drop_na(rendement_en_kg_ha) |>
     distinct()
@@ -110,20 +136,8 @@ formula <- yield ~
 #| message: false
 #| warning: false
 
-# Use model caching for the yield model
-yield_mod <- cache_model(
-    model_name = "yield_treatment_region",
-    data = data,
-    fit_function = function(data) {
-        glmmTMB(
-            rendement_en_kg_ha ~
-                fertilizer_treatment * region +
-                (1|farmer),
-            data = data,
-            family = tweedie()
-        )
-    }
-)
+# Load yield model from targets pipeline
+yield_mod <- readRDS(here::here("data", "model_objects", "yield_treatment_region.rds"))
 
 # Define emmeans function locally (could be moved to statistical_models.R)
 get_emmeans_and_pairs <- function(model) {

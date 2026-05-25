@@ -1,10 +1,114 @@
-
+# -----------------------------------------------------------------------------
+# System Files
+# -----------------------------------------------------------------------------
 .DS_Store
-/.quarto/
-_site/*
-outputs/*
-!data/processed/.gitkeep
-# Ignore generated Quarto/R Markdown artifacts
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*~
+
+# -----------------------------------------------------------------------------
+# R and RStudio
+# -----------------------------------------------------------------------------
+.RData
+.RDataTmp
+.Rhistory
+.Rapp.history
+.Rproj.user/
+*.Rproj.user
+.Renviron
+*-Ex.R
+*.Rcheck/
+docs/
+
+# -----------------------------------------------------------------------------
+# renv (R Package Management)
+# -----------------------------------------------------------------------------
+
+renv/library/
+renv/local/
+renv/cellar/
+renv/lock/
+renv/python/
+renv/sandbox/
+renv/staging/
+
+# -----------------------------------------------------------------------------
+# Python
+# -----------------------------------------------------------------------------
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.ipynb_checkpoints
+
+.python-version
+
+# -----------------------------------------------------------------------------
+# Targets Pipeline (R)
+# -----------------------------------------------------------------------------
+_targets/
+
+# -----------------------------------------------------------------------------
+# Quarto Publishing System
+# -----------------------------------------------------------------------------
+.quarto/
+_site/
+_book/
+_freeze/
 **/*.rmarkdown
 **/*_files/
 **/*.knit.md
+**/*.plotly.json
+
+# -----------------------------------------------------------------------------
+# Generated Outputs
+# -----------------------------------------------------------------------------
+outputs/
+data/processed/*
+!data/processed/.gitkeep
+!data/processed/maps/
+data/processed/maps/*
+!data/processed/maps/.gitkeep
+data/model_objects/*.rds
+
+# -----------------------------------------------------------------------------
+# Archives and Compressed Files
+# -----------------------------------------------------------------------------
+*.zip
+*.tar.gz
+*.7z
+
+# -----------------------------------------------------------------------------
+# Logs and Temporary Files
+# -----------------------------------------------------------------------------
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+/.quarto/

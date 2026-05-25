@@ -4,7 +4,7 @@ format: html
 toc: true
 ---
 
-::: {.callout-note}
+::: callout-note
 ## Exploratory Work
 
 This page contains exploratory analysis conducted during the development of the manuscript. These analyses informed our statistical approach and data management decisions. Not all content here appears in the final manuscript. For the final methods and results, see the [Methods and Results](manuscript_methods_results.qmd) page.
@@ -20,15 +20,42 @@ The goal of this page is to provide the map and a basic understanding of the dat
 #| message: false
 #| warning: false
 
-# Load common setup (packages, functions, configuration)
-source(here::here("R", "_common.R"))
+# Core packages for visualization
+suppressPackageStartupMessages({
+  library(tidyverse)
+  library(here)
+  library(rnaturalearth)
+  library(rnaturalearthhires)
+  library(janitor)
+  library(patchwork)
+  library(ggpubr)
+  library(gt)
+  library(webshot2)
+  library(MetBrewer)
+})
 
-# Set the current analysis for organized output
-set_current_analysis("basic_stats")
+# Plot defaults
+theme_set(theme_pubr())
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  fig.retina = 2
+)
 
-# Load gt and webshot2 for table export
-library(gt)
-library(webshot2)
+# Source functions needed for mapping
+function_files <- list.files(here::here("R", "functions"), pattern = "\\.R$", full.names = TRUE)
+for (f in function_files) source(f, local = TRUE)
+
+# Project configuration constants (from _targets.R)
+STUDY_REGIONS <- c('Saint-Louis', 'Thiès', 'Fatick', 'Kaffrine')
+ALT_STUDY_REGIONS <- c('Saint Louis', 'Thies', 'Fatick', 'Kaffrine')
+MISSION_LABELS <- c('Mission 1 (July)', 'Mission 2 (September)', 'Mission 3 (October)')
+DEFAULT_PALETTE <- "Degas"
+FERTILIZER_COLORS <- c('control' = 'black', 'fertilized' = 'dark green')
+DEFAULT_POINT_SIZE <- 5
+DEFAULT_EMMEAN_POINT_SIZE <- 8
+DEFAULT_FIGURE_DPI <- 2
 
 # Helper function to save gt tables as PNG and CSV
 save_gt_png <- function(gt_obj, filename, subfolder = "basic_stats") {
@@ -60,8 +87,8 @@ save_gt_png <- function(gt_obj, filename, subfolder = "basic_stats") {
 #| warning: false
 #| results: hide
 
-# Load and process data using the common function
-data <- load_ose_data(cache_processed = TRUE)
+# Load processed data from targets pipeline
+data <- read_csv(here("data", "processed", "ose_data_processed.csv"), show_col_types = FALSE)
 
 # Save basic dataset summary
 save_data_table(
@@ -76,7 +103,8 @@ save_data_table(
       mean_ground_cover = mean(percent_ground_cover, na.rm = TRUE),
       mean_yield = mean(rendement_en_kg_ha, na.rm = TRUE)
     ),
-  "dataset_summary"
+  "dataset_summary",
+  out_path = here("outputs", "tables", "basic_stats")
 )
 ```
 
@@ -102,7 +130,7 @@ summary_table
 #| warning: false
 
 senegal_map <- plot_senegal_map(
-  regions_of_interest = STUDY_REGIONS,
+  regions_of_interest = c('Saint-Louis', 'Thiès', 'Fatick', 'Kaffrine'),
   show_legend = FALSE,
   roi_color = "tomato",
   other_color = "grey80",
@@ -215,7 +243,6 @@ rainfall_max <- max(all_values)
 
 ### Full Senegal Monthly Maps
 
-
 ```{r}
 #| echo: false
 #| message: false
@@ -303,7 +330,6 @@ plots_full <- mapply(
 ```
 
 Below is the average monthly rainfall per region
-
 
 ```{r}
 library(terra)

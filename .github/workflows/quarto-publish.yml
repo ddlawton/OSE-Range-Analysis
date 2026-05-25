@@ -19,14 +19,14 @@ jobs:
           install-r: true
       - uses: actions/checkout@v4
 
-      # Cache model objects to avoid rebuilding expensive models
-      - name: Cache model objects
+      # Cache targets metadata for incremental builds
+      - name: Cache targets pipeline
         uses: actions/cache@v3
         with:
-          path: data/model_objects
-          key: model-cache-${{ hashFiles('data/raw/**', 'R/functions/**', 'R/_common.R') }}
+          path: _targets
+          key: targets-${{ hashFiles('_targets.R', 'R/**', 'data/raw/**') }}
           restore-keys: |
-            model-cache-
+            targets-
 
       - name: Install system dependencies
         run: |
@@ -102,6 +102,12 @@ jobs:
           git status --porcelain || true
           echo "-- renv::status() --"
           Rscript -e 'if (requireNamespace("renv", quietly=TRUE)) renv::status() else cat("renv not installed\n")'
+
+      - name: Run targets pipeline
+        run: |
+          echo "Running targets pipeline to build models and derived outputs..."
+          # Run the targets pipeline to produce model .rds and CSV outputs that Quarto will read
+          Rscript -e 'if (!requireNamespace("targets", quietly=TRUE)) { stop("targets package not available. Ensure it is in renv.lock and restored.") }; targets::tar_make()'
 
       - run: quarto render
 

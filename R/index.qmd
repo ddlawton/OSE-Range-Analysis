@@ -33,7 +33,20 @@ Each field was surveyed three times to record:
 
 ------------------------------------------------------------------------
 
-## Computational Approach
+## Computational Architecture
+
+This project uses a **targets pipeline** for reproducible computation with clean separation of concerns:
+
+### Key Principles
+
+1. **Separation of Computation and Presentation**
+   - `_targets.R`: ALL data processing, modeling, and post-processing
+   - Quarto documents: ONLY import artifacts and create visualizations
+
+2. **Reproducibility Through Targets**
+   - Incremental builds track dependencies automatically
+   - Models cached intelligently based on code/data changes
+   - Run `targets::tar_make()` to execute the entire pipeline
 
 ### Statistical Framework
 
@@ -46,13 +59,54 @@ All analyses were conducted in R using:
 
 ### Code Organization
 
-The repository is structured for reproducibility:
+The analysis follows a targets-based modular architecture:
 
--   **`R/_common.R`**: Shared setup, packages, and configuration
--   **`R/functions/`**: Modular functions for data processing, modeling, plotting, and mapping
--   **`R/analysis/`**: Quarto documents for all analyses
--   **`data/`**: Raw data and cached processed datasets
--   **`outputs/`**: Generated figures and tables
+**Pipeline Layer (`_targets.R`):**
+
+-   Orchestrates all computational work
+-   Defines dependencies between targets
+-   Manages incremental builds and caching
+
+**Function Layer (`R/functions/`):**
+
+-   `data_preprocessing.R`: Data loading, cleaning, validation
+-   `statistical_models.R`: Model fitting functions for GLMMs and GAMs
+-   `plotting_functions.R`: Publication-ready visualizations
+-   `figure_export.R`: File I/O utilities for saving outputs
+-   `senegal_map.R`: Geographic mapping functions
+-   `table_variable_summary.R`: Summary table generation
+
+**Presentation Layer (`R/analysis/*.qmd`):**
+
+-   Quarto documents that import pre-computed artifacts
+-   Load models from `data/model_objects/*.rds`
+-   Import tables from `outputs/tables/*.csv`
+-   Create inline statistics and format results for publication
+-   Generate final figure compositions
+
+### Targets Pipeline Workflow
+
+The `_targets.R` pipeline orchestrates all computation in three stages:
+
+**Stage 1: Data Preparation**
+
+-   Load raw Excel data
+-   Clean and validate fields
+-   Create analysis-ready datasets
+
+**Stage 2: Statistical Modeling**
+
+-   Fit GLMMs for locust density (3 missions) and damage (3 missions)
+-   Fit GLMMs for yield outcomes
+-   Fit GAMs for ground cover mediation and temperature effects
+-   Save all models to `data/model_objects/*.rds`
+
+**Stage 3: Post-Processing**
+
+-   Generate emmeans and pairwise comparisons
+-   Create model diagnostic plots
+-   Export summary tables as CSV
+-   Save high-resolution figures
 
 ### Manuscript Methods and Results
 

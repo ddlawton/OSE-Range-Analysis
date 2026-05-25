@@ -1,314 +1,308 @@
-#' Senegal Migration Data Transformation Functions
-#' 
-#' Modular, well-documented R functions for pivoting and cleaning the 'Toure_OSE2021data_v05.xlsx' dataset.
-#' Intended for use in Quarto QMD analytics for manuscript work.
-#' 
-#' Author: ddlawton
-#' Date: 2025-11-07
-#' Updated: 2025-12-25 - Added support for farmer gender and OSE leaf damage percent columns
-#'          Output changed from RDS to CSV format
+# ==============================================================================
+# Data Preprocessing Functions for OSE Range Analysis
+# ==============================================================================
+# 
+# Transform raw Excel data into clean, analysis-ready format
+# Pipeline: Load → Clean → Pivot → Finalize → Save
+#
+# Author: ddlawton
+# Created: 2025-11-07
+# Updated: 2026-05-24 - Optimized, standardized documentation, reduced redundancy
+# ==============================================================================
 
 library(dplyr)
 library(tidyr)
 library(readxl)
 library(janitor)
-library(testthat)
+library(readr)
 
-#' Load and clean raw Senegal migration data
+# ==============================================================================
+# Core Data Loading and Cleaning
+# ==============================================================================
+
+#' Load and Clean Raw Senegal Migration Data
 #'
-#' @param path Path to the Excel file of raw data
-#' @return A tibble with standardized column names and character columns
+#' Reads Excel file, standardizes column names, and fixes common typos using
+#' a centralized mapping approach for better maintainability.
+#'
+#' @param path Character. Path to Excel file
+#' @return Tibble with cleaned column names (all character type)
+#' @export
 load_and_clean_raw_data <- function(path) {
   raw_data <- read_excel(path) |> 
     clean_names() |> 
     mutate(across(everything(), as.character))
   
-  # Fix known column name typos (only if they exist)
-  if ("mission2_percent_grond_cover" %in% names(raw_data)) {
-    raw_data <- raw_data |> rename(mission2_percent_ground_cover = mission2_percent_grond_cover)
-  }
-  if ("mission3_ose_cont" %in% names(raw_data)) {
-    raw_data <- raw_data |> rename(mission3_ose_count = mission3_ose_cont)
-  }
+  # Centralized column name corrections
+  column_fixes <- list(
+    # Fix typos
+    "mission2_percent_grond_cover" = "mission2_percent_ground_cover",
+    "mission3_ose_cont" = "mission3_ose_count",
+    # Standardize names
+    "gender" = "farmer_gender",
+    "millet_yield_kg_ha" = "rendement_en_kg_ha"
+  )
   
-  # Standardize damage column names if they exist (handle potential variations)
-  # Expected format: mission1_ose_damage_percent, mission2_ose_damage_percent, mission3_ose_damage_percent
-  # Handle both "Mission1 OSE damage %" and "Mission3 OSE damage" (missing %) formats
-  damage_pattern <- "mission[1-3].*ose.*damage"
-  damage_cols <- grep(damage_pattern, names(raw_data), value = TRUE, ignore.case = TRUE)
-  
-  if (length(damage_cols) > 0) {
-    # Rename to standardized format: mission1_ose_damage_percent, etc.
-    for (col in damage_cols) {
-      mission_num <- gsub(".*(mission)?[_]?([1-3]).*", "\\2", col, ignore.case = TRUE)
-      new_name <- paste0("mission", mission_num, "_ose_damage_percent")
-      raw_data <- raw_data |> rename(!!new_name := !!col)
+  # Apply fixes for existing columns
+  for (old_name in names(column_fixes)) {
+    if (old_name %in% names(raw_data)) {
+      raw_data <- rename(raw_data, !!column_fixes[[old_name]] := !!old_name)
     }
   }
   
-  # Standardize gender column name to farmer_gender if it exists
-  if ("gender" %in% names(raw_data)) {
-    raw_data <- raw_data |> rename(farmer_gender = gender)
-  }
+  # Standardize damage column names via pattern matching
+  damage_cols <- grep("mission[1-3].*ose.*damage", names(raw_data), 
+                      value = TRUE, ignore.case = TRUE)
   
-  # Standardize yield column name variations
-  if ("millet_yield_kg_ha" %in% names(raw_data)) {
-    raw_data <- raw_data |> rename(rendement_en_kg_ha = millet_yield_kg_ha)
+  for (col in damage_cols) {
+    mission_num <- gsub(".*mission[_]?([1-3]).*", "\\1", col, ignore.case = TRUE)
+    new_name <- paste0("mission", mission_num, "_ose_damage_percent")
+    raw_data <- rename(raw_data, !!new_name := !!col)
   }
   
   return(raw_data)
 }
 
-#' Pivot missions columns from wide to long format
+# ==============================================================================
+# Data Transformation
+# ==============================================================================
+
+#' Pivot Mission Columns from Wide to Long Format
 #'
-#' Pivots mission-specific columns (those prefixed with mission1_, mission2_, mission3_)
-#' from wide to long format. Non-mission columns (like yield_date_havested and 
-#' rendement_en_kg_ha) are preserved as-is since they apply to the entire field.
+#' Transforms mission-specific columns (mission1_*, mission2_*, mission3_*)
+#' from wide to long format. Non-mission columns (e.g., yield) are preserved
+#' as they apply to the entire field rather than individual missions.
 #'
-#' @param df Tibble, preprocessed raw data
-#' @return Tibble in long format: each static row is repeated for three missions
+#' @param df Tibble with wide-format mission columns
+#' @return Tibble in long format with mission_number column
+#' @export
 pivot_missions_long <- function(df) {
-  # Check which columns will be pivoted
-  mission_cols <- grep("^mission[1-3]_.*|^mission_[1-3]_.*", names(df), value = TRUE)
-  
-  df_long <- df |>
+  df |>
     pivot_longer(
-      cols = matches("^mission[1-3]_.*|^mission_[1-3]_.*"),
+      cols = matches("^mission[1-3]_"),
       names_to = c("mission_number", ".value"),
       names_pattern = "mission_?([123])_?([a-zA-Z0-9_]+)"
     )
-  return(df_long)
 }
 
-# Note: The pattern above handles mission1_ose_damage_percent by extracting:
-# mission_number = "1" and creates a column ose_damage_percent with values from each mission
-# Yield columns should NOT have mission prefixes and will be preserved in wide format
-
-#' Further clean and correct mission columns data types
+#' Clean and Convert Mission Column Data Types
 #'
-#' Note: OSE count (ose_count) represents OSE density that has already been 
-#' adjusted for the proportion of OSE in the grasshopper population by Mamour.
+#' Converts mission_number to factor and numeric columns to appropriate types.
+#' Note: OSE count represents density already adjusted for OSE proportion.
 #'
-#' @param df Tibble, pivoted long format
-#' @return Tibble with mission_number as factor, percent_ground_cover and ose_damage_percent numeric
+#' @param df Tibble in long format
+#' @return Tibble with corrected data types
+#' @export
 clean_mission_cols <- function(df) {
-  # Convert mission_number and percent_ground_cover
-  df <- df |>
+  df |>
     mutate(
       mission_number = as.factor(mission_number),
-      percent_ground_cover = as.numeric(percent_ground_cover)
+      percent_ground_cover = as.numeric(percent_ground_cover),
+      ose_damage_percent = if ("ose_damage_percent" %in% names(df)) {
+        as.numeric(ose_damage_percent)
+      } else {
+        NA_real_
+      }
     )
-  
-  # Add ose_damage_percent column if it exists, otherwise create it with NA
-  if ("ose_damage_percent" %in% names(df)) {
-    df <- df |> mutate(ose_damage_percent = as.numeric(ose_damage_percent))
-  } else {
-    df <- df |> mutate(ose_damage_percent = NA_real_)
-  }
-  
-  return(df)
 }
 
-#' Fix fertilizer treatment typos and remove erroneous columns
+#' Fix Fertilizer Treatment Typos and Standardize Values
 #'
-#' @param df Tibble, with potential fertilizer_treatement typo column
+#' Corrects data entry errors in fertilizer treatment column.
+#'
+#' @param df Tibble with fertilizer_treatement column (note typo in source data)
 #' @return Tibble with corrected fertilizer_treatment column
+#' @export
 fix_fertilizer_treatment <- function(df) {
   df |>
     mutate(fertilizer_treatment = case_when(
-      fertilizer_treatement == "Id C NF" ~ "control",
-      fertilizer_treatement == "IdC NF" ~ "control",
+      fertilizer_treatement %in% c("Id C NF", "IdC NF") ~ "control",
       fertilizer_treatement == "Id C F" ~ "fertilized",
       TRUE ~ fertilizer_treatement
     )) |>
     select(-fertilizer_treatement)
 }
 
-add_farmer_id <- function(df, farmer_id = "farmer", direction = 'down') {
-  df |>
-    fill(all_of(farmer_id), .direction = direction)
+#' Fill Farmer ID Down Through Rows
+#'
+#' Propagates farmer identifier through grouped observations.
+#'
+#' @param df Tibble with farmer column containing NAs
+#' @param farmer_id Character. Name of farmer ID column (default: "farmer")
+#' @param direction Character. Fill direction (default: 'down')
+#' @return Tibble with filled farmer IDs
+#' @export
+add_farmer_id <- function(df, farmer_id = "farmer", direction = "down") {
+  df |> fill(all_of(farmer_id), .direction = direction)
 }
 
-#' Fill farmer gender down (metadata column)
+#' Fill Farmer Gender Down Through Rows
 #'
-#' @param df Tibble with farmer_gender column containing NA values
-#' @param direction Direction to fill (default: 'down')
-#' @return Tibble with farmer_gender filled
-add_farmer_gender <- function(df, direction = 'down') {
-  # Check if farmer_gender column exists
+#' Propagates farmer gender metadata through grouped observations.
+#'
+#' @param df Tibble with farmer_gender column
+#' @param direction Character. Fill direction (default: 'down')
+#' @return Tibble with filled farmer_gender values
+#' @export
+add_farmer_gender <- function(df, direction = "down") {
   if ("farmer_gender" %in% names(df)) {
-    df |>
-      fill(farmer_gender, .direction = direction)
+    df |> fill(farmer_gender, .direction = direction)
   } else {
-    # If column doesn't exist, just return the dataframe
     df
   }
 }
 
-#' Select and reorder relevant columns for final dataset
+# ==============================================================================
+# Finalization
+# ==============================================================================
+
+#' Select and Reorder Final Analysis Columns
 #'
-#' @param df Tibble, cleaned and pivoted
-#' @return Final tibble with subset of variables
+#' Extracts relevant columns for analysis, handling optional columns gracefully.
+#'
+#' @param df Tibble with full set of processed columns
+#' @return Tibble with selected columns only
+#' @export
 select_final_columns <- function(df) {
-  # Define core columns that should always be present
+  # Core columns required for analysis
   core_cols <- c(
-    "year",
-    "region",
-    "farmer",
-    "farmer_gender",
-    "fertilizer_treatment",
-    "code",
-    "mission_number",
-    "date_surveyed",
-    "ose_count",
-    "temperature",
-    "percent_ground_cover",
-    "ose_damage_percent"
+    "year", "region", "farmer", "farmer_gender", "fertilizer_treatment",
+    "code", "mission_number", "date_surveyed", "ose_count", 
+    "temperature", "percent_ground_cover", "ose_damage_percent"
   )
   
-  # Add yield columns if they exist (names may vary)
-  yield_cols <- c("yield_date_havested", "yield_date_harvested", "rendement_en_kg_ha", "rendement_kg_ha")
+  # Optional yield columns (names may vary across data versions)
+  yield_cols <- c("yield_date_havested", "yield_date_harvested", 
+                  "rendement_en_kg_ha", "rendement_kg_ha")
   
-  # Only select columns that actually exist (core + yield cols that exist)
-  cols_to_select <- c(intersect(core_cols, names(df)), intersect(yield_cols, names(df)))
+  # Select only existing columns
+  available_cols <- c(
+    intersect(core_cols, names(df)), 
+    intersect(yield_cols, names(df))
+  )
   
-  df |>
-    select(all_of(cols_to_select))
+  df |> select(all_of(available_cols))
 }
 
-#' Set proper data types for all columns
+#' Set Proper Data Types for All Columns
+#'
+#' Converts columns to appropriate types (factor, numeric) for analysis.
 #'
 #' @param df Tibble with selected columns
-#' @return Tibble with categorical/factor and numeric columns set
+#' @return Tibble with finalized data types
+#' @export
 finalize_datatypes <- function(df) {
-  # Factor columns that should always exist
+  # Core factor columns
   factor_cols <- c(
-    'farmer',
-    'farmer_gender',
-    'fertilizer_treatment',
-    'code',
-    'year',
-    'mission_number',
-    'date_surveyed'
+    "farmer", "farmer_gender", "fertilizer_treatment", "code",
+    "year", "mission_number", "date_surveyed"
   )
   
-  # Numeric columns that should always exist
+  # Core numeric columns
   numeric_cols <- c(
-    'ose_count',
-    'temperature',
-    'percent_ground_cover',
-    'ose_damage_percent'
+    "ose_count", "temperature", "percent_ground_cover", "ose_damage_percent"
   )
   
-  # Add optional factor columns if they exist
-  optional_factor_cols <- c('yield_date_havested', 'yield_date_harvested')
-  factor_cols <- c(factor_cols, intersect(optional_factor_cols, names(df)))
+  # Add optional columns if they exist
+  optional_factor_cols <- c("yield_date_havested", "yield_date_harvested")
+  optional_numeric_cols <- c("rendement_en_kg_ha", "rendement_kg_ha")
   
-  # Add optional numeric columns if they exist
-  optional_numeric_cols <- c('rendement_en_kg_ha', 'rendement_kg_ha')
+  factor_cols <- c(factor_cols, intersect(optional_factor_cols, names(df)))
   numeric_cols <- c(numeric_cols, intersect(optional_numeric_cols, names(df)))
   
+  # Apply transformations
   df |>
     mutate(
       across(all_of(intersect(factor_cols, names(df))), as.factor),
-      across(all_of(intersect(numeric_cols, names(df))), as.numeric),
-      year = as.factor(year),
-      region = as.factor(region)
+      across(all_of(intersect(numeric_cols, names(df))), as.numeric)
     )
 }
 
-#' Adjust OSE damage to represent total grasshopper damage
+#' Adjust OSE Damage to Represent Total Grasshopper Damage
 #'
-#' The raw data contains OSE-specific damage values that were already adjusted
-#' for the proportion of OSE in the total grasshopper population. To get total
-#' grasshopper damage, we divide by the OSE proportion for each region.
+#' Raw data contains OSE-specific damage adjusted for OSE proportion.
+#' This back-calculates total grasshopper damage by dividing by
+#' region-specific OSE proportions.
 #' 
 #' OSE proportions by region (averaged across missions):
-#' - Kaffrine: 0.93
-#' - Fatick: 0.91
-#' - Thies: 0.79
-#' - Saint Louis: 0.65
+#' Kaffrine: 0.93, Fatick: 0.91, Thies: 0.79, Saint Louis: 0.65
 #'
-#' @param df Tibble with ose_damage_percent column
-#' @return Tibble with adjusted ose_damage_percent representing total grasshopper damage
+#' @param df Tibble with ose_damage_percent and region columns
+#' @return Tibble with adjusted ose_damage_percent (total grasshopper damage)
+#' @export
 adjust_damage_for_total_grasshoppers <- function(df) {
-  # Define OSE proportions by region
+  # Region-specific OSE proportions
   ose_proportions <- c(
-    "Kaffrine" = 0.93,
-    "Fatick" = 0.91,
-    "Thies" = 0.79,
-    "Saint Louis" = 0.65
+    "Kaffrine" = 0.93, "Fatick" = 0.91, 
+    "Thies" = 0.79, "Saint Louis" = 0.65
   )
   
-  # Only adjust if ose_damage_percent column exists
-  if ("ose_damage_percent" %in% names(df) && "region" %in% names(df)) {
-    df <- df |>
+  if (all(c("ose_damage_percent", "region") %in% names(df))) {
+    df |>
       mutate(
-        ose_damage_percent = case_when(
-          region == "Kaffrine" ~ ose_damage_percent / ose_proportions["Kaffrine"],
-          region == "Fatick" ~ ose_damage_percent / ose_proportions["Fatick"],
-          region == "Thies" ~ ose_damage_percent / ose_proportions["Thies"],
-          region == "Saint Louis" ~ ose_damage_percent / ose_proportions["Saint Louis"],
-          TRUE ~ ose_damage_percent
-        )
+        ose_damage_percent = ose_damage_percent / ose_proportions[as.character(region)]
       )
+  } else {
+    df
   }
-  
-  return(df)
 }
 
+# ==============================================================================
+# Pipeline Functions
+# ==============================================================================
 
-#' Convenience pipeline to fully process raw Senegal migration data to long analytic format
+#' Complete Data Processing Pipeline
 #'
-#' @param path Path to the raw Excel file
-#' @param verbose Print diagnostic messages (default: FALSE)
-#' @return Final processed tibble, long format
+#' Executes full transformation from raw Excel to analysis-ready format.
+#' All preprocessing steps are applied in sequence.
+#'
+#' @param path Character. Path to raw Excel file
+#' @param verbose Logical. Print diagnostic messages (default: FALSE)
+#' @return Tibble in long format, ready for analysis
+#' @export
+#' 
+#' @examples
+#' \dontrun{
+#' data <- process_senegal_data("data/raw/Toure_OSE2021data_v05.xlsx")
+#' data_verbose <- process_senegal_data("data/raw/file.xlsx", verbose = TRUE)
+#' }
 process_senegal_data <- function(path, verbose = FALSE) {
   if (verbose) cat("Loading raw data...\n")
+  
   raw_data <- load_and_clean_raw_data(path)
   
   if (verbose) {
-    cat("After loading, columns:", ncol(raw_data), "\n")
-    cat("  Key columns present:\n")
-    cat("    - farmer:", "farmer" %in% names(raw_data), "\n")
-    cat("    - yield cols:", paste(grep("yield|rendement", names(raw_data), value=TRUE), collapse=", "), "\n")
+    cat("✓ Loaded", nrow(raw_data), "rows,", ncol(raw_data), "columns\n")
   }
   
   if (verbose) cat("Processing pipeline...\n")
-  long <- raw_data |>
+  
+  processed <- raw_data |>
     add_farmer_id() |>
-    add_farmer_gender()
-  
-  if (verbose) {
-    cat("Before pivot, columns:", ncol(long), "\n")
-    mission_cols <- grep("^mission[1-3]", names(long), value=TRUE)
-    cat("  Mission columns to pivot:", length(mission_cols), "\n")
-  }
-  
-  long <- long |> pivot_missions_long()
-  
-  if (verbose) {
-    cat("After pivot, columns:", ncol(long), "\n")
-    cat("  Available columns:\n")
-    for (col in sort(names(long))) {
-      cat("    -", col, "\n")
-    }
-  }
-  
-  long <- long |>
-    clean_mission_cols()  |>
+    add_farmer_gender() |>
+    pivot_missions_long() |>
+    clean_mission_cols() |>
     fix_fertilizer_treatment() |>
     select_final_columns() |>
     finalize_datatypes() |>
     adjust_damage_for_total_grasshoppers()
   
-  return(long)
+  if (verbose) {
+    cat("✓ Processed to", nrow(processed), "rows,", ncol(processed), "columns\n")
+  }
+  
+  return(processed)
 }
 
-#' Save data to CSV if all tests pass
+#' Save Processed Data to CSV
 #'
-#' @param raw_data_long The processed long format tibble
-#' @param outfile Path to save CSV file
-save_processed_data <- function(raw_data_long, outfile) {
-  write_csv(raw_data_long, file = outfile)
+#' Simple wrapper for write_csv with consistent behavior.
+#'
+#' @param data Tibble to save
+#' @param outfile Character. Output file path
+#' @return Invisibly returns the data
+#' @export
+save_processed_data <- function(data, outfile) {
+  write_csv(data, file = outfile)
+  invisible(data)
 }

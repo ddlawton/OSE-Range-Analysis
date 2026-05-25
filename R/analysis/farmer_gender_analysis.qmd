@@ -28,11 +28,42 @@ TLDR:
 #| message: false
 #| warning: false
 
-# Load common setup (packages, functions, configuration)
-source(here::here("R", "_common.R"))
+# Core packages for visualization
+suppressPackageStartupMessages({
+  library(tidyverse)
+  library(here)
+  library(ggpubr)
+  library(glmmTMB)
+  library(emmeans)
+  library(DHARMa)
+  library(gt)
+})
 
-# Load processed data
-data <- load_ose_data(cache_processed = TRUE)
+# Plot defaults
+theme_set(theme_pubr())
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  fig.retina = 2
+)
+
+# Source project functions
+function_files <- list.files(here("R", "functions"), pattern = "\\.R$", full.names = TRUE)
+for (f in function_files) source(f, local = TRUE)
+
+# Project configuration constants (from _targets.R)
+STUDY_REGIONS <- c('Saint-Louis', 'Thiès', 'Fatick', 'Kaffrine')
+ALT_STUDY_REGIONS <- c('Saint Louis', 'Thies', 'Fatick', 'Kaffrine')
+MISSION_LABELS <- c('Mission 1 (July)', 'Mission 2 (September)', 'Mission 3 (October)')
+DEFAULT_PALETTE <- "Degas"
+FERTILIZER_COLORS <- c('control' = 'black', 'fertilized' = 'dark green')
+DEFAULT_POINT_SIZE <- 5
+DEFAULT_EMMEAN_POINT_SIZE <- 8
+DEFAULT_FIGURE_DPI <- 2
+
+# Load processed data from targets pipeline
+data <- read_csv(here("data", "processed", "ose_data_processed.csv"), show_col_types = FALSE)
 
 data <- data |>
     mutate(ose_damage_percent = ose_damage_percent/100,mission_number=factor(mission_number)) |>
@@ -57,8 +88,8 @@ I will create a quick poisson glmm with mission_number as a random effect and fa
 
 ```{r}
 
-density_mod <- glmmTMB(ose_count ~ farmer_gender + (1|region) + (1|mission_number),data=data,
-    family=tweedie())
+# Load farmer gender density model from targets pipeline
+density_mod <- readRDS(here::here("data", "model_objects", "farmer_gender_density.rds"))
 
 summary(density_mod)
 
@@ -97,8 +128,8 @@ I will create a quick poisson glmm with mission_number as a random effect and fa
 
 ```{r}
 
-damage_mod <- glmmTMB(ose_damage_percent ~ farmer_gender + (1|region) + (1|mission_number),data=data,
-    family=tweedie())
+# Load farmer gender damage model from targets pipeline
+damage_mod <- readRDS(here::here("data", "model_objects", "farmer_gender_damage.rds"))
 
 summary(damage_mod)
 
@@ -137,7 +168,8 @@ yield_dat |>
 
 ```{r}
 
-yield_mod <- glmmTMB(rendement_en_kg_ha ~ farmer_gender + (1|region) + (1|mission_number),data=yield_dat,family=tweedie())
+# Load farmer gender yield model from targets pipeline
+yield_mod <- readRDS(here::here("data", "model_objects", "farmer_gender_yield.rds"))
 
 summary(yield_mod)
 

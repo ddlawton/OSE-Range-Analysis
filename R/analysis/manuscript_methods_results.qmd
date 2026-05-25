@@ -24,23 +24,49 @@ execute:
 
 ```{r setup}
 #| include: false
-source(here::here("R", "_common.R"))
- 
-# Load required libraries
-library(tidyverse)
-library(mgcv)
-library(glmmTMB) 
-library(emmeans)
-library(gratia)
-library(broom)
-library(broom.mixed)
-library(knitr)
-library(MetBrewer)
-library(gt)
-library(webshot2)
 
-# Load processed data
-data <- read_csv(here("data", "processed", "ose_data_processed.csv"))
+# Core packages for visualization and analysis
+suppressPackageStartupMessages({
+  library(tidyverse)
+  library(here)
+  library(mgcv)
+  library(glmmTMB) 
+  library(emmeans)
+  library(gratia)
+  library(broom)
+  library(broom.mixed)
+  library(knitr)
+  library(MetBrewer)
+  library(gt)
+  library(webshot2)
+  library(ggpubr)
+})
+
+# Plot defaults
+theme_set(theme_pubr())
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  fig.retina = 2
+)
+
+# Source project functions
+function_files <- list.files(here("R", "functions"), pattern = "\\.R$", full.names = TRUE)
+for (f in function_files) source(f, local = TRUE)
+
+# Project configuration constants (from _targets.R)
+STUDY_REGIONS <- c('Saint-Louis', 'Thiès', 'Fatick', 'Kaffrine')
+ALT_STUDY_REGIONS <- c('Saint Louis', 'Thies', 'Fatick', 'Kaffrine')
+MISSION_LABELS <- c('Mission 1 (July)', 'Mission 2 (September)', 'Mission 3 (October)')
+DEFAULT_PALETTE <- "Degas"
+FERTILIZER_COLORS <- c('control' = 'black', 'fertilized' = 'dark green')
+DEFAULT_POINT_SIZE <- 5
+DEFAULT_EMMEAN_POINT_SIZE <- 8
+DEFAULT_FIGURE_DPI <- 2
+
+# Load processed data from targets pipeline
+data <- read_csv(here("data", "processed", "ose_data_processed.csv"), show_col_types = FALSE)
 
 # Prepare data for modeling
 data <- data |>
@@ -56,6 +82,9 @@ data <- data |>
 
 # Helper function to format p-values for inline reporting
 format_p <- function(p, threshold = 0.001) {
+  if (is.na(p)) {
+    return("not available")
+  }
   if (p < threshold) {
     return("< 0.001")
   } else {
@@ -100,14 +129,10 @@ model_data <- data |>
 mission_mods_density <- list()
 mission_emmeans_density <- list()
 
-# Loop through missions: create model and emmeans with caching
+# Loop through missions: load models from targets pipeline
 for (i in seq_along(model_data)){
-    # Cache each mission model separately
-    mission_mods_density[[i]] <- cache_model(
-        model_name = paste0("locust_density_mission_", i),
-        data = model_data[[i]],
-        fit_function = create_count_glmm_model
-    )
+    # Load each mission model from targets
+    mission_mods_density[[i]] <- readRDS(here::here("data", "model_objects", paste0("locust_density_mission_", i, ".rds")))
     
     mission_emmeans_density[[i]] <- get_emmeans_and_pairs(mission_mods_density[[i]], mission_num = i)
 }
@@ -134,14 +159,10 @@ model_data_damage <- data_damage |>
 mission_mods_damage <- list()
 mission_emmeans_damage <- list()
 
-# Loop through missions: create model and emmeans with caching
+# Loop through missions: load models from targets pipeline
 for (i in seq_along(model_data_damage)){
-    # Cache each mission model separately
-    mission_mods_damage[[i]] <- cache_model(
-        model_name = paste0("locust_damage_mission_", i),
-        data = model_data_damage[[i]],
-        fit_function = create_damage_glmm_model
-    )
+    # Load each mission model from targets
+    mission_mods_damage[[i]] <- readRDS(here::here("data", "model_objects", paste0("locust_damage_mission_", i, ".rds")))
     
     mission_emmeans_damage[[i]] <- get_emmeans_and_pairs(mission_mods_damage[[i]], mission_num = i)
 }
@@ -185,19 +206,23 @@ To test whether the effect of fertilizer on grasshopper density is mediated by g
 #| message: false
 #| warning: false
 
-# Need to fit temperature model early to extract p-value for Results section
-temp_mod_early <- cache_model(
-  model_name = "locust_temperature_gam",
-  data = data |>
-    filter(fertilizer_treatment == 'control') |>
-    select(year, region, farmer, mission_number, ose_count, temperature) |>
-    mutate(
-      region = factor(region),
-      farmer = factor(farmer),
-      mission_number = factor(mission_number)
-    ) |>
-    drop_na(temperature, mission_number, region, ose_count),
-  fit_function = function(data) {
+# Load temperature model from targets to extract p-value for Results section
+temp_mod_early <- readRDS(here::here("data", "model_objects", "locust_temperature_gam.rds"))
+
+# Data preparation kept for reference (not needed for loading model)
+# data |>
+#   filter(fertilizer_treatment == 'control') |>
+#   select(year, region, farmer, mission_number, ose_count, temperature) |>
+#   mutate(
+#     region = factor(region),
+#     farmer = factor(farmer),
+#     mission_number = factor(mission_number)
+#   ) |>
+#   drop_na(temperature, mission_number, region, ose_count)
+
+if (FALSE) {
+  # Original fit_function kept for reference
+  function(data) {
     mgcv::gam(
       ose_count ~
         s(temperature, k = 10) +
@@ -209,7 +234,7 @@ temp_mod_early <- cache_model(
       select = TRUE
     )
   }
-)
+}
 
 # Extract temperature smooth term p-value
 temp_p <- broom::tidy(temp_mod_early, parametric = FALSE) |>
@@ -399,39 +424,36 @@ data_yield_early <- data |>
   drop_na(rendement_en_kg_ha) |>
   distinct()
 
-yield_mod_early <- cache_model(
-  model_name = "yield_treatment_region",
-  data = data_yield_early,
-  fit_function = function(data) {
-    glmmTMB(
-      rendement_en_kg_ha ~
-        fertilizer_treatment * region +
-        (1|farmer),
-      data = data,
-      family = tweedie()
-    )
-  }
-)
+yield_mod_early <- readRDS(here::here("data", "model_objects", "yield_treatment_region.rds"))
 
 # Extract key statistics from yield model for inline reporting
+# Helper function to safely extract values with default NA
+safe_pull <- function(df, value_col) {
+  result <- pull(df, {{value_col}})
+  if(length(result) == 0) return(NA_real_)
+  return(result)
+}
+
 yield_fert_est <- tidy(yield_mod_early) |> 
   filter(term == "fertilizer_treatmentfertilized") |> 
-  pull(estimate)
+  safe_pull(estimate)
 yield_fert_p <- tidy(yield_mod_early) |> 
   filter(term == "fertilizer_treatmentfertilized") |> 
-  pull(p.value)
+  safe_pull(p.value)
+
+# Try to find interaction terms - they may have accent (Thiès) or not (Thies)
 yield_thies_int_est <- tidy(yield_mod_early) |> 
-  filter(term == "fertilizer_treatmentfertilized:regionThies") |> 
-  pull(estimate)
+  filter(grepl("Thies", term, ignore.case = TRUE) & grepl("fertilizer", term)) |> 
+  safe_pull(estimate)
 yield_thies_int_p <- tidy(yield_mod_early) |> 
-  filter(term == "fertilizer_treatmentfertilized:regionThies") |> 
-  pull(p.value)
+  filter(grepl("Thies", term, ignore.case = TRUE) & grepl("fertilizer", term)) |> 
+  safe_pull(p.value)
 yield_kaffrine_int_est <- tidy(yield_mod_early) |> 
-  filter(term == "fertilizer_treatmentfertilized:regionKaffrine") |> 
-  pull(estimate)
+  filter(grepl("Kaffrine", term, ignore.case = TRUE) & grepl("fertilizer", term)) |> 
+  safe_pull(estimate)
 yield_kaffrine_int_p <- tidy(yield_mod_early) |> 
-  filter(term == "fertilizer_treatmentfertilized:regionKaffrine") |> 
-  pull(p.value)
+  filter(grepl("Kaffrine", term, ignore.case = TRUE) & grepl("fertilizer", term)) |> 
+  safe_pull(p.value)
 
 # Get yield emmeans for calculating percentages
 yield_emms <- emmeans(yield_mod_early, ~ fertilizer_treatment * region, type = "response")
@@ -785,22 +807,7 @@ data_gc_early <- data |>
   ) |>
   filter(!is.na(percent_ground_cover))
 
-gc_mod_early <- cache_model(
-  model_name = "ground_cover_mediation",
-  data = data_gc_early,
-  fit_function = function(data) {
-    gam(
-      ose_count ~ 
-        fertilizer_treatment * mission_number + 
-        region + 
-        s(percent_ground_cover, by=fertilizer_treatment) + 
-        s(farmer, bs='re'),
-      data = data,
-      family = tw(),
-      select = TRUE
-    )
-  }
-)
+gc_mod_early <- readRDS(here::here("data", "model_objects", "ground_cover_mediation.rds"))
 
 gc_dev_exp_early <- summary(gc_mod_early)$dev.expl * 100
 
@@ -929,7 +936,7 @@ m3_raw_plot <- plot_mission_counts(village_count_data, mission = 3, show_legend 
 (m2_raw_plot / m3_raw_plot)
 ```
 
-## Ground Cover by Fertilizer Treatment 
+## Ground Cover by Fertilizer Treatment
 
 ```{r fig-supp-ground-cover-prep, echo=FALSE}
 #| message: false
@@ -1212,7 +1219,6 @@ save_gt_png(tbl_gc_effects, "ground_cover_fertilizer_effects.png")
 # Display table
 tbl_gc_effects
 ```
-
 
 ## grasshopper Density Analysis Tables
 
@@ -1620,23 +1626,8 @@ data_gc <- data |>
     region = factor(region)
   )
 
-# Fit ground cover mediation model with caching (same as original)
-gc_mod <- cache_model(
-  model_name = "ground_cover_mediation",
-  data = data_gc,
-  fit_function = function(data) {
-    gam(
-      ose_count ~ 
-        fertilizer_treatment * mission_number + 
-        region + 
-        s(percent_ground_cover, by=fertilizer_treatment) + 
-        s(farmer, bs='re'),
-      data = data,
-      family = tw(),
-      select = TRUE
-    )
-  }
-)
+# Load ground cover model from targets pipeline (reuse earlier model)
+gc_mod <- gc_mod_early
 
 # Extract parametric and smooth terms
 tidy_mod <- broom::tidy(gc_mod, parametric = TRUE) %>%
@@ -1696,31 +1687,8 @@ tbl_ground_cover
 #| message: false
 #| warning: false
 
-# Load the cached temperature model
-temp_mod <- cache_model(
-  model_name = "locust_temperature_gam",
-  data = data |>
-    filter(fertilizer_treatment == 'control') |>
-    select(year, region, farmer, mission_number, ose_count, temperature) |>
-    mutate(
-      region = factor(region),
-      farmer = factor(farmer),
-      mission_number = factor(mission_number)
-    ) |>
-    drop_na(temperature, mission_number, region, ose_count),
-  fit_function = function(data) {
-    mgcv::gam(
-      ose_count ~
-        s(temperature, k = 10) +
-        s(region, bs='re') +
-        s(farmer, bs = 're') +
-        s(mission_number, bs = 're'),
-      data = data,
-      family = mgcv::tw(),
-      select = TRUE
-    )
-  }
-)
+# Load the temperature model from targets pipeline (reuse earlier model)
+temp_mod <- temp_mod_early
 
 # Extract smooth terms
 temp_summary <- broom::tidy(temp_mod, parametric = FALSE) %>%

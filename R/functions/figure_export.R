@@ -1,36 +1,125 @@
-#' Enhanced Figure and Table Export System
-#' 
-#' This system is designed to complement Quarto's built-in figure rendering
-#' by providing optional high-resolution exports and comprehensive table exports.
-#' The main figure collection now happens from the website output via scripts.
-#' 
-#' Author: ddlawton
-#' Date: 2025-11-23
+# ==============================================================================
+# Figure Export and Table Management Functions
+# ==============================================================================
+# 
+# Centralized system for exporting plots and tables with consistent structure
+# Complements Quarto's built-in figure rendering
+#
+# Author: ddlawton
+# Created: 2025-11-23
+# Updated: 2026-05-24 - Optimized, improved error handling
+# ==============================================================================
 
-# Global variables to track current analysis
+# Global state for current analysis context
 .current_analysis <- NULL
 
-#' Set the current analysis name for organizing outputs
-#' @param analysis_name Character string identifying the current analysis (e.g., "basic_stats")
+# ==============================================================================
+# Directory Management
+# ==============================================================================
+
+#' Ensure Directory Exists
+#'
+#' Creates directory and all parent directories if they don't exist.
+#'
+#' @param path Character. Directory path to create
+#' @return Invisibly returns the path
+#' @export
+ensure_dir <- function(path) {
+  if (!dir.exists(path)) {
+    dir.create(path, showWarnings = FALSE, recursive = TRUE)
+  }
+  invisible(path)
+}
+
+#' Set Current Analysis Context
+#'
+#' Establishes the current analysis name for organizing outputs.
+#' Creates necessary directory structure for tables.
+#'
+#' @param analysis_name Character. Analysis identifier (e.g., "basic_stats")
+#' @return Invisibly returns the analysis name
+#' @export
 set_current_analysis <- function(analysis_name) {
   .current_analysis <<- analysis_name
   
-  # Create directory structure for tables (figures handled by Quarto)
+  # Create table directory (figures handled by Quarto)
   tables_dir <- file.path("outputs", "tables", analysis_name)
+  ensure_dir(tables_dir)
   
-  if (!dir.exists(tables_dir)) dir.create(tables_dir, recursive = TRUE)
-  
-  message(paste("✓ Set output directories for", analysis_name))
+  message("✓ Set output context for: ", analysis_name)
+  invisible(analysis_name)
 }
 
-#' Save model summary tables as CSV
-#' @param model_obj A model object (glmm, gam, etc.)
-#' @param table_name Name for the output CSV file
-#' @param summary_function Function to extract summary (default: broom.mixed::tidy)
-save_model_summary <- function(model_obj, table_name, summary_function = NULL) {
-  if (is.null(.current_analysis)) {
-    warning("No analysis set. Call set_current_analysis() first.")
-    return(NULL)
+# ==============================================================================
+# Plot Export
+# ==============================================================================
+
+#' Save Plot to File with Error Handling
+#'
+#' Centralized plot saving with fallback mechanisms for different plot types.
+#' Handles ggplot2, grid, and base graphics.
+#'
+#' @param plot_obj Plot object or NULL
+#' @param filepath Character. Full output path including extension
+#' @param width Numeric. Width in inches (default: 8)
+#' @param height Numeric. Height in inches (default: 6)
+#' @param dpi Numeric. Resolution in dots per inch (default: 300)
+#' @param placeholder Character. Text to write if plot is NULL
+#' @return Invisibly returns the filepath
+#' @export
+save_plot_file <- function(plot_obj, filepath, width = 8, height = 6, 
+                           dpi = 300, placeholder = "plot unavailable") {
+  ensure_dir(dirname(filepath))
+  
+  if (is.null(plot_obj)) {
+    writeLines(placeholder, filepath)
+    return(invisible(filepath))
+  }
+  
+  # Try ggplot2::ggsave first (handles ggplot and patchwork)
+  tryCatch({
+    ggplot2::ggsave(
+      filename = filepath, 
+      plot = plot_obj, 
+      width = width, 
+      height = height, 
+      dpi = dpi, 
+      bg = "white"
+    )
+  }, error = function(e) {
+    # Fallback for grid/base graphics
+    tryCatch({
+      grDevices::png(filepath, width = width * dpi, height = height * dpi, res = dpi)
+      print(plot_obj)
+      grDevices::dev.off()
+    }, error = function(e2) {
+      warning("Failed to save plot to ", filepath, ": ", e2$message)
+      writeLines(placeholder, filepath)
+    })
+  })
+  
+  invisible(filepath)
+}
+
+# ==============================================================================
+# Table Export
+# ==============================================================================
+
+#' Save Model Summary as CSV
+#'
+#' Extracts model summary using provided function and saves as CSV.
+#'
+#' @param model_obj Model object (glmmTMB, lm, etc.)
+#' @param table_name Character. Output filename (or basename)
+#' @param summary_function Function. Extracts summary (default: broom.mixed::tidy)
+#' @param out_path Character. Optional explicit directory path
+#' @return Data frame of model summary (invisibly)
+#' @export
+save_model_summary <- function(model_obj, table_name, summary_function = NULL, out_path = NULL) {
+  # Validate context
+  if (is.null(.current_analysis) && is.null(out_path)) {
+    warning("No analysis context set. Call set_current_analysis() or provide out_path.")
+    return(invisible(NULL))
   }
   
   # Default summary function
@@ -38,161 +127,116 @@ save_model_summary <- function(model_obj, table_name, summary_function = NULL) {
     if (requireNamespace("broom.mixed", quietly = TRUE)) {
       summary_function <- broom.mixed::tidy
     } else {
-      warning("broom.mixed not available. Please provide summary_function.")
-      return(NULL)
+      warning("broom.mixed not available. Provide summary_function.")
+      return(invisible(NULL))
     }
   }
   
-  # Generate summary
+  # Extract and save summary
   tryCatch({
     summary_df <- summary_function(model_obj)
     
-    # Clean filename
+    # Ensure .csv extension
     if (!endsWith(table_name, ".csv")) {
       table_name <- paste0(table_name, ".csv")
     }
     
-    filepath <- file.path("outputs", "tables", .current_analysis, table_name)
+    # Determine filepath
+    filepath <- if (!is.null(out_path)) {
+      file.path(out_path, table_name)
+    } else {
+      file.path("outputs", "tables", .current_analysis, table_name)
+    }
     
-    # Save CSV
+    ensure_dir(dirname(filepath))
     readr::write_csv(summary_df, filepath)
-    message(paste("✓ Saved model summary:", filepath))
+    message("✓ Saved model summary: ", filepath)
     
-    return(summary_df)
+    invisible(summary_df)
   }, error = function(e) {
-    warning(paste("Failed to save model summary:", e$message))
-    return(NULL)
+    warning("Failed to save model summary: ", e$message)
+    invisible(NULL)
   })
 }
-  
-#' Save emmeans results as CSV
-#' @param emmeans_obj Emmeans object or tibble
-#' @param table_name Name for the output CSV file
-save_emmeans_table <- function(emmeans_obj, table_name) {
-  if (is.null(.current_analysis)) {
-    warning("No analysis set. Call set_current_analysis() first.")
-    return(NULL)
+
+#' Save Emmeans Results as CSV
+#'
+#' Converts emmGrid object to tibble and saves as CSV.
+#'
+#' @param emmeans_obj emmGrid object or data frame
+#' @param table_name Character. Output filename (or basename)
+#' @param out_path Character. Optional explicit directory path
+#' @return Data frame of emmeans (invisibly)
+#' @export
+save_emmeans_table <- function(emmeans_obj, table_name, out_path = NULL) {
+  # Validate context
+  if (is.null(.current_analysis) && is.null(out_path)) {
+    warning("No analysis context set. Call set_current_analysis() or provide out_path.")
+    return(invisible(NULL))
   }
   
   tryCatch({
     # Convert to tibble if needed
-    if ("emmGrid" %in% class(emmeans_obj)) {
-      emmeans_df <- tibble::as_tibble(emmeans_obj)
+    emmeans_df <- if ("emmGrid" %in% class(emmeans_obj)) {
+      tibble::as_tibble(emmeans_obj)
     } else {
-      emmeans_df <- emmeans_obj
+      emmeans_obj
     }
     
-    # Clean filename
+    # Ensure .csv extension
     if (!endsWith(table_name, ".csv")) {
       table_name <- paste0(table_name, ".csv")
     }
     
-    filepath <- file.path("outputs", "tables", .current_analysis, table_name)
+    # Determine filepath
+    filepath <- if (!is.null(out_path)) {
+      file.path(out_path, table_name)
+    } else {
+      file.path("outputs", "tables", .current_analysis, table_name)
+    }
     
-    # Save CSV
+    ensure_dir(dirname(filepath))
     readr::write_csv(emmeans_df, filepath)
-    message(paste("✓ Saved emmeans table:", filepath))
+    message("✓ Saved emmeans table: ", filepath)
     
-    return(emmeans_df)
+    invisible(emmeans_df)
   }, error = function(e) {
-    warning(paste("Failed to save emmeans table:", e$message))
-    return(NULL)
+    warning("Failed to save emmeans table: ", e$message)
+    invisible(NULL)
   })
 }
 
-#' Save any data frame as CSV
+#' Save Data Frame as CSV
+#'
+#' Generic function to save any data frame as CSV with consistent behavior.
+#'
 #' @param df Data frame or tibble
-#' @param table_name Name for the output CSV file
-save_data_table <- function(df, table_name) {
-  if (is.null(.current_analysis)) {
-    warning("No analysis set. Call set_current_analysis() first.")
-    return(NULL)
+#' @param table_name Character. Output filename (or basename)
+#' @param out_path Character. Optional explicit directory path
+#' @return Data frame (invisibly)
+#' @export
+save_data_table <- function(df, table_name, out_path = NULL) {
+  # Validate context
+  if (is.null(.current_analysis) && is.null(out_path)) {
+    warning("No analysis context set. Call set_current_analysis() or provide out_path.")
+    return(invisible(NULL))
   }
   
-  # Clean filename
+  # Ensure .csv extension
   if (!endsWith(table_name, ".csv")) {
     table_name <- paste0(table_name, ".csv")
   }
   
-  filepath <- file.path("outputs", "tables", .current_analysis, table_name)
-  
-  # Save CSV
-  readr::write_csv(df, filepath)
-  message(paste("✓ Saved data table:", filepath))
-  
-  return(df)
-}
-
-# === LEGACY WRAPPER FUNCTIONS ===
-# These functions are kept for backward compatibility but now just return the objects
-# since figures are collected from Quarto's website output
-
-#' Optional high-resolution plot export (for supplementary materials)
-#' @param plot_obj A ggplot object
-#' @param filename Optional filename for high-res export
-#' @param width Plot width in inches (default: 12 for high-res)
-#' @param height Plot height in inches (default: 9 for high-res)
-#' @param dpi Resolution (default: 600 for publication)
-auto_save_plot <- function(plot_obj, filename = NULL, width = 12, height = 9, dpi = 600) {
-  # Optionally save high-resolution version for supplementary materials
-  if (!is.null(filename) && !is.null(.current_analysis)) {
-    if (!endsWith(filename, ".png")) filename <- paste0(filename, ".png")
-    
-    # Create high-res directory
-    hires_dir <- file.path("outputs", "figures", .current_analysis, "high_resolution")
-    if (!dir.exists(hires_dir)) dir.create(hires_dir, recursive = TRUE)
-    
-    filepath <- file.path(hires_dir, filename)
-    
-    tryCatch({
-      ggplot2::ggsave(
-        filename = filepath,
-        plot = plot_obj,
-        width = width,
-        height = height,
-        dpi = dpi,
-        bg = "white"
-      )
-      message(paste("✓ Saved high-res version:", filepath))
-    }, error = function(e) {
-      message(paste("Could not save high-res version:", e$message))
-    })
+  # Determine filepath
+  filepath <- if (!is.null(out_path)) {
+    file.path(out_path, table_name)
+  } else {
+    file.path("outputs", "tables", .current_analysis, table_name)
   }
   
-  return(plot_obj)  # Always return the plot object for display
-}
-
-# Wrapper functions for backward compatibility
-auto_save_map <- function(map_obj, filename = NULL, width = 14, height = 10, dpi = 600) {
-  auto_save_plot(map_obj, filename, width, height, dpi)
-}
-
-save_senegal_map <- function(..., filename = "senegal_map") {
-  map_obj <- plot_senegal_map(...)
-  auto_save_map(map_obj, filename)
-}
-
-save_mission_density <- function(..., filename = "mission_density") {
-  plot_obj <- plot_mission_density(...)
-  auto_save_plot(plot_obj, filename, width = 14, height = 12)
-}
-
-save_temperature_smooth <- function(..., filename = "temperature_smooth") {
-  plot_obj <- plot_temperature_smooth(...)
-  auto_save_plot(plot_obj, filename, width = 14, height = 10)
-}
-
-save_gam_smooths <- function(..., filename = "gam_smooths") {
-  plot_obj <- plot_gam_smooths_gratia(...)
-  auto_save_plot(plot_obj, filename, width = 14, height = 12)
-}
-
-save_emmeans_plot <- function(..., filename = "emmeans_plot") {
-  plot_obj <- plot_emmeans(...)
-  auto_save_plot(plot_obj, filename, width = 12, height = 10)
-}
-
-save_diagnostic_plots <- function(plots_obj, filename = "diagnostic_plots") {
-  # Handle patchwork objects or individual plots
-  auto_save_plot(plots_obj, filename, width = 16, height = 12)
+  ensure_dir(dirname(filepath))
+  readr::write_csv(df, filepath)
+  message("✓ Saved data table: ", filepath)
+  
+  invisible(df)
 }
