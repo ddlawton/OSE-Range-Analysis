@@ -30,6 +30,18 @@ tar_option_set(
   format = "rds"
 )
 
+# --- Project constants (used by targets and analysis documents)
+# Define region and plotting constants here so they're available during `targets::tar_make()`.
+STUDY_REGIONS <- c('Saint-Louis', 'Thiès', 'Fatick', 'Kaffrine')
+ALT_STUDY_REGIONS <- c('Saint Louis', 'Thies', 'Fatick', 'Kaffrine')
+MISSION_LABELS <- c('Mission 1 (July)', 'Mission 2 (September)', 'Mission 3 (October)')
+DEFAULT_PALETTE <- "Degas"
+FERTILIZER_COLORS <- c('control' = 'black', 'fertilized' = 'dark green')
+DEFAULT_POINT_SIZE <- 5
+DEFAULT_EMMEAN_POINT_SIZE <- 8
+DEFAULT_FIGURE_DPI <- 2
+
+
 # === FUNCTION LOADING ===
 # Source all function files for use in targets
 function_files <- list.files(here::here("R", "functions"), pattern = "\\.R$", full.names = TRUE)

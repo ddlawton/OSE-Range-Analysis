@@ -87,6 +87,8 @@ jobs:
           Rscript -e 'install.packages("renv", repos="https://cran.r-project.org")'
           Rscript -e 'renv::restore(prompt = FALSE)'
           Rscript -e 'renv::install("ropensci/rnaturalearthhires")'
+          # Reinstall glmmTMB from source to ensure it is compiled against the restored TMB version
+          Rscript -e 'tryCatch(install.packages("glmmTMB", type = "source"), error = function(e) { message("glmmTMB reinstall failed: ", conditionMessage(e)); quit(status = 0) })'
 
       - uses: quarto-dev/quarto-actions/setup@v2
 
