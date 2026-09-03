@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -74,14 +77,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-b41724e58f79c1b7773766b10b517708.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-1a081a750f1ddb3367c3896ea17eb885.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-b41724e58f79c1b7773766b10b517708.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-559ce6fa1983ded364936823ab24d5d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-254ccb800011d39879e98109b2f8902c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-559ce6fa1983ded364936823ab24d5d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -447,23 +450,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="dataset-summary">Dataset Summary</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div id="ytkosmwzmo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ytkosmwzmo table {
+<div id="xfnjtbfsgy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xfnjtbfsgy table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ytkosmwzmo thead, #ytkosmwzmo tbody, #ytkosmwzmo tfoot, #ytkosmwzmo tr, #ytkosmwzmo td, #ytkosmwzmo th {
+#xfnjtbfsgy thead, #xfnjtbfsgy tbody, #xfnjtbfsgy tfoot, #xfnjtbfsgy tr, #xfnjtbfsgy td, #xfnjtbfsgy th {
   border-style: none;
 }
 
-#ytkosmwzmo p {
+#xfnjtbfsgy p {
   margin: 0;
   padding: 0;
 }
 
-#ytkosmwzmo .gt_table {
+#xfnjtbfsgy .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -489,12 +492,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#ytkosmwzmo .gt_caption {
+#xfnjtbfsgy .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ytkosmwzmo .gt_title {
+#xfnjtbfsgy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -506,7 +509,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#ytkosmwzmo .gt_subtitle {
+#xfnjtbfsgy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -518,7 +521,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#ytkosmwzmo .gt_heading {
+#xfnjtbfsgy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -530,13 +533,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ytkosmwzmo .gt_bottom_border {
+#xfnjtbfsgy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ytkosmwzmo .gt_col_headings {
+#xfnjtbfsgy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -551,7 +554,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ytkosmwzmo .gt_col_heading {
+#xfnjtbfsgy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -571,7 +574,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#ytkosmwzmo .gt_column_spanner_outer {
+#xfnjtbfsgy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -583,15 +586,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#ytkosmwzmo .gt_column_spanner_outer:first-child {
+#xfnjtbfsgy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ytkosmwzmo .gt_column_spanner_outer:last-child {
+#xfnjtbfsgy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ytkosmwzmo .gt_column_spanner {
+#xfnjtbfsgy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -603,11 +606,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#ytkosmwzmo .gt_spanner_row {
+#xfnjtbfsgy .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ytkosmwzmo .gt_group_heading {
+#xfnjtbfsgy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -633,7 +636,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#ytkosmwzmo .gt_empty_group_heading {
+#xfnjtbfsgy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -648,15 +651,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#ytkosmwzmo .gt_from_md > :first-child {
+#xfnjtbfsgy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ytkosmwzmo .gt_from_md > :last-child {
+#xfnjtbfsgy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ytkosmwzmo .gt_row {
+#xfnjtbfsgy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -675,7 +678,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#ytkosmwzmo .gt_stub {
+#xfnjtbfsgy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -688,7 +691,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ytkosmwzmo .gt_stub_row_group {
+#xfnjtbfsgy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -702,15 +705,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#ytkosmwzmo .gt_row_group_first td {
+#xfnjtbfsgy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ytkosmwzmo .gt_row_group_first th {
+#xfnjtbfsgy .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ytkosmwzmo .gt_summary_row {
+#xfnjtbfsgy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -720,16 +723,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ytkosmwzmo .gt_first_summary_row {
+#xfnjtbfsgy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ytkosmwzmo .gt_first_summary_row.thick {
+#xfnjtbfsgy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ytkosmwzmo .gt_last_summary_row {
+#xfnjtbfsgy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -739,7 +742,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ytkosmwzmo .gt_grand_summary_row {
+#xfnjtbfsgy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -749,7 +752,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ytkosmwzmo .gt_first_grand_summary_row {
+#xfnjtbfsgy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -759,7 +762,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#ytkosmwzmo .gt_last_grand_summary_row_top {
+#xfnjtbfsgy .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -769,11 +772,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ytkosmwzmo .gt_striped {
+#xfnjtbfsgy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ytkosmwzmo .gt_table_body {
+#xfnjtbfsgy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -782,7 +785,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ytkosmwzmo .gt_footnotes {
+#xfnjtbfsgy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -796,7 +799,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ytkosmwzmo .gt_footnote {
+#xfnjtbfsgy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -805,7 +808,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ytkosmwzmo .gt_sourcenotes {
+#xfnjtbfsgy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -819,7 +822,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ytkosmwzmo .gt_sourcenote {
+#xfnjtbfsgy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -827,72 +830,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ytkosmwzmo .gt_left {
+#xfnjtbfsgy .gt_left {
   text-align: left;
 }
 
-#ytkosmwzmo .gt_center {
+#xfnjtbfsgy .gt_center {
   text-align: center;
 }
 
-#ytkosmwzmo .gt_right {
+#xfnjtbfsgy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ytkosmwzmo .gt_font_normal {
+#xfnjtbfsgy .gt_font_normal {
   font-weight: normal;
 }
 
-#ytkosmwzmo .gt_font_bold {
+#xfnjtbfsgy .gt_font_bold {
   font-weight: bold;
 }
 
-#ytkosmwzmo .gt_font_italic {
+#xfnjtbfsgy .gt_font_italic {
   font-style: italic;
 }
 
-#ytkosmwzmo .gt_super {
+#xfnjtbfsgy .gt_super {
   font-size: 65%;
 }
 
-#ytkosmwzmo .gt_footnote_marks {
+#xfnjtbfsgy .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ytkosmwzmo .gt_asterisk {
+#xfnjtbfsgy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ytkosmwzmo .gt_indent_1 {
+#xfnjtbfsgy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ytkosmwzmo .gt_indent_2 {
+#xfnjtbfsgy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ytkosmwzmo .gt_indent_3 {
+#xfnjtbfsgy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ytkosmwzmo .gt_indent_4 {
+#xfnjtbfsgy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ytkosmwzmo .gt_indent_5 {
+#xfnjtbfsgy .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ytkosmwzmo .katex-display {
+#xfnjtbfsgy .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ytkosmwzmo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xfnjtbfsgy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1121,23 +1124,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Below is the average monthly rainfall per region</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="maubrppgem" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#maubrppgem table {
+<div id="beghwenuga" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#beghwenuga table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#maubrppgem thead, #maubrppgem tbody, #maubrppgem tfoot, #maubrppgem tr, #maubrppgem td, #maubrppgem th {
+#beghwenuga thead, #beghwenuga tbody, #beghwenuga tfoot, #beghwenuga tr, #beghwenuga td, #beghwenuga th {
   border-style: none;
 }
 
-#maubrppgem p {
+#beghwenuga p {
   margin: 0;
   padding: 0;
 }
 
-#maubrppgem .gt_table {
+#beghwenuga .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1163,12 +1166,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#maubrppgem .gt_caption {
+#beghwenuga .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#maubrppgem .gt_title {
+#beghwenuga .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1180,7 +1183,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#maubrppgem .gt_subtitle {
+#beghwenuga .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1192,7 +1195,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#maubrppgem .gt_heading {
+#beghwenuga .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1204,13 +1207,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#maubrppgem .gt_bottom_border {
+#beghwenuga .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#maubrppgem .gt_col_headings {
+#beghwenuga .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1225,7 +1228,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#maubrppgem .gt_col_heading {
+#beghwenuga .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1245,7 +1248,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#maubrppgem .gt_column_spanner_outer {
+#beghwenuga .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1257,15 +1260,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#maubrppgem .gt_column_spanner_outer:first-child {
+#beghwenuga .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#maubrppgem .gt_column_spanner_outer:last-child {
+#beghwenuga .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#maubrppgem .gt_column_spanner {
+#beghwenuga .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1277,11 +1280,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#maubrppgem .gt_spanner_row {
+#beghwenuga .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#maubrppgem .gt_group_heading {
+#beghwenuga .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1307,7 +1310,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#maubrppgem .gt_empty_group_heading {
+#beghwenuga .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1322,15 +1325,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#maubrppgem .gt_from_md > :first-child {
+#beghwenuga .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#maubrppgem .gt_from_md > :last-child {
+#beghwenuga .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#maubrppgem .gt_row {
+#beghwenuga .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1349,7 +1352,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#maubrppgem .gt_stub {
+#beghwenuga .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1362,7 +1365,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#maubrppgem .gt_stub_row_group {
+#beghwenuga .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1376,15 +1379,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#maubrppgem .gt_row_group_first td {
+#beghwenuga .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#maubrppgem .gt_row_group_first th {
+#beghwenuga .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#maubrppgem .gt_summary_row {
+#beghwenuga .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1394,16 +1397,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#maubrppgem .gt_first_summary_row {
+#beghwenuga .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#maubrppgem .gt_first_summary_row.thick {
+#beghwenuga .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#maubrppgem .gt_last_summary_row {
+#beghwenuga .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1413,7 +1416,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#maubrppgem .gt_grand_summary_row {
+#beghwenuga .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1423,7 +1426,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#maubrppgem .gt_first_grand_summary_row {
+#beghwenuga .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1433,7 +1436,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#maubrppgem .gt_last_grand_summary_row_top {
+#beghwenuga .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1443,11 +1446,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#maubrppgem .gt_striped {
+#beghwenuga .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#maubrppgem .gt_table_body {
+#beghwenuga .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1456,7 +1459,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#maubrppgem .gt_footnotes {
+#beghwenuga .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1470,7 +1473,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#maubrppgem .gt_footnote {
+#beghwenuga .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1479,7 +1482,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#maubrppgem .gt_sourcenotes {
+#beghwenuga .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1493,7 +1496,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#maubrppgem .gt_sourcenote {
+#beghwenuga .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1501,72 +1504,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#maubrppgem .gt_left {
+#beghwenuga .gt_left {
   text-align: left;
 }
 
-#maubrppgem .gt_center {
+#beghwenuga .gt_center {
   text-align: center;
 }
 
-#maubrppgem .gt_right {
+#beghwenuga .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#maubrppgem .gt_font_normal {
+#beghwenuga .gt_font_normal {
   font-weight: normal;
 }
 
-#maubrppgem .gt_font_bold {
+#beghwenuga .gt_font_bold {
   font-weight: bold;
 }
 
-#maubrppgem .gt_font_italic {
+#beghwenuga .gt_font_italic {
   font-style: italic;
 }
 
-#maubrppgem .gt_super {
+#beghwenuga .gt_super {
   font-size: 65%;
 }
 
-#maubrppgem .gt_footnote_marks {
+#beghwenuga .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#maubrppgem .gt_asterisk {
+#beghwenuga .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#maubrppgem .gt_indent_1 {
+#beghwenuga .gt_indent_1 {
   text-indent: 5px;
 }
 
-#maubrppgem .gt_indent_2 {
+#beghwenuga .gt_indent_2 {
   text-indent: 10px;
 }
 
-#maubrppgem .gt_indent_3 {
+#beghwenuga .gt_indent_3 {
   text-indent: 15px;
 }
 
-#maubrppgem .gt_indent_4 {
+#beghwenuga .gt_indent_4 {
   text-indent: 20px;
 }
 
-#maubrppgem .gt_indent_5 {
+#beghwenuga .gt_indent_5 {
   text-indent: 25px;
 }
 
-#maubrppgem .katex-display {
+#beghwenuga .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#maubrppgem div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#beghwenuga div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1799,16 +1802,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
     function toggleCodeHandler(show) {
       return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
           if (show) {
             details.open = true;
           } else {
             details.removeAttribute("open");
           }
         }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
         const fromCls = show ? "hidden" : "unhidden";
         const toCls = show ? "unhidden" : "hidden";
         for (let i=0; i<cellCodeDivs.length; i++) {

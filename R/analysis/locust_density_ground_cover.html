@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -74,14 +77,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-b41724e58f79c1b7773766b10b517708.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-1a081a750f1ddb3367c3896ea17eb885.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-b41724e58f79c1b7773766b10b517708.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-559ce6fa1983ded364936823ab24d5d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-254ccb800011d39879e98109b2f8902c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-559ce6fa1983ded364936823ab24d5d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -125,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -546,7 +549,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="model-summary-statistics">Model Summary Statistics</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div id="nwfnvhsxvs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="uzvrcvxjnq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false" data-bgcolor="#FFFFFF">
@@ -565,23 +568,23 @@ window.Quarto = {
 <tbody class="gt_table_body" style="border-style: none; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3;">
 <tr class="odd" style="border-style: none;">
 <td class="gt_row gt_left" headers="term" style="text-align: left; border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden;" data-valign="middle">s(percent_ground_cover):fertilizer_treatmentcontrol</td>
-<td class="gt_row gt_right" headers="edf" style="text-align: right; border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; font-variant-numeric: tabular-nums;" data-valign="middle">1.70</td>
+<td class="gt_row gt_right" headers="edf" style="text-align: right; border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; font-variant-numeric: tabular-nums;" data-valign="middle">2.64</td>
 <td class="gt_row gt_right" headers="ref.df" style="text-align: right; border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; font-variant-numeric: tabular-nums;" data-valign="middle">9.00</td>
-<td class="gt_row gt_right" headers="statistic" style="text-align: right; border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; font-variant-numeric: tabular-nums;" data-valign="middle">0.69</td>
-<td class="gt_row gt_right" headers="p.value" style="text-align: right; border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; font-variant-numeric: tabular-nums;" data-valign="middle">0.09</td>
+<td class="gt_row gt_right" headers="statistic" style="text-align: right; border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; font-variant-numeric: tabular-nums;" data-valign="middle">2.73</td>
+<td class="gt_row gt_right" headers="p.value" style="text-align: right; border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; font-variant-numeric: tabular-nums;" data-valign="middle">0.00</td>
 </tr>
 <tr class="even" style="border-style: none;">
 <td class="gt_row gt_left" headers="term" style="text-align: left; border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden;" data-valign="middle">s(percent_ground_cover):fertilizer_treatmentfertilized</td>
-<td class="gt_row gt_right" headers="edf" style="text-align: right; border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; font-variant-numeric: tabular-nums;" data-valign="middle">3.39</td>
+<td class="gt_row gt_right" headers="edf" style="text-align: right; border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; font-variant-numeric: tabular-nums;" data-valign="middle">3.19</td>
 <td class="gt_row gt_right" headers="ref.df" style="text-align: right; border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; font-variant-numeric: tabular-nums;" data-valign="middle">9.00</td>
-<td class="gt_row gt_right" headers="statistic" style="text-align: right; border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; font-variant-numeric: tabular-nums;" data-valign="middle">5.20</td>
+<td class="gt_row gt_right" headers="statistic" style="text-align: right; border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; font-variant-numeric: tabular-nums;" data-valign="middle">3.01</td>
 <td class="gt_row gt_right" headers="p.value" style="text-align: right; border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; font-variant-numeric: tabular-nums;" data-valign="middle">0.00</td>
 </tr>
 <tr class="odd" style="border-style: none;">
 <td class="gt_row gt_left" headers="term" style="text-align: left; border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden;" data-valign="middle">s(farmer)</td>
-<td class="gt_row gt_right" headers="edf" style="text-align: right; border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; font-variant-numeric: tabular-nums;" data-valign="middle">80.02</td>
-<td class="gt_row gt_right" headers="ref.df" style="text-align: right; border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; font-variant-numeric: tabular-nums;" data-valign="middle">144.00</td>
-<td class="gt_row gt_right" headers="statistic" style="text-align: right; border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; font-variant-numeric: tabular-nums;" data-valign="middle">1.33</td>
+<td class="gt_row gt_right" headers="edf" style="text-align: right; border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; font-variant-numeric: tabular-nums;" data-valign="middle">104.63</td>
+<td class="gt_row gt_right" headers="ref.df" style="text-align: right; border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; font-variant-numeric: tabular-nums;" data-valign="middle">234.00</td>
+<td class="gt_row gt_right" headers="statistic" style="text-align: right; border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; font-variant-numeric: tabular-nums;" data-valign="middle">0.89</td>
 <td class="gt_row gt_right" headers="p.value" style="text-align: right; border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; font-variant-numeric: tabular-nums;" data-valign="middle">0.00</td>
 </tr>
 </tbody>
@@ -801,51 +804,65 @@ The model with fertilizer-specific smooths was strongly supported by AIC.
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">3.2757745</td>
-<td style="text-align: right;">0.0555975</td>
-<td style="text-align: right;">58.919461</td>
+<td style="text-align: right;">2.9470682</td>
+<td style="text-align: right;">0.0753861</td>
+<td style="text-align: right;">39.092979</td>
 <td style="text-align: right;">0.0000000</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">fertilizer_treatmentfertilized</td>
-<td style="text-align: right;">-0.2123204</td>
-<td style="text-align: right;">0.0589053</td>
-<td style="text-align: right;">-3.604438</td>
-<td style="text-align: right;">0.0003337</td>
+<td style="text-align: right;">-0.1404329</td>
+<td style="text-align: right;">0.0539619</td>
+<td style="text-align: right;">-2.602445</td>
+<td style="text-align: right;">0.0093753</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">mission_number2</td>
-<td style="text-align: right;">-0.6772203</td>
-<td style="text-align: right;">0.0631311</td>
-<td style="text-align: right;">-10.727200</td>
+<td style="text-align: right;">-0.3226009</td>
+<td style="text-align: right;">0.0563570</td>
+<td style="text-align: right;">-5.724241</td>
 <td style="text-align: right;">0.0000000</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">mission_number3</td>
-<td style="text-align: right;">-0.0764582</td>
-<td style="text-align: right;">0.0599485</td>
-<td style="text-align: right;">-1.275397</td>
-<td style="text-align: right;">0.2025675</td>
+<td style="text-align: right;">0.1676941</td>
+<td style="text-align: right;">0.0580630</td>
+<td style="text-align: right;">2.888140</td>
+<td style="text-align: right;">0.0039480</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">regionThiès</td>
+<td style="text-align: right;">-0.3860405</td>
+<td style="text-align: right;">0.0863193</td>
+<td style="text-align: right;">-4.472237</td>
+<td style="text-align: right;">0.0000085</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">regionFatick</td>
+<td style="text-align: right;">0.1805615</td>
+<td style="text-align: right;">0.0806640</td>
+<td style="text-align: right;">2.238440</td>
+<td style="text-align: right;">0.0253834</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">regionKaffrine</td>
-<td style="text-align: right;">0.6293084</td>
-<td style="text-align: right;">0.0564492</td>
-<td style="text-align: right;">11.148217</td>
+<td style="text-align: right;">0.8297830</td>
+<td style="text-align: right;">0.0762017</td>
+<td style="text-align: right;">10.889301</td>
 <td style="text-align: right;">0.0000000</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">fertilizer_treatmentfertilized:mission_number2</td>
-<td style="text-align: right;">-0.2287752</td>
-<td style="text-align: right;">0.0921016</td>
-<td style="text-align: right;">-2.483943</td>
-<td style="text-align: right;">0.0132130</td>
+<td style="text-align: right;">-0.5245022</td>
+<td style="text-align: right;">0.0832311</td>
+<td style="text-align: right;">-6.301755</td>
+<td style="text-align: right;">0.0000000</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">fertilizer_treatmentfertilized:mission_number3</td>
-<td style="text-align: right;">-1.0216522</td>
-<td style="text-align: right;">0.0946481</td>
-<td style="text-align: right;">-10.794221</td>
+<td style="text-align: right;">-1.1168055</td>
+<td style="text-align: right;">0.0899504</td>
+<td style="text-align: right;">-12.415793</td>
 <td style="text-align: right;">0.0000000</td>
 </tr>
 </tbody>
@@ -856,7 +873,7 @@ The model with fertilizer-specific smooths was strongly supported by AIC.
 <caption>Smooth Terms from GAM Model</caption>
 <colgroup>
 <col style="width: 59%">
-<col style="width: 10%">
+<col style="width: 11%">
 <col style="width: 7%">
 <col style="width: 10%">
 <col style="width: 10%">
@@ -873,30 +890,30 @@ The model with fertilizer-specific smooths was strongly supported by AIC.
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">s(percent_ground_cover):fertilizer_treatmentcontrol</td>
-<td style="text-align: right;">1.695303</td>
+<td style="text-align: right;">2.642169</td>
 <td style="text-align: right;">9</td>
-<td style="text-align: right;">0.691088</td>
-<td style="text-align: right;">0.0887203</td>
+<td style="text-align: right;">2.7349295</td>
+<td style="text-align: right;">0.0003524</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">s(percent_ground_cover):fertilizer_treatmentfertilized</td>
-<td style="text-align: right;">3.387153</td>
+<td style="text-align: right;">3.185180</td>
 <td style="text-align: right;">9</td>
-<td style="text-align: right;">5.196868</td>
-<td style="text-align: right;">0.0000015</td>
+<td style="text-align: right;">3.0080960</td>
+<td style="text-align: right;">0.0001093</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">s(farmer)</td>
-<td style="text-align: right;">80.016106</td>
-<td style="text-align: right;">144</td>
-<td style="text-align: right;">1.329290</td>
+<td style="text-align: right;">104.633158</td>
+<td style="text-align: right;">234</td>
+<td style="text-align: right;">0.8892797</td>
 <td style="text-align: right;">0.0000000</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<p>This unified model explained 64.185% of the variation and was pretty well fit.</p>
+<p>This unified model explained 60.033% of the variation and was pretty well fit.</p>
 <section id="ground-cover-x-fertilizer-impact-on-ose-density" class="level3">
 <h3 class="anchored" data-anchor-id="ground-cover-x-fertilizer-impact-on-ose-density">ground cover x fertilizer impact on OSE density</h3>
 <div class="cell">
@@ -1122,16 +1139,16 @@ Mission 3 in the <50% ground cover has very wide CI bars likely due to low sampl
     }
     function toggleCodeHandler(show) {
       return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
           if (show) {
             details.open = true;
           } else {
             details.removeAttribute("open");
           }
         }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
         const fromCls = show ? "hidden" : "unhidden";
         const toCls = show ? "unhidden" : "hidden";
         for (let i=0; i<cellCodeDivs.length; i++) {

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -74,14 +77,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-b41724e58f79c1b7773766b10b517708.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-1a081a750f1ddb3367c3896ea17eb885.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-b41724e58f79c1b7773766b10b517708.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-559ce6fa1983ded364936823ab24d5d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-254ccb800011d39879e98109b2f8902c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-559ce6fa1983ded364936823ab24d5d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -452,23 +455,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>There isnt a strong relationship between locust density and yield. I am happy to dive further into this if you’d like!</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="shwgesxvhv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#shwgesxvhv table {
+<div id="myrytrueoe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#myrytrueoe table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#shwgesxvhv thead, #shwgesxvhv tbody, #shwgesxvhv tfoot, #shwgesxvhv tr, #shwgesxvhv td, #shwgesxvhv th {
+#myrytrueoe thead, #myrytrueoe tbody, #myrytrueoe tfoot, #myrytrueoe tr, #myrytrueoe td, #myrytrueoe th {
   border-style: none;
 }
 
-#shwgesxvhv p {
+#myrytrueoe p {
   margin: 0;
   padding: 0;
 }
 
-#shwgesxvhv .gt_table {
+#myrytrueoe .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -494,12 +497,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#shwgesxvhv .gt_caption {
+#myrytrueoe .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#shwgesxvhv .gt_title {
+#myrytrueoe .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -511,7 +514,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#shwgesxvhv .gt_subtitle {
+#myrytrueoe .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -523,7 +526,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#shwgesxvhv .gt_heading {
+#myrytrueoe .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -535,13 +538,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#shwgesxvhv .gt_bottom_border {
+#myrytrueoe .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#shwgesxvhv .gt_col_headings {
+#myrytrueoe .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -556,7 +559,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#shwgesxvhv .gt_col_heading {
+#myrytrueoe .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -576,7 +579,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#shwgesxvhv .gt_column_spanner_outer {
+#myrytrueoe .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -588,15 +591,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#shwgesxvhv .gt_column_spanner_outer:first-child {
+#myrytrueoe .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#shwgesxvhv .gt_column_spanner_outer:last-child {
+#myrytrueoe .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#shwgesxvhv .gt_column_spanner {
+#myrytrueoe .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -608,11 +611,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#shwgesxvhv .gt_spanner_row {
+#myrytrueoe .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#shwgesxvhv .gt_group_heading {
+#myrytrueoe .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -638,7 +641,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#shwgesxvhv .gt_empty_group_heading {
+#myrytrueoe .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -653,15 +656,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#shwgesxvhv .gt_from_md > :first-child {
+#myrytrueoe .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#shwgesxvhv .gt_from_md > :last-child {
+#myrytrueoe .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#shwgesxvhv .gt_row {
+#myrytrueoe .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -680,7 +683,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#shwgesxvhv .gt_stub {
+#myrytrueoe .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -693,7 +696,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#shwgesxvhv .gt_stub_row_group {
+#myrytrueoe .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -707,15 +710,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#shwgesxvhv .gt_row_group_first td {
+#myrytrueoe .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#shwgesxvhv .gt_row_group_first th {
+#myrytrueoe .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#shwgesxvhv .gt_summary_row {
+#myrytrueoe .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -725,16 +728,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#shwgesxvhv .gt_first_summary_row {
+#myrytrueoe .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#shwgesxvhv .gt_first_summary_row.thick {
+#myrytrueoe .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#shwgesxvhv .gt_last_summary_row {
+#myrytrueoe .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -744,7 +747,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#shwgesxvhv .gt_grand_summary_row {
+#myrytrueoe .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -754,7 +757,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#shwgesxvhv .gt_first_grand_summary_row {
+#myrytrueoe .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -764,7 +767,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#shwgesxvhv .gt_last_grand_summary_row_top {
+#myrytrueoe .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -774,11 +777,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#shwgesxvhv .gt_striped {
+#myrytrueoe .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#shwgesxvhv .gt_table_body {
+#myrytrueoe .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -787,7 +790,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#shwgesxvhv .gt_footnotes {
+#myrytrueoe .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -801,7 +804,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#shwgesxvhv .gt_footnote {
+#myrytrueoe .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -810,7 +813,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#shwgesxvhv .gt_sourcenotes {
+#myrytrueoe .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -824,7 +827,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#shwgesxvhv .gt_sourcenote {
+#myrytrueoe .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -832,72 +835,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#shwgesxvhv .gt_left {
+#myrytrueoe .gt_left {
   text-align: left;
 }
 
-#shwgesxvhv .gt_center {
+#myrytrueoe .gt_center {
   text-align: center;
 }
 
-#shwgesxvhv .gt_right {
+#myrytrueoe .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#shwgesxvhv .gt_font_normal {
+#myrytrueoe .gt_font_normal {
   font-weight: normal;
 }
 
-#shwgesxvhv .gt_font_bold {
+#myrytrueoe .gt_font_bold {
   font-weight: bold;
 }
 
-#shwgesxvhv .gt_font_italic {
+#myrytrueoe .gt_font_italic {
   font-style: italic;
 }
 
-#shwgesxvhv .gt_super {
+#myrytrueoe .gt_super {
   font-size: 65%;
 }
 
-#shwgesxvhv .gt_footnote_marks {
+#myrytrueoe .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#shwgesxvhv .gt_asterisk {
+#myrytrueoe .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#shwgesxvhv .gt_indent_1 {
+#myrytrueoe .gt_indent_1 {
   text-indent: 5px;
 }
 
-#shwgesxvhv .gt_indent_2 {
+#myrytrueoe .gt_indent_2 {
   text-indent: 10px;
 }
 
-#shwgesxvhv .gt_indent_3 {
+#myrytrueoe .gt_indent_3 {
   text-indent: 15px;
 }
 
-#shwgesxvhv .gt_indent_4 {
+#myrytrueoe .gt_indent_4 {
   text-indent: 20px;
 }
 
-#shwgesxvhv .gt_indent_5 {
+#myrytrueoe .gt_indent_5 {
   text-indent: 25px;
 }
 
-#shwgesxvhv .katex-display {
+#myrytrueoe .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#shwgesxvhv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#myrytrueoe div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -943,9 +946,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="Fixed effects stub_1_2 Effect">Fixed effects</td>
 <td class="gt_row gt_left" headers="Fixed effects stub_1_2 Component">cond</td>
 <td class="gt_row gt_left" headers="Fixed effects stub_1_2 Group">-</td>
-<td class="gt_row gt_right" headers="Fixed effects stub_1_2 Estimate">3.065</td>
-<td class="gt_row gt_right" headers="Fixed effects stub_1_2 Std. Error">0.045</td>
-<td class="gt_row gt_right" headers="Fixed effects stub_1_2 Statistic">68.548</td>
+<td class="gt_row gt_right" headers="Fixed effects stub_1_2 Estimate">2.622</td>
+<td class="gt_row gt_right" headers="Fixed effects stub_1_2 Std. Error">0.050</td>
+<td class="gt_row gt_right" headers="Fixed effects stub_1_2 Statistic">52.370</td>
 <td class="gt_row gt_left" headers="Fixed effects stub_1_2 p value">&lt;0.001</td>
 </tr>
 <tr class="odd">
@@ -953,30 +956,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="Fixed effects stub_1_3 Effect">Fixed effects</td>
 <td class="gt_row gt_left" headers="Fixed effects stub_1_3 Component">cond</td>
 <td class="gt_row gt_left" headers="Fixed effects stub_1_3 Group">-</td>
-<td class="gt_row gt_right" headers="Fixed effects stub_1_3 Estimate">−0.695</td>
-<td class="gt_row gt_right" headers="Fixed effects stub_1_3 Std. Error">0.030</td>
-<td class="gt_row gt_right" headers="Fixed effects stub_1_3 Statistic">−22.790</td>
+<td class="gt_row gt_right" headers="Fixed effects stub_1_3 Estimate">−0.861</td>
+<td class="gt_row gt_right" headers="Fixed effects stub_1_3 Std. Error">0.041</td>
+<td class="gt_row gt_right" headers="Fixed effects stub_1_3 Statistic">−21.255</td>
 <td class="gt_row gt_left" headers="Fixed effects stub_1_3 p value">&lt;0.001</td>
 </tr>
 <tr class="even">
-<th id="stub_1_4" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">regionKaffrine</th>
+<th id="stub_1_4" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">regionFatick</th>
 <td class="gt_row gt_left" headers="Fixed effects stub_1_4 Effect">Fixed effects</td>
 <td class="gt_row gt_left" headers="Fixed effects stub_1_4 Component">cond</td>
 <td class="gt_row gt_left" headers="Fixed effects stub_1_4 Group">-</td>
-<td class="gt_row gt_right" headers="Fixed effects stub_1_4 Estimate">0.582</td>
-<td class="gt_row gt_right" headers="Fixed effects stub_1_4 Std. Error">0.059</td>
-<td class="gt_row gt_right" headers="Fixed effects stub_1_4 Statistic">9.818</td>
+<td class="gt_row gt_right" headers="Fixed effects stub_1_4 Estimate">0.442</td>
+<td class="gt_row gt_right" headers="Fixed effects stub_1_4 Std. Error">0.067</td>
+<td class="gt_row gt_right" headers="Fixed effects stub_1_4 Statistic">6.598</td>
 <td class="gt_row gt_left" headers="Fixed effects stub_1_4 p value">&lt;0.001</td>
 </tr>
 <tr class="odd">
-<th id="stub_1_5" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">fertilizer_treatmentfertilized:regionKaffrine</th>
+<th id="stub_1_5" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">regionKaffrine</th>
 <td class="gt_row gt_left" headers="Fixed effects stub_1_5 Effect">Fixed effects</td>
 <td class="gt_row gt_left" headers="Fixed effects stub_1_5 Component">cond</td>
 <td class="gt_row gt_left" headers="Fixed effects stub_1_5 Group">-</td>
-<td class="gt_row gt_right" headers="Fixed effects stub_1_5 Estimate">0.258</td>
-<td class="gt_row gt_right" headers="Fixed effects stub_1_5 Std. Error">0.035</td>
-<td class="gt_row gt_right" headers="Fixed effects stub_1_5 Statistic">7.277</td>
+<td class="gt_row gt_right" headers="Fixed effects stub_1_5 Estimate">1.025</td>
+<td class="gt_row gt_right" headers="Fixed effects stub_1_5 Std. Error">0.063</td>
+<td class="gt_row gt_right" headers="Fixed effects stub_1_5 Statistic">16.164</td>
 <td class="gt_row gt_left" headers="Fixed effects stub_1_5 p value">&lt;0.001</td>
+</tr>
+<tr class="even">
+<th id="stub_1_6" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">fertilizer_treatmentfertilized:regionFatick</th>
+<td class="gt_row gt_left" headers="Fixed effects stub_1_6 Effect">Fixed effects</td>
+<td class="gt_row gt_left" headers="Fixed effects stub_1_6 Component">cond</td>
+<td class="gt_row gt_left" headers="Fixed effects stub_1_6 Group">-</td>
+<td class="gt_row gt_right" headers="Fixed effects stub_1_6 Estimate">0.166</td>
+<td class="gt_row gt_right" headers="Fixed effects stub_1_6 Std. Error">0.051</td>
+<td class="gt_row gt_right" headers="Fixed effects stub_1_6 Statistic">3.276</td>
+<td class="gt_row gt_left" headers="Fixed effects stub_1_6 p value">0.001</td>
+</tr>
+<tr class="odd">
+<th id="stub_1_7" class="gt_row gt_left gt_stub" data-quarto-table-cell-role="th" scope="row">fertilizer_treatmentfertilized:regionKaffrine</th>
+<td class="gt_row gt_left" headers="Fixed effects stub_1_7 Effect">Fixed effects</td>
+<td class="gt_row gt_left" headers="Fixed effects stub_1_7 Component">cond</td>
+<td class="gt_row gt_left" headers="Fixed effects stub_1_7 Group">-</td>
+<td class="gt_row gt_right" headers="Fixed effects stub_1_7 Estimate">0.424</td>
+<td class="gt_row gt_right" headers="Fixed effects stub_1_7 Std. Error">0.044</td>
+<td class="gt_row gt_right" headers="Fixed effects stub_1_7 Statistic">9.560</td>
+<td class="gt_row gt_left" headers="Fixed effects stub_1_7 p value">&lt;0.001</td>
 </tr>
 </tbody>
 </table>
@@ -1097,16 +1120,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
     function toggleCodeHandler(show) {
       return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
           if (show) {
             details.open = true;
           } else {
             details.removeAttribute("open");
           }
         }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
         const fromCls = show ? "hidden" : "unhidden";
         const toCls = show ? "unhidden" : "hidden";
         for (let i=0; i<cellCodeDivs.length; i++) {

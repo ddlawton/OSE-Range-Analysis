@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -74,14 +77,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-b41724e58f79c1b7773766b10b517708.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-1a081a750f1ddb3367c3896ea17eb885.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-b41724e58f79c1b7773766b10b517708.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-559ce6fa1983ded364936823ab24d5d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-254ccb800011d39879e98109b2f8902c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-559ce6fa1983ded364936823ab24d5d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -463,22 +466,22 @@ ose_count ~ farmer_gender + (1 | region) + (1 | mission_number)
 Data: df
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-   6959.8    6988.2   -3473.9    6947.8       847 
+  10180.2   10211.3   -5084.1   10168.2      1295 
 
 Random effects:
 
 Conditional model:
  Groups         Name        Variance Std.Dev.
- region         (Intercept) 0.1247   0.3531  
- mission_number (Intercept) 0.1435   0.3788  
-Number of obs: 853, groups:  region, 2; mission_number, 3
+ region         (Intercept) 0.18469  0.4298  
+ mission_number (Intercept) 0.06303  0.2511  
+Number of obs: 1301, groups:  region, 4; mission_number, 3
 
-Dispersion parameter for tweedie family (): 2.03 
+Dispersion parameter for tweedie family (): 2.33 
 
 Conditional model:
                Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)     3.04556    0.33457   9.103   &lt;2e-16 ***
-farmer_genderM  0.11268    0.04974   2.265   0.0235 *  
+(Intercept)     2.78805    0.26183  10.648   &lt;2e-16 ***
+farmer_genderM  0.06330    0.04305   1.471    0.141    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -520,22 +523,22 @@ ose_damage_percent ~ farmer_gender + (1 | region) + (1 | mission_number)
 Data: df
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-   2804.9    2833.4   -1396.5    2792.9       846 
+   3928.3    3959.3   -1958.1    3916.3      1294 
 
 Random effects:
 
 Conditional model:
  Groups         Name        Variance Std.Dev.
- region         (Intercept) 0.2346   0.4843  
- mission_number (Intercept) 0.7176   0.8471  
-Number of obs: 852, groups:  region, 2; mission_number, 3
+ region         (Intercept) 0.1843   0.4293  
+ mission_number (Intercept) 0.3882   0.6231  
+Number of obs: 1300, groups:  region, 4; mission_number, 3
 
-Dispersion parameter for tweedie family (): 4.63 
+Dispersion parameter for tweedie family (): 5.59 
 
 Conditional model:
-               Estimate Std. Error z value Pr(&gt;|z|)  
-(Intercept)      0.6871     0.6058   1.134   0.2567  
-farmer_genderM  -0.2776     0.1162  -2.389   0.0169 *
+               Estimate Std. Error z value Pr(&gt;|z|)   
+(Intercept)      0.6479     0.4289   1.511  0.13086   
+farmer_genderM  -0.3070     0.1062  -2.891  0.00384 **
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -575,22 +578,22 @@ Formula:          yield ~ farmer_gender + (1 | region) + (1 | mission_number)
 Data: df
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-  10898.3   10926.0   -5443.2   10886.3       741 
+  15025.9   15055.5   -7506.9   15013.9      1029 
 
 Random effects:
 
 Conditional model:
  Groups         Name        Variance  Std.Dev. 
- region         (Intercept) 5.485e-10 2.342e-05
- mission_number (Intercept) 3.034e-10 1.742e-05
-Number of obs: 747, groups:  region, 2; mission_number, 3
+ region         (Intercept) 1.466e-03 3.829e-02
+ mission_number (Intercept) 6.521e-10 2.554e-05
+Number of obs: 1035, groups:  region, 3; mission_number, 3
 
-Dispersion parameter for tweedie family (): 2.83 
+Dispersion parameter for tweedie family (): 2.52 
 
 Conditional model:
                Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)     6.01386    0.04219  142.53   &lt;2e-16 ***
-farmer_genderM  0.66126    0.05006   13.21   &lt;2e-16 ***
+(Intercept)     6.07561    0.04112  147.74   &lt;2e-16 ***
+farmer_genderM  0.52745    0.04178   12.63   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -723,16 +726,16 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
     }
     function toggleCodeHandler(show) {
       return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
           if (show) {
             details.open = true;
           } else {
             details.removeAttribute("open");
           }
         }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
         const fromCls = show ? "hidden" : "unhidden";
         const toCls = show ? "unhidden" : "hidden";
         for (let i=0; i<cellCodeDivs.length; i++) {

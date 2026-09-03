@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -74,14 +77,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-b41724e58f79c1b7773766b10b517708.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-1a081a750f1ddb3367c3896ea17eb885.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-b41724e58f79c1b7773766b10b517708.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-559ce6fa1983ded364936823ab24d5d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-254ccb800011d39879e98109b2f8902c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-559ce6fa1983ded364936823ab24d5d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -125,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -527,23 +530,23 @@ window.Quarto = {
 <p>Here are the model summaries and pairwise comparisons. This will be <em>across</em> missions, but please keep in mind each mission had it’s own model. So we cant make across-mission comparions just yet.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="pdgmwchezs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#pdgmwchezs table {
+<div id="xxsgizibiy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xxsgizibiy table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pdgmwchezs thead, #pdgmwchezs tbody, #pdgmwchezs tfoot, #pdgmwchezs tr, #pdgmwchezs td, #pdgmwchezs th {
+#xxsgizibiy thead, #xxsgizibiy tbody, #xxsgizibiy tfoot, #xxsgizibiy tr, #xxsgizibiy td, #xxsgizibiy th {
   border-style: none;
 }
 
-#pdgmwchezs p {
+#xxsgizibiy p {
   margin: 0;
   padding: 0;
 }
 
-#pdgmwchezs .gt_table {
+#xxsgizibiy .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -569,12 +572,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#pdgmwchezs .gt_caption {
+#xxsgizibiy .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pdgmwchezs .gt_title {
+#xxsgizibiy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -586,7 +589,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#pdgmwchezs .gt_subtitle {
+#xxsgizibiy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -598,7 +601,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#pdgmwchezs .gt_heading {
+#xxsgizibiy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -610,13 +613,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#pdgmwchezs .gt_bottom_border {
+#xxsgizibiy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pdgmwchezs .gt_col_headings {
+#xxsgizibiy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -631,7 +634,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#pdgmwchezs .gt_col_heading {
+#xxsgizibiy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -651,7 +654,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#pdgmwchezs .gt_column_spanner_outer {
+#xxsgizibiy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -663,15 +666,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#pdgmwchezs .gt_column_spanner_outer:first-child {
+#xxsgizibiy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pdgmwchezs .gt_column_spanner_outer:last-child {
+#xxsgizibiy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pdgmwchezs .gt_column_spanner {
+#xxsgizibiy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -683,11 +686,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#pdgmwchezs .gt_spanner_row {
+#xxsgizibiy .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pdgmwchezs .gt_group_heading {
+#xxsgizibiy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -713,7 +716,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#pdgmwchezs .gt_empty_group_heading {
+#xxsgizibiy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -728,15 +731,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#pdgmwchezs .gt_from_md > :first-child {
+#xxsgizibiy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pdgmwchezs .gt_from_md > :last-child {
+#xxsgizibiy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pdgmwchezs .gt_row {
+#xxsgizibiy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -755,7 +758,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#pdgmwchezs .gt_stub {
+#xxsgizibiy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -768,7 +771,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pdgmwchezs .gt_stub_row_group {
+#xxsgizibiy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -782,15 +785,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#pdgmwchezs .gt_row_group_first td {
+#xxsgizibiy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pdgmwchezs .gt_row_group_first th {
+#xxsgizibiy .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pdgmwchezs .gt_summary_row {
+#xxsgizibiy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -800,16 +803,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pdgmwchezs .gt_first_summary_row {
+#xxsgizibiy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pdgmwchezs .gt_first_summary_row.thick {
+#xxsgizibiy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pdgmwchezs .gt_last_summary_row {
+#xxsgizibiy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -819,7 +822,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#pdgmwchezs .gt_grand_summary_row {
+#xxsgizibiy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -829,7 +832,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pdgmwchezs .gt_first_grand_summary_row {
+#xxsgizibiy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -839,7 +842,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#pdgmwchezs .gt_last_grand_summary_row_top {
+#xxsgizibiy .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -849,11 +852,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#pdgmwchezs .gt_striped {
+#xxsgizibiy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pdgmwchezs .gt_table_body {
+#xxsgizibiy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -862,7 +865,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#pdgmwchezs .gt_footnotes {
+#xxsgizibiy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -876,7 +879,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#pdgmwchezs .gt_footnote {
+#xxsgizibiy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -885,7 +888,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pdgmwchezs .gt_sourcenotes {
+#xxsgizibiy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -899,7 +902,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#pdgmwchezs .gt_sourcenote {
+#xxsgizibiy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -907,72 +910,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pdgmwchezs .gt_left {
+#xxsgizibiy .gt_left {
   text-align: left;
 }
 
-#pdgmwchezs .gt_center {
+#xxsgizibiy .gt_center {
   text-align: center;
 }
 
-#pdgmwchezs .gt_right {
+#xxsgizibiy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pdgmwchezs .gt_font_normal {
+#xxsgizibiy .gt_font_normal {
   font-weight: normal;
 }
 
-#pdgmwchezs .gt_font_bold {
+#xxsgizibiy .gt_font_bold {
   font-weight: bold;
 }
 
-#pdgmwchezs .gt_font_italic {
+#xxsgizibiy .gt_font_italic {
   font-style: italic;
 }
 
-#pdgmwchezs .gt_super {
+#xxsgizibiy .gt_super {
   font-size: 65%;
 }
 
-#pdgmwchezs .gt_footnote_marks {
+#xxsgizibiy .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pdgmwchezs .gt_asterisk {
+#xxsgizibiy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pdgmwchezs .gt_indent_1 {
+#xxsgizibiy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pdgmwchezs .gt_indent_2 {
+#xxsgizibiy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pdgmwchezs .gt_indent_3 {
+#xxsgizibiy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pdgmwchezs .gt_indent_4 {
+#xxsgizibiy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pdgmwchezs .gt_indent_5 {
+#xxsgizibiy .gt_indent_5 {
   text-indent: 25px;
 }
 
-#pdgmwchezs .katex-display {
+#xxsgizibiy .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#pdgmwchezs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xxsgizibiy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -998,39 +1001,71 @@ window.Quarto = {
 <tr class="gt_row_group_first even">
 <td class="gt_row gt_left" headers="1  effect">fixed</td>
 <td class="gt_row gt_left" headers="1  term">(Intercept)</td>
-<td class="gt_row gt_right" headers="1  estimate">2.883</td>
-<td class="gt_row gt_right" headers="1  std.error">0.069</td>
-<td class="gt_row gt_right" headers="1  statistic">42.017</td>
+<td class="gt_row gt_right" headers="1  estimate">2.032</td>
+<td class="gt_row gt_right" headers="1  std.error">0.101</td>
+<td class="gt_row gt_right" headers="1  statistic">20.165</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="1  effect">fixed</td>
 <td class="gt_row gt_left" headers="1  term">fertilized</td>
-<td class="gt_row gt_right" headers="1  estimate">0.066</td>
-<td class="gt_row gt_right" headers="1  std.error">0.039</td>
-<td class="gt_row gt_right" headers="1  statistic">1.682</td>
-<td class="gt_row gt_right" headers="1  p.value">0.093</td>
+<td class="gt_row gt_right" headers="1  estimate">0.206</td>
+<td class="gt_row gt_right" headers="1  std.error">0.071</td>
+<td class="gt_row gt_right" headers="1  statistic">2.913</td>
+<td class="gt_row gt_right" headers="1  p.value">0.004</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="1  effect">fixed</td>
+<td class="gt_row gt_left" headers="1  term">Thiès</td>
+<td class="gt_row gt_right" headers="1  estimate">0.077</td>
+<td class="gt_row gt_right" headers="1  std.error">0.135</td>
+<td class="gt_row gt_right" headers="1  statistic">0.568</td>
+<td class="gt_row gt_right" headers="1  p.value">0.570</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="1  effect">fixed</td>
+<td class="gt_row gt_left" headers="1  term">Fatick</td>
+<td class="gt_row gt_right" headers="1  estimate">0.850</td>
+<td class="gt_row gt_right" headers="1  std.error">0.123</td>
+<td class="gt_row gt_right" headers="1  statistic">6.917</td>
+<td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="1  effect">fixed</td>
 <td class="gt_row gt_left" headers="1  term">Kaffrine</td>
-<td class="gt_row gt_right" headers="1  estimate">1.105</td>
-<td class="gt_row gt_right" headers="1  std.error">0.091</td>
-<td class="gt_row gt_right" headers="1  statistic">12.112</td>
+<td class="gt_row gt_right" headers="1  estimate">1.955</td>
+<td class="gt_row gt_right" headers="1  std.error">0.118</td>
+<td class="gt_row gt_right" headers="1  statistic">16.526</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="1  effect">fixed</td>
+<td class="gt_row gt_left" headers="1  term">fertilized:Thiès</td>
+<td class="gt_row gt_right" headers="1  estimate">−0.307</td>
+<td class="gt_row gt_right" headers="1  std.error">0.098</td>
+<td class="gt_row gt_right" headers="1  statistic">−3.129</td>
+<td class="gt_row gt_right" headers="1  p.value">0.002</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="1  effect">fixed</td>
+<td class="gt_row gt_left" headers="1  term">fertilized:Fatick</td>
+<td class="gt_row gt_right" headers="1  estimate">−0.140</td>
+<td class="gt_row gt_right" headers="1  std.error">0.081</td>
+<td class="gt_row gt_right" headers="1  statistic">−1.734</td>
+<td class="gt_row gt_right" headers="1  p.value">0.083</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="1  effect">fixed</td>
 <td class="gt_row gt_left" headers="1  term">fertilized:Kaffrine</td>
-<td class="gt_row gt_right" headers="1  estimate">−0.273</td>
-<td class="gt_row gt_right" headers="1  std.error">0.045</td>
-<td class="gt_row gt_right" headers="1  statistic">−6.029</td>
+<td class="gt_row gt_right" headers="1  estimate">−0.413</td>
+<td class="gt_row gt_right" headers="1  std.error">0.074</td>
+<td class="gt_row gt_right" headers="1  statistic">−5.561</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="1  effect">random</td>
 <td class="gt_row gt_left" headers="1  term">farmer</td>
-<td class="gt_row gt_right" headers="1  estimate">0.508</td>
+<td class="gt_row gt_right" headers="1  estimate">0.527</td>
 <td class="gt_row gt_right" headers="1  std.error">NA</td>
 <td class="gt_row gt_right" headers="1  statistic">NA</td>
 <td class="gt_row gt_right" headers="1  p.value">NA</td>
@@ -1041,39 +1076,71 @@ window.Quarto = {
 <tr class="gt_row_group_first even">
 <td class="gt_row gt_left" headers="2  effect">fixed</td>
 <td class="gt_row gt_left" headers="2  term">(Intercept)</td>
-<td class="gt_row gt_right" headers="2  estimate">2.771</td>
-<td class="gt_row gt_right" headers="2  std.error">0.076</td>
-<td class="gt_row gt_right" headers="2  statistic">36.455</td>
+<td class="gt_row gt_right" headers="2  estimate">3.349</td>
+<td class="gt_row gt_right" headers="2  std.error">0.087</td>
+<td class="gt_row gt_right" headers="2  statistic">38.402</td>
 <td class="gt_row gt_right" headers="2  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="2  effect">fixed</td>
 <td class="gt_row gt_left" headers="2  term">fertilized</td>
-<td class="gt_row gt_right" headers="2  estimate">−0.878</td>
-<td class="gt_row gt_right" headers="2  std.error">0.055</td>
-<td class="gt_row gt_right" headers="2  statistic">−16.073</td>
+<td class="gt_row gt_right" headers="2  estimate">−1.267</td>
+<td class="gt_row gt_right" headers="2  std.error">0.062</td>
+<td class="gt_row gt_right" headers="2  statistic">−20.348</td>
+<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="2  effect">fixed</td>
+<td class="gt_row gt_left" headers="2  term">Thiès</td>
+<td class="gt_row gt_right" headers="2  estimate">−1.169</td>
+<td class="gt_row gt_right" headers="2  std.error">0.126</td>
+<td class="gt_row gt_right" headers="2  statistic">−9.287</td>
+<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="2  effect">fixed</td>
+<td class="gt_row gt_left" headers="2  term">Fatick</td>
+<td class="gt_row gt_right" headers="2  estimate">−0.573</td>
+<td class="gt_row gt_right" headers="2  std.error">0.113</td>
+<td class="gt_row gt_right" headers="2  statistic">−5.088</td>
 <td class="gt_row gt_right" headers="2  p.value">0.000</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="2  effect">fixed</td>
 <td class="gt_row gt_left" headers="2  term">Kaffrine</td>
-<td class="gt_row gt_right" headers="2  estimate">0.125</td>
-<td class="gt_row gt_right" headers="2  std.error">0.104</td>
-<td class="gt_row gt_right" headers="2  statistic">1.209</td>
-<td class="gt_row gt_right" headers="2  p.value">0.227</td>
+<td class="gt_row gt_right" headers="2  estimate">−0.446</td>
+<td class="gt_row gt_right" headers="2  std.error">0.109</td>
+<td class="gt_row gt_right" headers="2  statistic">−4.076</td>
+<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="2  effect">fixed</td>
+<td class="gt_row gt_left" headers="2  term">fertilized:Thiès</td>
+<td class="gt_row gt_right" headers="2  estimate">0.205</td>
+<td class="gt_row gt_right" headers="2  std.error">0.110</td>
+<td class="gt_row gt_right" headers="2  statistic">1.859</td>
+<td class="gt_row gt_right" headers="2  p.value">0.063</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="2  effect">fixed</td>
+<td class="gt_row gt_left" headers="2  term">fertilized:Fatick</td>
+<td class="gt_row gt_right" headers="2  estimate">0.390</td>
+<td class="gt_row gt_right" headers="2  std.error">0.083</td>
+<td class="gt_row gt_right" headers="2  statistic">4.716</td>
+<td class="gt_row gt_right" headers="2  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="2  effect">fixed</td>
 <td class="gt_row gt_left" headers="2  term">fertilized:Kaffrine</td>
-<td class="gt_row gt_right" headers="2  estimate">0.743</td>
-<td class="gt_row gt_right" headers="2  std.error">0.066</td>
-<td class="gt_row gt_right" headers="2  statistic">11.279</td>
+<td class="gt_row gt_right" headers="2  estimate">1.133</td>
+<td class="gt_row gt_right" headers="2  std.error">0.072</td>
+<td class="gt_row gt_right" headers="2  statistic">15.653</td>
 <td class="gt_row gt_right" headers="2  p.value">0.000</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="2  effect">random</td>
 <td class="gt_row gt_left" headers="2  term">farmer</td>
-<td class="gt_row gt_right" headers="2  estimate">0.565</td>
+<td class="gt_row gt_right" headers="2  estimate">0.523</td>
 <td class="gt_row gt_right" headers="2  std.error">NA</td>
 <td class="gt_row gt_right" headers="2  statistic">NA</td>
 <td class="gt_row gt_right" headers="2  p.value">NA</td>
@@ -1084,39 +1151,55 @@ window.Quarto = {
 <tr class="gt_row_group_first even">
 <td class="gt_row gt_left" headers="3  effect">fixed</td>
 <td class="gt_row gt_left" headers="3  term">(Intercept)</td>
-<td class="gt_row gt_right" headers="3  estimate">3.340</td>
-<td class="gt_row gt_right" headers="3  std.error">0.045</td>
-<td class="gt_row gt_right" headers="3  statistic">74.716</td>
+<td class="gt_row gt_right" headers="3  estimate">3.129</td>
+<td class="gt_row gt_right" headers="3  std.error">0.056</td>
+<td class="gt_row gt_right" headers="3  statistic">55.959</td>
 <td class="gt_row gt_right" headers="3  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="3  effect">fixed</td>
 <td class="gt_row gt_left" headers="3  term">fertilized</td>
-<td class="gt_row gt_right" headers="3  estimate">−1.374</td>
-<td class="gt_row gt_right" headers="3  std.error">0.050</td>
-<td class="gt_row gt_right" headers="3  statistic">−27.285</td>
+<td class="gt_row gt_right" headers="3  estimate">−1.341</td>
+<td class="gt_row gt_right" headers="3  std.error">0.065</td>
+<td class="gt_row gt_right" headers="3  statistic">−20.676</td>
 <td class="gt_row gt_right" headers="3  p.value">0.000</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="3  effect">fixed</td>
+<td class="gt_row gt_left" headers="3  term">Fatick</td>
+<td class="gt_row gt_right" headers="3  estimate">0.209</td>
+<td class="gt_row gt_right" headers="3  std.error">0.072</td>
+<td class="gt_row gt_right" headers="3  statistic">2.884</td>
+<td class="gt_row gt_right" headers="3  p.value">0.004</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="3  effect">fixed</td>
 <td class="gt_row gt_left" headers="3  term">Kaffrine</td>
-<td class="gt_row gt_right" headers="3  estimate">0.341</td>
-<td class="gt_row gt_right" headers="3  std.error">0.060</td>
-<td class="gt_row gt_right" headers="3  statistic">5.689</td>
+<td class="gt_row gt_right" headers="3  estimate">0.550</td>
+<td class="gt_row gt_right" headers="3  std.error">0.070</td>
+<td class="gt_row gt_right" headers="3  statistic">7.907</td>
 <td class="gt_row gt_right" headers="3  p.value">0.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="3  effect">fixed</td>
+<td class="gt_row gt_left" headers="3  term">fertilized:Fatick</td>
+<td class="gt_row gt_right" headers="3  estimate">−0.032</td>
+<td class="gt_row gt_right" headers="3  std.error">0.082</td>
+<td class="gt_row gt_right" headers="3  statistic">−0.395</td>
+<td class="gt_row gt_right" headers="3  p.value">0.693</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="3  effect">fixed</td>
 <td class="gt_row gt_left" headers="3  term">fertilized:Kaffrine</td>
-<td class="gt_row gt_right" headers="3  estimate">0.162</td>
-<td class="gt_row gt_right" headers="3  std.error">0.063</td>
-<td class="gt_row gt_right" headers="3  statistic">2.577</td>
-<td class="gt_row gt_right" headers="3  p.value">0.010</td>
+<td class="gt_row gt_right" headers="3  estimate">0.129</td>
+<td class="gt_row gt_right" headers="3  std.error">0.075</td>
+<td class="gt_row gt_right" headers="3  statistic">1.725</td>
+<td class="gt_row gt_right" headers="3  p.value">0.085</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="3  effect">random</td>
 <td class="gt_row gt_left" headers="3  term">farmer</td>
-<td class="gt_row gt_right" headers="3  estimate">0.305</td>
+<td class="gt_row gt_right" headers="3  estimate">0.319</td>
 <td class="gt_row gt_right" headers="3  std.error">NA</td>
 <td class="gt_row gt_right" headers="3  statistic">NA</td>
 <td class="gt_row gt_right" headers="3  p.value">NA</td>
@@ -1130,23 +1213,23 @@ window.Quarto = {
 <p>Here are the pairwise comparisons between region and treatment by mission number. Fair warning, its a large table since there are a lot of regions.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="zodnajvkse" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zodnajvkse table {
+<div id="ebtxudkpyh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ebtxudkpyh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zodnajvkse thead, #zodnajvkse tbody, #zodnajvkse tfoot, #zodnajvkse tr, #zodnajvkse td, #zodnajvkse th {
+#ebtxudkpyh thead, #ebtxudkpyh tbody, #ebtxudkpyh tfoot, #ebtxudkpyh tr, #ebtxudkpyh td, #ebtxudkpyh th {
   border-style: none;
 }
 
-#zodnajvkse p {
+#ebtxudkpyh p {
   margin: 0;
   padding: 0;
 }
 
-#zodnajvkse .gt_table {
+#ebtxudkpyh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1172,12 +1255,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#zodnajvkse .gt_caption {
+#ebtxudkpyh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zodnajvkse .gt_title {
+#ebtxudkpyh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1189,7 +1272,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#zodnajvkse .gt_subtitle {
+#ebtxudkpyh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1201,7 +1284,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#zodnajvkse .gt_heading {
+#ebtxudkpyh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1213,13 +1296,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#zodnajvkse .gt_bottom_border {
+#ebtxudkpyh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zodnajvkse .gt_col_headings {
+#ebtxudkpyh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1234,7 +1317,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#zodnajvkse .gt_col_heading {
+#ebtxudkpyh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1254,7 +1337,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#zodnajvkse .gt_column_spanner_outer {
+#ebtxudkpyh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1266,15 +1349,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#zodnajvkse .gt_column_spanner_outer:first-child {
+#ebtxudkpyh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zodnajvkse .gt_column_spanner_outer:last-child {
+#ebtxudkpyh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zodnajvkse .gt_column_spanner {
+#ebtxudkpyh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1286,11 +1369,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#zodnajvkse .gt_spanner_row {
+#ebtxudkpyh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zodnajvkse .gt_group_heading {
+#ebtxudkpyh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1316,7 +1399,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#zodnajvkse .gt_empty_group_heading {
+#ebtxudkpyh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1331,15 +1414,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#zodnajvkse .gt_from_md > :first-child {
+#ebtxudkpyh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zodnajvkse .gt_from_md > :last-child {
+#ebtxudkpyh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zodnajvkse .gt_row {
+#ebtxudkpyh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1358,7 +1441,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#zodnajvkse .gt_stub {
+#ebtxudkpyh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1371,7 +1454,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#zodnajvkse .gt_stub_row_group {
+#ebtxudkpyh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1385,15 +1468,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#zodnajvkse .gt_row_group_first td {
+#ebtxudkpyh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zodnajvkse .gt_row_group_first th {
+#ebtxudkpyh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zodnajvkse .gt_summary_row {
+#ebtxudkpyh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1403,16 +1486,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#zodnajvkse .gt_first_summary_row {
+#ebtxudkpyh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zodnajvkse .gt_first_summary_row.thick {
+#ebtxudkpyh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zodnajvkse .gt_last_summary_row {
+#ebtxudkpyh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1422,7 +1505,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#zodnajvkse .gt_grand_summary_row {
+#ebtxudkpyh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1432,7 +1515,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#zodnajvkse .gt_first_grand_summary_row {
+#ebtxudkpyh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1442,7 +1525,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#zodnajvkse .gt_last_grand_summary_row_top {
+#ebtxudkpyh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1452,11 +1535,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#zodnajvkse .gt_striped {
+#ebtxudkpyh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zodnajvkse .gt_table_body {
+#ebtxudkpyh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1465,7 +1548,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#zodnajvkse .gt_footnotes {
+#ebtxudkpyh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1479,7 +1562,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#zodnajvkse .gt_footnote {
+#ebtxudkpyh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1488,7 +1571,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#zodnajvkse .gt_sourcenotes {
+#ebtxudkpyh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1502,7 +1585,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#zodnajvkse .gt_sourcenote {
+#ebtxudkpyh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1510,72 +1593,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#zodnajvkse .gt_left {
+#ebtxudkpyh .gt_left {
   text-align: left;
 }
 
-#zodnajvkse .gt_center {
+#ebtxudkpyh .gt_center {
   text-align: center;
 }
 
-#zodnajvkse .gt_right {
+#ebtxudkpyh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zodnajvkse .gt_font_normal {
+#ebtxudkpyh .gt_font_normal {
   font-weight: normal;
 }
 
-#zodnajvkse .gt_font_bold {
+#ebtxudkpyh .gt_font_bold {
   font-weight: bold;
 }
 
-#zodnajvkse .gt_font_italic {
+#ebtxudkpyh .gt_font_italic {
   font-style: italic;
 }
 
-#zodnajvkse .gt_super {
+#ebtxudkpyh .gt_super {
   font-size: 65%;
 }
 
-#zodnajvkse .gt_footnote_marks {
+#ebtxudkpyh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zodnajvkse .gt_asterisk {
+#ebtxudkpyh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zodnajvkse .gt_indent_1 {
+#ebtxudkpyh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zodnajvkse .gt_indent_2 {
+#ebtxudkpyh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zodnajvkse .gt_indent_3 {
+#ebtxudkpyh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zodnajvkse .gt_indent_4 {
+#ebtxudkpyh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zodnajvkse .gt_indent_5 {
+#ebtxudkpyh .gt_indent_5 {
   text-indent: 25px;
 }
 
-#zodnajvkse .katex-display {
+#ebtxudkpyh .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#zodnajvkse div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ebtxudkpyh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1600,33 +1683,150 @@ window.Quarto = {
 <th colspan="7" id="1" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">1</th>
 </tr>
 <tr class="gt_row_group_first even">
-<td class="gt_row gt_center" headers="1  contrast">control Fatick / control Kaffrine</td>
-<td class="gt_row gt_right" headers="1  ratio">0.331</td>
-<td class="gt_row gt_right" headers="1  SE">0.030</td>
+<td class="gt_row gt_center" headers="1  contrast">(control Saint-Louis) / (fertilized Saint-Louis)</td>
+<td class="gt_row gt_right" headers="1  ratio">0.814</td>
+<td class="gt_row gt_right" headers="1  SE">0.058</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">−12.112</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−2.913</td>
+<td class="gt_row gt_right" headers="1  p.value">0.070</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="1  contrast">(control Saint-Louis) / control Fatick</td>
+<td class="gt_row gt_right" headers="1  ratio">0.428</td>
+<td class="gt_row gt_right" headers="1  SE">0.053</td>
+<td class="gt_row gt_right" headers="1  df">Inf</td>
+<td class="gt_row gt_right" headers="1  null">1</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−6.917</td>
+<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="1  contrast">(control Saint-Louis) / control Kaffrine</td>
+<td class="gt_row gt_right" headers="1  ratio">0.142</td>
+<td class="gt_row gt_right" headers="1  SE">0.017</td>
+<td class="gt_row gt_right" headers="1  df">Inf</td>
+<td class="gt_row gt_right" headers="1  null">1</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−16.526</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="odd">
+<td class="gt_row gt_center" headers="1  contrast">(control Saint-Louis) / control Thiès</td>
+<td class="gt_row gt_right" headers="1  ratio">0.926</td>
+<td class="gt_row gt_right" headers="1  SE">0.125</td>
+<td class="gt_row gt_right" headers="1  df">Inf</td>
+<td class="gt_row gt_right" headers="1  null">1</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−0.568</td>
+<td class="gt_row gt_right" headers="1  p.value">0.999</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="1  contrast">(control Saint-Louis) / fertilized Fatick</td>
+<td class="gt_row gt_right" headers="1  ratio">0.400</td>
+<td class="gt_row gt_right" headers="1  SE">0.049</td>
+<td class="gt_row gt_right" headers="1  df">Inf</td>
+<td class="gt_row gt_right" headers="1  null">1</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−7.501</td>
+<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="1  contrast">(control Saint-Louis) / fertilized Kaffrine</td>
+<td class="gt_row gt_right" headers="1  ratio">0.174</td>
+<td class="gt_row gt_right" headers="1  SE">0.021</td>
+<td class="gt_row gt_right" headers="1  df">Inf</td>
+<td class="gt_row gt_right" headers="1  null">1</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−14.757</td>
+<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="1  contrast">(control Saint-Louis) / fertilized Thiès</td>
+<td class="gt_row gt_right" headers="1  ratio">1.025</td>
+<td class="gt_row gt_right" headers="1  SE">0.139</td>
+<td class="gt_row gt_right" headers="1  df">Inf</td>
+<td class="gt_row gt_right" headers="1  null">1</td>
+<td class="gt_row gt_right" headers="1  z.ratio">0.179</td>
+<td class="gt_row gt_right" headers="1  p.value">1.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="1  contrast">(fertilized Saint-Louis) / control Fatick</td>
+<td class="gt_row gt_right" headers="1  ratio">0.525</td>
+<td class="gt_row gt_right" headers="1  SE">0.063</td>
+<td class="gt_row gt_right" headers="1  df">Inf</td>
+<td class="gt_row gt_right" headers="1  null">1</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−5.332</td>
+<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="1  contrast">(fertilized Saint-Louis) / control Kaffrine</td>
+<td class="gt_row gt_right" headers="1  ratio">0.174</td>
+<td class="gt_row gt_right" headers="1  SE">0.020</td>
+<td class="gt_row gt_right" headers="1  df">Inf</td>
+<td class="gt_row gt_right" headers="1  null">1</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−15.064</td>
+<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="1  contrast">(fertilized Saint-Louis) / control Thiès</td>
+<td class="gt_row gt_right" headers="1  ratio">1.138</td>
+<td class="gt_row gt_right" headers="1  SE">0.151</td>
+<td class="gt_row gt_right" headers="1  df">Inf</td>
+<td class="gt_row gt_right" headers="1  null">1</td>
+<td class="gt_row gt_right" headers="1  z.ratio">0.971</td>
+<td class="gt_row gt_right" headers="1  p.value">0.978</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="1  contrast">(fertilized Saint-Louis) / fertilized Fatick</td>
+<td class="gt_row gt_right" headers="1  ratio">0.492</td>
+<td class="gt_row gt_right" headers="1  SE">0.059</td>
+<td class="gt_row gt_right" headers="1  df">Inf</td>
+<td class="gt_row gt_right" headers="1  null">1</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−5.916</td>
+<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="1  contrast">(fertilized Saint-Louis) / fertilized Kaffrine</td>
+<td class="gt_row gt_right" headers="1  ratio">0.214</td>
+<td class="gt_row gt_right" headers="1  SE">0.025</td>
+<td class="gt_row gt_right" headers="1  df">Inf</td>
+<td class="gt_row gt_right" headers="1  null">1</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−13.264</td>
+<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="1  contrast">(fertilized Saint-Louis) / fertilized Thiès</td>
+<td class="gt_row gt_right" headers="1  ratio">1.259</td>
+<td class="gt_row gt_right" headers="1  SE">0.168</td>
+<td class="gt_row gt_right" headers="1  df">Inf</td>
+<td class="gt_row gt_right" headers="1  null">1</td>
+<td class="gt_row gt_right" headers="1  z.ratio">1.722</td>
+<td class="gt_row gt_right" headers="1  p.value">0.673</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="1  contrast">control Fatick / control Kaffrine</td>
+<td class="gt_row gt_right" headers="1  ratio">0.331</td>
+<td class="gt_row gt_right" headers="1  SE">0.031</td>
+<td class="gt_row gt_right" headers="1  df">Inf</td>
+<td class="gt_row gt_right" headers="1  null">1</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−11.760</td>
+<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+</tr>
+<tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">control Fatick / fertilized Fatick</td>
 <td class="gt_row gt_right" headers="1  ratio">0.936</td>
 <td class="gt_row gt_right" headers="1  SE">0.037</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">−1.682</td>
-<td class="gt_row gt_right" headers="1  p.value">0.333</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_center" headers="1  contrast">control Fatick / fertilized Kaffrine</td>
-<td class="gt_row gt_right" headers="1  ratio">0.407</td>
-<td class="gt_row gt_right" headers="1  SE">0.037</td>
-<td class="gt_row gt_right" headers="1  df">Inf</td>
-<td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">−9.820</td>
-<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−1.677</td>
+<td class="gt_row gt_right" headers="1  p.value">0.702</td>
 </tr>
 <tr class="odd">
+<td class="gt_row gt_center" headers="1  contrast">control Fatick / fertilized Kaffrine</td>
+<td class="gt_row gt_right" headers="1  ratio">0.407</td>
+<td class="gt_row gt_right" headers="1  SE">0.038</td>
+<td class="gt_row gt_right" headers="1  df">Inf</td>
+<td class="gt_row gt_right" headers="1  null">1</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−9.539</td>
+<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+</tr>
+<tr class="even">
 <td class="gt_row gt_center" headers="1  contrast">control Kaffrine / fertilized Kaffrine</td>
 <td class="gt_row gt_right" headers="1  ratio">1.230</td>
 <td class="gt_row gt_right" headers="1  SE">0.028</td>
@@ -1635,79 +1835,358 @@ window.Quarto = {
 <td class="gt_row gt_right" headers="1  z.ratio">9.176</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
-<tr class="even">
-<td class="gt_row gt_center" headers="1  contrast">fertilized Fatick / control Kaffrine</td>
-<td class="gt_row gt_right" headers="1  ratio">0.354</td>
-<td class="gt_row gt_right" headers="1  SE">0.032</td>
+<tr class="odd">
+<td class="gt_row gt_center" headers="1  contrast">control Thiès / control Fatick</td>
+<td class="gt_row gt_right" headers="1  ratio">0.462</td>
+<td class="gt_row gt_right" headers="1  SE">0.053</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">−11.522</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−6.754</td>
+<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="1  contrast">control Thiès / control Kaffrine</td>
+<td class="gt_row gt_right" headers="1  ratio">0.153</td>
+<td class="gt_row gt_right" headers="1  SE">0.017</td>
+<td class="gt_row gt_right" headers="1  df">Inf</td>
+<td class="gt_row gt_right" headers="1  null">1</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−17.159</td>
+<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="1  contrast">control Thiès / fertilized Fatick</td>
+<td class="gt_row gt_right" headers="1  ratio">0.432</td>
+<td class="gt_row gt_right" headers="1  SE">0.049</td>
+<td class="gt_row gt_right" headers="1  df">Inf</td>
+<td class="gt_row gt_right" headers="1  null">1</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−7.383</td>
+<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="1  contrast">control Thiès / fertilized Kaffrine</td>
+<td class="gt_row gt_right" headers="1  ratio">0.188</td>
+<td class="gt_row gt_right" headers="1  SE">0.021</td>
+<td class="gt_row gt_right" headers="1  df">Inf</td>
+<td class="gt_row gt_right" headers="1  null">1</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−15.244</td>
+<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="1  contrast">control Thiès / fertilized Thiès</td>
+<td class="gt_row gt_right" headers="1  ratio">1.106</td>
+<td class="gt_row gt_right" headers="1  SE">0.075</td>
+<td class="gt_row gt_right" headers="1  df">Inf</td>
+<td class="gt_row gt_right" headers="1  null">1</td>
+<td class="gt_row gt_right" headers="1  z.ratio">1.485</td>
+<td class="gt_row gt_right" headers="1  p.value">0.816</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="1  contrast">fertilized Fatick / control Kaffrine</td>
+<td class="gt_row gt_right" headers="1  ratio">0.353</td>
+<td class="gt_row gt_right" headers="1  SE">0.033</td>
+<td class="gt_row gt_right" headers="1  df">Inf</td>
+<td class="gt_row gt_right" headers="1  null">1</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−11.183</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="1  contrast">fertilized Fatick / fertilized Kaffrine</td>
 <td class="gt_row gt_right" headers="1  ratio">0.435</td>
-<td class="gt_row gt_right" headers="1  SE">0.039</td>
+<td class="gt_row gt_right" headers="1  SE">0.041</td>
 <td class="gt_row gt_right" headers="1  df">Inf</td>
 <td class="gt_row gt_right" headers="1  null">1</td>
-<td class="gt_row gt_right" headers="1  z.ratio">−9.205</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−8.938</td>
+<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="1  contrast">fertilized Thiès / control Fatick</td>
+<td class="gt_row gt_right" headers="1  ratio">0.417</td>
+<td class="gt_row gt_right" headers="1  SE">0.048</td>
+<td class="gt_row gt_right" headers="1  df">Inf</td>
+<td class="gt_row gt_right" headers="1  null">1</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−7.592</td>
+<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="1  contrast">fertilized Thiès / control Kaffrine</td>
+<td class="gt_row gt_right" headers="1  ratio">0.138</td>
+<td class="gt_row gt_right" headers="1  SE">0.015</td>
+<td class="gt_row gt_right" headers="1  df">Inf</td>
+<td class="gt_row gt_right" headers="1  null">1</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−17.966</td>
+<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="1  contrast">fertilized Thiès / fertilized Fatick</td>
+<td class="gt_row gt_right" headers="1  ratio">0.391</td>
+<td class="gt_row gt_right" headers="1  SE">0.045</td>
+<td class="gt_row gt_right" headers="1  df">Inf</td>
+<td class="gt_row gt_right" headers="1  null">1</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−8.223</td>
+<td class="gt_row gt_right" headers="1  p.value">0.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="1  contrast">fertilized Thiès / fertilized Kaffrine</td>
+<td class="gt_row gt_right" headers="1  ratio">0.170</td>
+<td class="gt_row gt_right" headers="1  SE">0.019</td>
+<td class="gt_row gt_right" headers="1  df">Inf</td>
+<td class="gt_row gt_right" headers="1  null">1</td>
+<td class="gt_row gt_right" headers="1  z.ratio">−16.062</td>
 <td class="gt_row gt_right" headers="1  p.value">0.000</td>
 </tr>
 <tr class="gt_group_heading_row even">
 <th colspan="7" id="2" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">2</th>
 </tr>
 <tr class="gt_row_group_first odd">
-<td class="gt_row gt_center" headers="2  contrast">control Fatick / control Kaffrine</td>
-<td class="gt_row gt_right" headers="2  ratio">0.882</td>
-<td class="gt_row gt_right" headers="2  SE">0.091</td>
+<td class="gt_row gt_center" headers="2  contrast">(control Saint-Louis) / (fertilized Saint-Louis)</td>
+<td class="gt_row gt_right" headers="2  ratio">3.552</td>
+<td class="gt_row gt_right" headers="2  SE">0.221</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−1.209</td>
-<td class="gt_row gt_right" headers="2  p.value">0.621</td>
+<td class="gt_row gt_right" headers="2  z.ratio">20.348</td>
+<td class="gt_row gt_right" headers="2  p.value">0.000</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_center" headers="2  contrast">control Fatick / fertilized Fatick</td>
-<td class="gt_row gt_right" headers="2  ratio">2.406</td>
-<td class="gt_row gt_right" headers="2  SE">0.131</td>
+<td class="gt_row gt_center" headers="2  contrast">(control Saint-Louis) / control Fatick</td>
+<td class="gt_row gt_right" headers="2  ratio">1.774</td>
+<td class="gt_row gt_right" headers="2  SE">0.200</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">16.073</td>
+<td class="gt_row gt_right" headers="2  z.ratio">5.088</td>
 <td class="gt_row gt_right" headers="2  p.value">0.000</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="2  contrast">control Fatick / fertilized Kaffrine</td>
-<td class="gt_row gt_right" headers="2  ratio">1.009</td>
-<td class="gt_row gt_right" headers="2  SE">0.105</td>
+<td class="gt_row gt_center" headers="2  contrast">(control Saint-Louis) / control Kaffrine</td>
+<td class="gt_row gt_right" headers="2  ratio">1.562</td>
+<td class="gt_row gt_right" headers="2  SE">0.171</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">0.090</td>
-<td class="gt_row gt_right" headers="2  p.value">1.000</td>
+<td class="gt_row gt_right" headers="2  z.ratio">4.076</td>
+<td class="gt_row gt_right" headers="2  p.value">0.001</td>
 </tr>
 <tr class="even">
+<td class="gt_row gt_center" headers="2  contrast">(control Saint-Louis) / control Thiès</td>
+<td class="gt_row gt_right" headers="2  ratio">3.219</td>
+<td class="gt_row gt_right" headers="2  SE">0.405</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">9.287</td>
+<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="2  contrast">(control Saint-Louis) / fertilized Fatick</td>
+<td class="gt_row gt_right" headers="2  ratio">4.264</td>
+<td class="gt_row gt_right" headers="2  SE">0.498</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">12.427</td>
+<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="2  contrast">(control Saint-Louis) / fertilized Kaffrine</td>
+<td class="gt_row gt_right" headers="2  ratio">1.787</td>
+<td class="gt_row gt_right" headers="2  SE">0.196</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">5.297</td>
+<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="2  contrast">(control Saint-Louis) / fertilized Thiès</td>
+<td class="gt_row gt_right" headers="2  ratio">9.313</td>
+<td class="gt_row gt_right" headers="2  SE">1.296</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">16.030</td>
+<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="2  contrast">(fertilized Saint-Louis) / control Fatick</td>
+<td class="gt_row gt_right" headers="2  ratio">0.499</td>
+<td class="gt_row gt_right" headers="2  SE">0.061</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−5.724</td>
+<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="2  contrast">(fertilized Saint-Louis) / control Kaffrine</td>
+<td class="gt_row gt_right" headers="2  ratio">0.440</td>
+<td class="gt_row gt_right" headers="2  SE">0.052</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−6.941</td>
+<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="2  contrast">(fertilized Saint-Louis) / control Thiès</td>
+<td class="gt_row gt_right" headers="2  ratio">0.906</td>
+<td class="gt_row gt_right" headers="2  SE">0.121</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−0.735</td>
+<td class="gt_row gt_right" headers="2  p.value">0.996</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="2  contrast">(fertilized Saint-Louis) / fertilized Fatick</td>
+<td class="gt_row gt_right" headers="2  ratio">1.200</td>
+<td class="gt_row gt_right" headers="2  SE">0.150</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">1.461</td>
+<td class="gt_row gt_right" headers="2  p.value">0.828</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="2  contrast">(fertilized Saint-Louis) / fertilized Kaffrine</td>
+<td class="gt_row gt_right" headers="2  ratio">0.503</td>
+<td class="gt_row gt_right" headers="2  SE">0.060</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−5.796</td>
+<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="2  contrast">(fertilized Saint-Louis) / fertilized Thiès</td>
+<td class="gt_row gt_right" headers="2  ratio">2.622</td>
+<td class="gt_row gt_right" headers="2  SE">0.383</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">6.591</td>
+<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="2  contrast">control Fatick / control Kaffrine</td>
+<td class="gt_row gt_right" headers="2  ratio">0.881</td>
+<td class="gt_row gt_right" headers="2  SE">0.086</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−1.306</td>
+<td class="gt_row gt_right" headers="2  p.value">0.897</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="2  contrast">control Fatick / fertilized Fatick</td>
+<td class="gt_row gt_right" headers="2  ratio">2.404</td>
+<td class="gt_row gt_right" headers="2  SE">0.131</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">16.077</td>
+<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="2  contrast">control Fatick / fertilized Kaffrine</td>
+<td class="gt_row gt_right" headers="2  ratio">1.008</td>
+<td class="gt_row gt_right" headers="2  SE">0.098</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">0.078</td>
+<td class="gt_row gt_right" headers="2  p.value">1.000</td>
+</tr>
+<tr class="odd">
 <td class="gt_row gt_center" headers="2  contrast">control Kaffrine / fertilized Kaffrine</td>
 <td class="gt_row gt_right" headers="2  ratio">1.144</td>
 <td class="gt_row gt_right" headers="2  SE">0.042</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">3.655</td>
-<td class="gt_row gt_right" headers="2  p.value">0.001</td>
+<td class="gt_row gt_right" headers="2  z.ratio">3.652</td>
+<td class="gt_row gt_right" headers="2  p.value">0.006</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="2  contrast">control Thiès / control Fatick</td>
+<td class="gt_row gt_right" headers="2  ratio">0.551</td>
+<td class="gt_row gt_right" headers="2  SE">0.064</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−5.166</td>
+<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="2  contrast">control Thiès / control Kaffrine</td>
+<td class="gt_row gt_right" headers="2  ratio">0.485</td>
+<td class="gt_row gt_right" headers="2  SE">0.054</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−6.444</td>
+<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="2  contrast">control Thiès / fertilized Fatick</td>
+<td class="gt_row gt_right" headers="2  ratio">1.324</td>
+<td class="gt_row gt_right" headers="2  SE">0.158</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">2.355</td>
+<td class="gt_row gt_right" headers="2  p.value">0.264</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="2  contrast">control Thiès / fertilized Kaffrine</td>
+<td class="gt_row gt_right" headers="2  ratio">0.555</td>
+<td class="gt_row gt_right" headers="2  SE">0.062</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−5.237</td>
+<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="2  contrast">control Thiès / fertilized Thiès</td>
+<td class="gt_row gt_right" headers="2  ratio">2.893</td>
+<td class="gt_row gt_right" headers="2  SE">0.264</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">11.652</td>
+<td class="gt_row gt_right" headers="2  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="2  contrast">fertilized Fatick / control Kaffrine</td>
-<td class="gt_row gt_right" headers="2  ratio">0.367</td>
-<td class="gt_row gt_right" headers="2  SE">0.040</td>
+<td class="gt_row gt_right" headers="2  ratio">0.366</td>
+<td class="gt_row gt_right" headers="2  SE">0.037</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−9.288</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−9.858</td>
 <td class="gt_row gt_right" headers="2  p.value">0.000</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="2  contrast">fertilized Fatick / fertilized Kaffrine</td>
 <td class="gt_row gt_right" headers="2  ratio">0.419</td>
-<td class="gt_row gt_right" headers="2  SE">0.045</td>
+<td class="gt_row gt_right" headers="2  SE">0.043</td>
 <td class="gt_row gt_right" headers="2  df">Inf</td>
 <td class="gt_row gt_right" headers="2  null">1</td>
-<td class="gt_row gt_right" headers="2  z.ratio">−8.028</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−8.521</td>
+<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="2  contrast">fertilized Thiès / control Fatick</td>
+<td class="gt_row gt_right" headers="2  ratio">0.190</td>
+<td class="gt_row gt_right" headers="2  SE">0.025</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−12.779</td>
+<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="2  contrast">fertilized Thiès / control Kaffrine</td>
+<td class="gt_row gt_right" headers="2  ratio">0.168</td>
+<td class="gt_row gt_right" headers="2  SE">0.021</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−14.063</td>
+<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="2  contrast">fertilized Thiès / fertilized Fatick</td>
+<td class="gt_row gt_right" headers="2  ratio">0.458</td>
+<td class="gt_row gt_right" headers="2  SE">0.061</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−5.863</td>
+<td class="gt_row gt_right" headers="2  p.value">0.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="2  contrast">fertilized Thiès / fertilized Kaffrine</td>
+<td class="gt_row gt_right" headers="2  ratio">0.192</td>
+<td class="gt_row gt_right" headers="2  SE">0.024</td>
+<td class="gt_row gt_right" headers="2  df">Inf</td>
+<td class="gt_row gt_right" headers="2  null">1</td>
+<td class="gt_row gt_right" headers="2  z.ratio">−12.988</td>
 <td class="gt_row gt_right" headers="2  p.value">0.000</td>
 </tr>
 <tr class="gt_group_heading_row odd">
@@ -1716,55 +2195,136 @@ window.Quarto = {
 <tr class="gt_row_group_first even">
 <td class="gt_row gt_center" headers="3  contrast">control Fatick / control Kaffrine</td>
 <td class="gt_row gt_right" headers="3  ratio">0.711</td>
-<td class="gt_row gt_right" headers="3  SE">0.043</td>
+<td class="gt_row gt_right" headers="3  SE">0.044</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">−5.689</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−5.507</td>
 <td class="gt_row gt_right" headers="3  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="3  contrast">control Fatick / fertilized Fatick</td>
-<td class="gt_row gt_right" headers="3  ratio">3.949</td>
+<td class="gt_row gt_right" headers="3  ratio">3.947</td>
 <td class="gt_row gt_right" headers="3  SE">0.199</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">27.285</td>
+<td class="gt_row gt_right" headers="3  z.ratio">27.260</td>
 <td class="gt_row gt_right" headers="3  p.value">0.000</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_center" headers="3  contrast">control Fatick / fertilized Kaffrine</td>
-<td class="gt_row gt_right" headers="3  ratio">2.388</td>
-<td class="gt_row gt_right" headers="3  SE">0.156</td>
+<td class="gt_row gt_right" headers="3  ratio">2.386</td>
+<td class="gt_row gt_right" headers="3  SE">0.161</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">13.295</td>
+<td class="gt_row gt_right" headers="3  z.ratio">12.898</td>
 <td class="gt_row gt_right" headers="3  p.value">0.000</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_center" headers="3  contrast">control Kaffrine / fertilized Kaffrine</td>
-<td class="gt_row gt_right" headers="3  ratio">3.358</td>
+<td class="gt_row gt_right" headers="3  ratio">3.357</td>
 <td class="gt_row gt_right" headers="3  SE">0.127</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">32.038</td>
+<td class="gt_row gt_right" headers="3  z.ratio">32.021</td>
 <td class="gt_row gt_right" headers="3  p.value">0.000</td>
 </tr>
 <tr class="even">
+<td class="gt_row gt_center" headers="3  contrast">control Thiès / control Fatick</td>
+<td class="gt_row gt_right" headers="3  ratio">0.812</td>
+<td class="gt_row gt_right" headers="3  SE">0.059</td>
+<td class="gt_row gt_right" headers="3  df">Inf</td>
+<td class="gt_row gt_right" headers="3  null">1</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−2.884</td>
+<td class="gt_row gt_right" headers="3  p.value">0.045</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="3  contrast">control Thiès / control Kaffrine</td>
+<td class="gt_row gt_right" headers="3  ratio">0.577</td>
+<td class="gt_row gt_right" headers="3  SE">0.040</td>
+<td class="gt_row gt_right" headers="3  df">Inf</td>
+<td class="gt_row gt_right" headers="3  null">1</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−7.907</td>
+<td class="gt_row gt_right" headers="3  p.value">0.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="3  contrast">control Thiès / fertilized Fatick</td>
+<td class="gt_row gt_right" headers="3  ratio">3.204</td>
+<td class="gt_row gt_right" headers="3  SE">0.259</td>
+<td class="gt_row gt_right" headers="3  df">Inf</td>
+<td class="gt_row gt_right" headers="3  null">1</td>
+<td class="gt_row gt_right" headers="3  z.ratio">14.383</td>
+<td class="gt_row gt_right" headers="3  p.value">0.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="3  contrast">control Thiès / fertilized Kaffrine</td>
+<td class="gt_row gt_right" headers="3  ratio">1.937</td>
+<td class="gt_row gt_right" headers="3  SE">0.144</td>
+<td class="gt_row gt_right" headers="3  df">Inf</td>
+<td class="gt_row gt_right" headers="3  null">1</td>
+<td class="gt_row gt_right" headers="3  z.ratio">8.882</td>
+<td class="gt_row gt_right" headers="3  p.value">0.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="3  contrast">control Thiès / fertilized Thiès</td>
+<td class="gt_row gt_right" headers="3  ratio">3.822</td>
+<td class="gt_row gt_right" headers="3  SE">0.248</td>
+<td class="gt_row gt_right" headers="3  df">Inf</td>
+<td class="gt_row gt_right" headers="3  null">1</td>
+<td class="gt_row gt_right" headers="3  z.ratio">20.676</td>
+<td class="gt_row gt_right" headers="3  p.value">0.000</td>
+</tr>
+<tr class="odd">
 <td class="gt_row gt_center" headers="3  contrast">fertilized Fatick / control Kaffrine</td>
 <td class="gt_row gt_right" headers="3  ratio">0.180</td>
 <td class="gt_row gt_right" headers="3  SE">0.013</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">−24.456</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−23.850</td>
+<td class="gt_row gt_right" headers="3  p.value">0.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="3  contrast">fertilized Fatick / fertilized Kaffrine</td>
+<td class="gt_row gt_right" headers="3  ratio">0.604</td>
+<td class="gt_row gt_right" headers="3  SE">0.046</td>
+<td class="gt_row gt_right" headers="3  df">Inf</td>
+<td class="gt_row gt_right" headers="3  null">1</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−6.572</td>
 <td class="gt_row gt_right" headers="3  p.value">0.000</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_center" headers="3  contrast">fertilized Fatick / fertilized Kaffrine</td>
-<td class="gt_row gt_right" headers="3  ratio">0.605</td>
+<td class="gt_row gt_center" headers="3  contrast">fertilized Thiès / control Fatick</td>
+<td class="gt_row gt_right" headers="3  ratio">0.212</td>
+<td class="gt_row gt_right" headers="3  SE">0.018</td>
+<td class="gt_row gt_right" headers="3  df">Inf</td>
+<td class="gt_row gt_right" headers="3  null">1</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−17.918</td>
+<td class="gt_row gt_right" headers="3  p.value">0.000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="3  contrast">fertilized Thiès / control Kaffrine</td>
+<td class="gt_row gt_right" headers="3  ratio">0.151</td>
+<td class="gt_row gt_right" headers="3  SE">0.013</td>
+<td class="gt_row gt_right" headers="3  df">Inf</td>
+<td class="gt_row gt_right" headers="3  null">1</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−22.462</td>
+<td class="gt_row gt_right" headers="3  p.value">0.000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="3  contrast">fertilized Thiès / fertilized Fatick</td>
+<td class="gt_row gt_right" headers="3  ratio">0.839</td>
+<td class="gt_row gt_right" headers="3  SE">0.079</td>
+<td class="gt_row gt_right" headers="3  df">Inf</td>
+<td class="gt_row gt_right" headers="3  null">1</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−1.878</td>
+<td class="gt_row gt_right" headers="3  p.value">0.416</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="3  contrast">fertilized Thiès / fertilized Kaffrine</td>
+<td class="gt_row gt_right" headers="3  ratio">0.507</td>
 <td class="gt_row gt_right" headers="3  SE">0.045</td>
 <td class="gt_row gt_right" headers="3  df">Inf</td>
 <td class="gt_row gt_right" headers="3  null">1</td>
-<td class="gt_row gt_right" headers="3  z.ratio">−6.712</td>
+<td class="gt_row gt_right" headers="3  z.ratio">−7.702</td>
 <td class="gt_row gt_right" headers="3  p.value">0.000</td>
 </tr>
 </tbody>
@@ -1780,23 +2340,23 @@ window.Quarto = {
 <p>The data discrepancies seen the the OSE count x ground cover are really shown in this table as well. We can see that the trends are the same (e.g.&nbsp;fertilized plots have less than control), but the actual averages are totally different.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="drkrejojwe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#drkrejojwe table {
+<div id="mdgxbekdoo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mdgxbekdoo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#drkrejojwe thead, #drkrejojwe tbody, #drkrejojwe tfoot, #drkrejojwe tr, #drkrejojwe td, #drkrejojwe th {
+#mdgxbekdoo thead, #mdgxbekdoo tbody, #mdgxbekdoo tfoot, #mdgxbekdoo tr, #mdgxbekdoo td, #mdgxbekdoo th {
   border-style: none;
 }
 
-#drkrejojwe p {
+#mdgxbekdoo p {
   margin: 0;
   padding: 0;
 }
 
-#drkrejojwe .gt_table {
+#mdgxbekdoo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1822,12 +2382,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#drkrejojwe .gt_caption {
+#mdgxbekdoo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#drkrejojwe .gt_title {
+#mdgxbekdoo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1839,7 +2399,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#drkrejojwe .gt_subtitle {
+#mdgxbekdoo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1851,7 +2411,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#drkrejojwe .gt_heading {
+#mdgxbekdoo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1863,13 +2423,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#drkrejojwe .gt_bottom_border {
+#mdgxbekdoo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#drkrejojwe .gt_col_headings {
+#mdgxbekdoo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1884,7 +2444,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#drkrejojwe .gt_col_heading {
+#mdgxbekdoo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1904,7 +2464,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#drkrejojwe .gt_column_spanner_outer {
+#mdgxbekdoo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1916,15 +2476,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#drkrejojwe .gt_column_spanner_outer:first-child {
+#mdgxbekdoo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#drkrejojwe .gt_column_spanner_outer:last-child {
+#mdgxbekdoo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#drkrejojwe .gt_column_spanner {
+#mdgxbekdoo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1936,11 +2496,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#drkrejojwe .gt_spanner_row {
+#mdgxbekdoo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#drkrejojwe .gt_group_heading {
+#mdgxbekdoo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1966,7 +2526,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#drkrejojwe .gt_empty_group_heading {
+#mdgxbekdoo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1981,15 +2541,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#drkrejojwe .gt_from_md > :first-child {
+#mdgxbekdoo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#drkrejojwe .gt_from_md > :last-child {
+#mdgxbekdoo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#drkrejojwe .gt_row {
+#mdgxbekdoo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2008,7 +2568,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#drkrejojwe .gt_stub {
+#mdgxbekdoo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2021,7 +2581,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#drkrejojwe .gt_stub_row_group {
+#mdgxbekdoo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2035,15 +2595,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#drkrejojwe .gt_row_group_first td {
+#mdgxbekdoo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#drkrejojwe .gt_row_group_first th {
+#mdgxbekdoo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#drkrejojwe .gt_summary_row {
+#mdgxbekdoo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2053,16 +2613,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#drkrejojwe .gt_first_summary_row {
+#mdgxbekdoo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#drkrejojwe .gt_first_summary_row.thick {
+#mdgxbekdoo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#drkrejojwe .gt_last_summary_row {
+#mdgxbekdoo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2072,7 +2632,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#drkrejojwe .gt_grand_summary_row {
+#mdgxbekdoo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2082,7 +2642,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#drkrejojwe .gt_first_grand_summary_row {
+#mdgxbekdoo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2092,7 +2652,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#drkrejojwe .gt_last_grand_summary_row_top {
+#mdgxbekdoo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2102,11 +2662,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#drkrejojwe .gt_striped {
+#mdgxbekdoo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#drkrejojwe .gt_table_body {
+#mdgxbekdoo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2115,7 +2675,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#drkrejojwe .gt_footnotes {
+#mdgxbekdoo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2129,7 +2689,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#drkrejojwe .gt_footnote {
+#mdgxbekdoo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2138,7 +2698,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#drkrejojwe .gt_sourcenotes {
+#mdgxbekdoo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2152,7 +2712,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#drkrejojwe .gt_sourcenote {
+#mdgxbekdoo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2160,72 +2720,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#drkrejojwe .gt_left {
+#mdgxbekdoo .gt_left {
   text-align: left;
 }
 
-#drkrejojwe .gt_center {
+#mdgxbekdoo .gt_center {
   text-align: center;
 }
 
-#drkrejojwe .gt_right {
+#mdgxbekdoo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#drkrejojwe .gt_font_normal {
+#mdgxbekdoo .gt_font_normal {
   font-weight: normal;
 }
 
-#drkrejojwe .gt_font_bold {
+#mdgxbekdoo .gt_font_bold {
   font-weight: bold;
 }
 
-#drkrejojwe .gt_font_italic {
+#mdgxbekdoo .gt_font_italic {
   font-style: italic;
 }
 
-#drkrejojwe .gt_super {
+#mdgxbekdoo .gt_super {
   font-size: 65%;
 }
 
-#drkrejojwe .gt_footnote_marks {
+#mdgxbekdoo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#drkrejojwe .gt_asterisk {
+#mdgxbekdoo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#drkrejojwe .gt_indent_1 {
+#mdgxbekdoo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#drkrejojwe .gt_indent_2 {
+#mdgxbekdoo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#drkrejojwe .gt_indent_3 {
+#mdgxbekdoo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#drkrejojwe .gt_indent_4 {
+#mdgxbekdoo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#drkrejojwe .gt_indent_5 {
+#mdgxbekdoo .gt_indent_5 {
   text-indent: 25px;
 }
 
-#drkrejojwe .katex-display {
+#mdgxbekdoo .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#drkrejojwe div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#mdgxbekdoo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2395,16 +2955,16 @@ window.Quarto = {
     }
     function toggleCodeHandler(show) {
       return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
           if (show) {
             details.open = true;
           } else {
             details.removeAttribute("open");
           }
         }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
         const fromCls = show ? "hidden" : "unhidden";
         const toCls = show ? "unhidden" : "hidden";
         for (let i=0; i<cellCodeDivs.length; i++) {
@@ -2938,7 +3498,7 @@ window.Quarto = {
 <span id="cb2-182"><a href="#cb2-182" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>source <span class="ot">&lt;-</span> nm</span>
 <span id="cb2-183"><a href="#cb2-183" aria-hidden="true" tabindex="-1"></a>    df</span>
 <span id="cb2-184"><a href="#cb2-184" aria-hidden="true" tabindex="-1"></a>  }),</span>
-<span id="cb2-185"><a href="#cb2-185" aria-hidden="true" tabindex="-1"></a>  <span class="at">.id =</span> <span class="st">'mission_numer'</span> </span>
+<span id="cb2-185"><a href="#cb2-185" aria-hidden="true" tabindex="-1"></a>  <span class="at">.id =</span> <span class="st">'mission_number'</span> </span>
 <span id="cb2-186"><a href="#cb2-186" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb2-187"><a href="#cb2-187" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-188"><a href="#cb2-188" aria-hidden="true" tabindex="-1"></a>count_plot_option_1 <span class="ot">&lt;-</span> <span class="fu">plot_mission_density</span>(</span>

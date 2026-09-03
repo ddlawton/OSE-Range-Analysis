@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ddlawton.github.io/OSE-Range-Analysis/R/analysis/locust_density_treatment_region.html</loc>
-    <lastmod>2026-05-25T14:09:39.355Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ddlawton.github.io/OSE-Range-Analysis/R/analysis/yield_environment.html</loc>
-    <lastmod>2026-05-25T14:09:39.356Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ddlawton.github.io/OSE-Range-Analysis/R/analysis/manuscript_methods_results.html</loc>
-    <lastmod>2026-05-25T14:09:39.355Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ddlawton.github.io/OSE-Range-Analysis/R/analysis/yield_treatment_region.html</loc>
-    <lastmod>2026-05-25T14:09:39.356Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ddlawton.github.io/OSE-Range-Analysis/R/analysis/yield_locust.html</loc>
-    <lastmod>2026-05-25T14:09:39.356Z</lastmod>
-  </url>
-  <url>
     <loc>https://ddlawton.github.io/OSE-Range-Analysis/R/index.html</loc>
-    <lastmod>2026-05-25T14:09:39.356Z</lastmod>
+    <lastmod>2026-09-03T03:10:10.968Z</lastmod>
   </url>
   <url>
-    <loc>https://ddlawton.github.io/OSE-Range-Analysis/R/analysis/locust_damage_treatment_region.html</loc>
-    <lastmod>2026-05-25T14:09:39.355Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ddlawton.github.io/OSE-Range-Analysis/R/analysis/basic_stats.html</loc>
-    <lastmod>2026-05-25T14:09:39.355Z</lastmod>
+    <loc>https://ddlawton.github.io/OSE-Range-Analysis/R/analysis/locust_density_treatment_region.html</loc>
+    <lastmod>2026-09-03T03:10:10.967Z</lastmod>
   </url>
   <url>
     <loc>https://ddlawton.github.io/OSE-Range-Analysis/R/analysis/locust_density_ground_cover.html</loc>
-    <lastmod>2026-05-25T14:09:39.355Z</lastmod>
+    <lastmod>2026-09-03T03:10:10.967Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ddlawton.github.io/OSE-Range-Analysis/R/analysis/basic_stats.html</loc>
+    <lastmod>2026-09-03T03:10:10.966Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ddlawton.github.io/OSE-Range-Analysis/R/analysis/manuscript_methods_results.html</loc>
+    <lastmod>2026-09-03T03:10:10.967Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ddlawton.github.io/OSE-Range-Analysis/R/analysis/yield_environment.html</loc>
+    <lastmod>2026-09-03T03:10:10.967Z</lastmod>
   </url>
   <url>
     <loc>https://ddlawton.github.io/OSE-Range-Analysis/R/analysis/farmer_gender_analysis.html</loc>
-    <lastmod>2026-05-25T14:09:39.355Z</lastmod>
+    <lastmod>2026-09-03T03:10:10.967Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ddlawton.github.io/OSE-Range-Analysis/R/analysis/locust_damage_treatment_region.html</loc>
+    <lastmod>2026-09-03T03:10:10.967Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ddlawton.github.io/OSE-Range-Analysis/R/analysis/yield_locust.html</loc>
+    <lastmod>2026-09-03T03:10:10.967Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ddlawton.github.io/OSE-Range-Analysis/R/analysis/yield_treatment_region.html</loc>
+    <lastmod>2026-09-03T03:10:10.967Z</lastmod>
   </url>
   <url>
     <loc>https://ddlawton.github.io/OSE-Range-Analysis/R/analysis/locust_density_temperature.html</loc>
-    <lastmod>2026-05-25T14:09:39.355Z</lastmod>
+    <lastmod>2026-09-03T03:10:10.967Z</lastmod>
   </url>
 </urlset>
