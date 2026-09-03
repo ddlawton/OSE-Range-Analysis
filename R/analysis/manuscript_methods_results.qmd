@@ -603,7 +603,9 @@ ggplot() +
     axis.text   = element_blank(),
     axis.ticks  = element_blank(),
     panel.grid  = element_blank()
-  )
+  ) +
+  xlab('') +
+  ylab('')
 ```
 
 ```{r fig-monthly-rainfall}
@@ -704,7 +706,7 @@ mission_emms_density <- bind_rows(
     df$source <- nm
     df
   }),
-  .id = 'mission_numer' 
+  .id = 'mission_number' 
 )
 
 plot_mission_density(
@@ -734,7 +736,7 @@ mission_emms_damage <- bind_rows(
     df$source <- nm
     df
   }),
-  .id = 'mission_numer' 
+  .id = 'mission_number' 
 )
 
 plot_mission_damage(

@@ -14,6 +14,24 @@
 # Mission-Based Density and Damage Plots
 # ==============================================================================
 
+normalize_region_names <- function(x) {
+  x_chr <- as.character(x)
+  x_chr <- gsub("Thiès", "Thies", x_chr, fixed = TRUE)
+  x_chr <- gsub("Saint-Louis", "Saint Louis", x_chr, fixed = TRUE)
+  x_ascii <- iconv(x_chr, from = "", to = "ASCII//TRANSLIT")
+  x_ascii[is.na(x_ascii)] <- x_chr[is.na(x_ascii)]
+  x_ascii <- gsub("-", " ", x_ascii)
+  x_ascii <- gsub("\\s+", " ", x_ascii)
+  trimws(x_ascii)
+}
+
+extract_mission_number <- function(x) {
+  x_chr <- as.character(x)
+  direct_num <- suppressWarnings(as.integer(x_chr))
+  digit_num <- suppressWarnings(as.integer(gsub("[^0-9]", "", x_chr)))
+  dplyr::coalesce(direct_num, digit_num)
+}
+
 #' Plot OSE Density by Region and Mission
 #'
 #' Creates faceted jitter plots of OSE density colored by fertilizer treatment.
@@ -32,11 +50,26 @@ plot_mission_density <- function(data, emmeans, ncol = 1,
                                 emmean_point_size = DEFAULT_EMMEAN_POINT_SIZE,
                                 regions = ALT_STUDY_REGIONS,
                                 legend_position = "bottom") {
+  regions_norm <- normalize_region_names(regions)
+  mission_source <- if ("mission" %in% names(emmeans)) {
+    emmeans$mission
+  } else if ("mission_number" %in% names(emmeans)) {
+    emmeans$mission_number
+  } else if ("mission_numer" %in% names(emmeans)) {
+    emmeans$mission_numer
+  } else if ("source" %in% names(emmeans)) {
+    emmeans$source
+  } else {
+    rep(NA_character_, nrow(emmeans))
+  }
+
   # Prepare data with mission date labels
   density_dat <- data |>
     dplyr::select(year, region, farmer, fertilizer_treatment, mission_number, ose_count) |>
     dplyr::mutate(
-      region = factor(region, levels = regions),
+      mission_number = extract_mission_number(mission_number),
+      region = normalize_region_names(region),
+      region = factor(region, levels = regions_norm),
       mission_date = dplyr::case_when(
         mission_number == 1 ~ MISSION_LABELS[1],
         mission_number == 2 ~ MISSION_LABELS[2],
@@ -47,12 +80,14 @@ plot_mission_density <- function(data, emmeans, ncol = 1,
   # Prepare emmeans with mission date labels
   emmeans <- emmeans |>
     dplyr::mutate(
+      mission_number = extract_mission_number(mission_source),
       mission_date = dplyr::case_when(
-        mission_numer %in% c("1", 1) ~ MISSION_LABELS[1],
-        mission_numer %in% c("2", 2) ~ MISSION_LABELS[2],
-        mission_numer %in% c("3", 3) ~ MISSION_LABELS[3]
+        mission_number == 1 ~ MISSION_LABELS[1],
+        mission_number == 2 ~ MISSION_LABELS[2],
+        mission_number == 3 ~ MISSION_LABELS[3]
       ),
-      region = factor(region, levels = regions)
+      region = normalize_region_names(region),
+      region = factor(region, levels = regions_norm)
     )
   
   mission_titles <- sub(" \\(.*\\)", "", MISSION_LABELS)
@@ -113,11 +148,26 @@ plot_mission_damage <- function(data, emmeans, ncol = 1,
                                emmean_point_size = DEFAULT_EMMEAN_POINT_SIZE,
                                regions = ALT_STUDY_REGIONS,
                                legend_position = "bottom") {
+  regions_norm <- normalize_region_names(regions)
+  mission_source <- if ("mission" %in% names(emmeans)) {
+    emmeans$mission
+  } else if ("mission_number" %in% names(emmeans)) {
+    emmeans$mission_number
+  } else if ("mission_numer" %in% names(emmeans)) {
+    emmeans$mission_numer
+  } else if ("source" %in% names(emmeans)) {
+    emmeans$source
+  } else {
+    rep(NA_character_, nrow(emmeans))
+  }
+
   # Prepare data with mission date labels
   damage_dat <- data |>
     dplyr::select(year, region, farmer, fertilizer_treatment, mission_number, ose_damage_percent) |>
     dplyr::mutate(
-      region = factor(region, levels = regions),
+      mission_number = extract_mission_number(mission_number),
+      region = normalize_region_names(region),
+      region = factor(region, levels = regions_norm),
       mission_date = dplyr::case_when(
         mission_number == 1 ~ MISSION_LABELS[1],
         mission_number == 2 ~ MISSION_LABELS[2],
@@ -128,12 +178,14 @@ plot_mission_damage <- function(data, emmeans, ncol = 1,
   # Prepare emmeans with mission date labels
   emmeans <- emmeans |>
     dplyr::mutate(
+      mission_number = extract_mission_number(mission_source),
       mission_date = dplyr::case_when(
-        mission_numer %in% c("1", 1) ~ MISSION_LABELS[1],
-        mission_numer %in% c("2", 2) ~ MISSION_LABELS[2],
-        mission_numer %in% c("3", 3) ~ MISSION_LABELS[3]
+        mission_number == 1 ~ MISSION_LABELS[1],
+        mission_number == 2 ~ MISSION_LABELS[2],
+        mission_number == 3 ~ MISSION_LABELS[3]
       ),
-      region = factor(region, levels = regions)
+      region = normalize_region_names(region),
+      region = factor(region, levels = regions_norm)
     )
   
   mission_titles <- sub(" \\(.*\\)", "", MISSION_LABELS)

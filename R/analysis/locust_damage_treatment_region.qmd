@@ -171,7 +171,7 @@ mission_emms <- bind_rows(
     df$source <- nm
     df
   }),
-  .id = 'mission_numer' 
+  .id = 'mission_number' 
 )
 
 count_plot_option_1 <- plot_mission_damage(

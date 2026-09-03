@@ -50,7 +50,39 @@ for (f in function_files) source(f, local = TRUE)
 # Utility function to standardize region factor levels
 standardize_regions <- function(data, region_col = "region", alt_names = FALSE) {
   regions <- if (alt_names) ALT_STUDY_REGIONS else STUDY_REGIONS
-  data[[region_col]] <- factor(data[[region_col]], levels = regions)
+
+  normalize_region <- function(x) {
+    x_ascii <- iconv(as.character(x), from = "", to = "ASCII//TRANSLIT")
+    x_ascii <- gsub("-", " ", x_ascii)
+    x_ascii <- gsub("\\s+", " ", x_ascii)
+    trimws(x_ascii)
+  }
+
+  canonical_map <- c(
+    "Saint Louis" = "Saint-Louis",
+    "Thies" = "Thiès",
+    "Fatick" = "Fatick",
+    "Kaffrine" = "Kaffrine"
+  )
+
+  region_norm <- normalize_region(data[[region_col]])
+  region_canonical <- unname(canonical_map[region_norm])
+
+  unresolved <- unique(region_norm[is.na(region_canonical) & !is.na(region_norm)])
+  if (length(unresolved) > 0) {
+    warning(
+      "Unrecognized region values after normalization: ",
+      paste(unresolved, collapse = ", ")
+    )
+  }
+
+  if (alt_names) {
+    region_out <- normalize_region(region_canonical)
+  } else {
+    region_out <- region_canonical
+  }
+
+  data[[region_col]] <- factor(region_out, levels = regions)
   return(data)
 }
 
