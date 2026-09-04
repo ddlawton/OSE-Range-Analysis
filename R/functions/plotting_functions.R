@@ -194,17 +194,17 @@ plot_mission_damage <- function(data, emmeans, ncol = 1,
   plot_mission <- function(md, title) {
     ggplot2::ggplot(
       dplyr::filter(damage_dat, mission_date == md),
-      ggplot2::aes(x = region, y = ose_damage_percent, color = fertilizer_treatment)
+      ggplot2::aes(x = region, y = ose_damage_percent, color = fertilizer_treatment,group = fertilizer_treatment)
     ) +
       ggplot2::geom_jitter(
         position = ggplot2::position_jitterdodge(jitter.width = 0.2, jitter.height = 0),
-        pch = 21, alpha = 0.3
+        pch = 21, alpha = 0.3,color='#818589'
       ) +
       ggplot2::geom_jitter(
         data = dplyr::filter(emmeans, mission_date == md),
         ggplot2::aes(y = response, fill = fertilizer_treatment),
         position = ggplot2::position_jitterdodge(jitter.width = 0.00001, jitter.height = 0),
-        pch = 21, color = "black", size = emmean_point_size
+        pch = 23, color = "black", size = emmean_point_size
       ) +
       ggplot2::scale_color_manual(values = FERTILIZER_COLORS) +
       ggplot2::scale_fill_manual(values = FERTILIZER_COLORS) +

@@ -62,7 +62,7 @@ MISSION_LABELS <- c('Mission 1 (July)', 'Mission 2 (September)', 'Mission 3 (Oct
 DEFAULT_PALETTE <- "Degas"
 FERTILIZER_COLORS <- c('control' = 'black', 'fertilized' = 'dark green')
 DEFAULT_POINT_SIZE <- 5
-DEFAULT_EMMEAN_POINT_SIZE <- 8
+DEFAULT_EMMEAN_POINT_SIZE <- 2.75
 DEFAULT_FIGURE_DPI <- 2
 
 # Load processed data from targets pipeline
