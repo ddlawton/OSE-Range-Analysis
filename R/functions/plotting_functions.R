@@ -63,6 +63,8 @@ plot_mission_density <- function(data, emmeans, ncol = 1,
     rep(NA_character_, nrow(emmeans))
   }
 
+
+
   # Prepare data with mission date labels
   density_dat <- data |>
     dplyr::select(year, region, farmer, fertilizer_treatment, mission_number, ose_count) |>
@@ -96,17 +98,18 @@ plot_mission_density <- function(data, emmeans, ncol = 1,
   plot_mission <- function(md, title) {
     ggplot2::ggplot(
       dplyr::filter(density_dat, mission_date == md),
-      ggplot2::aes(x = region, y = ose_count, color = fertilizer_treatment)
+      ggplot2::aes(x = region, y = ose_count, color = fertilizer_treatment,
+      group = fertilizer_treatment)
     ) +
       ggplot2::geom_jitter(
         position = ggplot2::position_jitterdodge(jitter.width = 0.2, jitter.height = 0),
-        pch = 21, alpha = 0.3
+        pch = 21, alpha = 0.3,
       ) +
       ggplot2::geom_jitter(
         data = dplyr::filter(emmeans, mission_date == md),
         ggplot2::aes(y = rate, fill = fertilizer_treatment),
         position = ggplot2::position_jitterdodge(jitter.width = 0.00001, jitter.height = 0),
-        pch = 21, color = "black", size = emmean_point_size
+        pch = 23, color = "black", size = emmean_point_size
       ) +
       ggplot2::scale_color_manual(values = FERTILIZER_COLORS) +
       ggplot2::scale_fill_manual(values = FERTILIZER_COLORS) +
@@ -198,13 +201,13 @@ plot_mission_damage <- function(data, emmeans, ncol = 1,
     ) +
       ggplot2::geom_jitter(
         position = ggplot2::position_jitterdodge(jitter.width = 0.2, jitter.height = 0),
-        pch = 21, alpha = 0.3,color='#818589'
+        pch = 21, alpha = 0.3,
       ) +
       ggplot2::geom_jitter(
         data = dplyr::filter(emmeans, mission_date == md),
         ggplot2::aes(y = response, fill = fertilizer_treatment),
         position = ggplot2::position_jitterdodge(jitter.width = 0.00001, jitter.height = 0),
-        pch = 23, color = "black", size = emmean_point_size
+        pch = 23, size = emmean_point_size
       ) +
       ggplot2::scale_color_manual(values = FERTILIZER_COLORS) +
       ggplot2::scale_fill_manual(values = FERTILIZER_COLORS) +

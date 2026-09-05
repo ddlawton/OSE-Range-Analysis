@@ -62,7 +62,7 @@ MISSION_LABELS <- c('Mission 1 (July)', 'Mission 2 (September)', 'Mission 3 (Oct
 DEFAULT_PALETTE <- "Degas"
 FERTILIZER_COLORS <- c('control' = 'black', 'fertilized' = 'dark green')
 DEFAULT_POINT_SIZE <- 5
-DEFAULT_EMMEAN_POINT_SIZE <- 2.75
+DEFAULT_EMMEAN_POINT_SIZE <- 5
 DEFAULT_FIGURE_DPI <- 2
 
 # Load processed data from targets pipeline
@@ -709,6 +709,7 @@ mission_emms_density <- bind_rows(
   .id = 'mission_number' 
 )
 
+
 plot_mission_density(
     data |> drop_na(ose_count, fertilizer_treatment),
     mission_emms_density,
@@ -775,11 +776,12 @@ avg_yield <- data_yield |>
 data_yield |>
     drop_na() |>
     ggplot(aes(x=region, y=rendement_en_kg_ha, color=fertilizer_treatment)) +
-        geom_jitter(position=position_jitterdodge(), alpha=0.5) +
-        geom_jitter(data = avg_yield, aes(y=mean_yield), size=8, 
-                    position=position_jitterdodge(jitter.width=0, jitter.height=0)) +
-        scale_color_manual(values = c('black','dark green'), 
-                          labels = c('control', 'fertilized')) +
+        geom_jitter(position=position_jitterdodge(), pch = 21, alpha = 0.3) +
+        geom_jitter(data = avg_yield, aes(y=mean_yield,fill=fertilizer_treatment), 
+                    position=position_jitterdodge(jitter.width=0, jitter.height=0),
+        pch = 23, size = DEFAULT_EMMEAN_POINT_SIZE) +
+      ggplot2::scale_color_manual(values = FERTILIZER_COLORS) +
+      ggplot2::scale_fill_manual(values = FERTILIZER_COLORS) +
         labs(
           x = "region",
           y =expression("yield kg"~bold("\u2022")~"ha"^{-1}),
