@@ -54,7 +54,7 @@ copy_website_png_figures() {
         
         # Process each PNG file with meaningful renaming
         for fig_path in "$site_figures_dir"/*.png; do
-            if [ -f "$fig_path" ]; then
+            if [ -s "$fig_path" ]; then
                 local orig_name=$(basename "$fig_path")
                 local stem
                 stem=$(map_figure_name "$analysis_name" "$orig_name")
@@ -72,22 +72,6 @@ copy_website_png_figures() {
     fi
 }
 
-# Map legacy/non-page figure folder names to website page folder names
-map_to_page_dir() {
-    local folder_name="$1"
-    case "$folder_name" in
-        manuscript_methods_results|basic_stats|locust_damage_treatment_region|locust_density_treatment_region|locust_density_ground_cover|locust_density_temperature|yield_locust|yield_treatment_region|yield_environment|farmer_gender_analysis)
-            echo "$folder_name"
-            ;;
-        locust_density) echo "locust_density_treatment_region" ;;
-        locust_damage) echo "locust_damage_treatment_region" ;;
-        ground_cover) echo "locust_density_ground_cover" ;;
-        locust_temperature) echo "locust_density_temperature" ;;
-        yield) echo "yield_treatment_region" ;;
-        *) echo "" ;;
-    esac
-}
-
 # Copy website-rendered SVG figures (vector)
 copy_website_svg_figures() {
     local analysis_name="$1"
@@ -101,7 +85,7 @@ copy_website_svg_figures() {
         local count=0
 
         for fig_path in "$site_figures_dir"/*.svg; do
-            if [ -f "$fig_path" ]; then
+            if [ -s "$fig_path" ]; then
                 local orig_name=$(basename "$fig_path")
                 local stem
                 stem=$(map_figure_name "$analysis_name" "$orig_name")
@@ -114,31 +98,6 @@ copy_website_svg_figures() {
 
         if [ $count -gt 0 ]; then
             echo "  ✓ Copied $count website SVG figures from $analysis_name"
-        fi
-    fi
-}
-
-# Copy pipeline-exported figure files (includes vector formats)
-copy_pipeline_figures() {
-    local analysis_name="$1"
-    local src_dir="outputs/figures/$analysis_name"
-    local dest_dir="$temp_dir/figures/$analysis_name"
-
-    if [ -d "$src_dir" ]; then
-        mkdir -p "$dest_dir"
-        local count=0
-
-        for ext in pdf svg eps png; do
-            for fig in "$src_dir"/*.$ext; do
-                if [ -f "$fig" ]; then
-                    cp "$fig" "$dest_dir/"
-                    count=$((count + 1))
-                fi
-            done
-        done
-
-        if [ $count -gt 0 ]; then
-            echo "  ✓ Copied $count pipeline figures from $analysis_name"
         fi
     fi
 }
@@ -168,26 +127,6 @@ create_embedded_svg_from_png() {
 EOF
 }
 
-# Ensure every PNG in the download bundle has an SVG companion.
-ensure_svg_companions_for_pngs() {
-    local root_dir="$1"
-    local created_count=0
-
-    if [ -d "$root_dir" ]; then
-        while IFS= read -r -d '' png_file; do
-            local svg_file="${png_file%.png}.svg"
-            if [ ! -f "$svg_file" ]; then
-                create_embedded_svg_from_png "$png_file" "$svg_file"
-                if [ -f "$svg_file" ]; then
-                    created_count=$((created_count + 1))
-                fi
-            fi
-        done < <(find "$root_dir" -type f -name "*.png" -print0)
-    fi
-
-    echo "$created_count"
-}
-
 # Ensure each figure basename has PNG + SVG + PDF companions.
 ensure_figure_triplets() {
     local root_dir="$1"
@@ -200,7 +139,8 @@ ensure_figure_triplets() {
         return
     fi
 
-    while IFS= read -r -d '' base_path; do
+    while IFS= read -r base_path; do
+        [ -n "$base_path" ] || continue
         local png_file="${base_path}.png"
         local svg_file="${base_path}.svg"
         local pdf_file="${base_path}.pdf"
@@ -239,14 +179,11 @@ ensure_figure_triplets() {
             fi
         fi
 
-    done < <(
-        find "$root_dir" -type f \( -name "*.png" -o -name "*.svg" -o -name "*.pdf" \) \
-          | sed -E 's/\.(png|svg|pdf)$//' \
-          | sort -u \
-          | while IFS= read -r base; do
-                printf '%s\0' "$base"
-            done
-    )
+        done < <(
+                find "$root_dir" -type f \( -name "*.png" -o -name "*.svg" -o -name "*.pdf" \) \
+                    | sed -E 's/\.(png|svg|pdf)$//' \
+                    | sort -u
+        )
 
     echo "$created_png $created_svg $created_pdf"
 }
@@ -260,7 +197,7 @@ svg_to_pdf_count=0
 png_to_pdf_count=0
 
 # === COPY FIGURES ===
-echo "Collecting figures (vector + website PNG fallbacks)..."
+echo "Collecting figures from website pages..."
 
 # List of all analysis pages
 analysis_pages=(
@@ -280,40 +217,7 @@ analysis_pages=(
 for analysis in "${analysis_pages[@]}"; do
     copy_website_png_figures "$analysis"
     copy_website_svg_figures "$analysis"
-    copy_pipeline_figures "$analysis"
 done
-
-# Backfill legacy outputs/figures folders into page-based directories only
-if [ -d "outputs/figures" ]; then
-    echo "Checking for additional exported figures..."
-    
-    for analysis_dir in outputs/figures/*/; do
-        if [ -d "$analysis_dir" ]; then
-            source_name=$(basename "$analysis_dir")
-            analysis_name=$(map_to_page_dir "$source_name")
-
-            if [ -z "$analysis_name" ]; then
-                continue
-            fi
-
-            dest_dir="$temp_dir/figures/$analysis_name"
-
-            mkdir -p "$dest_dir"
-            copied_any=0
-            for ext in pdf svg eps png; do
-                for fig in "$analysis_dir"*.$ext; do
-                    if [ -f "$fig" ]; then
-                        cp "$fig" "$dest_dir/"
-                        copied_any=1
-                    fi
-                done
-            done
-            if [ $copied_any -eq 1 ]; then
-                echo "  ✓ Added exported figures from $source_name -> $analysis_name"
-            fi
-        fi
-    done
-fi
 
 # Guarantee: every figure has PNG + SVG + PDF companions.
 read -r created_png_companions created_svg_companions created_pdf_companions < <(ensure_figure_triplets "$temp_dir/figures")
@@ -358,6 +262,8 @@ missing_triplets=$(find "$temp_dir/figures" -type f \( -name "*.png" -o -name "*
 if [ -n "$missing_triplets" ]; then
     echo "  ⚠️  Some figures are missing companions:"
     printf '%s\n' "$missing_triplets" | sed 's#^#     - #' 
+    echo "  ❌ Companion check failed: every figure must include PNG + SVG + PDF"
+    exit 1
 else
     echo "  ✓ All figure basenames include PNG + SVG + PDF"
 fi
@@ -432,7 +338,7 @@ matching exactly what appears on the published website.
 
 CONTENTS:
 
-FIGURES/ (organized by website page; each figure includes PNG and SVG)
+FIGURES/ (organized by website page; each figure includes PNG, SVG, and PDF)
   ├── manuscript_methods_results/     Main manuscript figures and visualizations
   ├── basic_stats/                    Study area maps and dataset summaries
   ├── locust_damage_treatment_region/ Damage analysis by treatment and region
