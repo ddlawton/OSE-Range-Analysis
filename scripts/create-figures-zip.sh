@@ -15,29 +15,12 @@ mkdir -p _site/outputs/figures
 temp_dir="_site/temp_download"
 mkdir -p "$temp_dir"
 
-# Map website PNG names to meaningful standardized names
+# Keep original Quarto-rendered figure basenames to avoid collisions and ensure
+# downloaded figures exactly match website-rendered figures.
 map_figure_name() {
-    local analysis_name="$1"
+    local _analysis_name="$1"
     local orig_name="$2"
-
-    case "$orig_name" in
-        *"senegal-map"*) echo "senegal_regions_map" ;;
-        *"basic-statistics"*) echo "dataset_summary_stats" ;;
-        *"diagnostic"*) echo "model_diagnostic_plots" ;;
-        *"density-option-1"*) echo "locust_density_by_treatment_region" ;;
-        *"count-plot"*) echo "locust_count_summary" ;;
-        *"emmeans"*) echo "estimated_marginal_means" ;;
-        *"temperature"*) echo "temperature_analysis" ;;
-        *"ground-cover"*) echo "ground_cover_analysis" ;;
-        *"yield"*) echo "yield_analysis" ;;
-        *"raw-data"*) echo "raw_data_visualization" ;;
-        *"gam"*) echo "gam_smooth_plots" ;;
-        *)
-            local chunk_num
-            chunk_num=$(echo "$orig_name" | grep -o '[0-9]\+' | head -1)
-            echo "${analysis_name}_figure_${chunk_num:-1}"
-            ;;
-    esac
+    echo "${orig_name%.*}"
 }
 
 # Resolve figure directory for an analysis page.
@@ -169,14 +152,14 @@ ensure_figure_triplets() {
             fi
         fi
 
-        # Create missing PDF (prefer SVG vector route)
+        # Create missing PDF (prefer PNG fidelity route to match website exactly)
         if [ ! -f "$pdf_file" ]; then
-            if [ -f "$svg_file" ] && command -v rsvg-convert >/dev/null 2>&1; then
-                if rsvg-convert -f pdf -o "$pdf_file" "$svg_file" 2>/dev/null; then
+            if [ -f "$png_file" ]; then
+                if sips -s format pdf "$png_file" --out "$pdf_file" >/dev/null 2>&1; then
                     created_pdf=$((created_pdf + 1))
                 fi
-            elif [ -f "$png_file" ]; then
-                if sips -s format pdf "$png_file" --out "$pdf_file" >/dev/null 2>&1; then
+            elif [ -f "$svg_file" ] && command -v rsvg-convert >/dev/null 2>&1; then
+                if rsvg-convert -f pdf -o "$pdf_file" "$svg_file" 2>/dev/null; then
                     created_pdf=$((created_pdf + 1))
                 fi
             fi
