@@ -76,29 +76,114 @@ save_plot_file <- function(plot_obj, filepath, width = 8, height = 6,
     return(invisible(filepath))
   }
   
+  ext <- tolower(tools::file_ext(filepath))
+
+  save_with_device <- function(path) {
+    device <- NULL
+    if (tolower(tools::file_ext(path)) == "pdf") {
+      device <- grDevices::cairo_pdf
+    } else if (tolower(tools::file_ext(path)) == "svg") {
+      if (requireNamespace("svglite", quietly = TRUE)) {
+        device <- svglite::svglite
+      } else {
+        warning("svglite not installed; skipping SVG export for ", path)
+        return(invisible(NULL))
+      }
+    }
+
+    ggplot2::ggsave(
+      filename = path,
+      plot = plot_obj,
+      width = width,
+      height = height,
+      dpi = dpi,
+      bg = "white",
+      device = device
+    )
+  }
+
   # Try ggplot2::ggsave first (handles ggplot and patchwork)
   tryCatch({
-    ggplot2::ggsave(
-      filename = filepath, 
-      plot = plot_obj, 
-      width = width, 
-      height = height, 
-      dpi = dpi, 
-      bg = "white"
-    )
+    save_with_device(filepath)
   }, error = function(e) {
-    # Fallback for grid/base graphics
-    tryCatch({
-      grDevices::png(filepath, width = width * dpi, height = height * dpi, res = dpi)
-      print(plot_obj)
-      grDevices::dev.off()
-    }, error = function(e2) {
-      warning("Failed to save plot to ", filepath, ": ", e2$message)
+    # Fallback for raster devices only
+    if (ext %in% c("png", "jpg", "jpeg", "tif", "tiff")) {
+      tryCatch({
+        grDevices::png(filepath, width = width * dpi, height = height * dpi, res = dpi)
+        print(plot_obj)
+        grDevices::dev.off()
+      }, error = function(e2) {
+        warning("Failed to save plot to ", filepath, ": ", e2$message)
+        writeLines(placeholder, filepath)
+      })
+    } else {
+      warning("Failed to save plot to ", filepath, ": ", e$message)
       writeLines(placeholder, filepath)
-    })
+    }
   })
+
+  # For raster exports, also write vector companions with matching dimensions.
+  if (ext %in% c("png", "jpg", "jpeg", "tif", "tiff")) {
+    stem <- tools::file_path_sans_ext(filepath)
+    vector_paths <- c(paste0(stem, ".pdf"), paste0(stem, ".svg"))
+    for (vector_path in vector_paths) {
+      tryCatch({
+        save_with_device(vector_path)
+      }, error = function(e) {
+        warning("Failed to save vector companion ", vector_path, ": ", e$message)
+      })
+    }
+  }
   
   invisible(filepath)
+}
+
+#' Save GT Table Outputs (PNG/PDF/CSV)
+#'
+#' Saves a gt table as PNG and PDF with matching capture width, and also exports
+#' the underlying data as CSV. An HTML export is also written for portability.
+#'
+#' @param gt_obj A gt table object
+#' @param filename Character. Preferred output filename (typically .png)
+#' @param subfolder Character. Analysis subfolder under outputs/tables
+#' @param vwidth Numeric. Virtual capture width passed to gtsave
+#' @return Invisibly returns paths to exported files
+#' @export
+save_gt_outputs <- function(gt_obj, filename, subfolder, vwidth = 3000) {
+  png_dir <- here::here("outputs", "tables", subfolder, "png")
+  pdf_dir <- here::here("outputs", "tables", subfolder, "pdf")
+  csv_dir <- here::here("outputs", "tables", subfolder, "csv")
+  html_dir <- here::here("outputs", "tables", subfolder, "html")
+
+  ensure_dir(png_dir)
+  ensure_dir(pdf_dir)
+  ensure_dir(csv_dir)
+  ensure_dir(html_dir)
+
+  stem <- tools::file_path_sans_ext(filename)
+  png_path <- file.path(png_dir, paste0(stem, ".png"))
+  pdf_path <- file.path(pdf_dir, paste0(stem, ".pdf"))
+  html_path <- file.path(html_dir, paste0(stem, ".html"))
+  csv_path <- file.path(csv_dir, paste0(stem, ".csv"))
+
+  gt::gtsave(gt_obj, png_path, vwidth = vwidth)
+
+  tryCatch({
+    gt::gtsave(gt_obj, pdf_path, vwidth = vwidth)
+  }, error = function(e) {
+    warning("Could not export GT table PDF for ", stem, ": ", e$message)
+  })
+
+  tryCatch({
+    gt::gtsave(gt_obj, html_path)
+  }, error = function(e) {
+    warning("Could not export GT table HTML for ", stem, ": ", e$message)
+  })
+
+  gt_data <- gt_obj$`_data`
+  readr::write_csv(gt_data, csv_path)
+
+  invisible(list(png = png_path, pdf = pdf_path, html = html_path, csv = csv_path))
 }
 
 # ==============================================================================
