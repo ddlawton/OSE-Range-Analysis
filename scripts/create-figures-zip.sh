@@ -188,6 +188,69 @@ ensure_svg_companions_for_pngs() {
     echo "$created_count"
 }
 
+# Ensure each figure basename has PNG + SVG + PDF companions.
+ensure_figure_triplets() {
+    local root_dir="$1"
+    local created_png=0
+    local created_svg=0
+    local created_pdf=0
+
+    if [ ! -d "$root_dir" ]; then
+        echo "0 0 0"
+        return
+    fi
+
+    while IFS= read -r -d '' base_path; do
+        local png_file="${base_path}.png"
+        local svg_file="${base_path}.svg"
+        local pdf_file="${base_path}.pdf"
+
+        # Create missing SVG from PNG fallback
+        if [ ! -f "$svg_file" ] && [ -f "$png_file" ]; then
+            create_embedded_svg_from_png "$png_file" "$svg_file"
+            if [ -f "$svg_file" ]; then
+                created_svg=$((created_svg + 1))
+            fi
+        fi
+
+        # Create missing PDF (prefer SVG vector route)
+        if [ ! -f "$pdf_file" ]; then
+            if [ -f "$svg_file" ] && command -v rsvg-convert >/dev/null 2>&1; then
+                if rsvg-convert -f pdf -o "$pdf_file" "$svg_file" 2>/dev/null; then
+                    created_pdf=$((created_pdf + 1))
+                fi
+            elif [ -f "$png_file" ]; then
+                if sips -s format pdf "$png_file" --out "$pdf_file" >/dev/null 2>&1; then
+                    created_pdf=$((created_pdf + 1))
+                fi
+            fi
+        fi
+
+        # Create missing PNG from SVG/PDF if possible
+        if [ ! -f "$png_file" ]; then
+            if [ -f "$svg_file" ] && command -v rsvg-convert >/dev/null 2>&1; then
+                if rsvg-convert -f png -o "$png_file" "$svg_file" 2>/dev/null; then
+                    created_png=$((created_png + 1))
+                fi
+            elif [ -f "$pdf_file" ]; then
+                if sips -s format png "$pdf_file" --out "$png_file" >/dev/null 2>&1; then
+                    created_png=$((created_png + 1))
+                fi
+            fi
+        fi
+
+    done < <(
+        find "$root_dir" -type f \( -name "*.png" -o -name "*.svg" -o -name "*.pdf" \) \
+          | sed -E 's/\.(png|svg|pdf)$//' \
+          | sort -u \
+          | while IFS= read -r base; do
+                printf '%s\0' "$base"
+            done
+    )
+
+    echo "$created_png $created_svg $created_pdf"
+}
+
 # Initialize counters
 total_figures=0
 total_vector_figures=0
@@ -252,43 +315,21 @@ if [ -d "outputs/figures" ]; then
     done
 fi
 
-# Guarantee: every PNG figure has an SVG companion.
-svg_companions_figures=$(ensure_svg_companions_for_pngs "$temp_dir/figures")
-svg_companions_created=$svg_companions_figures
-if [ "$svg_companions_created" -gt 0 ]; then
-    echo "  ✓ Created $svg_companions_created SVG companions for PNG figures"
+# Guarantee: every figure has PNG + SVG + PDF companions.
+read -r created_png_companions created_svg_companions created_pdf_companions < <(ensure_figure_triplets "$temp_dir/figures")
+
+if [ "$created_png_companions" -gt 0 ]; then
+    echo "  ✓ Created $created_png_companions PNG companions"
+fi
+if [ "$created_svg_companions" -gt 0 ]; then
+    echo "  ✓ Created $created_svg_companions SVG companions"
+fi
+if [ "$created_pdf_companions" -gt 0 ]; then
+    echo "  ✓ Created $created_pdf_companions PDF companions"
 fi
 
-# Guarantee: every figure has a PDF companion.
-# Priority: SVG->PDF (vector, when rsvg-convert exists), then PNG->PDF fallback.
-if command -v rsvg-convert >/dev/null 2>&1; then
-    while IFS= read -r -d '' svg_file; do
-        pdf_file="${svg_file%.svg}.pdf"
-        if [ ! -f "$pdf_file" ]; then
-            if rsvg-convert -f pdf -o "$pdf_file" "$svg_file" 2>/dev/null; then
-                svg_to_pdf_count=$((svg_to_pdf_count + 1))
-            fi
-        fi
-    done < <(find "$temp_dir/figures" -type f -name "*.svg" -print0)
-
-    if [ $svg_to_pdf_count -gt 0 ]; then
-        echo "  ✓ Converted $svg_to_pdf_count SVG figures to PDF"
-    fi
-else
-    echo "  ℹ️  rsvg-convert not found; using PNG->PDF fallback where needed"
-fi
-
-while IFS= read -r -d '' png_file; do
-    pdf_file="${png_file%.png}.pdf"
-    if [ ! -f "$pdf_file" ]; then
-        if sips -s format pdf "$png_file" --out "$pdf_file" >/dev/null 2>&1; then
-            png_to_pdf_count=$((png_to_pdf_count + 1))
-        fi
-    fi
-done < <(find "$temp_dir/figures" -type f -name "*.png" -print0)
-
-if [ $png_to_pdf_count -gt 0 ]; then
-    echo "  ✓ Converted $png_to_pdf_count PNG figures to PDF fallback"
+if ! command -v rsvg-convert >/dev/null 2>&1; then
+    echo "  ℹ️  rsvg-convert not found; SVG->PDF/PNG direct conversion is limited"
 fi
 
 # Figure counts
@@ -298,6 +339,27 @@ total_vector_figures=$(find "$temp_dir/figures" -type f \( -name "*.pdf" -o -nam
 if [ "$total_vector_figures" -eq 0 ]; then
     echo "  ⚠️  No vector figure files found (PDF/SVG/EPS)."
     echo "     Re-render with SVG enabled before zipping."
+fi
+
+# Final verification: report missing companion types by basename.
+missing_triplets=$(find "$temp_dir/figures" -type f \( -name "*.png" -o -name "*.svg" -o -name "*.pdf" \) \
+  | sed -E 's/\.(png|svg|pdf)$//' \
+  | sort -u \
+  | while IFS= read -r base; do
+      missing=""
+      [ -f "${base}.png" ] || missing="${missing} png"
+      [ -f "${base}.svg" ] || missing="${missing} svg"
+      [ -f "${base}.pdf" ] || missing="${missing} pdf"
+      if [ -n "$missing" ]; then
+          echo "${base}:${missing}"
+      fi
+    done)
+
+if [ -n "$missing_triplets" ]; then
+    echo "  ⚠️  Some figures are missing companions:"
+    printf '%s\n' "$missing_triplets" | sed 's#^#     - #' 
+else
+    echo "  ✓ All figure basenames include PNG + SVG + PDF"
 fi
 
 # === COPY TABLES ===
