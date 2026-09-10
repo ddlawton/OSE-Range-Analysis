@@ -275,6 +275,17 @@ missing_triplets=$(find "$temp_dir/figures" -type f \( -name "*.png" -o -name "*
       fi
     done)
 
+figure_basename_count=$(find "$temp_dir/figures" -type f \( -name "*.png" -o -name "*.svg" -o -name "*.pdf" \) \
+    | sed -E 's/\.(png|svg|pdf)$//' \
+    | sort -u \
+    | wc -l)
+
+if [ "$figure_basename_count" -eq 0 ]; then
+        echo "  ❌ No figure files were collected from rendered pages."
+        echo "     Check Quarto figure asset output (embed-resources must be false)."
+        exit 1
+fi
+
 if [ -n "$missing_triplets" ]; then
     echo "  ⚠️  Some figures are missing companions:"
     printf '%s\n' "$missing_triplets" | sed 's#^#     - #' 
