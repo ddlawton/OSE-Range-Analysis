@@ -126,6 +126,46 @@ create_embedded_svg_from_png() {
 EOF
 }
 
+# Convert PNG to PDF with cross-platform fallbacks.
+png_to_pdf() {
+    local png_file="$1"
+    local pdf_file="$2"
+
+    if command -v sips >/dev/null 2>&1; then
+        sips -s format pdf "$png_file" --out "$pdf_file" >/dev/null 2>&1 && return 0
+    fi
+
+    if command -v magick >/dev/null 2>&1; then
+        magick "$png_file" "$pdf_file" >/dev/null 2>&1 && return 0
+    fi
+
+    if command -v convert >/dev/null 2>&1; then
+        convert "$png_file" "$pdf_file" >/dev/null 2>&1 && return 0
+    fi
+
+    return 1
+}
+
+# Convert PDF to PNG with cross-platform fallbacks.
+pdf_to_png() {
+    local pdf_file="$1"
+    local png_file="$2"
+
+    if command -v sips >/dev/null 2>&1; then
+        sips -s format png "$pdf_file" --out "$png_file" >/dev/null 2>&1 && return 0
+    fi
+
+    if command -v magick >/dev/null 2>&1; then
+        magick -density 300 "$pdf_file" "$png_file" >/dev/null 2>&1 && return 0
+    fi
+
+    if command -v convert >/dev/null 2>&1; then
+        convert -density 300 "$pdf_file" "$png_file" >/dev/null 2>&1 && return 0
+    fi
+
+    return 1
+}
+
 # Ensure each figure basename has PNG + SVG + PDF companions.
 ensure_figure_triplets() {
     local root_dir="$1"
@@ -152,14 +192,16 @@ ensure_figure_triplets() {
             fi
         fi
 
-        # Create missing PDF (prefer PNG fidelity route to match website exactly)
+        # Create missing PDF with robust CI-first strategy:
+        # 1) SVG -> PDF via rsvg-convert when SVG exists (reliable on Linux CI)
+        # 2) PNG -> PDF via platform tools as fallback
         if [ ! -f "$pdf_file" ]; then
-            if [ -f "$png_file" ]; then
-                if sips -s format pdf "$png_file" --out "$pdf_file" >/dev/null 2>&1; then
+            if [ -f "$svg_file" ] && command -v rsvg-convert >/dev/null 2>&1; then
+                if rsvg-convert -f pdf -o "$pdf_file" "$svg_file" 2>/dev/null; then
                     created_pdf=$((created_pdf + 1))
                 fi
-            elif [ -f "$svg_file" ] && command -v rsvg-convert >/dev/null 2>&1; then
-                if rsvg-convert -f pdf -o "$pdf_file" "$svg_file" 2>/dev/null; then
+            elif [ -f "$png_file" ]; then
+                if png_to_pdf "$png_file" "$pdf_file"; then
                     created_pdf=$((created_pdf + 1))
                 fi
             fi
@@ -172,7 +214,7 @@ ensure_figure_triplets() {
                     created_png=$((created_png + 1))
                 fi
             elif [ -f "$pdf_file" ]; then
-                if sips -s format png "$pdf_file" --out "$png_file" >/dev/null 2>&1; then
+                if pdf_to_png "$pdf_file" "$png_file"; then
                     created_png=$((created_png + 1))
                 fi
             fi
