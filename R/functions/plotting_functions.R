@@ -203,13 +203,13 @@ plot_mission_damage <- function(data, emmeans, ncol = 1,
         position = ggplot2::position_jitterdodge(jitter.width = 0.2, jitter.height = 0),
         pch = 21, alpha = 0.3,
       ) +
+      ggplot2::scale_color_manual(values = FERTILIZER_COLORS) +
       ggplot2::geom_jitter(
         data = dplyr::filter(emmeans, mission_date == md),
         ggplot2::aes(y = response, fill = fertilizer_treatment),
         position = ggplot2::position_jitterdodge(jitter.width = 0.00001, jitter.height = 0),
-        pch = 23, size = emmean_point_size
+        pch = 23, size = emmean_point_size,color='black'
       ) +
-      ggplot2::scale_color_manual(values = FERTILIZER_COLORS) +
       ggplot2::scale_fill_manual(values = FERTILIZER_COLORS) +
       ggplot2::scale_x_discrete(drop = FALSE) +
       ggplot2::ylab("leaf damage (%)") +

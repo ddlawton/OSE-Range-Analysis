@@ -773,25 +773,39 @@ avg_yield <- data_yield |>
     drop_na() 
 
 # Plot
+
 data_yield |>
-    drop_na() |>
-    ggplot(aes(x=region, y=rendement_en_kg_ha, color=fertilizer_treatment)) +
-        geom_jitter(position=position_jitterdodge(), pch = 21, alpha = 0.3) +
-        geom_jitter(data = avg_yield, aes(y=mean_yield,fill=fertilizer_treatment), 
-                    position=position_jitterdodge(jitter.width=0, jitter.height=0),
-        pch = 23, size = DEFAULT_EMMEAN_POINT_SIZE) +
-      ggplot2::scale_color_manual(values = FERTILIZER_COLORS) +
-      ggplot2::scale_fill_manual(values = FERTILIZER_COLORS) +
-        labs(
-          x = "region",
-          y =expression("yield kg"~bold("\u2022")~"ha"^{-1}),
-          color = "",
-        ) +
-        theme_pubr() +
-        theme(
-          legend.position = "top",
-          plot.title = element_text(size = 14, face = "bold")
-        )
+  drop_na() |>
+  ggplot(aes(
+    x = region,
+    y = rendement_en_kg_ha,
+    color = fertilizer_treatment,
+    group = fertilizer_treatment
+  )) +
+  geom_jitter(
+    position = position_jitterdodge(jitter.width = 0.2, jitter.height = 0),
+    pch = 21,
+    alpha = 0.3
+  ) +
+  geom_point(
+    data = avg_yield,
+    aes(x = region, y = mean_yield, fill = fertilizer_treatment),
+    position = position_dodge(width = 0.75),
+    inherit.aes = FALSE,
+    shape = 23,
+    size = DEFAULT_EMMEAN_POINT_SIZE,
+    color = "black",
+  ) +
+  scale_color_manual(values = FERTILIZER_COLORS) +
+  scale_fill_manual(values = FERTILIZER_COLORS) +
+  labs(
+    x = "region",
+    y = expression("yield kg" ~ bold("\u2022") ~ "ha"^{-1}),
+    color = ""
+  ) +
+  theme_pubr() +
+  theme(legend.position = "top")
+
 ```
 
 ## Ground Cover Mediation of Fertilizer Effects on grasshopper Density
