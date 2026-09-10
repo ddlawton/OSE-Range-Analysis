@@ -56,7 +56,9 @@ website:
       [Download manuscript as DOCX](outputs/manuscript_methods_results.docx)
 format:
   html:
-    fig-format: svg
+    fig-format: png
+    fig-dpi: 300
+    embed-resources: true
     theme:
       light: flatly
       dark: darkly
@@ -68,4 +70,6 @@ format:
     number-sections: false
     anchor-sections: true
     page-layout: full
+  pdf:
+    fig-format: pdf
 editor: visual
