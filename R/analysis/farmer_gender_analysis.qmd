@@ -45,7 +45,7 @@ knitr::opts_chunk$set(
   echo = FALSE,
   message = FALSE,
   warning = FALSE,
-  fig.retina = 2
+    fig.retina = 2,
     dev = if (knitr::is_html_output()) "svg" else "png"
 )
 
