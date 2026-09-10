@@ -40,14 +40,30 @@ map_figure_name() {
     esac
 }
 
+# Resolve figure directory for an analysis page.
+# In CI, figures can exist under source render artifacts even when _site embeds resources.
+get_site_figures_dir() {
+    local analysis_name="$1"
+    local candidate_project="R/analysis/${analysis_name}_files/figure-html"
+    local candidate_site="_site/R/analysis/${analysis_name}_files/figure-html"
+
+    if [ -d "$candidate_project" ]; then
+        echo "$candidate_project"
+    elif [ -d "$candidate_site" ]; then
+        echo "$candidate_site"
+    else
+        echo ""
+    fi
+}
+
 # Copy website-rendered PNG figures
 copy_website_png_figures() {
     local analysis_name="$1"
     local dest_dir="$temp_dir/figures/$analysis_name"
     mkdir -p "$dest_dir"
     
-    # Path to analysis figures in _site
-    local site_figures_dir="_site/R/analysis/${analysis_name}_files/figure-html"
+    local site_figures_dir
+    site_figures_dir=$(get_site_figures_dir "$analysis_name")
     
     if [ -d "$site_figures_dir" ]; then
         local count=0
@@ -78,8 +94,8 @@ copy_website_svg_figures() {
     local dest_dir="$temp_dir/figures/$analysis_name"
     mkdir -p "$dest_dir"
 
-    # Path to analysis figures in _site
-    local site_figures_dir="_site/R/analysis/${analysis_name}_files/figure-html"
+    local site_figures_dir
+    site_figures_dir=$(get_site_figures_dir "$analysis_name")
 
     if [ -d "$site_figures_dir" ]; then
         local count=0
